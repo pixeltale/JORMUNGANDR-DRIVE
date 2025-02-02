@@ -1,0 +1,254 @@
+; JV TRIALS LIST ---------------------------
+
+[TrialDef, 5S]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+trialstep.1.text = 5S (Normal)
+trialstep.1.glyphs = ^Y
+trialstep.1.stateno = 1000
+
+[TrialDef, 5S (Enhanced)]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+trialstep.1.text = Dash
+trialstep.1.stateno = 100
+trialstep.1.isnohit = true
+trialstep.1.validuntilnexthit = true
+trialstep1.numofhits = 0
+trialstep.2.text = 5S (Enhanced)
+trialstep.2.glyphs = ^Y
+trialstep.2.stateno = 1001
+
+[TrialDef, 6S]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+trialstep.1.text = 6S (Normal)
+trialstep.1.stateno = 1100
+trialstep.1.anim = 1105
+
+[TrialDef, 6S (Enhanced)]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = Dash
+trialstep.1.stateno = 100
+trialstep.1.isnohit = true
+trialstep1.numofhits = 0
+trialstep.1.validuntilnexthit = true
+trialstep.2.text = 6S (Enhanced)
+trialstep.2.anim = 1101
+trialstep.2.stateno = 1100
+
+
+[TrialDef, 2S]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 2S (Normal)
+trialstep.1.stateno = 1090
+trialstep.1.anim = 1050
+trialstep.1.isnohit = true
+
+[TrialDef, 2S (Enhanced)]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = Dash
+trialstep.1.stateno = 100
+trialstep.1.isnohit = true
+trialstep1.numofhits = 0
+trialstep.1.validuntilnexthit = true
+trialstep.2.text = 2S (Enhanced)
+trialstep.2.stateno = 1090
+trialstep.2.anim = 1051
+trialstep.2.isnohit = true
+trialstep2.numofhits = 0
+
+[TrialDef, 4S]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+trialstep.1.text = 4S (Normal)
+trialstep.1.stateno = 1010
+trialstep.1.isnohit = true
+trialstep1.numofhits = 0
+
+[TrialDef, 4S (Enhanced)]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = Dash
+trialstep.1.stateno = 100
+trialstep.1.isnohit = true
+trialstep1.numofhits = 0
+trialstep.1.validuntilnexthit = true
+
+trialstep.2.text = 4S (Enhanced)
+trialstep.2.stateno = 1011
+trialstep.2.isnohit = true
+
+[TrialDef, Sundr]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = (6S, EN2S, or EN4S) > L
+trialstep.1.stateno = 1110
+trialstep1.numofhits = 0
+
+[TrialDef, Naora]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = (6S, EN2S, or EN4S) > M
+trialstep.1.stateno = 1120
+trialstep1.numofhits = 0
+
+[TrialDef, Yggdrasil]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = (6S, EN2S, or EN4S) > H
+trialstep.1.stateno = 1130
+trialstep1.numofhits = 0
+
+[TrialDef, 4S (Dash Cancel)]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 4S (Normal)
+trialstep.1.stateno = 1010
+trialstep.1.isnohit = true
+trialstep1.numofhits = 0
+trialstep.2.text = Dash
+trialstep.2.stateno = 100
+trialstep.2.isnohit = true
+trialstep2.numofhits = 0
+
+[TrialDef, Basic Chain Combo]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 5L > 5M > 5H
+trialstep.1.glyphs = ^A
+trialstep.1.stateno = 200, 210, 220
+
+[TrialDef, Building Blocks I]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 5L > 5M > 5H
+trialstep.1.glyphs = ^A
+trialstep.1.stateno = 200, 210, 220
+trialstep.2.text = 4S (Normal)
+trialstep.2.stateno = 1010
+trialstep.2.isnohit = true
+trialstep2.numofhits = 0
+trialstep.3.text = Dash
+trialstep.3.stateno = 100
+trialstep.3.isnohit = true
+trialstep3.numofhits = 0
+trialstep.4.text = 5S (Enhanced)
+trialstep.4.glyphs = ^Y
+trialstep.4.stateno = 1001
+
+[TrialDef, Building Blocks II]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 5L > 5M > 5H
+trialstep.1.stateno = 200, 210, 220
+trialstep.2.text = 4S (Normal)
+trialstep.2.stateno = 1010
+trialstep.2.isnohit = true
+trialstep2.numofhits = 0
+trialstep.3.text = Dash
+trialstep.3.stateno = 100
+trialstep.3.isnohit = true
+trialstep3.numofhits = 0
+trialstep.4.text = 5S (Enhanced)
+trialstep.4.stateno = 1001
+trialstep.5.text = 5M
+trialstep.5.stateno = 210
+trialstep.6.text = 6H
+trialstep.6.stateno = 230
+trialstep.7.text = Jump Cancel
+trialstep.7.stateno = 40
+trialstep.7.isnohit = true
+trialstep.8.text = j.M > j.H
+trialstep.8.stateno = 610, 630
+trialstep.9.text = Double Jump Cancel
+trialstep.9.stateno = 45
+trialstep.9.isnohit = true
+trialstep.10.text = j.M > j.H
+trialstep.10.stateno = 610, 630
+trialstep.11.text = j.2H
+trialstep.11.stateno = 640
+
+
+[TrialDef, 5[S] Starter]
+
+trial.dummymode = stand
+trial.guardmode = none
+trial.dummybuttonjam = none
+
+trialstep.1.text = 5S (Charge) - Beretta Driver
+trialstep.1.stateno = 1000
+trialstep.2.text = Dash Cancel
+trialstep.2.stateno = 100
+trialstep.2.isnohit = true
+trialstep2.numofhits = 0
+trialstep.3.text = 5R (Enhanced) > L
+trialstep.3.stateno = 707
+trialstep.3.isnohit = false
+trialstep.4.text = Dash
+trialstep.4.stateno = 100
+trialstep.4.isnohit = true
+trialstep.5.text = 5M
+trialstep.5.stateno = 210
+trialstep.6.text = 5R (Enhanced) > M
+trialstep.6.stateno = 705
+trialstep.7.text = Dash
+trialstep.7.stateno = 100
+trialstep.7.isnohit = true
+trialstep.8.text = 5M
+trialstep.8.stateno = 210
+trialstep.9.text = 5R (Enhanced) > M
+trialstep.9.stateno = 705
+trialstep.10.text = Dash
+trialstep.10.stateno = 100
+trialstep.10.isnohit = true
+trialstep.11.text = 5M
+trialstep.11.stateno = 210
+trialstep.12.text = 5S (Enhanced)
+trialstep.12.stateno = 1001
+trialstep.13.text = 236X - Enter the 36 Chambers (Enhanced)
+trialstep.13.stateno = 3000, 3010

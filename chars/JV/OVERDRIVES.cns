@@ -1,0 +1,408 @@
+;236L/M/H - JUDGEMENT BLADE
+[Statedef 3000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+velset = vel x,0
+anim =3000
+sprpriority = 8
+poweradd = -2000
+
+[State -3, Hyper Finish Background]
+type = Helper
+triggerall = WinKO
+trigger1 = WinKO
+name = "Hyper Finish B.G."
+id = 8990
+stateno = 8990
+pos = 0,0
+postype = p1
+facing = 0
+stateno = 8990
+keyctrl = 0
+ownpal = 1
+supermovetime = 1000
+pausemovetime = 1000
+ignorehitpause = 1
+persistent = 0
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = time = 63
+value = 3002 - map(EnLock)
+
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = map(EN)
+map = "EnLock"
+value = 1
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = !map(EN)
+map = "EnLock"
+value = 0
+
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = anim = 3001 && (animelem = 2 || animelem = 3)
+x = 10
+[State 0, PosAdd]
+type = PosAdd
+trigger1 = anim = 3001 && (animelem = 4 || animelem = 5)
+x = -8
+
+
+[State 0, AfterImage] ;Enhancer Afterimage Effect ============ ++
+type 		= AfterImage			        ;+
+trigger1 		= time 	=  0 && map(EN)		        ;+
+time 		= 10				        ;+
+length 		= 20   				        ;+
+timegap 		= 1				        ;+
+ignorehitpause 	= 1 				        ;+
+paladd		= 191, 64, 191			        ;+
+trans 		= add				        ;+
+persistent 	= 0				        ;+
+;==================================================++  
+
+[State -2, Starter Level]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "StarterLevel"
+value 		= 4
+ignorehitpause 	= 1
+
+[State -2, P1 Value Set]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "P1"
+value 		= 0.90	;100% Starting DMG
+ignorehitpause 	= 1
+[State -2, P2 Value Set]
+type 		= MapSet
+trigger1 		= movehit && map(ComboStateCheck)
+map 		= "P2"
+value 		= 0.95	;90% DMG For next hit
+ignorehitpause 	= 1
+persistent = 0
+[State -2, P2 Accumulation - Scale]
+type 		= MapSet
+trigger1 		= movehit
+map 		= "Accumulation"
+value 		= Map(Accumulation) * map(P2)
+ignorehitpause 	= 1
+persistent 		= 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = time = 0
+time = 62
+anim = 3000
+sound = 20,0
+pos = 0,0
+movetime = 62
+darken = 1
+poweradd = 0
+unhittable = 1
+
+[State Meter Burn State, VarSet]
+type = VarSet
+trigger1 = movehit = 1
+v = 3
+value = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
+time = 8
+
+[State 200, 1]
+type = HitDef
+p2facing = 1 
+triggerall = !movecontact && !movereversed
+trigger1 = !map(EnLock)
+attr = S, SA, HA
+damage = 200*MAP(P4), 10
+hitflag = MAFD
+guardflag = MA
+pausetime = 12,12
+sparkno = 2
+sparkxy = -25,-44
+hitsound   = 5,1
+guardsound = 6,1
+ground.type = high
+animtype = hard
+ground.hittime  = 40
+air.hittime = 40
+down.hittime = 999
+ground.velocity = -2,-9
+air.velocity = -2,-8
+envshake.time = 30
+fall = 1
+fall.yvelocity = 0
+guard.slidetime = 21
+guard.hittime = 21
+guard.ctrltime = 4
+[State 200, 1]
+type = HitDef
+triggerall = !movecontact && !movereversed
+trigger1 = map(EnLock)
+hitonce = 1
+attr = S, SA, HA
+damage = 200*MAP(P4) + 200 + 100*map(CounterHit), 80 ;Super Frontload Bros.
+hitflag = MAFD
+guardflag = MAF
+pausetime 	= 25,25 + 10*map(CounterHit)
+sparkno 		= 3
+sparkxy 		= -10,-45
+hitsound   	= 5,4
+guardsound 	= 6,2
+ground.type 	= TRIP
+air.type		= TRIP
+animtype 		= medium
+ground.hittime  	= 40
+ground.velocity 	= -20,-6
+air.velocity 	= -20,-2
+air.hittime 	= 15
+fall 		= 1
+guard.ctrltime 	= 10
+envshake.time 	= 8
+envshake.freq 	= 10
+envshake.ampl 	= 5
+envshake.phase 	= 1
+getpower 	= 0
+p2stateno 	= 5220
+p2getp1state 	= 0
+
+[State 8990, Explod]
+type = Explod
+triggerall = WinKO
+trigger1 = time = 40
+anim = 8991
+id = 8991
+pos = 160,120
+scale = .5,.5
+postype = Left
+bindtime = -1
+removetime = -2
+sprpriority = -15
+ownpal = 1
+supermovetime = -1
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = anim = [3001,3002]
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+
+;================================
+;214S - Maw of Ouroboros
+[Statedef 3200]
+type = S
+movetype = A
+Physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 3050
+poweradd = -4000
+sprpriority = 2
+
+[State -3, Hyper Finish Background]
+type = Helper
+trigger1 = WinKO && !NumHelper(8990)
+name = "Hyper Finish B.G."
+id = 8990
+pos = 0,0
+postype = p1
+facing = 0
+stateno = 8990
+keyctrl = 0
+ownpal = 1
+supermovetime = 1000
+pausemovetime = 1000
+ignorehitpause = 1
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = movehit
+value = 0
+ignorehitpause = 1
+;persistent = 
+
+[State 4000, NotHitBy]
+type = NotHitBy
+trigger1 = time = 0
+value = SCA
+time = 40
+
+[State Meter Burn State, VarSet]
+type = VarSet
+trigger1 = movehit = 1
+v = 2
+value = 0
+
+[State 0. MapSet]
+type 		= MapAdd
+trigger1	= time
+map 		= "ComboTimer"
+value 		= -1
+ignorehitpause 	= 1
+persistent 	= 1
+
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = map(EN)
+map = "EnLock"
+value = 1
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = !map(EN)
+map = "EnLock"
+value = 0
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = time = 0 && MAP(EnLock)
+value = 3050
+elem = 7
+ignorehitpause = 1
+persistent = 0
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = animelemno(0) >= 11
+x = 0
+y = 0
+
+[State 0, Explod]
+type = Explod
+trigger1 = animelem = 11
+anim = 3051
+ID = 3051
+pos = 0,0
+postype = p1
+facing = 1
+vfacing = 1
+removetime = -2
+pausemovetime = 1
+scale = 1,1
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 1
+ignorehitpause = 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = animelem = 11
+anim = 3052
+ID = 3052
+pausemovetime = 0
+ignorehitpause = 0
+removeongethit = 1
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = animelem = 8
+time = 30
+sound = 20,0
+pos = 0,0
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+unhittable = 1
+
+[State 200, 1]
+type = hitdef 
+p2facing 	= 1
+trigger1 	= time % 10
+trigger1 	= cond(Map(EnLock), time < 45, time < 60)
+attr 	= S, HA
+animtype  	= hard
+damage 		= 10*MAP(P4) + 10, 5
+hitflag 		= MAFD
+guardflag 	= MA
+pausetime 	= 3,3
+guard.pausetime 	= 2,2
+sparkno 		= 3
+sparkxy 		= -p2dist x, enemy, pos y+-40 ;Bruh
+hitsound   	= 5,3
+guardsound 	= 6,2
+ground.type 	= high
+ground.slidetime 	= 14
+ground.hittime  	= 999
+air.hittime 	= 999
+down.hittime 	= 999
+ground.velocity 	= p2dist x*.05,-3
+down.velocity 	= p2dist x*.05,-3
+air.velocity 	= p2dist x*.05,(-p2dist y - 100)*0.05
+envshake.time 	= 12
+envshake.freq 	= 10
+envshake.ampl 	= 3
+envshake.phase 	= 1
+palfx.time 	= 12
+palfx.add 		= 100, 0,20
+guard.hittime 	= 19
+guard.slidetime 	= 16
+guard.ctrltime 	= 17
+guard.velocity 	= -.1
+air.fall 		= 1
+getpower		= 0
+kill		= 0
+
+[State 200, 1]
+type = hitdef 
+p2facing = 1
+trigger1 = animelem = 13
+attr = S, HA
+animtype  = hard
+damage = 300*MAP(P4) + 67, 25
+hitflag = MAFD
+guardflag = MA
+pausetime = 35,35
+guard.pausetime = 10,10
+sparkno = 3
+sparkxy = enemy, pos x, enemy, pos y+-40 ;Bruh
+hitsound   	= 5,3
+guardsound 	= 6,2
+ground.type 	= trip
+air.type		= trip
+ground.slidetime 	= 14
+ground.hittime  	= 30
+air.hittime 	= 30
+down.hittime 	= 30
+ground.velocity 	= -10,-3
+down.velocity 	= -10,-3
+air.velocity 	= -10,-3
+envshake.time 	= 25
+envshake.freq 	= 20
+envshake.ampl 	= 10
+envshake.phase 	= 1
+palfx.time 	= 12
+palfx.add 		= 100, 0,20
+guard.hittime 	= 19
+guard.slidetime 	= 16
+guard.ctrltime 	= 17
+guard.velocity 	= -.4
+air.fall 		= 1
+fall 		= 1
+fall.yvelocity	= 0
+p2stateno	= 5220
+p2getp1state	= 0
+getpower 	= 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
