@@ -8,29 +8,26 @@ displayname 	= "J.V."		;Name of character to display
 versiondate 	= 11,24,2021    	;Version date of character (MM-DD-YYYY or X.XX)
 mugenversion 	= 1.0         	;Version of M.U.G.E.N character works on (X.XX)
 ikemenversion	= 0.99
-author 		= "PXN."         		;Character author name
+author 		    = "PXN."         		;Character author name
 pal.defaults 	= 1,2,3,4      	;Default palettes in order of preference (up to 4)                          
 localcoord 	= 280,240       	;Local coordinate space width and height
 
 ; Files for the player
 [Files]
-cmd     	= JV.cmd           ;Command set
+cmd     	= JV.cds           ;Command set
 cns     	= JV.cns           ;Constants
 st      	= JV.cns           ;States
-st1      	= Normals.cns
-st2      	= Specials.cns
-st3      	= HyperCombos.cns
-st4      	= Target.cns
-st5      	= Helpers.cns
-st6 		= JVstates.cns
+st1      	= NORMALS.cns
+st2      	= SPECIALS.cns
+st3      	= OVERDRIVES.cns
+st4 		= JVstates.cns
 stcommon 	= common1.cns      ;Common states (from data/ or motif)
 sprite  		= JV.sff           ;Sprite
 anim    		= JV.air           ;Animation
 sound   		= JV.snd           ;Sound
 ai      		= JV.ai            ;AI hints data (not used)
-movelist 		= JV.dat
-trials			= trials.def
-pal1   = 1.act
+movelist 		= UJV.dat
+pal1    = 1.act
 pal2    = 2.act
 pal3    = 3.act
 pal4    = 4.act
@@ -38,10 +35,10 @@ pal5    = 5.act
 pal6    = 6.act
 pal7    = 7.act
 pal8    = 8.act
-pal9=9.act
-pal10=10.act
-pal11=11.act
-pal12=12.act
+pal9    = 9.act
+pal10   = 10.act
+pal11   = 11.act
+pal12   = 12.act
 
 
 ; Maps character selection buttons to palette numbers.

@@ -14,7 +14,7 @@
     "data/common.air"
   ],
   "CommonCmd": [
-    "data/common.cmd"
+    "data/common.cds"
   ],
   "CommonConst": [
     "data/common.const"
@@ -56,6 +56,8 @@
   "GameWidth": 1280,
   "GameHeight": 720,
   "GameFramerate": 60,
+  "InputButtonAssistWindow": 1,
+  "InputSOCDResolution": 1,
   "IP": {},
   "LifeMul": 100,
   "ListenPort": "7500",
@@ -143,11 +145,11 @@
         "u",
         "i",
         "o",
-        "j",
         "k",
         "l",
+        "n",
         "RETURN",
-        "y",
+        "j",
         "h",
         "p"
       ]
@@ -287,5 +289,14 @@
         "6"
       ]
     }
-  ]
+  ],
+  "RollbackConfig": {
+    "frameDelay": 2,
+    "disconnectNotifyStart": 1000,
+    "disconnectTimeout": 3000,
+    "logsEnabled": false,
+    "desyncTest": false,
+    "desyncTestFrames": 0,
+    "DesyncTestAI": false
+  }
 }

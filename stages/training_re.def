@@ -1,0 +1,255 @@
+
+;--------------------------------------------------------
+[Info]
+name = "VIEW FROM THE FALSE HORIZON"
+
+[Camera]
+startx = 0
+starty = 0
+zoomin = 0.8
+zoomout = 0.8
+boundleft = -700
+boundright = 700
+boundhigh = -700
+boundlow = 0
+verticalfollow = .2
+floortension = 0
+tension = 300
+overdrawhigh = 120
+overdrawlow = 120
+cuthigh = 0
+cutlow = 0
+
+;--------------------------------------------------------
+[PlayerInfo]
+;--- Player 1 ---
+p1startx = -120          ;Starting x coordinates
+p1starty = 0            ;Starting y coordinates
+p1facing = 1            ;Direction player faces: 1=right, -1=left
+
+;--- Player 2 ---
+p2startx = 120
+p2starty = 0
+p2facing = -1
+
+;--- Common ---
+ ;Don't change these values.
+leftbound  = -1500 ;Left bound (x-movement)
+rightbound = 1500 ;Right bound
+topbound  =  0     ;Top bound (z-movement)
+botbound  =  0     ;Bottom bound
+
+;--------------------------------------------------------
+[Scaling]
+ ;No need to change these values
+topz     = 0       ;Top z-coordinate for scaling
+botz     = 50      ;Bottom z-coordinate for scaling
+topscale = 1       ;Scale to use at top
+botscale = 1.2     ;Scale to use at bottom
+
+;--------------------------------------------------------
+[Bound]
+ ;Distance from left/right edge of screen that player can move to
+ ;Typically 15
+screenleft = 25    ;Dist from left of screen that player can move to
+screenright = 25   ;Right edge
+
+;--------------------------------------------------------
+[StageInfo]
+zoffset = 400
+autoturn = 1
+resetBG =1
+localcoord = 640,460
+
+;--------------------------------------------------------
+[Shadow]
+color 		= 0,0,0
+yscale 		= .2
+intensity 	= 0
+reflect = 1
+
+[Reflection]
+intensity 	= 75
+
+;--------------------------------------------------------
+
+
+;========================================================
+;--------------------------------------------------------
+; Background definition
+; ***
+;-------------------------------------
+; [BG x]
+; type = ?       "Normal"/"Parallax"/"Height"  (def: "normal")
+; spriteno = ?, ? Sprite group and number: groupno, imgno  (req'd)
+; start = ?, ?   Starting location (integer)  (def: 0, 0)
+; delta = ?, ?   Change in location per camera unit moved (float)  (def: 1,1)
+; trans = ?      Transparency settings: "none"/"add"/"sub"/"avg" (def: "none")
+; mask = ?       Masking (int): 0 - off, 1 - on  (def: 0)
+; velocity = ?, ? Velocity: x, y (float): speed background moves (def: 0, 0)
+; tile = ?, ?    Tiling: xtile, ytile (int): 0 - off, 1 - infinite,
+;                        >1 - tile that number of times  (def: 0, 0)
+; tilespacing = ?, ? Tiling: x, y (int) : space between tiles (def: 0, 0)
+;  Parallax-only:
+; xscale = ?, ?    Top xscale, bottom xscale (float) (if used, then no tiling)
+; width = ?, ?     Top width, bottom width (int)  (if used, then tiles;
+;                             use either this or above, but not both)
+; yscalestart = ?  Starting y-scale (float, in percent)  (def: 100)
+; yscaledelta = ?  Change in y-scale per unit (float, in percent)  (def: 0)
+;-------------------------------------
+
+;-------------------------------------
+; Main background definition
+[BGdef]
+ ;Filename of sprite data
+spr = stages/training_re.sff
+
+ ;Set to 1 if you want to clear the screen to magenta before
+ ;drawing layer 0 (the default background). Good for spotting "holes"
+ ;in your background.
+ ;Remember to turn this off when you are done debugging the background,
+ ;because it slows down performance.
+debugbg = 0
+
+
+;----------
+; Start each background element with the following:
+; Make sure it's "[BG n]", where n is anything you like (it's only used to
+; report errors.) For example, you could use:  [BG TheFloor]
+; Specify as many as you like. This is an example of a normal background:
+
+[BG Black]
+type  = normal
+spriteno = 100,0
+start = 0, 0
+delta = 0,0
+layerno = 0
+tile=1,1
+[BG Black]
+type  = normal
+spriteno = 8,0
+start = 0, -30
+velocity=0,0
+delta = .15,.90
+layerno = 0
+trans=add1
+
+[BG Black]
+type  = anim
+actionno=15
+start = -220, -300
+velocity=0.3,0.3
+tile= 1,1
+tilespacing = 2000,9000
+delta = .15,.80
+layerno = 0
+trans=add
+
+[BG 1]
+type = normal
+spriteno=1,1
+start = 0.3,0.9
+delta = .21,1.2
+tile = 1,1
+velocity = 0.1,0.1
+TRANS=add
+
+[BG 1]
+type = anim
+actionno=1
+start = 0,340
+delta = 0,1.4
+tile = 1,1
+velocity = 0,0
+mask = 0
+TRANS=sub
+[BG 1]
+type = normal
+spriteno=6,0
+start = 32.5,415
+delta = 0,0
+tile = 1,0
+velocity = 0,0
+mask = 1
+TRANS=add
+[BG Black]
+type  = normal
+spriteno = 8,1
+start = 0, -30
+velocity=0,0
+delta = .15,.90
+layerno = 0
+mask=1
+[BG 1] ; Floor
+type  = parallax
+spriteno = 4,1
+start = 32.5,310
+delta = .25, 1;.25, .35
+tile = 1, 1
+velocity=-0.4,0
+tilespacing = 0, 0
+width = 65, 330
+;yscalestart = 100
+[BG 1] ; Floor
+type  = parallax
+spriteno = 4,2
+start = 32.5,310
+delta = .25, 1;.25, .35
+tile = 1, 0
+velocity=0,0
+tilespacing = 0, 0
+width = 65, 330
+mask=1
+;yscalestart = 100
+; 0
+
+[BG 1] ; Floor
+type  = anim
+actionno=10
+start = 0,-50
+delta = 0, 1;.25, .35
+tile = 1, 0
+velocity=0,0
+tilespacing = 0, 0
+
+;yscalestart = 100
+layerno=0
+; Red Gradient
+[Begin Action 1]
+LoopStart
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 10, , AS225D256
+5,0, 0,0, 20, , AS225D256
+
+; 1
+[Begin Action 5]
+1,0, 0,0, 1, , AS100D256
+1,1, 0,0, 1, , AS100D256
+1,2, 0,0, 1, , AS100D256
+1,3, 0,0, 1, , AS100D256
+
+[Begin Action 6]
+1,0, 0,0, 1, , AS30D256
+1,1, 0,0, 1, , AS31D256
+1,2, 0,0, 1, , AS32D256
+1,3, 0,0, 1, , AS31D256
+
+[Begin Action 10]
+2,0, 0,0, 500, , AS150D256
+2,0, 0,0, 5, , AS140D256
+2,0, 0,0, 5, , AS130D256
+2,0, 0,0, 5, , AS120D256
+2,0, 0,0, 5, , AS130D256
+2,0, 0,0, 5, , AS140D256
+2,0, 0,0, 5, , AS150D256
+
+[Begin Action 15]
+9,0, 0,0, 15, , A
+9,1, 0,0, 15, , AS240D256

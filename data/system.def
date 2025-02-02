@@ -2,8 +2,8 @@
 
 ;----------------------------
 [Info]
-name = "Default"          ;Name of motif
-author = "Elecbyte"       ;Motif author name
+name = "JDR"          ;Name of motif
+author = "PXN."       ;Motif author name
 versiondate = 09,01,2009  ;Version date of motif (MM-DD-YYYY) (new in MUGEN 2009)
 mugenversion = 1.0        ;Version of M.U.G.E.N motif is compatible with (new in MUGEN 2009)
 localcoord = 320,240      ;Local coordinate space width and height (new in MUGEN 2009)
@@ -1396,12 +1396,12 @@ keymenu.itemname.right = "Right"                  ;Ikemen feature
 keymenu.itemname.a = "A"                          ;Ikemen feature
 keymenu.itemname.b = "B"                          ;Ikemen feature
 keymenu.itemname.c = "C"                          ;Ikemen feature
-keymenu.itemname.x = "X"                          ;Ikemen feature
-keymenu.itemname.y = "Y"                          ;Ikemen feature
-keymenu.itemname.z = "Z"                          ;Ikemen feature
-keymenu.itemname.start = "Start"                  ;Ikemen feature
 keymenu.itemname.d = "D"                          ;Ikemen feature
-keymenu.itemname.w = "W"                          ;Ikemen feature
+keymenu.itemname.x = "F"                          ;Ikemen feature
+keymenu.itemname.y = "MACRO"                          ;Ikemen feature
+keymenu.itemname.z = "MACRO2"                          ;Ikemen feature
+keymenu.itemname.w = "MACRO3"                          ;Ikemen feature
+keymenu.itemname.start = "Start"                  ;Ikemen feature
 keymenu.itemname.menu = "Menu"                    ;Ikemen feature
 keymenu.itemname.back = "Back"                    ;Ikemen feature
 keymenu.itemname.page = "Page"                    ;Ikemen feature

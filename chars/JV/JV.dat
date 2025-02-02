@@ -1,55 +1,64 @@
-	<#bbbbbb>This move list assumes you are facing to the right.</>
+	<#a000ff>This move list assumes you are facing to the right.</>
 
 	<#190bd9>UNIQUE TRAIT: Nálgask</>
 	JV can enhance his special, remix, and super moves by
-	dashing before doing them. Enhanced moves have unique,
-   improved properties over their regular counterparts.
+    dashing before doing them. Enhanced moves have unique,
+    improved properties over their regular counterparts.
+
+	<#190bd9>UNIQUE TRAIT: TRUE FORM</>
+    Instead of using a Record Scratch cancel, UJV employs the 
+   Redline Cancel, foregoing the speed boost and slowdown of scratch,
+   for a faster cancel option.
+   For 25 meter, JV can cancel attacks at "FREE REDLINE"
+   points, even if an attack hasnt made contact.
 
 	<#190bd9>UNIQUE MOVES</>
 DIVIDER	-		_F^C
-   <#bbbbbb>This attack can be jump cancelled on hit.</>
+   <#a000ff>This attack can be jump cancelled on hit.</>
 EARTHEN SERPENT	-		_DF^C
-   <#bbbbbb>A low-hitting sweep.</>
+   <#a000ff>A low-hitting sweep.</>
 KICKBACK	-		<#65b5ff>(AIR ONLY)</> _D^C
-   <#bbbbbb>A downward kick that inflicts a groundbounce.</>
-KING'S ARSENAL	-		(AFTER CERTAIN MOVES)^A/^B/^C/^Y
-        <#bbbbbb>After certain attacks, JV can use a set of moves
-        known as the King's Arsenal by pressing 
-        light, medium, or heavy.</>
-        _!SUNDR	-		^A
-        <#983eff>A dash-cancelable mid strike.
-        If spaced to hit at the tip, it will wallbounce.</>
-         _!NAORA	-		^B
-        <#983eff>A fast advancing kick for punishing enemy agression.
-        Has upper-body invulnerability for a part of its duration.</>
-         _!YGGDRASIL	-		^C
-        <#983eff>An overhead attack that deals high damage
-        and stun. Ground bounces airborne opponents.</>
-SKYFALL	-		(AIR ONLY)</> _D^Y
-        <#bbbbbb>A fastfall JV can use to reach the ground.</>
+   <#a000ff>A downward kick that inflicts a groundbounce.</>
 
 	<#190bd9>SPECIAL MOVES</>
-ONE-INCH PUNCH	-		^Y
-   <#bbbbbb>A simple punch.</>
-   <#983eff>Enhanced version launches higher and for longer,
-   also gaining the ability to cancel into EX moves.</>
-BERETTA DRIVER	-		(HOLD) ^Y
-   <#bbbbbb>A fullscreen attack that causes a sliding knockdown.
-   Can be dash cancelled on hit.</>
-NAGANT DRIVER	-		(HOLD LONGER) ^Y
-   <#bbbbbb>A fullscreen, highly damaging attack that causes a 
+ONE-INCH PUNCH/HIMINN	-		_D_DF_F_-^A
+   <#a000ff>A simple punch.</>
+   <#983eff>Enhanced version has JV avoid high attacks while delivering
+   an uppercut that is devastating on counterhit.</>
+BERETTA DRIVER	-		 _D_DF_F_- (HOLD)^A
+   <#a000ff>A fullscreen attack that causes a sliding knockdown.
+   Has a FREE REDLINE point.</>
+NAGANT DRIVER	-		(HOLD LONGER) ^A
+   <#a000ff>A fullscreen, highly damaging attack that causes a 
    sliding knockdown.
    Can be dash cancelled on hit.</>
-DEATH DRIVER	-		(MAX HOLD) ^Y
-   <#bbbbbb>Executioner's Technique.</>
-VEÐRFÖLNIR	-		_F^Y
-   <#bbbbbb>A bajiquan stomp that can be guarded standing or crouching.
-   Goes into [KING'S ARSENAL] when used.
+DEATH DRIVER	-		(MAX HOLD) ^A
+   <#a000ff>Try again, in another life.</>
+STRIKE.THE.EARTH.	-		_D_DF_F_-^B
+   <#a000ff>A bajiquan stomp that hits low. Starts a rekka chain.
+   Each attack in the chain can cancel into other attacks, and 
+   after two are performed, they can be canceled into an ender.
+   <#983eff>Enhanced version is faster.</>
+_!JOTUNN OMEGA (REKKA)	-		^A
+   <#a000ff>A powerful dash-punch that causes a hard knockdown.
+_!Malignant Gate (REKKA)	-		^B
+   <#a000ff>A jump-cancelable launching roundhouse kick.
+_!Serpent Lash (REKKA)	-		^C
+   <#a000ff>A quick kick that must be guarded crouching.
+_!BEAST (END)	-		_F_DF_D_DB_B_-^C
+   <#a000ff>A slow but powerful beast elbow that can be dash-canceled,
+   even on block. Can also be used independently of [STRIKE THE EARTH].
+_!YGGDRASIL (END)	-		_D_DF_F_-^C
+   <#a000ff>A powerful, ground-bouncing attack that must be guarded standing.
+_!Ego Death (END)	-		_F_DF_D_DB_B_F_-^A
+   <#a000ff>Don't block.
+VEÐRFÖLNIR	-		_D_DF_F^C
+   <#a000ff>A bajiquan stomp that can be guarded standing or crouching.
+   Goes into [STRIKE THE EARTH] when used.
    <#983eff>Enhanced version ground bounces and
    must be guarded standing.</>
-_!KING'S ARSENAL	-		^A/^B/^C
-AIMLESS SERPENT	-		_B^Y
-   <#bbbbbb>JV stops, momentarily dodging all
+AIMLESS SERPENT	-		_D_DB_B_-^A
+   <#a000ff>JV stops, momentarily dodging all
    forms of enemy attacks. Tapping forward 
    allows him to cancel the spotdodge into a
    run, but doing so locks out his ability to
@@ -57,90 +66,72 @@ AIMLESS SERPENT	-		_B^Y
    Can be done out of jump-squat.
    <#983eff>Enhanced version moves JV forward and isn't dash cancellable.
    Also gains a followup attack.</>
-_!SPEAR OF GOD	-		^Y
-        <#983eff>A powerful mid strike that can be dash canceled on contact.
-        Deals high damage, and scoring a counter-hit with it will send
-        your opponent to hell before they die.</>
-DISENGANGE	-		_D^Y 
-   <#bbbbbb>Quickly moves JV backwards.
+_!Naora	-		^B
+        <#983eff>JV avoids high attacks while delivering
+        a quick roundhouse kick that launches the opponent.</>
+DISENGANGE	-		_D_DB_B^B
+   <#a000ff>Quickly moves JV backwards.
    <#983eff>Enhanced version has invul
-   and can be canceled into Kings Arsenal.</>
-_!KING'S ARSENAL	-		^A/^B/^C
-JÖTUNN'S WRATH	-		<#65b5ff>(AIR ONLY)</> ^Y
-   <#bbbbbb>An aerial straight punch.
+   and can be canceled into a followup. Also has a Free Redline point.</>
+_!Sundr	-		^A
+        <#983eff>JV spins forward and delivers a punch that is
+        more devastating at the edge of his fist. Dash cancelable,
+        even on block.</>
+IRON MOUNTAIN'S COFFIN	-		_B_DB_D_DF_F^C
+        <#a000ff>A powerful tetsuzankou attack with infinite hits of armor.
+        <#983eff>Enhanced version is faster with reduced recovery.
+        Has a Free Redline point.</>
+JÖTUNN'S WRATH	-		<#65b5ff>(AIR ONLY)</> _D_DF_F_-^C
+   <#a000ff>An aerial straight punch.
    <#983eff>Enhanced version is faster and deals more
-   damage. Will trigger a wall bounce if it connects at the
-   sweetspot point-blank.</>
+   damage. Will trigger a wall bounce if it gets a clean hit
+   at point-blank range.</>
+
+WINGED SERPENT'S HUNT	-		<#65b5ff>(AIR ONLY)</> _D_D_-^A/^B/^C
+         <#a000ff>An upward teleport, scissor kick, and fastfall respectively.
+         <#983eff>L version cancels into H. M cancels into L. H into M.</>
 
 	<#190bd9>REMIX MOVES</>
 COILED SERPENT	-		^Z
-   <#bbbbbb>JV enters a stance with unique followup attacks.
+   <#a000ff>JV enters a stance with unique followup attacks.
    <#983eff>Enhanced version is much faster.</>
 _!SVERA	-		^A
-        <#bbbbbb>A low-hitting sweep.
+        <#a000ff>A low-hitting sweep.
         <#983eff>Enhanced version is much faster and has more hitstun.</>
 _!MEGIN	-		^B
-        <#bbbbbb>An overhead kick.
+        <#a000ff>An overhead kick.
         <#983eff>Enhanced version is faster and has more hitstun.</>
 _!GUNGNIR	-		^C
-        <#bbbbbb>A rising knee launcher.
+        <#a000ff>A rising knee launcher.
         <#983eff>Enhanced version launches higher and for longer.</>
 STRIKING SERPENT	-		_D^Z
-   <#bbbbbb>A low-hitting kick that puts JV in COILED SERPENT stance.</>
+   <#a000ff>A low-hitting kick that puts JV in COILED SERPENT stance.</>
    <#983eff>Enhanced version is much faster.</>
 
-	<#190bd9>EX MOVES</>
-KANON DRIVER	-		^Y+^Z
-   <#bbbbbb>JV kicks upward with a beam that only hits 
-   air opponents. Causes a wall bounce on hit and deals more
-   damage the futher away you are. Dash cancelable.</>
-
-VEÐRFÖLNIR	-		_F^Y+^Z
-   <#bbbbbb>A faster version of
-   enhanced 6S. Does not hit overhead.</>
-   _!KING'S ARSENAL	-		^A/^B/^C/^Y
-
-WINGED SERPENT	-		_B^Y+^Z
-   <#bbbbbb>JV instantly dashes forward with blinding speed.
-   Use this to close the gap when your opponent least
-   expects it.</>
-
-SERPENT'S BASTION	-		_D^Y+^Z
-   <#bbbbbb>JV performs a slow, advancing tetsuzankou.
-   This move can armor up to two enemy attacks.
-   Cancels into King's Arsenal on contact.</>
-   _!KING'S ARSENAL	-		^A/^B/^C/^Y
-
 	<#55ffff>SUPER MOVES</>
-<#983eff>Enter the 36 CHAMBERS</>	-		<#55ffff>(2 BARS)</> _D_DF_F_-^A/^B/^C
-   <#bbbbbb>A powerful barrage of attacks that deals a lot of damage
-   and knocks the opponent down.</>
-<#983eff>TWENTY-EIGHT MALIGNANT GATES</>	-		<#55ffff>(2 BARS)</> _D_DB_B_-^A/^B/^C
-   <#bbbbbb>JV launches the opponent into the air before following
-   up with a second, downward kick. If he has a third bar available, he
-   will perform a third kick that grants him a combo extension.</>
+<#983eff>JUDGEMENT BLADE EXCEED</>	-		<#55ffff>(2 BARS)</> _D_DF_F_-^Y
+   <#a000ff>JV charges energy in his arm and swipes at his opponent, delivering
+   a powerful cut that wall-bounces.</>
 <#983eff>BEAUTIFUL DEATH</>		<#55ffff>(4 BARS)</> _D_DB_B_-^Y
-   <#bbbbbb>A slow, powerful, invincible attack.
-   The air version does not have invincible.</>
+   <#a000ff>A slow, powerful, invincible attack.</>
 
 	SYSTEM MECHANICS
 SUPERJUMP	-		_D_U
-   <#bbbbbb>Jump higher, faster, and further. Increases the amount
+   <#a000ff>Jump higher, faster, and further. Increases the amount
    of air-influence directional inputs have.</>   
 ANTI-AIR	-		_D^C
-   <#bbbbbb>This move has invulnerability to airborne enemies.</>
+   <#a000ff>This move has invulnerability to airborne enemies.</>
 FORCE BLOCK (WHILE BLOCKING)	-		(0.25 BARS)</> _B^X
-   <#bbbbbb>Can push the enemy away while you block.</>
+   <#a000ff>Can push the enemy away while you block.</>
 RECOIL GUARD (WHILE BLOCKING)	-		(2 BARS)</> _F^X
-   <#bbbbbb>A fullscreen-ranged reversal that knocks the
+   <#a000ff>A fullscreen-ranged reversal that knocks the
    enemy down and beats projectiles. Returns 1 bar of
    meter upon use.</>
-RECORD SCRATCH (WHILE ATTACKING)	-		(2 BARS)</> ^X
-   <#bbbbbb>Can be used to instantly cancel most attacks.
-   Holding a direction while you perform it will redirect
-   you to move in said direction.</>
+REDLINE (WHILE ATTACKING)	-		(2 BARS)</> ^X
+   <#a000ff>Can be used to instantly cancel most attacks. Certain
+   attacks can even be canceled on whiff.</>
 BURST (WHILE GETTING HIT)	-		(BURST OK)</> ^Z+^C or ^X+^Y
-   <#bbbbbb>A large reversal that can be used while you're getting hit.
+   <#a000ff>A large reversal that can be used while you're getting hit.
    Be careful not to get it baited.
    </>
    </>
