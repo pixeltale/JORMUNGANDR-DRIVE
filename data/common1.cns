@@ -5602,31 +5602,8 @@ value = 5249 ;Downed get-hit (hit ground from fall)
 type    = L
 movetype= H
 physics = N
-anim  = 5249
+anim  = 5101
 velset = -10*cond(enemy,facing=facing,-1,1),0
-
-;[State 0, Explod]
-;type = Explod
-;trigger1 = time%5 = 0
-;trigger1 = time%10=0
-;anim = F201
-;ID = 206
-;pos = 0,0
-;postype = p1  ;p2,front,back,left,right
-;facing = -1
-;vfacing = 1
-;bindtime = 1
-;vel = 0,0
-;accel = 0,0
-;random = 0,0
-removetime = -2
-;pausemovetime = 0
-;scale = .6,.6
-;sprpriority = 0
-;ontop = 1
-;shadow = 0,0,0
-;ownpal = 0
-;removeongethit = 0
 
 ;[State 0, ModifyExplod]
 ;type = MakeDust

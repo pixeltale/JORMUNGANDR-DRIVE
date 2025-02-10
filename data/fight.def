@@ -1,4 +1,4 @@
-﻿; Definition of fight screen
+; Definition of fight screen
 
 ; *** DO NOT MODIFY OR OVERWRITE THIS FILE ***
 ; To customize, make a copy of this file in a subdirectory of your
@@ -536,9 +536,10 @@ p2.counter.font = 1,0, 0
 p2.levelbars = 0       ;Ikemen feature
 
 ; --level sounds---
-level1.snd = 21,0
-level2.snd = 21,0
-level3.snd = 21,0
+;level1.snd = -1,0
+;level2.snd = -1,0
+;level3.snd = -1,0
+;level4.snd = -1,0
 
 [Begin Action 40] ;Darkened powerbar background 
 40,0, 0,0, 1, , S

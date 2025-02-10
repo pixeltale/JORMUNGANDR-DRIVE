@@ -1219,19 +1219,19 @@ value 	= 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "x" || command = "holdx"
+trigger1 = command = "A" || command = "HOLD_A"
 trigger1 = movecontact
 value = 1201
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "y" || command = "holdy"
+trigger1 = command = "B" || command = "HOLD_B"
 trigger1 = movecontact
 value = 1202
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "z" || command = "holdz"
+trigger1 = command = "C" || command = "HOLD_C"
 trigger1 = movecontact
 value = 1203
 ctrl = 0
@@ -2362,7 +2362,7 @@ air.fall = 1
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = command = "feintBuffer_m" && animelem = 5
+trigger1 = command = "feintBuffer_B" && animelem = 5
 value = 1065
 elem = 8
 
@@ -2530,7 +2530,7 @@ ignorehitpause 	= 1
 
 [State 0, ChangeAnim] ;Feint
 type = ChangeAnim
-trigger1 = command = "feintBuffer_h" && animelem = 6
+trigger1 = command = "feintBuffer_C" && animelem = 6
 value = 430
 elem = 9
 

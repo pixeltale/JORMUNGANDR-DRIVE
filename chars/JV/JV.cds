@@ -72,13 +72,13 @@ command = ~D, D, d
 time = 10
 
 [Command]
-name = "feintBuffer_m"
-command = /y
+name = "feintBuffer_B"
+command = /b
 time = 1
 buffer.time = 0
 [Command]
-name = "feintBuffer_h"
-command = /z
+name = "feintBuffer_C"
+command = /c
 time = 1
 buffer.time = 0
 

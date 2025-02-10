@@ -268,7 +268,7 @@ persistent 		= 0
 [State 200, 1] ;++++++++++++++++++++++++++++++++++
 type 		= HitDef 
 p2facing 		= 1
-trigger1 		= !movehit && !movereversed
+trigger1 		= !movecontact && !movereversed
 ;==============================================
 attr 		= S, NA                     
 damage 		= 150*map(P4)
@@ -1565,26 +1565,26 @@ sprpriority = 2
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "c" && time > 8
+trigger1 = command = "D" && time > 8
 trigger2 = time > 90
 value = 704
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "x"
+trigger1 = command = "A"
 trigger1 = time >= 5
 value = 707
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "y"
+trigger1 = command = "B"
 trigger1 = time >= 5
 value = 705
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "z"
+trigger1 = command = "C"
 trigger1 = time >= 5
 value = 706
 ctrl = 0
@@ -1660,19 +1660,19 @@ ignorehitpause 	= 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "x"
+trigger1 = command = "A"
 trigger1 = time
 value = 707
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "y"
+trigger1 = command = "B"
 trigger1 = time
 value = 705
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "z"
+trigger1 = command = "C"
 trigger1 = time
 value = 706
 ctrl = 0
@@ -1780,28 +1780,28 @@ removeongethit = 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "c" && time > 14
+trigger1 = command = "D" && time > 14
 trigger2 = time > 90
 value = 704
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "x"
+triggerall = command = "A"
 trigger1 = animelemno(0) = 8
 trigger2 = movecontact
 value = 707
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "y"
+triggerall = command = "B"
 trigger1 = animelemno(0) = 8
 trigger2 = movecontact
 value = 705
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "z"
+triggerall = command = "C"
 trigger1 = animelemno(0) = 8
 trigger2 = movecontact
 value = 706
@@ -1922,28 +1922,28 @@ removeongethit = 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "c" && time > 15
+trigger1 = command = "D" && time > 15
 trigger2 = time > 90
 value = 704
 ctrl = 0
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "x"
+triggerall = command = "A"
 trigger1 = animelemno(0) > 8
 trigger2 = movecontact
 value = 707
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "y"
+triggerall = command = "B"
 trigger1 = animelemno(0) > 8
 trigger2 = movecontact
 value = 705
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
-triggerall = command = "z"
+triggerall = command = "C"
 trigger1 = animelemno(0) > 8
 trigger2 = movecontact
 value = 706
