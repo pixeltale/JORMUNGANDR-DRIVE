@@ -7543,46 +7543,6 @@ shadow = 0,0,0
 ownpal = 1
 ignorehitpause = 1
 
-;=============
-;Low Detector
-;=============
-[State -2, LOW]
-type 		    = MapSet
-trigger1 	    = name = "Alicia" && (stateno = [400, 410] || stateno = 430)
-trigger1 	    = name = "Angous" && (stateno = 410 || stateno = 431)
-trigger1 	    = name = "Arzon" && (stateno = [400, 410])
-trigger1 	    = name = "Crow" && (stateno = 410 || stateno = 430)
-trigger1        = name = "Eddy" && (stateno = 410 || stateno = 430 || stateno = 1002)
-trigger1        = name = "Grandmaster Wu" && (stateno = 410 || stateno = 430)
-trigger1 	    = name = "Jojo" && (stateno = [400, 410] || stateno = 431)
-trigger1 	    = name = "JV" && (stateno = 410 || stateno = 430 || stateno = [702, 703] || stateno = 707)
-trigger1 	    = name = "One" && (stateno = 420 || stateno = 440)
-trigger1 	    = name = "Roger" && (stateno = 410 || stateno = 430 || stateno = 562)
-trigger1 	    = name = "Sahkive" && (stateno = [400, 410] || stateno = 440 || stateno = 1034)
-trigger1 	    = name = "Vile" && (stateno = 200 || stateno = [400, 410] || stateno = 430 || stateno = [1010, 1011])
-map 		    = "Low"
-value 		    = 1
-ignorehitpause 	= 1
-persistent      = 1
-
-[State -2, LOW]
-type 		    = MapSet
-trigger1 	    = name = "Alicia" && !(stateno = [400, 410] || stateno = 430)
-trigger1 	    = name = "Angous" && !(stateno = 410 || stateno = 431)
-trigger1 	    = name = "Arzon" && !(stateno = [400, 410])
-trigger1 	    = name = "Crow" && !(stateno = 410 || stateno = 430)
-trigger1        = name = "Eddy" && !(stateno = 410 || stateno = 430 || stateno = 1002)
-trigger1        = name = "Grandmaster Wu" && !(stateno = 410 || stateno = 430)
-trigger1 	    = name = "Jojo" && !(stateno = [400, 410] || stateno = 431)
-trigger1 	    = name = "JV" && !(stateno = 410 || stateno = 430 || stateno = [702, 703] || stateno = 707)
-trigger1 	    = name = "One" && !(stateno = 420 || stateno = 440)
-trigger1 	    = name = "Roger" && !(stateno = 410 || stateno = 430 || stateno = 562)
-trigger1 	    = name = "Sahkive" && !(stateno = [400, 410] || stateno = 440 || stateno = 1034)
-trigger1 	    = name = "Vile" && !(stateno = 200 || stateno = [400, 410] || stateno = 430 || stateno = [1010, 1011])
-map 		    = "Low"
-value 		    = 0
-ignorehitpause 	= 1
-
 ;====================================================================
 ;System Mechanics
 ;====================================================================
@@ -7593,7 +7553,7 @@ triggerall = alive
 triggerall = statetype != L
 triggerall = map(BurstGauge)>=1000
 triggerall = !(enemy, map(BurstLock) && !enemy,fvar(18)=1) && stateno != 915020 && stateno != 5070
-triggerall = command = "F" && command = "b" || command = "z" && command = "c"
+triggerall = command = "F" && (command = "b" || command = "c" || command = "x" || command = "y" || command = "z")
 triggerall = movetype = H && enemy, hitdefattr != SCA, HA, HP, NT, ST, HT
 ;Average battle
 trigger1 = enemy,hitdefattr = SCA, NA, SA, NP, SP

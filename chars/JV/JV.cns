@@ -4,7 +4,6 @@ attack = 100
 defence = 120
 fall.defence_up = 0
 liedown.time = 60
-airjuggle = 15
 sparkno = 2
 guard.sparkno = 40
 KO.echo = 0
@@ -109,7 +108,7 @@ type = S
 [State 180, 1]
 type = ChangeState
 trigger1 = Time = 0
-value = 181+random%3
+value = 181
 
 ;---------------------------------------------------------------------------
 ; Win 1
@@ -401,31 +400,6 @@ trigger1 = statetype = S
 map = "DoubleJump"
 value = 0
 
-;[State 0, Custom Afterimage]
-;type = Explod
-;trigger1 = life <= 300
-;trigger1 = time%10=0
-;anim = anim
-;ID = 1000
-;vel = 0, -0.75
-;accel = 0, 0.075
-;postype = p1
-;bindtime = 1
-;facing = 1
-;supermovetime = 0
-;pausemovetime = 0
-;scale = const(size.xscale), const(size.yscale)
-;sprpriority = 0
-;ontop = 0
-;shadow = 0,0,0
-;ownpal = 1
-;trans = add
-;removetime = 20
-;palfx.time = 40
-;palfx.sinmul = 100,-255,-55,160
-;removeongethit = 0
-;ignorehitpause = 1
-
 [State 0, Strike The Earth - Reset]
 type 		= MapSet
 trigger1 		= stateno != [1200,1203]
@@ -463,44 +437,6 @@ type = MapSet
 trigger1 = enemy, movetype != H
 map = "j2H_UseCount"
 value = 0
-[State SP, MapSet]
-type = MapSet
-trigger1 = enemy, movetype != H
-map = "EX6S_Limiter"
-value = 0
-[State SP, MapSet]
-type = MapSet
-trigger1 = enemy, movetype != H
-map = "EX2S_Limiter"
-value = 0
-[State SP, MapSet]
-type = MapSet
-trigger1 = enemy, movetype != H
-map = "EX5S_Limiter"
-value = 0
-[State SP, MapSet]
-type = MapSet
-trigger1 = enemy, movetype != H
-map = "EXjS_Limiter"
-value = 0
-
-;=============================================+
-;Palette Stuff
-[State 0, MapSet]
-type = RemapPal
-trigger1 = roundstate = 0
-source = 1, 1
-dest = 1, palno + map(AltPal)
-
-[State 0, MapSet]
-type = MapSet
-trigger1 = roundsexisted = 0
-trigger1 = roundstate = 0
-trigger1 = command = "holds"
-map = "AltPal"
-value = 12
-ignorehitpause = 1
-;=============================================+
 
 [State 100, 2] 
 type = AssertSpecial
@@ -510,27 +446,11 @@ ignorehitpause = 1
 
 [State 0. MapSet]
 type 		= MapSet
-trigger1 	= stateno = [3000, 3200]
+trigger1 		= stateno = [3000, 3200]
 map 		= "BurstLock"
 value 		= 1
 ignorehitpause 	= 1
-persistent 	= 1
-
-;=============================
-;LIMITERS
-;=============================
-[State SP, MapSet]
-type = MapSet
-trigger1 = !map(comboTimer)
-map = "sSENuse"
-value = 0
-
-[State -2, Starter Level]
-type 		= MapSet
-trigger1 		= !map(ComboTimer)
-map 		= "jEXLim"
-value 		= 0
-ignorehitpause 	= 1
+persistent 		= 1
 
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard

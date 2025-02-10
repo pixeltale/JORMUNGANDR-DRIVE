@@ -1,0 +1,15 @@
+{
+  "chars": [
+    {
+      "name": "AKIRA",
+      "command": "~F,B,F,B,s",
+      "holdstart": 0,
+      "unlocked": false,
+      "unlocksnd": "1,0,100",
+      "hidden": 1,
+      "anim": [
+        "1,0, 0,0, -1"
+      ]
+    }
+  ]
+}

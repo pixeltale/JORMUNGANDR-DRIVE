@@ -124,7 +124,7 @@ air.hittime 	= 24
 envshake.time 	= 7
 fall 		= 1
 fall.yvelocity 	= 0
-guard.ctrltime 	= 8	
+guard.ctrltime 	= 8
 p2stateno 	= 5245
 p2getp1state	= 0
 airguard.velocity = -1, -0.5
@@ -2673,17 +2673,17 @@ ground.cornerpush.veloff = -30
 air.cornerpush.veloff	= -35
 airguard.velocity 	= -2.5,-1
 air.type 		= High
-envshake.time 	= 0;
+envshake.time 	= 0
 fall		= 1
 air.fall 		= 1
-fall.yvelocity 	= 0
 ;==============================================
 envshake.time	= 40
 envshake.freq 	= 120
 envshake.ampl 	= 5
 envshake.phase 	= 1
 getpower 		= (50)*(cond(var(var(3)) = 1, 1, .5)) 
-p2stateno 	= 915020 ;SKD
+p2stateno 	= 5245
+p2getp1state	= 0
 
 [State 200, 1]
 type = HitDef 

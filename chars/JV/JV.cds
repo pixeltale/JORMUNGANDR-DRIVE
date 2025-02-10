@@ -444,8 +444,8 @@ triggerall = command != "holddown"
 triggerall = !map(NoNormals)
 trigger1 = statetype = S
 trigger1 = ctrl
-trigger2 = (stateno = 200) && movecontact
-trigger3 = stateno = [400,410] && movecontact
+trigger2 = (stateno = 200 || stateno = [400,410]) && movecontact
+trigger3 = stateno = [100,101] 
 
 ;5C
 [State -1, Standing Heavy]
@@ -521,43 +521,42 @@ trigger3 = stateno = [100,101]
 ;---------------------------------------------------------------------------
 
 ;jA
-[State -1, Jumping Light]
+[State -1, jA]
 type = ChangeState
 value = 600
 triggerall = command = "A"
 triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = stateno = [600, 640] && movehit
+trigger1 = ctrl || stateno = 60
+trigger2 = stateno = 600
 ;---------------------------------------------------------------------------
 ;j.B
-[State -1, Jumping Medium]
+[State -1, jB]
 type = ChangeState
 value = 610
 triggerall = command = "B"
 triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = movecontact && stateno!= 610
-trigger2 = stateno = [630,640] && movehit
+trigger1 = ctrl || stateno = 60
+trigger2 = movecontact && stateno = 600
 
 ;---------------------------------------------------------------------------
 ;j.2C: Jumping Heavy
-[State -1, Jumping Heavy]
+[State -1, j2C]
 type = ChangeState
 value = 640
 triggerall = command = "C"
 triggerall	= command = "holddown"
 triggerall = statetype = A
-trigger1 = ctrl
+trigger1 = ctrl || stateno = 60
 trigger2 = stateno = [600, 630] && movecontact
 
 ;j.C: Jumping Heavy
-[State -1, Jumping Heavy]
+[State -1, jC]
 type = ChangeState
 value = 630
 triggerall = command = "C"
 triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = stateno = [600,610] && movecontact || stateno = 640 && movehit
+trigger1 = ctrl || stateno = 60
+trigger2 = stateno = [600,610] && movecontact
 
 ;DEVIANT REDLINE CANCEL
 [State -1, REDLINE CANCEL]

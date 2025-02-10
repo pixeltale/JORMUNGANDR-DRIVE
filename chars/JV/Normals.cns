@@ -41,8 +41,6 @@ value 		= Map(Accumulation) * map(P2)
 ignorehitpause 	= 1
 persistent 		= 0
 
-
-
 [State 200, 1]
 type = HitDef 
 p2facing = 1
@@ -85,11 +83,6 @@ type = PlaySnd
 trigger1 = animelem = 2
 value = 0, 2
 
-[State 200, 3]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 0
-ctrl = 1
 
 [State 0, Jump Cancel]
 type 		= MapSet
@@ -103,6 +96,13 @@ trigger1 		= movehit
 map 		= "JC"
 value 		= 1
 ignorehitpause 	= 1
+
+
+[State 200, 3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
 
 ;---------------------------------------------------------------------------
 ;5M
@@ -268,33 +268,33 @@ persistent 		= 0
 [State 200, 1] ;++++++++++++++++++++++++++++++++++
 type 		= HitDef 
 p2facing 		= 1
-trigger1 		= time = 0
+trigger1 		= !movehit && !movereversed
 ;==============================================
-attr 			= S, NA                     
-damage 			= 150*map(P4)
-animtype 		= light
-air.animtype 		= back
+attr 		= S, NA                     
+damage 		= 150*map(P4)
+animtype 	= light
+air.animtype 	= back
 ;==============================================
-guardflag 		= MA
+guardflag 	= MA
 hitflag 		= MAFD
 ;==============================================
-pausetime 		= 12, 12 
+pausetime 	= 12, 12 
 sparkno 		= 0
 sparkxy 		= -30, -59
 hitsound 		= 5, 1
-guardsound 		= 6, 0
+guardsound 	= 6, 0
 ;==============================================
-ground.type 		= High
+ground.type 	= High
 air.type 		= High
 ;==============================================
 ground.hittime  	= 26 * MAP(untechMOD)
-air.hittime  		= 30 * MAP(untechMOD)
-down.hittime 		= 30 * MAP(untechMOD)
+air.hittime  	= 30 * MAP(untechMOD)
+down.hittime 	= 30 * MAP(untechMOD)
 ground.slidetime 	= 15
 ;==============================================
 ground.velocity 	= -8
-air.velocity 		= -1.4, -1.8 + (map(H_Usecount) * 0.2)
-guard.ctrltime 		= 12
+air.velocity 	= -1.4, -1.8
+guard.ctrltime 	= 12
 airguard.velocity 	= -1.9,-.8
 ;==============================================
 fall		= 0
@@ -306,15 +306,8 @@ envshake.freq 	= 5
 envshake.ampl 	= 2
 envshake.phase 	= 1
 ;==============================================
-getpower 		= (100)*(cond(var(var(2)) = 1, 1, .5))
+getpower 	= (100)*(cond(var(var(2)) = 1, 1, .5))
 ;++++++++++++++++++++++++++++++++++++++++++++++
-
-[State 0, 5H Limiter]
-type 		= MapAdd
-trigger1 	= movehit = 1
-map 		= "H_UseCount"
-value 		= 1
-ignorehitpause 	= 0
 
 [State 0, VelAdd]
 type = velset
@@ -354,6 +347,7 @@ trigger1 		= time = 0
 map 		= "JC"
 value 		= 0
 ignorehitpause 	= 1
+
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = animtime = 0
@@ -1149,7 +1143,7 @@ attr 	= A, NA
 damage 	= 100*MAP(P4)
 hitflag 	= MAF
 guardflag 	= HA
-pausetime 	= 14,15
+pausetime 	= 12,12
 sparkno 		= 3
 sparkxy 		= -5,-35
 hitsound   	= 5,3
@@ -1503,7 +1497,7 @@ attr 	= A, NA
 damage 	= 100*MAP(P4)
 hitflag 	= MAFD
 guardflag 	= HA
-pausetime 	= 14,15
+pausetime 	= 10,10
 sparkno 		= 3
 sparkxy 		= -5,-35
 hitsound   	= 5,3
@@ -2487,7 +2481,7 @@ guardflag 	= LAFD
 guard.ctrltime 	= 18
 guard.velocity 	= -8
 guard.pausetime 	= 10,8
-pausetime 	= 20,20
+pausetime 	= 15,15
 sparkno 		= 3
 sparkxy 		= -10,-10
 hitsound   	= 5,3

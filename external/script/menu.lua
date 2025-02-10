@@ -29,22 +29,43 @@ menu.t_valuename = {
 		{itemname = 'wjump', displayname = motif.training_info.menu_valuename_dummymode_wjump},
 	},
 	guardmode = {
-		{itemname = 'none', displayname = motif.training_info.menu_valuename_guardmode_none},
-		{itemname = 'auto', displayname = motif.training_info.menu_valuename_guardmode_auto},
-		{itemname = 'all', displayname = motif.training_info.menu_valuename_guardmode_all},
-		{itemname = 'random', displayname = motif.training_info.menu_valuename_guardmode_random},
+		{itemname = 'none', displayname = motif.training_info.menu_valuename_guardmode_none}, 	--0
+		{itemname = 'all', displayname = motif.training_info.menu_valuename_guardmode_all},		--1
+		{itemname = 'instant', displayname = motif.training_info.menu_valuename_guardmode_instant},	--2
+		{itemname = 'FALSE', displayname = motif.training_info.menu_valuename_guardmode_pb},	--3
 	},
 	fallrecovery = {
-		{itemname = 'none', displayname = motif.training_info.menu_valuename_fallrecovery_none},
-		{itemname = 'ground', displayname = motif.training_info.menu_valuename_fallrecovery_ground},
-		{itemname = 'air', displayname = motif.training_info.menu_valuename_fallrecovery_air},
-		{itemname = 'random', displayname = motif.training_info.menu_valuename_fallrecovery_random},
+		{itemname = 'neutral', displayname = motif.training_info.menu_valuename_fallrecovery_neut}, -- 0
+		{itemname = 'back', displayname = motif.training_info.menu_valuename_fallrecovery_back}, -- 1
+		{itemname = 'forward', displayname = motif.training_info.menu_valuename_fallrecovery_fwd}, -- 2 
 	},
-	distance = {
-		{itemname = 'any', displayname = motif.training_info.menu_valuename_distance_any},
-		{itemname = 'close', displayname = motif.training_info.menu_valuename_distance_close},
-		{itemname = 'medium', displayname = motif.training_info.menu_valuename_distance_medium},
-		{itemname = 'far', displayname = motif.training_info.menu_valuename_distance_far},
+	atkdatadisp = {
+		{itemname = 'none', displayname = motif.training_info.menu_valuename_atkdatadisp_none}, -- 0
+		{itemname = 'vis', displayname = motif.training_info.menu_valuename_atkdatadisp_vis}, -- 1
+	},
+	ctrldatadisp = {
+		{itemname = 'none', displayname = motif.training_info.menu_valuename_ctrldatadisp_none}, -- 0
+		{itemname = 'p1', displayname = motif.training_info.menu_valuename_ctrldatadisp_p1}, -- 1
+		{itemname = 'p2',displayname = motif.training_info.menu_valuename_ctrldatadisp_p2}, -- 2
+		{itemname = 'both',displayname = motif.training_info.menu_valuename_ctrldatadisp_all}, -- 3
+	},
+	punish = {
+		{itemname = 'off', displayname = motif.training_info.menu_valuename_punish_off}, -- 0
+		{itemname = 'guard', displayname = motif.training_info.menu_valuename_punish_guard}, -- 1
+		{itemname = 'recovery', displayname = motif.training_info.menu_valuename_punish_rec}, -- 2
+		{itemname = 'wakeup', displayname = motif.training_info.menu_valuename_punish_wakeup}, -- 3
+		{itemname = 'all', displayname = motif.training_info.menu_valuename_punish_all}, -- 4
+	},
+	regen = {
+		{itemname = 'instant', displayname = motif.training_info.menu_valuename_regen_instant}, -- 0
+		{itemname = 'delayed', displayname = motif.training_info.menu_valuename_regen_delay}, -- 1
+		{itemname = 'none', displayname = motif.training_info.menu_valuename_regen_off}, -- 2
+	},
+	dir = {
+		{itemname = 'neutral', displayname = motif.training_info.menu_valuename_dir_5},
+		{itemname = 'fwd', displayname = motif.training_info.menu_valuename_dir_6},
+		{itemname = 'down', displayname = motif.training_info.menu_valuename_dir_2},
+		{itemname = 'back', displayname = motif.training_info.menu_valuename_dir_4},
 	},
 	buttonjam = {
 		{itemname = 'none', displayname = motif.training_info.menu_valuename_buttonjam_none},
@@ -155,10 +176,38 @@ menu.t_itemname = {
 		end
 		return true
 	end,
-	--Distance
-	['distance'] = function(t, item, cursorPosY, moveTxt, section)
+	--Atk Data Display
+	['atkdatadisp'] = function(t, item, cursorPosY, moveTxt, section)
 		if menu.f_valueChanged(t.items[item], motif[section]) then
-			charMapSet(2, '_iksys_trainingDistance', menu.distance - 1)
+			charMapSet(2, '_iksys_trainingAtkDataDisp', menu.atkdatadisp - 1)
+		end
+		return true
+	end,
+	--Ctrl Data Display
+	['ctrldatadisp'] = function(t, item, cursorPosY, moveTxt, section)
+		if menu.f_valueChanged(t.items[item], motif[section]) then
+			charMapSet(2, '_iksys_trainingCtrlDataDisp', menu.ctrldatadisp - 1)
+		end
+		return true
+	end,
+	--Punish Toggle
+	['punish'] = function(t, item, cursorPosY, moveTxt, section)
+		if menu.f_valueChanged(t.items[item], motif[section]) then
+			charMapSet(2, '_iksys_trainingPunish', menu.punish - 1)
+		end
+		return true
+	end,
+	--LifeRegen
+	['regen'] = function(t, item, cursorPosY, moveTxt, section)
+		if menu.f_valueChanged(t.items[item], motif[section]) then
+			charMapSet(2, '_iksys_trainingRegen', menu.regen - 1)
+		end
+		return true
+	end,
+	--Hold Direction
+	['dir'] = function(t, item, cursorPosY, moveTxt, section)
+		if menu.f_valueChanged(t.items[item], motif[section]) then
+			charMapSet(2, '_iksys_trainingHoldDir', menu.dir - 1)
 		end
 		return true
 	end,
@@ -325,8 +374,20 @@ menu.t_vardisplay = {
 	['fallrecovery'] = function()
 		return menu.t_valuename.fallrecovery[menu.fallrecovery or 1].displayname
 	end,
-	['distance'] = function()
-		return menu.t_valuename.distance[menu.distance or 1].displayname
+	['atkdatadisp'] = function()
+		return menu.t_valuename.atkdatadisp[menu.atkdatadisp or 1].displayname
+	end,
+	['ctrldatadisp'] = function()
+		return menu.t_valuename.ctrldatadisp[menu.ctrldatadisp or 1].displayname
+	end,
+	['punish'] = function()
+		return menu.t_valuename.punish[menu.punish or 1].displayname
+	end,
+	['regen'] = function()
+		return menu.t_valuename.regen[menu.regen or 1].displayname
+	end,
+	['dir'] = function()
+		return menu.t_valuename.dir[menu.dir or 1].displayname
 	end,
 	['buttonjam'] = function()
 		return menu.t_valuename.buttonjam[menu.buttonjam or 1].displayname
@@ -475,7 +536,11 @@ function menu.f_trainingReset()
 	charMapSet(2, '_iksys_trainingDummyMode', 0)
 	charMapSet(2, '_iksys_trainingGuardMode', 0)
 	charMapSet(2, '_iksys_trainingFallRecovery', 0)
-	charMapSet(2, '_iksys_trainingDistance', 0)
+	charMapSet(2, '_iksys_trainingAtkDataDisp', 0)
+	charMapSet(2, '_iksys_trainingCtrlDataDisp', 0)
+	charMapSet(2, '_iksys_trainingPunish', 0)
+	charMapSet(2, '_iksys_trainingRegen', 0)
+	charMapSet(2, '_iksys_trainingHoldDir', 0)
 	charMapSet(2, '_iksys_trainingButtonJam', 0)
 end
 

@@ -14,7 +14,7 @@ local restoreCursor = false
 local selScreenEnd = false
 local stageEnd = false
 local stageRandom = false
-local stageListNo = 0
+local stageListNo = 1
 local t_aiRamp = {}
 local t_gameStats = {}
 local t_recordText = {}
@@ -511,9 +511,7 @@ function start.f_setStage(num, assigned)
 	if main.stageMenu then
 		num = main.t_selectableStages[stageListNo]
 		if stageListNo == 0 then
-			num = main.t_selectableStages[math.random(1, #main.t_selectableStages)]
-			stageListNo = num -- comment out to randomize stage after each fight in survival mode, when random stage is chosen
-			stageRandom = true
+			selectStage(1)
 		else
 			num = main.t_selectableStages[stageListNo]
 		end
@@ -1512,8 +1510,6 @@ end
 function start.f_selectReset(hardReset)
 	esc(false)
 	setMatchNo(1)
-	setConsecutiveWins(1, 0)
-	setConsecutiveWins(2, 0)
 	setContinue(false)
 	main.f_cmdInput()
 	local col = 1
@@ -1533,7 +1529,7 @@ function start.f_selectReset(hardReset)
 		col = col + 1
 	end
 	if hardReset then
-		stageListNo = 0
+		stageListNo = 1
 		restoreCursor = false
 		--cursor start cell
 		for i = 1, config.Players do
@@ -1553,7 +1549,7 @@ function start.f_selectReset(hardReset)
 		end
 	end
 	if stageRandom then
-		stageListNo = 0
+		stageListNo = 1
 		stageRandom = false
 	end
 	for side = 1, 2 do
@@ -1611,8 +1607,6 @@ function start.f_selectChallenger()
 	local matchNo_sav = matchno()
 	local p1cmd = main.t_remaps[1]
 	local p2cmd = main.t_remaps[start.challenger]
-	local p1ConsecutiveWins = getConsecutiveWins(1)
-	local p2ConsecutiveWins = getConsecutiveWins(2)
 	--start challenger match
 	main.f_default()
 	main.f_playerInput(p1cmd, 1)
@@ -1631,13 +1625,14 @@ function start.f_selectChallenger()
 	if not ok then
 		return false
 	end
+	if getConsecutiveWins(1) > 0 then
+		setConsecutiveWins(1, getConsecutiveWins(1) - 1)
+	end
 	start.p = t_p_sav
 	start.c = t_c_sav
 	start.winCnt = winCnt_sav
 	start.loseCnt = loseCnt_sav
 	setMatchNo(matchNo_sav)
-	setConsecutiveWins(1, p1ConsecutiveWins)
-	setConsecutiveWins(2, p2ConsecutiveWins)
 	return true
 end
 
@@ -2163,7 +2158,7 @@ function start.f_selectScreen()
 				main.f_animPosDraw(motif.select_info.stage_portrait_bg_data)
 				--draw stage portrait (random)
 				if stageListNo == 0 then
-					main.f_animPosDraw(motif.select_info.stage_portrait_random_data)
+					stageListNo = #main.t_selectableStages
 				--draw stage portrait loaded from stage SFF
 				else
 					main.f_animPosDraw(
@@ -2726,7 +2721,7 @@ function start.f_stageMenu()
 	elseif main.f_input(main.t_players, {'$F'}) then
 		sndPlay(motif.files.snd_data, motif.select_info.stage_move_snd[1], motif.select_info.stage_move_snd[2])
 		stageListNo = stageListNo + 1
-		if stageListNo > #main.t_selectableStages then stageListNo = 0 end
+		if stageListNo > #main.t_selectableStages then stageListNo = 1 end
 	elseif main.f_input(main.t_players, {'$U'}) then
 		sndPlay(motif.files.snd_data, motif.select_info.stage_move_snd[1], motif.select_info.stage_move_snd[2])
 		for i = 1, 10 do
@@ -2737,7 +2732,7 @@ function start.f_stageMenu()
 		sndPlay(motif.files.snd_data, motif.select_info.stage_move_snd[1], motif.select_info.stage_move_snd[2])
 		for i = 1, 10 do
 			stageListNo = stageListNo + 1
-			if stageListNo > #main.t_selectableStages then stageListNo = 0 end
+			if stageListNo > #main.t_selectableStages then stageListNo = 1 end
 		end
 	end
 	if n ~= stageListNo and stageListNo > 0 then
@@ -3378,7 +3373,7 @@ function start.f_victory()
 	--draw layerno = 1 backgrounds
 	bgDraw(motif.victorybgdef.bg, true)
 	--draw fadein / fadeout
-	if main.fadeType == 'fadein' and ((start.t_victory.textend and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time) or main.f_input(main.t_players, {'pal', 's'})) then
+	if main.fadeType == 'fadein' and ((start.t_victory.textend and start.t_victory.counter - start.t_victory.textcnt >= motif.victory_screen.time) or (main.f_input(main.t_players, {'pal', 's'}) and ik_rematch.rematchend())) then
 		main.f_fadeReset('fadeout', motif.victory_screen)
 	end
 	main.f_fadeAnim(motif.victory_screen)

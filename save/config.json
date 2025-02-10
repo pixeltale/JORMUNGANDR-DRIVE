@@ -125,11 +125,11 @@
   "WavChannels": 32,
   "WindowCentered": true,
   "WindowIcon": [
-    "external/icons/IkemenCylia_256.png",
-    "external/icons/IkemenCylia_96.png",
-    "external/icons/IkemenCylia_48.png"
+    "external/icons/JDR_256.png",
+    "external/icons/JDR_96.png",
+    "external/icons/JDR_48.png"
   ],
-  "WindowTitle": "Ikemen GO",
+  "WindowTitle": "JORMUNGANDR DRIVE",
   "XinputTriggerSensitivity": 0,
   "ZoomActive": true,
   "ZoomDelay": false,
@@ -145,12 +145,12 @@
         "u",
         "i",
         "o",
-        "k",
+        "j",
+        "y",
+        "h",
+        "RETURN",
         "l",
         "n",
-        "RETURN",
-        "j",
-        "h",
         "p"
       ]
     },
