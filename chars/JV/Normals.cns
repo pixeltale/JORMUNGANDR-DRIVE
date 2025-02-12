@@ -1552,7 +1552,7 @@ trigger1 =pos y>= 0
 value = 0
 ctrl = 1
 ;================================
-;5R - Coiled Serpent
+;5D - Coiled Serpent
 ;-----------------------------
 [Statedef 700]
 type    = S
@@ -1590,7 +1590,7 @@ value = 706
 ctrl = 0
 
 ;================================
-;5REN
+;5DEN
 ;-----------------------------
 [Statedef 701]
 type    = S
@@ -1678,7 +1678,7 @@ value = 706
 ctrl = 0
 
 ;================================
-;2R - Striking Serpent
+;2D - Striking Serpent
 ;-----------------------------
 [Statedef 702]
 type    = S
@@ -1808,7 +1808,7 @@ value = 706
 ctrl = 0
 
 ;================================
-;2REN
+;2DEN
 ;-----------------------------
 [Statedef 703]
 type    = S
@@ -1990,7 +1990,7 @@ value = 0
 ctrl = 1
 
 ;================================
-;5R~M
+;5D~B
 ;-----------------------------
 [Statedef 705]
 type    = S
@@ -2167,7 +2167,7 @@ trigger1 = animtime = 0
 value = 0
 ctrl = 1
 ;================================
-;5R~H
+;5D~C
 ;-----------------------------
 [Statedef 706]
 type    = S
@@ -2422,7 +2422,7 @@ trigger1 = animtime = 0
 value = 0
 ctrl = 1
 ;================================
-;5R~L
+;5D~A
 ;-----------------------------
 [Statedef 707]
 type    = S
@@ -2609,3 +2609,105 @@ type = ChangeState
 trigger1 = animtime = 0
 value = 0
 ctrl = 1
+
+;---------------------------------------------------------------------------
+;Exceed Shock
+[Statedef 905]
+type    = S
+movetype= A
+physics = S
+poweradd= -500
+velset = vel x,0
+anim = 905
+ctrl = 0
+sprpriority = 2
+
+[State Category]
+type = mapset
+trigger1 = time = 0
+map = "Body"
+value = 1
+
+[State Cancel]
+type = mapset
+trigger1 = time = 0
+map = "DCFH"
+value = 1
+[State - Guard Crush]
+type = mapset
+trigger1 = time = 0
+map = "GC"
+value = 1
+
+[State -2, Starter Level]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "StarterLevel"
+value 		= 3
+ignorehitpause 	= 1
+
+[State -2, P1 Value Set]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "P1"
+value 		= 1	;100% Starting DMG
+ignorehitpause 	= 1
+[State -2, P2 Value Set]
+type 		= MapSet
+trigger1 		= movehit && map(ComboStateCheck)
+map 		= "P2"
+value 		= 0.90	;85% DMG For next hit
+ignorehitpause 	= 1
+persistent = 0
+[State -2, P2 Accumulation - Scale]
+type 		= MapSet
+trigger1 		= movehit
+map 		= "Accumulation"
+value 		= Map(Accumulation) * map(P2)
+ignorehitpause 	= 1
+persistent 		= 0
+
+[State - Counter Hit Vulnerable]
+type = mapset
+trigger1 = stateno
+map = "Counterhit"
+value = (time = [0, 25])
+
+[State 1020, 6]
+type = HitDef
+trigger1 = !movecontact
+attr = S, SA
+animtype  = Hard
+damage    = 100, 0
+priority  = 4
+guardflag = MA
+hitflag = MAFD
+pausetime = 35,35
+sparkxy = -10,-60
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = Low
+guard.slidetime = 55
+ground.slidetime = 20
+ground.hittime  = 22
+ground.velocity = -12,-7
+guard.velocity = -7
+air.velocity = -12,-7
+airguard.velocity = -5, -4
+p2facing = 1
+fall = 1
+p2facing = 1 
+p2stateno = 5220
+p2getp1state = 0
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State Cancel]
+type = mapset
+trigger1 = animelem = 7
+map = "GC"
+value = 0

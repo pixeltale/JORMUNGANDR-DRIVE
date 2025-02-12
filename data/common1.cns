@@ -402,7 +402,7 @@ y = 0.9
 type = VelSet
 trigger1 = Time = 0
 x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x), ifelse(sysvar(1)=1, const(velocity.jump.fwd.x)*0.5 + vel x * 0.5, const(velocity.jump.back.x)*0.5))*1.1
-y = -9.5 - 1 * (name = "Z")
+y = -9.5
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -7527,17 +7527,11 @@ ignorehitpause = 1
 type = SelfState
 value = 900
 triggerall = alive
-triggerall = statetype != L
 triggerall = map(BurstGauge)>=1000
-triggerall = !(enemy, map(BurstLock) && !enemy,fvar(18)=1) && stateno != 915020 && stateno != 5070
-triggerall = command = "F" && (command = "b" || command = "c" || command = "x" || command = "y" || command = "z")
+triggerall = !(enemy, map(BurstLock))
+triggerall = command = "F" && command = "E"
 triggerall = movetype = H && enemy, hitdefattr != SCA, HA, HP, NT, ST, HT
-;Average battle
 trigger1 = enemy,hitdefattr = SCA, NA, SA, NP, SP
-;Wu support
-trigger2 = enemynear, numhelper(777)
-trigger2 = enemy, hitdefattr != SCA, HA, HP, NT, ST, HT
-trigger3 = enemynear, numhelper(1110)
 
 ;====================================================================
 ;Alicia Power Drain
@@ -8190,10 +8184,6 @@ persistent = 0
 type = PowerAdd
 triggerall = movetype != H && !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
 trigger1 = vel x > 0
-trigger1 = !(name = "Roger" && (Stateno = 1403 || stateno = [1453,1456]))
-trigger1 = !(name = "Vile" && (Stateno = [1050,1061] || stateno = 2059 || stateno = 1020))
-trigger1 = !(name = "ONE" && (Stateno = 1051 || stateno = 1151))
-trigger1 = !(name = "Z" && (stateno = [2000,2008]))
 trigger1 = !(stateno = [3000,4000]) && stateno != 5610
 trigger1 = !(map(untechDecay) >= 2) && !(map(isAssist) > 0)
 value = vel x * 0.75
@@ -9274,14 +9264,3 @@ triggerall = command = "holdfwd"
 triggerall = command = "F"
 triggerall = statetype != A
 triggerall = power >= 2000
-
-;How can I make this about Z...?
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = enemynear,name="Z"
-trigger1 = enemynear,stateno = 3051&&enemynear,anim=3052
-trigger2 = name="Z"
-trigger2 = stateno = 3051&&anim=3052
-id = 900
-ignorehitpause=1
-persistent=1

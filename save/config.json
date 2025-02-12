@@ -26,7 +26,6 @@
   "CommonStates": [
     "data/functions.zss",
     "data/action.zss",
-    "data/dizzy.zss",
     "data/guardbreak.zss",
     "data/score.zss",
     "data/tag.zss",
@@ -146,11 +145,11 @@
         "i",
         "o",
         "j",
+        "k",
         "y",
-        "h",
         "RETURN",
         "l",
-        "n",
+        "h",
         "p"
       ]
     },

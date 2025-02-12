@@ -677,7 +677,7 @@ value = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "y" || command = "holdy"
+trigger1 = command = "B" || command = "HOLD_B"
 trigger1 = animelemno(0) > 3
 value = 1120
 ctrl = 0
@@ -1010,7 +1010,7 @@ removeongethit = 0
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "y" || command = "holdx"
+trigger1 = command = "A" || command = "HOLD_A"
 trigger1 = anim = 1051 && time > 4
 value = 1110
 ctrl = 0

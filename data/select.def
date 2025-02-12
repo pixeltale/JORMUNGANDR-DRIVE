@@ -61,6 +61,7 @@ JV
  ;Insert your stages below.
 
 stages/training_re.def
+stages/glass ocean.def
 
 ;-------------------------------------------------------------------------------
 [Options]

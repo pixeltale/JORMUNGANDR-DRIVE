@@ -32,15 +32,11 @@ name = "D"
 command = d
 time = 1
 [Command]
-name = "x"
-command = x
-time = 1
-[Command]
 name = "F"
 command = x
 time = 1
 [Command]
-name = "y"
+name = "E"
 command = y
 time = 1
 [Command]
@@ -618,22 +614,27 @@ time = 3
 name = "236236A"
 command = ~D, DF, F, D, DF, F, a
 time = 20
+buffer.time = 10
 [Command]
 name = "236236B"
 command = ~D, DF, F, D, DF, F, b
 time = 20
+buffer.time = 10
 [Command]
 name = "236236C"
 command = ~D, DF, F, D, DF, F, c
 time = 20
+buffer.time = 10
 [Command]
 name = "236236D"
 command = ~D, DF, F, D, DF, F, x
 time = 20
+buffer.time = 10
 [Command]
 name = "236236CD"
 command = ~D, DF, F, D, DF, F, c+x
 time = 20
+buffer.time = 10
 
 [Command]
 name = "214214A"

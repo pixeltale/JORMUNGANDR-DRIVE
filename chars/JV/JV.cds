@@ -106,18 +106,18 @@ var(1) = 1
 
 ;===========================================================================
 ;236X - Judgement
-;[State -1, 236x]
-;type = ChangeState
-;value = 3000
-;triggerall = command = "236S"
-;triggerall = power >= 2000
-;trigger1 = statetype != A
-;trigger1 = ctrl
-;trigger2 = statetype != A
-;trigger2 = stateno != [3000,3050)
-;trigger2 = movecontact ;&& enemynear, movetype = H
-;trigger3 = stateno = 1310 || stateno = 1330 ;From blocking
-;trigger4 = stateno = [100,101]
+[State -1, 236x]
+type = ChangeState
+value = 3000
+triggerall = command = "236236C"
+triggerall = power >= 2000
+trigger1 = statetype != A
+trigger1 = ctrl
+trigger2 = statetype != A
+trigger2 = stateno != [3000,3050)
+trigger2 = movecontact ;&& enemynear, movetype = H
+trigger3 = stateno = 1310 || stateno = 1330 ;From blocking
+trigger4 = stateno = [100,101]
 
 ;214X- Strike Heaven
 ;[State -1, 214x]
@@ -381,6 +381,16 @@ trigger2 = var(1)
 trigger3 = stateno = 60
 trigger4 = movecontact && stateno = [600,640]
 
+
+[State -1, 5E: EXCEED Shock]
+type = ChangeState
+value = 905
+triggerall = command = "E"
+triggerall = statetype !=A
+trigger1 = var(1)
+trigger2 = stateno = [200,230] || stateno = [400,431]
+trigger2 = movecontact
+trigger3 = stateno = [100,101]
 ;===========================================================================
 
 [State -1, 2D: Striking Serpent]
@@ -413,108 +423,97 @@ trigger3 = stateno = [100,101] && !(prevstateno = 2000 && time <= 5)
 [State -1, 6C]
 type = ChangeState
 value = 230
+triggerall = statetype != A
 triggerall = command = "C"
 triggerall = command = "holdfwd"
 triggerall = command != "holddown"
 triggerall = !map(NoNormals)
-trigger1 = statetype != A
-trigger1 = ctrl
-trigger2 = stateno = [400,420] || stateno = 200 || stateno = [210,220]
-trigger2 = movecontact
-trigger3 = stateno = [100,101] ;run and runstop
+trigger1 = ctrl || stateno = [100,101]
+trigger2 = (stateno = [400,420] || stateno = [200,220]) && movecontact
 
 ;5A
 [State -1, Standing Light]
 type = ChangeState
 value = 200
+triggerall = statetype != A
 triggerall = command = "A"
 triggerall = command != "holddown" && var(59) !=4
 triggerall = !map(NoNormals)
-trigger1 = statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = [100,101] 
 trigger2 = stateno = 400 && movecontact
-trigger3 = stateno = [100,101] 
- 
+
 ;5B
 [State -1, Standing Medium]
 type = ChangeState
 value =  210
+triggerall = statetype != A
 triggerall = command = "B"
 triggerall = command != "holddown"
 triggerall = !map(NoNormals)
-trigger1 = statetype = S
-trigger1 = ctrl
+trigger1 = ctrl || stateno = [100,101] 
 trigger2 = (stateno = 200 || stateno = [400,410]) && movecontact
-trigger3 = stateno = [100,101] 
 
 ;5C
 [State -1, Standing Heavy]
 type = ChangeState
 value =  220
-trigger1 = statetype = S
+triggerall = statetype != A
 triggerall = command = "C"
 triggerall = command != "holddown"
 triggerall = !map(NoNormals)
-trigger1 = ctrl
+trigger1 = ctrl || stateno = [100,101] 
 trigger2 = (stateno = [200,210] || stateno = [400,420]) && movecontact
 
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------
 ;2A
-[State -1, Crouching Light]
+[State -1, 2A]
 type = ChangeState
 value = 400
+triggerall = statetype != A
 triggerall = command = "A"
 triggerall = command = "holddown"
 triggerall = !map(NoNormals)
-trigger1 = statetype = C
-trigger1 = ctrl
-trigger2 = stateno = 200 && movecontact ;5L
-trigger3 = stateno = [100,101] 
+trigger1 = ctrl || stateno = [100,101] 
+trigger2 = stateno = 200 && movecontact
 
 ;---------------------------------------------------------------------------
-;2M: Crouching Medium
-[State -1, Crouching Medium]
+;2B
+[State -1, 2B]
 type = ChangeState
 value = 410
+triggerall = statetype != A
 triggerall = command = "B"
 triggerall = command = "holddown"
 triggerall = !map(NoNormals)
-trigger1 = statetype = C
-trigger1 = ctrl
-trigger2 = (stateno = 400) || (stateno = 200)  || (stateno = 210) 
-trigger2 = (movecontact) ;&& enemynear, movetype = H
-trigger3 = stateno = [100,101] 
+trigger1 = ctrl || stateno = [100,101] 
+trigger2 = (stateno = 400 || stateno = [200, 210] ) && movecontact
 
 ;---------------------------------------------------------------------------
-;Crouching Heavy (2H)
-[State -1, Crouching Heavy]
+;2C
+[State -1, 2C]
 type = ChangeState
 value = 420
+triggerall = statetype != A
 triggerall = command = "C"
 triggerall = command = "holddown"
 triggerall = command != "holdfwd"
 triggerall = !map(NoNormals)
-trigger1 = statetype = C
-trigger1 = ctrl
-trigger2 = (stateno = 400) || (stateno = 410)|| (stateno = 200)|| (stateno = 210) 
-trigger2 = (movecontact) ;&& enemynear, movetype = H
-trigger3 = stateno = [100,101] 
+trigger1 = ctrl || stateno = [100,101] 
+trigger2 = (stateno = [400, 410] || stateno = [200, 210]) && movecontact
 
 ;---------------------------------------------------------------------------
-;3H: Sweep
-[State -1, 3H]
+;3C
+[State -1, 3C]
 type = ChangeState
 value = 430
+triggerall = statetype != A
 triggerall = command = "C"
 triggerall = command = "holddown"
 triggerall = command = "holdfwd"
 triggerall = !map(NoNormals)
-trigger1 = statetype = C
-trigger1 = ctrl
-trigger2 = (stateno = 400) || (stateno = 410) || (stateno = 210)  || (stateno = 200) 
-trigger2 = (movecontact) ;&& enemynear, movetype = H
-trigger3 = stateno = [100,101] 
+trigger1 = ctrl || stateno = [100,101] 
+trigger2 = (stateno = [400, 410] || stateno = [200, 210]) && movecontact
 
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------
@@ -527,7 +526,7 @@ value = 600
 triggerall = command = "A"
 triggerall = statetype = A
 trigger1 = ctrl || stateno = 60
-trigger2 = stateno = 600
+trigger2 = stateno = 600 && movecontact
 ;---------------------------------------------------------------------------
 ;j.B
 [State -1, jB]
