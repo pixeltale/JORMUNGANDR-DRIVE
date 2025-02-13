@@ -193,7 +193,7 @@ triggerall = command != "holdback"
 triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
 triggerall = Map(ADash) > 0
-triggerall = pos y<-30 || vel y > 0
+triggerall = pos y<-45 || vel y > 0
 trigger1 = ctrl
 trigger2 = movehit
 trigger2 = stateno = 3130
@@ -209,7 +209,7 @@ triggerall = command = "a44" || command = "M44"
 trigger1 = statetype = A
 trigger1 = ctrl
 triggerall = Map(ADash) > 0
-triggerall = pos y<-10
+triggerall = pos y<-45
 ;--------------------------------------------------------------------------
 
 ;Dash
@@ -241,7 +241,7 @@ trigger2 = stateno = 250
 [State -1, One Inch Punch]
 type = changeState
 value = 2300
-triggerall = command = "426H"
+triggerall = command = "623C"
 triggerall = statetype != A
 trigger1 = var(1) || ctrl
 
@@ -513,7 +513,7 @@ triggerall = command = "holddown"
 triggerall = command = "holdfwd"
 triggerall = !map(NoNormals)
 trigger1 = ctrl || stateno = [100,101] 
-trigger2 = (stateno = [400, 410] || stateno = [200, 210]) && movecontact
+trigger2 = (stateno = [400, 420] || stateno = [200, 220]) && movecontact
 
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------

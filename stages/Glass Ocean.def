@@ -1,39 +1,40 @@
 
 ;--------------------------------------------------------
 [Info]
-name = "Glass Ocean"
+name = "GLASS OCEAN"
+mugenversion = 1.1
 
 [Camera]
 startx = 0
 starty = 0
-zoomin = 0.8
-zoomout = 0.8
+zoomin = 0.9
+zoomout = 0.7
 boundleft = -700
 boundright = 700
-boundhigh = -700
+boundhigh = -1500
 boundlow = 0
-verticalfollow = .2
 floortension = 0
 tension = 300
-overdrawhigh = 120
-overdrawlow = 120
+tensionhigh = 300
+tensionlow = 300
+overdrawhigh = 300
+overdrawlow = 300
 cuthigh = 0
 cutlow = 0
 
 ;--------------------------------------------------------
 [PlayerInfo]
 ;--- Player 1 ---
-p1startx = -120          ;Starting x coordinates
+p1startx = -220          ;Starting x coordinates
 p1starty = 0            ;Starting y coordinates
 p1facing = 1            ;Direction player faces: 1=right, -1=left
 
 ;--- Player 2 ---
-p2startx = 120
+p2startx = 220
 p2starty = 0
 p2facing = -1
 
 ;--- Common ---
- ;Don't change these values.
 leftbound  = -1500 ;Left bound (x-movement)
 rightbound = 1500 ;Right bound
 topbound  =  0     ;Top bound (z-movement)
@@ -41,7 +42,6 @@ botbound  =  0     ;Bottom bound
 
 ;--------------------------------------------------------
 [Scaling]
- ;No need to change these values
 topz     = 0       ;Top z-coordinate for scaling
 botz     = 50      ;Bottom z-coordinate for scaling
 topscale = 1       ;Scale to use at top
@@ -118,23 +118,15 @@ debugbg = 0
 ; report errors.) For example, you could use:  [BG TheFloor]
 ; Specify as many as you like. This is an example of a normal background:
 
-[BG Black]
+[BG - Sky]	;Sky
 type  = normal
 spriteno = 100,0
 start = 0, 0
 delta = 0,0
 layerno = 0
 tile=1,1
-[BG Black]
-type  = normal
-spriteno = 8,0
-start = 0, -30
-velocity=0,0
-delta = .15,.90
-layerno = 0
-trans=add1
 
-[BG Black]
+[BG Shooting Star]	;Ride on, Shooting Star
 type  = anim
 actionno=15
 start = -220, -300
@@ -145,75 +137,80 @@ delta = .15,.80
 layerno = 0
 trans=add
 
-[BG 1]
+[BG Stars]		;Stars
 type = normal
 spriteno=1,1
-start = 0.3,0.9
+start = 0.1,0.1
 delta = .21,1.2
 tile = 1,1
 velocity = 0.1,0.1
 TRANS=add
 
-[BG 1]
+
+
+[BG CLOUD1]		;Cloud - Right - Distance: Far
+type = normal
+spriteno=3,2
+start = 100,-200
+delta = .5,.5
+mask = 1
+
+[BG CLOUD2]		;Cloud- Far-Left - Distance: Far
+type = normal
+spriteno=3,3
+start = -500,-100
+delta = .4,.5
+mask = 1
+
+[BG MOON]		;Moon - Far-Right - Distance: Far, High
+type = normal
+spriteno=3,0
+start = 230,-340
+delta = .4,.4
+mask = 1
+
+[BG CLOUD3]		;Obscuring Cloud- Far-Right - Distance: Far, High
+type = normal
+spriteno=3,4
+start = 600,-300
+delta = .5,.5
+mask = 1
+
+[BG 1]		;BG Glow
 type = anim
 actionno=1
 start = 0,340
-delta = 0,1.4
+delta = 0,1.1
 tile = 1,0
+tilespacing = 0, 0
 velocity = 0,0
 mask = 0
 TRANS=add
-[BG 1]
-type = normal
-spriteno=6,0
-start = 32.5,415
-delta = 0,0
-tile = 1,0
-velocity = 0,0
-mask = 1
-TRANS=add
-[BG Black]
-type  = normal
-spriteno = 8,1
-start = 0, -30
-velocity=0,0
-delta = .15,.90
-layerno = 0
-mask=1
-[BG 1] ; Floor
+
+[BG 1] ;FLOOR. Add some details (idk, maybe cracks, water ripples) to make parallax go harder
 type  = parallax
 spriteno = 4,1
-start = 32.5,310
+start = 32.5,200
 delta = .25, 1;.25, .35
 tile = 1, 1
 velocity=-0.4,0
-tilespacing = 0, 0
 width = 65, 330
-;yscalestart = 100
-[BG 1] ; Floor
-type  = parallax
-spriteno = 4,2
-start = 32.5,310
-delta = .25, 1;.25, .35
-tile = 1, 0
-velocity=0,0
-tilespacing = 0, 0
-width = 65, 330
-mask=1
-;yscalestart = 100
-; 0
 
-;[BG 1] ; Floor
-;type  = anim
-;actionno=10
-;start = 0,-50
-;delta = 0, 1;.25, .35
-;tile = 1, 0
-;velocity=0,0
-;tilespacing = 0, 0
-;layerno=0
+[BG BUILDING1]		;Destroyed Building - Far Right - Distance: Close
+type = normal
+spriteno=2,0
+start = 800,325
+delta = .9,.9
+mask = 1
 
-; Red Gradient
+[BG BUILDING 2]		;Destroyed Building - Mid-Left - Distance: Mid-Far
+type = normal
+spriteno=2,1
+start = -600,250
+delta = .7,.7
+mask = 1
+
+; Glow Gradient
 [Begin Action 1]
 LoopStart
 5,0, 0,0, 10, , AS225D256

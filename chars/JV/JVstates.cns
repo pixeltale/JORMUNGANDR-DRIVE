@@ -35,50 +35,11 @@ physics = S
 sprpriority = 1
 velset = vel x, 0
 
-;[State 0, AssertSpecial]
-;type = AssertInput
-;trigger1 = 1
-;flag = x
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = var(59)!=[1,4]
-v = 59    ;fv = 10
-value = 1
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time=0
-v = 13    ;fv = 10
-value = 0
-
 [State 0, 1]
 type = ChangeAnim
-triggerall = var(59) = 1
 trigger1 = Anim != 0 && Anim != 5 
-trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
+trigger2 = Anim = 5 && AnimTime = 0
 value = 0
-
-[State 0, ChangeAnim]
-type = ChangeAnim
-triggerall = var(59) = 2
-trigger1 = Anim != 20001 && Anim != 5 
-trigger2 = Anim = 5 && AnimTime = 0
-value = 20001
-
-[State 0, ChangeAnim]
-type = ChangeAnim
-triggerall = var(59) = 3
-trigger1 = Anim != 30001 && Anim != 5 
-trigger2 = Anim = 5 && AnimTime = 0
-value = 30001
-
-[State 0, ChangeAnim]
-type = ChangeAnim
-triggerall = var(59) = 4
-trigger1 = Anim != 50001 && Anim != 5 
-trigger2 = Anim = 5 && AnimTime = 0
-value = 50001
 
 [State 0, 3] ;Stop moving if low velocity or 4 ticks pass
 type = VelSet
@@ -97,11 +58,6 @@ ctrl = 0
 type    = C
 physics = C
 anim = 10
-[State 0, VarSet]
-type = VarSet
-trigger1 = time=0
-v = 13    ;fv = 10
-value = 0
 
 [State 10, 2] ;Stop moving if low velocity
 type = VelSet
@@ -121,13 +77,6 @@ physics = C
 anim = 11
 sprpriority = 0
 
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time=0
-v = 13    ;fv = 10
-value = 0
-
 [State 11, 1] ;Change from turning animation
 type = ChangeAnim
 trigger1 = Anim = 6 && AnimTime = 0
@@ -144,11 +93,7 @@ x = 0
 type    = S
 physics = S
 anim = 12
-[State 0, VarSet]
-type = VarSet
-trigger1 = time=0
-v = 13    ;fv = 10
-value = 0
+
 [State 12, 1]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -214,10 +159,6 @@ type = PlaySnd
 trigger1 = time = 0
 value = 0, 4
 
-[State -3, Tui Voices]
-type = PlaySnd
-trigger1 = time=0
-value = 1017, (0+(Random%2))
 [State 0, Explod]
 type = Explod
 trigger1 = time = 1
@@ -318,17 +259,6 @@ trigger1 = time = 0
 map = "DoubleJump"
 value = 1
 
-[State 0, VarAdd]
-type = VarAdd
-trigger1 = prevstateno = 610 && time = 0
-v = 27
-value =4
-[State 0, VarAdd]
-type = VarAdd
-trigger1 = movehit = 1
-v = 23
-value = 3
-
 [State - Air Option Limiter - Airdash]
 type = mapadd
 trigger1 = time = 0
@@ -340,18 +270,6 @@ trigger1 = time = 0
 map = "DJL"
 value = -1
 
-[State 0, VarAdd]
-type = VarAdd
-trigger1 = time = 0 
-v =  45   ;fv = 
-value = -1
-ignorehitpause = 
-persistent = 
-
-[State -3, Tui Voices]
-type = PlaySnd
-trigger1 = time=0
-value = 1017, (0+(Random%2))
 [State 45, 1]
 type = ChangeAnim
 trigger1 = SelfAnimExist(44)
@@ -417,11 +335,8 @@ value = Anim + 3
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = time = 6
-value = 660
+value = 50
 ctrl = 1
-;anim = 660
-;ignorehitpause = 
-;persistent = 
 
 ;---------------------------------------------------------------------------
 ; Jump Up
@@ -660,183 +575,6 @@ type = Ctrlset
 trigger1 = time=8
 value =1
 
-;---------------------------------------------------------------------------
-; Jump Start
-[Statedef 106]
-type    = S
-physics = S
-ctrl = 0
-sprpriority = 1
-facep2 = 1
-
-[State 0, AfterImage]
-type = AfterImage
-trigger1 =time =  0
-time = 20
-length = 14
-
-
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 0, 4
-[State 0, Explod]
-type = Explod
-trigger1 = time = 1
-anim = 6500
-ID = 6500
-pos = 0,0
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.5,0.5
-sprpriority = 0
-ontop = 1
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time = 0
-fv = 6  ;fv = 10
-value = 0 ;State of this attack
-;ignorehitpause = 
-;persistent = 
-
-;Armor
-[State 0, ChangeAnim]
-type = ChangeAnim
-trigger1 = time = 0 && anim!=40 ;Animation of this state
-value = 40
-elem = 1
-
-[State 0, HitOverride]
-type = HitOverride
-triggerall = var(30)>0
-triggerall = movetype != H
-trigger1=  1
-attr = SCA ,NA,NP,SP,HP
-slot = 0
-stateno = 666999 
-time = 1
-forceair = 0
-
-[State 40, 1]
-type = VarSet
-trigger1 = Time = 0
-sysvar(1) = 0
-
-[State 40, 2]
-type = VarSet
-trigger1 = command = "holdfwd"
-sysvar(1) = 1
-
-[State 40, 3]
-type = VarSet
-trigger1 = command = "holdback"
-sysvar(1) = -1
-
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time=0
-v = 40    ;fv = 10
-value = const(velocity.jump.y)
-;ignorehitpause = 
-;persistent = 
-
-[State 40, 4]
-type = VelSet
-trigger1 = animtime=0
-x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x), ifelse(sysvar(1)=1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
-y =-9.5
-
-[State 40, 5]
-type = VelSet
-trigger1 = AnimTime = 0
-trigger1 = prevstateno = 100 ;RUN_FWD
-trigger1 = sysvar(1) = 1
-x = const(velocity.runjump.fwd.x)
-
-[State 0, Explod]
-type = Explod
-trigger1 = animelem = 1
-anim = 7010
-ID = 673
-pos = 0,0
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.3,0.3
-sprpriority = 0
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 0
-
-[State 40, 6]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 4001
-ctrl = 1
-;---------------------------------------------------------------------------
-; Jump Up
-[Statedef 107]
-type    = A
-physics = A
-ctrl = 1
-
-[State 0, VelAdd]
-type = VelAdd
-trigger1 = command = "holdfwd"&& time<7
-x = .3
-
-[State 0, VelAdd]
-type = VelAdd
-trigger1 = command = "holdback" && time<7
-x = -.3
-
-[State 50, 1]
-type = VarSet
-trigger1 = Time = 0
-sysvar(1) = 0
-
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time = 0
-fv = 6  ;fv = 10
-value = 0 ;State of this attack
-;ignorehitpause = 
-;persistent = 
-
-[State 50, 2]
-type = ChangeAnim
-trigger1 = Time = 0
-value = ifelse((vel x)=0, 41, ifelse((vel x)>0, 42, 43))
-
-[State 50, 3]
-type = ChangeAnim
-trigger1 = Vel y > Const720p(-8)
-trigger1 = SelfAnimExist(anim + 3)
-trigger1 = anim >= 41 && anim <= 43
-persistent = 0
-value = Anim + 3
 ;--------------------------------------------------------------
 ; Jump Down (empty state for compatibility)
 [Statedef 51]
@@ -915,149 +653,6 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
-
-;---------------------------------------------------------------------------
-; Guard Cancel Dash
-[Statedef 99]
-type    = S
-physics = S
-anim = 100
-sprpriority = 1
-ctrl = 0
-poweradd = -2000
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = time = 0
-fv = 18
-value = cond((enemynear, stateno = [120,160]), 0, 40)
-
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F6999
-ID = 69900
-pos = 0,0
-postype = back  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = -1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 100000000, 1000000000
-sprpriority = -9
-ontop = 0
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F1905
-ID = 1905
-pos = 0,-45
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = .3,.3
-sprpriority = -4
-ontop = 0
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time>10
-value = 1
-
-
-[State 0, VelSet]
-type = VelSet
-trigger1 = AnimElemTime(1) >= 0
-x = 6
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 3
-anim = 6951
-ID = 6951
-pos = 0,-10
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.7,0.7
-sprpriority = 0
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 0
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 0, 1
-[State 0, PlaySnd]
-type = PlaySnd
-trigger1 = animelem = 6
-trigger2 = animelem = 10
-value = 20,0
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = 6700
-ID = 6700
-pos = 10,0
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.5,0.5
-sprpriority = 0
-ontop = 1
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-[State 100, 2] ;Prevent run from canceling into walk
-type = AssertSpecial
-trigger1 = 1
-flag = NoWalk
-
-[State 100, 3] ;Prevent from turning
-type = AssertSpecial
-trigger1 = 1
-flag = NoAutoTurn
-
-[State 100, 4]
-type = ChangeState
-trigger1 = command!="holdfwd" && time>20
-value = 101
-ctrl = 1
 ;---------------------------------------------------------------------------
 ; Run F
 [Statedef 100]

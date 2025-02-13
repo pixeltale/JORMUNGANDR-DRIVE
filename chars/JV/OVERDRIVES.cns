@@ -32,12 +32,6 @@ trigger1 = time = 1
 x = vel x + 15
 y = 0
 
-[State Meter Burn State, VarSet]
-type = VarSet
-trigger1 = movehit = 1
-v = 3
-value = 0
-
 [State SP, MapSet]
 type = MapSet
 trigger1 = time = 0
@@ -79,12 +73,6 @@ value 		= Map(Accumulation) * map(P2)
 ignorehitpause 	= 1
 persistent 		= 0
 
-[State 0, Varadd]
-type = varadd
-value = 7
-v = 30
-trigger1 = time = 0
-
 [State 0, Explod]
 type = Explod
 trigger1 = time = 0
@@ -107,12 +95,6 @@ darken = 1
 p2defmul = 1
 poweradd = 0
 unhittable = 1
-
-[State Meter Burn State, VarSet]
-type = VarSet
-trigger1 = movehit = 1
-v = 3
-value = 0
 
 [State 0, NotHitBy]
 type = NotHitBy
@@ -201,12 +183,6 @@ sprpriority = -15
 ownpal = 1
 supermovetime = -1
 
-[State 0, VarSet]
-type = varset
-trigger1 = movehit && var(30) > 0
-v = 30
-value = 300
-
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = animtime = 0 && !movehit
@@ -236,12 +212,6 @@ velset = 1.2,0
 anim = 3005
 sprpriority = 8
 poweradd = 0
-
-[State Meter Burn State, VarSet]
-type = VarSet
-trigger1 = movehit = 1
-v = 2
-value = 0
 
 [State -3, Hyper Finish Background]
 type = Helper
@@ -438,12 +408,6 @@ paladd		= 256, 64, 191			        ;+
 trans 		= add				        ;+
 persistent 	= 0				        ;+
 ;==================================================++
-
-[State Meter Burn State, VarSet]
-type = VarSet
-trigger1 = movehit = 1
-v = 2
-value = 0
 
 [State -2, Starter Level]
 type 		= MapSet
@@ -690,12 +654,6 @@ type = NotHitBy
 trigger1 = time = 0
 value = SCA
 time = 40
-
-[State Meter Burn State, VarSet]
-type = VarSet
-trigger1 = movehit = 1
-v = 2
-value = 0
 
 [State 0. MapSet]
 type 		= MapAdd

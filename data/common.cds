@@ -1,3 +1,7 @@
+[Defaults]
+command.time = 15
+command.buffer.time = 5
+
 ;-| Single Button |---------------------------------------------------------
 [Command]
 name = "a"
@@ -453,12 +457,7 @@ buffertime = 5
 name = "a66"
 command = ~F, F
 time = 10
-buffertime = 15
-[Command]
-name = "a66"
-command = ~F, n, F
-time = 10
-buffertime = 15
+buffertime = 20
 
 
 [Command]
@@ -466,22 +465,12 @@ name = "44"
 command = B, B
 time = 10
 buffertime = 15
-[Command]
-name = "44"
-command = ~B, n, B
-time = 10
-buffertime = 15
 
 [Command]
 name = "a44"
 command = ~B, B
 time = 10
-buffertime = 15
-[Command]
-name = "a44"
-command = ~B, n, B
-time = 10
-buffertime = 15
+buffertime = 20
 
 
 [Command]
@@ -490,18 +479,8 @@ command = $D, U
 time = 10
 buffer.time = 10
 [Command]
-name = "28"
-command = $D, N, U
-time = 10
-buffer.time = 10
-[Command]
 name = "29"
 command = $D, UF
-time = 10
-buffer.time = 10
-[Command]
-name = "29"
-command = $D, F, N, U
 time = 10
 buffer.time = 10
 [Command]
@@ -613,28 +592,28 @@ time = 3
 [Command]
 name = "236236A"
 command = ~D, DF, F, D, DF, F, a
-time = 20
-buffer.time = 10
+time = 30
+buffer.time = 15
 [Command]
 name = "236236B"
 command = ~D, DF, F, D, DF, F, b
-time = 20
-buffer.time = 10
+time = 30
+buffer.time = 15
 [Command]
 name = "236236C"
 command = ~D, DF, F, D, DF, F, c
-time = 20
-buffer.time = 10
+time = 30
+buffer.time = 15
 [Command]
 name = "236236D"
-command = ~D, DF, F, D, DF, F, x
-time = 20
-buffer.time = 10
+command = ~D, DF, F, D, DF, F, d
+time = 30
+buffer.time = 15
 [Command]
 name = "236236CD"
-command = ~D, DF, F, D, DF, F, c+x
+command = ~D, DF, F, D, DF, F, c+d
 time = 20
-buffer.time = 10
+buffer.time = 15
 
 [Command]
 name = "214214A"
@@ -650,11 +629,11 @@ command = ~D, DB, B, D, DB, B, c
 time = 20
 [Command]
 name = "214214D"
-command = ~D, DB, B, D, DB, B, x
+command = ~D, DB, B, D, DB, B, d
 time = 20
 [Command]
 name = "214214CD"
-command = ~D, DB, B, D, DB, B, c+x
+command = ~D, DB, B, D, DB, B, c+d
 time = 20
 
 [Command]
@@ -667,8 +646,8 @@ command = ~F, DF, D, DB, B, F, b
 name = "632146C"
 command = ~F, DF, D, DB, B, F, c
 [Command]
-name = "632146X"
-command = ~F, DF, D, DB, B, F, x
+name = "632146D"
+command = ~F, DF, D, DB, B, F, d
 time = 15
 buffer.time = 15
 [Command]
@@ -693,11 +672,11 @@ command = ~F, y
 ; Command Inputs - Special, Without Buttons
 ;===================================
 [Command]
-name = "632146"
-command = ~F, DF, D, DB, B, F
+name = "6246"
+command = ~$F, $D, $B, $F
 [Command]
-name = "41236"
-command = ~B, DB, D, DF, F
+name = "426"
+command = ~$B, $D, F
 [Command]
 name = "63214"
 command = ~F, DF, D, DB, B
@@ -709,15 +688,18 @@ buffer.time = 10
 [Command]
 name = "421"
 command = ~B, D, DB
-time = 6
+time = 8
+buffer.time = 10
 [Command]
 name = "236"
 command = ~D, DF, F
 time = 6
+buffer.time = 10
 [Command]
 name = "214"
 command = ~D, DB, B
 time = 6
+buffer.time = 10
 [Command]
 name = "MistStep"
 command = ~$F, D, DF
@@ -740,41 +722,53 @@ buffer.time = 15
 [Command]
 name = "632146A"
 command = ~F, DF, D, DB, B, F, a
+buffer.time = 15
 [Command]
 name = "632146B"
 command = ~F, DF, D, DB, B, F, b
+buffer.time = 15
 [Command]
 name = "632146C"
 command = ~F, DF, D, DB, B, F, c
+buffer.time = 15
 [Command]
 name = "632146D"
 command = ~F, DF, D, DB, B, F, x
+buffer.time = 15
 
 [Command]
 name = "41236A"
 command = ~B, DB, D, DF, F, a
+buffer.time = 10
 [Command]
 name = "41236B"
 command = ~B, DB, D, DF, F, b
+buffer.time = 10
 [Command]
 name = "41236C"
 command = ~B, DB, D, DF, F, c
+buffer.time = 10
 [Command]
 name = "41236D"
 command = ~B, DB, D, DF, F, x
+buffer.time = 10
 
 [Command]
 name = "63214A"
 command = ~F, DF, D, DB, B, a
+buffer.time = 10
 [Command]
 name = "63214B"
 command = ~F, DF, D, DB, B, b
+buffer.time = 10
 [Command]
 name = "63214C"
 command = ~F, DF, D, DB, B, c
+buffer.time = 10
 [Command]
 name = "63214D"
 command = ~F, DF, D, DB, B, x
+buffer.time = 10
 
 [Command]
 name = "623A"
@@ -987,17 +981,10 @@ buffer.time = 5
 
 ;-| Throws |-----------------------------------------------
 [Command]
-name = "throw"
-command = x+y
+name = "Throw"
+command = b+c
 time = 3
-[Command]
-name = "throw"
-command = y+z
-time = 3
-[Command]
-name = "throw"
-command = x+z
-time = 3
+buffer.time = 2
 
 [Command]
 name = "throwtech"

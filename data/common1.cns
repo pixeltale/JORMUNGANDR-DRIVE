@@ -4288,32 +4288,32 @@ value = 0
 ignorehitpause = 1
 persistent = 0
 
-; [State 5210, 2] ;Go up
-; type = VelSet
-; trigger1 = Time = 4
-; trigger1 = Command = "holdup"
-; y = -4
-; x = vel x*.5
+[State 5210, 2] ;Go up
+type = VelSet
+trigger1 = Time = 4
+trigger1 = Command = "holdup"
+y = -6
+x = vel x*.5
 
-; [State 5210, 2] ;Go down
-; type = VelSet
-; trigger1 = Time = 4
-; trigger1 = Command = "holddown"
-; y = 4
-; x = vel x*.5
+[State 5210, 2] ;Go down
+type = VelSet
+trigger1 = Time = 4
+trigger1 = Command = "holddown"
+y = 4
+x = vel x*.5
 
 [State 5210, 2] ;Go fwd
 type = VelSet
 trigger1 = Time = 0
 trigger1 = Command = "holdfwd"
-x = 2
+x = 4
 y = -5.5
 
 [State 5210, 2] ;Go back
 type = VelSet
 trigger1 = Time = 0
 trigger1 = Command = "holdback"
-x = -2
+x = -4
 y = -5.5
 
 [State 5210, 4]
@@ -4346,7 +4346,7 @@ value = 52 ;Jump land
 ctrl = 1
 
 ;===========================================================================
-;Record Scratch (Rapid)
+;REDLINE CANCEL
 ;---------------------------------------------------------------------------
 [Statedef 4000]
 type    = S
@@ -4359,45 +4359,6 @@ ctrl = 0
 velset = vel x * 0.05,0
 sprpriority = 2
 facep2 = 1
-
-[State 0, AfterImage]
-type = AfterImage
-trigger1 = time = 0
-time = 30
-length = 20
-palcolor = 256
-palcontrast = 256,120,120
-trans = add
-paladd = 25,10,10
-palmul = .75,.65,.75
-timegap = 1
-framegap = 2
-persistent = 1
-ignorehitpause = 1
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 	= time = 0
-map 		= "SlowdownTime"
-value 		= 15
-ignorehitpause 	= 1
-persistent 		= 1
-[State 0, MapSet]
-type 		= MapSet
-triggerall 		= time = 0
-trigger1		= map(comboTimer) >= 60 && map(comboTimer) < 100
-map 		= "comboTimer"
-value 		= -120
-ignorehitpause 	= 1
-persistent 		= 1
-[State 0, MapSet]
-type 		= MapSet
-triggerall 		= time = 0
-trigger1		= map(comboTimer) >= 100 && map(comboTimer) < 300
-map 		= "comboTimer"
-value 		= 59
-ignorehitpause 	= 1
-persistent 		= 1
 
 [State 0, Explod]
 type = Explod
@@ -4443,7 +4404,7 @@ trigger1 = time = 4
 value = 1
 
 ;===========================================================================
-;Record Scratch (Rapid)
+;REDLINE CANCEL (AIR)
 ;---------------------------------------------------------------------------
 [Statedef 4001]
 type    = A
@@ -4456,45 +4417,6 @@ ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
 facep2 = 0
-
-[State 0, AfterImage]
-type = AfterImage
-trigger1 = time = 0
-time = 30
-length = 20
-palcolor = 256
-palcontrast = 256,120,120
-trans = add
-paladd = 25,10,10
-palmul = .75,.65,.75
-timegap = 1
-framegap = 2
-persistent = 1
-ignorehitpause = 1
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 	= time = 0
-map 		= "SlowdownTimeC"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-[State 0, MapSet]
-type 		= MapSet
-triggerall 		= time = 0
-trigger1		= map(comboTimer) >= 60 && map(comboTimer) < 100
-map 		= "comboTimer"
-value 		= 59
-ignorehitpause 	= 1
-persistent 		= 1
-[State 0, MapSet]
-type 		= MapSet
-triggerall 		= time = 0
-trigger1		= map(comboTimer) >= 100 && map(comboTimer) < 300
-map 		= "comboTimer"
-value 		= 99
-ignorehitpause 	= 1
-persistent 		= 1
 
 [State 0, Explod]
 type = Explod
@@ -7213,7 +7135,7 @@ value = 6140
 ;===========================================================================
 ;SYSTEM MECHANICS ----------------------------------------------------------
 ;===========================================================================
-;RECORD SCRATCH
+;REDLINE CANCEL
 [State -1, RC Jasta]
 type = ChangeState
 value = 4000
@@ -7224,7 +7146,7 @@ triggerall = command = "F"
 triggerall = statetype != A
 trigger1 = movecontact
 
-;RECORD SCRATCH (AIR)
+;REDLINE CANCEL (AIR)
 [State -1, RC Jasta Air]
 type = ChangeState
 value = 4001
@@ -7240,7 +7162,7 @@ trigger1 = movecontact
 type = ChangeState
 value = 800
 triggerall = !(Name="JV" && map(NoNormals))
-trigger1 = command = "throw"
+trigger1 = command = "Throw"
 trigger1 = statetype != A
 trigger1 = ctrl || (stateno = [200,230] && time < 2) && prevstateno != [200, 430]
 

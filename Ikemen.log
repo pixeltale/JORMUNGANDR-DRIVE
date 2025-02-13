@@ -1,7 +1,40 @@
-.\external\script\start.lua:1401: chars/JV/JV.def:
-./data/dizzy.zss
-data/dizzy.zss:341:
-Command doesn't exist: x
+runtime error: invalid memory address or nil pointer dereference
+goroutine 1 [running, locked to thread]:
+github.com/yuin/gopher-lua.(*LState).PCall.func1()
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1988 +0x1ea
+panic({0x7ff788e4ace0?, 0x7ff788de0730?})
+	runtime/panic.go:914 +0x21f
+main.(*HealthBar).reset(0xc0009bb200?)
+	github.com/ikemen-engine/Ikemen-GO/src/lifebar.go:380 +0x1b
+main.(*Lifebar).reset(0x7ff788df9610)
+	github.com/ikemen-engine/Ikemen-GO/src/lifebar.go:3823 +0xbe9
+main.(*System).nextRound(0x7ff788df93c0)
+	github.com/ikemen-engine/Ikemen-GO/src/system.go:805 +0x45
+main.(*System).fight.func4()
+	github.com/ikemen-engine/Ikemen-GO/src/system.go:1990 +0x53d
+main.(*System).fight(0x7ff788df93c0)
+	github.com/ikemen-engine/Ikemen-GO/src/system.go:1995 +0x13f6
+main.systemScriptInit.func57.2()
+	github.com/ikemen-engine/Ikemen-GO/src/script.go:991 +0x56a
+main.systemScriptInit.func57(0xc0000dc210)
+	github.com/ikemen-engine/Ikemen-GO/src/script.go:1039 +0x3af
+github.com/yuin/gopher-lua.callGFunction(0xc0000dc210, 0x0)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:202 +0x31
+github.com/yuin/gopher-lua.init.3.func26(0xc0000dc210, 0xc0c0001?, 0xc0001b1000?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:821 +0x365
+github.com/yuin/gopher-lua.mainLoop(0xc0000dc210, 0xc0003a5240?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:31 +0xe5
+github.com/yuin/gopher-lua.(*LState).callR(0xc0000dc210, 0x0, 0xffffffffffffffff, 0xc00008c790?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1211 +0x1bc
+github.com/yuin/gopher-lua.(*LState).Call(...)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1967
+github.com/yuin/gopher-lua.(*LState).PCall(0xc0000dc210, 0x0, 0xc0003a5240?, 0x0)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:2030 +0x11e
+github.com/yuin/gopher-lua.(*LState).DoFile(0xc0000dc210, {0xc0000b0ab0?, 0x0?})
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/auxlib.go:396 +0x65
+main.main()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:91 +0x21d
+
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1401: in function 'f_game'

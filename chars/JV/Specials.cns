@@ -1707,7 +1707,7 @@ value = 0
 ctrl = 1
 
 ;==============================
-;j5S: Jotunn's Wrath    
+;j236C  
 ;==============================     
 [Statedef 1025]
 type    = A
@@ -1791,7 +1791,7 @@ value = 52
 ctrl = 1
 
 ;==============================
-;Enj5S: Jotunn's Wrath    
+;[EN] j236C
 ;==============================     
 [Statedef 1030]
 type    = A
@@ -1888,7 +1888,7 @@ animtype 		= medium
 ground.slidetime 	= 14
 ground.hittime  	= 33
 ground.velocity 	= -8,-6
-air.velocity 	= -20,-3.5
+air.velocity 	= -25,-4.5
 ground.hittime	= 70 * MAP(untechMOD)
 air.hittime 	= 40 * MAP(untechMOD)
 fall 		= 1
@@ -3625,7 +3625,7 @@ value = 0
 ctrl = 1
 
 ;==============================
-;[EX] j.S
+;[FB] j.236D
 ;==============================     
 [Statedef 2500]
 type    = A

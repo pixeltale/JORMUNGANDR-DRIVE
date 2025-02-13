@@ -69,17 +69,7 @@ down.friction.threshold = .05         ;If the player's speed drops below this th
 
 
 [Quotes]
-victory1 = "The hell, even after all that you still haven't gone down? Alright then, time for round 2!"
-victory2 = "Guardian, huh? So is that why that other guy was so strong as well? Seems like I have a lot to worry about around here."
-victory3 = "...Britain? The hell's that? Are you messing with me or something...?"
-victory4 = "The hell is a 'Blackwatch?' Why would I be working for them? Is this a race thing?"
-victory5 = "I can see why they call you the 'God Killing Demon'. You were strong...stand proud..."
-victory6 = "Everyone wants to say they're a 'death god' or 'death goddess' nowadays. Why don't you fill out a damn job application."
-victory7 = "Grandmaster Wu? Like, Wu-Tang clan? No? Alright, sorry..."
-victory8 = "Sorry man, the Garten is that way."
-victory9 = "...Is this really how weak I am...? No way you...I mean me...I mean...fuck. Whatever."
-victory10 = "Come on Alicia. I know you're just acting injured so you can stab me in the neck when I come check on you. That trick wont work on me twice."
-victory11 = "Sorry, but a cinder block in a weed warehouse is not enough to stop me."
+victory1 = "Its JV time baby!"
 
 [ja.Quotes]
 victory1 = "私は私のベルトで長年の経験を持っています、あなたは知っています。"
@@ -375,16 +365,26 @@ velset = 0,0
 type = DestroySelf
 trigger1 = animtime=0
 
-;---------------------------------------------------------------------------
-; Override common states (use same number to override) :
-;---------------------------------------------------------------------------
+;---------------------- Integer variable list ----------------------
 
-;========================================
-; States that are always executed (use statedef -2)        ||
-;========================================
+; var(1):= -1
+
+;---------------------- Float variable list ----------------------
+
+
+
+
+
 
 
 [Statedef -2]
+
+
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= stateno = stateno && time = 0
+map 		= "JC"
+value 		= 0
 
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
@@ -455,8 +455,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "EState = %f StrikeCount = %f"
-params = map(EnState), map(StrikeCount)
+text = "EState = %f JumpCancel = %f"
+params = map(EnState), map(JC)
 ignorehitpause = 1
 persistent = 1
 
@@ -532,9 +532,3 @@ map 		= "FRC"
 value 		= 0
 ignorehitpause 	= 1
 persistent		= 1
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = 1
-v = 5
-value = map(EN)
