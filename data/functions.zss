@@ -15,7 +15,7 @@ ignoreHitPause{
 [Function CounterHit() ret]
 ignoreHitPause{
 	let ret = 0;
-	if moveCountered = 1 && (map(_iksys_counterHitFlag) = 0 || map(_iksys_counterHitFlag) = gameTime) {
+	if moveCountered = 1 && (map(_iksys_counterHitFlag) = 0 || map(_iksys_counterHitFlag) = gameTime){
 		let ret = 1;
 		map(_iksys_counterHitFlag) := gameTime;
 	} else if moveCountered = 0 {

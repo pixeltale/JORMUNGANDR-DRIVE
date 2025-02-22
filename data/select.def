@@ -59,9 +59,7 @@ JV
  ; stages/mybg.def, order=3
  ;
  ;Insert your stages below.
-
-stages/training_re.def
-stages/glass ocean.def
+stages/glass ocean.def, music=sound/SpiralLadder.mp3
 
 ;-------------------------------------------------------------------------------
 [Options]

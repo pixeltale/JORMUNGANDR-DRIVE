@@ -382,10 +382,10 @@ trigger3 = stateno = 60
 trigger4 = movecontact && stateno = [600,640]
 
 
-[State -1, 5E: EXCEED Shock]
+[State -1, EXCEED Shock]
 type = ChangeState
 value = 905
-triggerall = command = "E"
+triggerall = command = "236" && command = "F"
 triggerall = statetype !=A
 trigger1 = var(1)
 trigger2 = stateno = [200,230] || stateno = [400,431]
@@ -525,7 +525,7 @@ type = ChangeState
 value = 600
 triggerall = command = "A"
 triggerall = statetype = A
-trigger1 = ctrl || stateno = 60
+trigger1 = ctrl
 trigger2 = stateno = 600 && movecontact
 ;---------------------------------------------------------------------------
 ;j.B
@@ -534,7 +534,7 @@ type = ChangeState
 value = 610
 triggerall = command = "B"
 triggerall = statetype = A
-trigger1 = ctrl || stateno = 60
+trigger1 = ctrl
 trigger2 = movecontact && stateno = 600
 
 ;---------------------------------------------------------------------------
@@ -545,7 +545,7 @@ value = 640
 triggerall = command = "C"
 triggerall	= command = "holddown"
 triggerall = statetype = A
-trigger1 = ctrl || stateno = 60
+trigger1 = ctrl
 trigger2 = stateno = [600, 630] && movecontact
 
 ;j.C: Jumping Heavy
@@ -554,14 +554,22 @@ type = ChangeState
 value = 630
 triggerall = command = "C"
 triggerall = statetype = A
-trigger1 = ctrl || stateno = 60
+trigger1 = ctrl
 trigger2 = stateno = [600,610] && movecontact
+
+;REDLINE GUARD
+[State -1, REDLINE GUARD]
+type = ChangeState
+value = 910 + 1*statetype = A
+triggerall = power >= (500 * prevstateno = [120, 155])
+triggerall = command = "Redline Guard"
+trigger1 = ctrl || stateno = [120,155] && map(IBParam)
 
 ;DEVIANT REDLINE CANCEL
 [State -1, REDLINE CANCEL]
 type = ChangeState
-value = 4005
-triggerall = power >=1000 && stateno != 4005 && teammode != Tag
+value = 4002
+triggerall = power >=1000 && stateno != 4002
 triggerall = command = "F"
 triggerall = statetype != A
 trigger1 = map(FRC)
@@ -569,32 +577,8 @@ trigger1 = map(FRC)
 ;DEVIANT REDLINE CANCEL (AIR)
 [State -1, REDLINE CANCEL]
 type = ChangeState
-value = 4006
-triggerall = power>=1000 && stateno != 4006 && teammode != Tag
+value = 4003
+triggerall = power>=1000 && stateno != 4003
 triggerall = command = "F"
 triggerall = statetype = A 
 trigger1 = map(FRC)
-
-
-;REDLINE CANCEL
-[State -1, REDLINE CANCEL]
-type = ChangeState
-value = 4000
-triggerall = !map(ScratchLockout) && enemy, Alive && teammode != Tag
-triggerall = power >=2000 && !map(FRC)
-triggerall = stateno != 803
-triggerall = command = "F"
-triggerall = statetype != A
-trigger1 = movecontact
-
-;REDLINE CANCEL (AIR)
-[State -1, REDLINE CANCEL]
-type = ChangeState
-value = 4001
-triggerall = !map(ScratchLockout) && enemy, Alive && teammode != Tag
-triggerall = power>=2000 && !map(FRC)
-triggerall = stateno !=750
-triggerall = stateno != 900
-triggerall = command = "F"
-triggerall = statetype = A
-trigger1 = movecontact

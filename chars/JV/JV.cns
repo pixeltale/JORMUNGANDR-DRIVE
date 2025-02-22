@@ -1,7 +1,7 @@
 [Data]
 life = 1500
 attack = 100
-defence = 120
+defence = 100
 fall.defence_up = 0
 liedown.time = 60
 sparkno = 2
@@ -13,13 +13,13 @@ IntPersistIndex = 4
 FloatPersistIndex = 40
 
 [Size]
-xscale = 0.84          ;Horizontal scaling factor.
-yscale = 0.84          ;Vertical scaling factor.
-ground.back = 15     ;Player width (back, ground)
-ground.front = 16    ;Player width (front, ground)
-air.back = 12        ;Player width (back, air)
-air.front = 12       ;Player width (front, air)
-height = 50          ;Height of player (for opponent to jump over)
+xscale = 0.25          ;Horizontal scaling factor.
+yscale = 0.25          ;Vertical scaling factor.
+ground.back = 20     ;Player width (back, ground)
+ground.front = 20    ;Player width (front, ground)
+air.back = 20        ;Player width (back, air)
+air.front = 20       ;Player width (front, air)
+height = 60          ;Height of player (for opponent to jump over)
 attack.dist = 160    ;Default attack distance
 proj.attack.dist = 90 ;Default attack distance for projectiles
 proj.doscale = 0     ;Set to 1 to scale projectiles too
@@ -33,25 +33,26 @@ walk.fwd  = 2.5      ;Walk forward
 walk.back = -2.5     ;Walk backward
 run.fwd  = 5.6, 0    ;Run forward (x, y)
 run.back = -3.5,-3.8 ;Hop backward (x, y)
-jump.neu = 0,-7    ;Neutral jumping velocity (x, y)
+jump.neu = 0,-10    ;Neutral jumping velocity (x, y)
 jump.back = -2.55    ;Jump back Speed (x, y)
 jump.fwd = 2.33       ;Jump forward Speed (x, y)
-runjump.back = -1,-8.1 ;Running jump speeds (opt)
+runjump.back = -1,-10 ;Running jump speeds (opt)
 runjump.fwd = 7.5,-10      ;.
-airjump.neu = 0,-6.5      ;.
+airjump.neu = 0,-9      ;.
 airjump.back = -2      ;Air jump speeds (opt)
 airjump.fwd = 2.2         ;.
-air.gethit.groundrecover = -.15,-3.5  ;Velocity for ground recovery state (x, y) **MUGEN 1.0**
-air.gethit.airrecover.mul = .5,.2     ;Multiplier for air recovery velocity (x, y) **MUGEN 1.0**
-air.gethit.airrecover.add = 0,-4.5    ;Velocity offset for air recovery (x, y) **MUGEN 1.0**
-air.gethit.airrecover.back = -1       ;Extra x-velocity for holding back during air recovery **MUGEN 1.0**
-air.gethit.airrecover.fwd = 0         ;Extra x-velocity for holding forward during air recovery **MUGEN 1.0**
-air.gethit.airrecover.up = -2         ;Extra y-velocity for holding up during air recovery **MUGEN 1.0**
-air.gethit.airrecover.down = 1.5      ;Extra y-velocity for holding down during air recovery **MUGEN 1.0**
+air.gethit.groundrecover = -.15,-3.5
+air.gethit.airrecover.mul = .5,.2
+air.gethit.airrecover.add = 0,-4.5
+air.gethit.airrecover.back = -1
+air.gethit.airrecover.fwd = 0
+air.gethit.airrecover.up = -2
+air.gethit.airrecover.down = 1.5
+
 [Movement]
 airjump.num = 0       ;Number of air jumps allowed (opt)
 airjump.height = 35   ;Minimum distance from ground before you can air jump (opt)
-yaccel = .39          ;Vertical acceleration
+yaccel = .5          ;Vertical acceleration
 stand.friction = .85  ;Friction coefficient when standing
 crouch.friction = .82 ;Friction coefficient when crouching
 stand.friction.threshold = 2          ;If player's speed drops below this threshold while standing, stop his movement **MUGEN 1.0**
@@ -67,6 +68,8 @@ down.bounce.yaccel = .4               ;Vertical acceleration for player bouncing
 down.bounce.groundlevel = -4          ;Y-position at which player bouncing off the ground touches the ground again **MUGEN 1.0**
 down.friction.threshold = .05         ;If the player's speed drops below this threshold while lying down, stop his movement **MUGEN 1.0**
 
+[Constants]
+defensemod = 1.2
 
 [Quotes]
 victory1 = "Its JV time baby!"
@@ -447,16 +450,30 @@ ignorehitpause = 1
 [State 0. MapSet]
 type 		= MapSet
 trigger1 		= stateno = [3000, 3200]
-map 		= "BurstLock"
+map 			= "BurstLock"
 value 		= 1
 ignorehitpause 	= 1
 persistent 		= 1
 
+[State 0, VarSet]
+type = VarSet
+trigger1 = 1
+v = 2
+value = enemynear, movetype = A
+ignorehitpause = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = var(2) && !time && movehit
+v = 3
+value = 1
+ignorehitpause = 1
+
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "EState = %f JumpCancel = %f"
-params = map(EnState), map(JC)
+text = "ch = %i"
+params = var(2)
 ignorehitpause = 1
 persistent = 1
 

@@ -3,6 +3,7 @@
 [Info]
 name = "GLASS OCEAN"
 mugenversion = 1.1
+ikemenversion = 0.99
 
 [Camera]
 startx = 0
@@ -133,7 +134,7 @@ start = -220, -300
 velocity=0.3,0.3
 tile= 1,1
 tilespacing = 2000,9000
-delta = .15,.80
+delta = .15,.2
 layerno = 0
 trans=add
 
@@ -141,7 +142,7 @@ trans=add
 type = normal
 spriteno=1,1
 start = 0.1,0.1
-delta = .21,1.2
+delta = .21,0.1
 tile = 1,1
 velocity = 0.1,0.1
 TRANS=add
@@ -179,7 +180,7 @@ mask = 1
 [BG 1]		;BG Glow
 type = anim
 actionno=1
-start = 0,340
+start = 0,240
 delta = 0,1.1
 tile = 1,0
 tilespacing = 0, 0
@@ -187,19 +188,10 @@ velocity = 0,0
 mask = 0
 TRANS=add
 
-[BG 1] ;FLOOR. Add some details (idk, maybe cracks, water ripples) to make parallax go harder
-type  = parallax
-spriteno = 4,1
-start = 32.5,200
-delta = .25, 1;.25, .35
-tile = 1, 1
-velocity=-0.4,0
-width = 65, 330
-
 [BG BUILDING1]		;Destroyed Building - Far Right - Distance: Close
 type = normal
 spriteno=2,0
-start = 800,325
+start = 800,350
 delta = .9,.9
 mask = 1
 
@@ -209,6 +201,15 @@ spriteno=2,1
 start = -600,250
 delta = .7,.7
 mask = 1
+
+[BG 1] ;FLOOR. Add some details (idk, maybe cracks, water ripples) to make parallax go harder
+type  = parallax
+spriteno = 4,1
+start = 32.5,300
+delta = 1, 1;.25, .35
+tile = 1, 1
+velocity=0,0
+width = 500, 330
 
 ; Glow Gradient
 [Begin Action 1]

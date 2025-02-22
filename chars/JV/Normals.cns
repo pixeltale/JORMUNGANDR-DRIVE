@@ -11,10 +11,11 @@ facep2 		= 1
 poweradd 	= 0
 sprpriority 	= 2
 
+
 [State -2, Starter Level]
 type 		= MapSet
 trigger1 		= movehit && !map(ComboStateCheck)
-map 		= "StarterLevel"
+map 			= "StarterLevel"
 value 		= 1
 ignorehitpause 	= 1
 
@@ -96,6 +97,13 @@ trigger1 		= movehit
 map 		= "JC"
 value 		= 1
 ignorehitpause 	= 1
+
+[State 0, Recovery - Disable Counterhit]
+type 		= MapSet
+trigger1 		= 1
+map 			= "_iksys_counterHitFlag"
+value 		= -1
+redirectid	= enemy, id
 
 
 [State 200, 3]
@@ -183,9 +191,13 @@ fall.yvelocity 	= 0
 getpower 		= (50)*(cond(var(var(2)) = 1, 1, .5))
 
 [State 0, Veladd]
-type = Velset
-trigger1 = prevstateno = 100
-x = vel x
+type = VelAdd
+trigger1 = animelem = 3
+x = 5
+[State 0, Veladd]
+type = VelAdd
+trigger1 = animelem = 7
+x = -1
 
 [State 200, 2]
 type = PlaySnd
@@ -413,7 +425,7 @@ damage 		= 100*Map(P4)
 hitflag 	= MAFD
 guardflag 	= MA
 pausetime 	= 14,15
-sparkno 	= 1
+sparkno 	= 4
 sparkxy 	= -15,-60
 hitsound   	= 5,0
 guardsound 	= 6,2
@@ -940,7 +952,7 @@ value = 1
 [State 0, ChangeState]
 type = ChangeState
 trigger1 =animtime = 0 
-value = 69000
+value = 50
 ctrl = 1
 
 [State 0, ChangeState]
@@ -1145,7 +1157,7 @@ getpower 		= (100)*(cond(var(var(2)) = 1, 1, .5))
 [State 0, ChangeState]
 type = ChangeState
 trigger1 =animtime = 0 
-value = 69000
+value = 50
 ctrl = 1
 
 [State 0, ChangeState]
@@ -1274,7 +1286,7 @@ p2getp1state = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 =animtime = 0 
-value = 69000
+value = 50
 ctrl = 1
 [State 0, ChangeState]
 type = ChangeState
@@ -2608,7 +2620,7 @@ sprpriority = 2
 type = PalFX
 trigger1 = time = 9
 time = 10
-sinadd = 191, 64, 64, 10	
+sinadd = 120, 120, 64, 50	
 mul = 256,256,256
 sinadd = 0,0,0,10
 invertall = 0
@@ -2704,3 +2716,152 @@ type = mapset
 trigger1 = animelem = 7
 map = "GC"
 value = 0
+
+;---------------------------------------------------------------------------
+;Red Guard
+[Statedef 910]
+type    = S
+movetype= A
+physics = S
+poweradd= -500
+velset = vel x * 0.5,0
+anim = 910
+ctrl = 0
+sprpriority = 2
+
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F41	;RedGuard Spark
+ID = 41
+pos = 10,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = const(size.xscale),const(size.yscale)*1.5
+sprpriority = 2
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,0
+hitsound = S2,0
+p1stateno = 912
+ignorehitpause = 1
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Red Guard (Air)
+[Statedef 911]
+type    = A
+movetype= A
+physics = A
+poweradd= -500
+velset = vel x,vel y + 1
+anim = 911
+ctrl = 0
+sprpriority = 2
+
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F41	;RedGuard Spark
+ID = 41
+pos = 10,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = const(size.xscale),const(size.yscale)*1.5
+sprpriority = 2
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,0
+hitsound = S2,0
+p1stateno = 912
+ignorehitpause = 1
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Red Guard - Success
+[Statedef 912]
+type    = S
+movetype= A
+physics = S
+poweradd= 500
+velset = vel x * 0.5, -3 * prevstateno = 911
+anim = 910
+ctrl = 0
+sprpriority = 2
+
+;Include Meter Gain Bonus Mapadd Here
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 4
+sinadd = 200, 64, 64, 10	
+mul = 256,256,256
+sinadd = 0,0,0,10
+invertall = 0
+color = 256
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= time = 0
+map 		= "SlowdownTimeB"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = !time
+time = 20
+freq = 20
+ampl = -6
+phase = 120
+ignorehitpause = 1
+persistent = 1
+
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = time = 1
+value = 0
+ctrl = 1

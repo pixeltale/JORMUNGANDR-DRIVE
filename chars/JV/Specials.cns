@@ -1115,7 +1115,7 @@ hitsound   	= 5,3
 guardsound 	= 6, 1
 ground.slidetime 	= 12
 ground.hittime  	= 35 * MAP(untechMOD)
-down.hittime	= 58 * MAP(untechMOD)
+down.hittime	= 90 * MAP(untechMOD)
 ground.velocity 	= -4, -5
 down.velocity	= -1, -6
 air.fall 		= 1
@@ -2897,13 +2897,12 @@ persistent 		= 0
 [State 210, 2]
 type = HitDef 
 p2facing = 1
-triggerall = enemy, statetype != A
 trigger1 = movecontact = 0 && movereversed = 0
 attr = S, NA
 animtype  = Heavy
 air.animtype = back
 damage = 100 * MAP(P4) + (40*map(CounterHit)), 0
-pausetime = 20,20
+pausetime = 15,15
 sparkno = 2
 sparkxy = -p2dist x * 0.25,-1
 hitsound   = 5,3
@@ -2921,49 +2920,13 @@ air.velocity = 1,16
 air.fall = 1
 fall.yvelocity = 0
 envshake.time 		= 35
-envshake.freq 		= 90
-envshake.ampl 		= -6
-envshake.phase 		= 100
-getpower = (100)*(cond(var(var(2)) = 1, 1.5, 1)) 
+envshake.freq 		= 30
+envshake.ampl 		= -3
+envshake.phase 		= 50
+p2stateno 		= 5255
+p2getp1state		= 0
+getpower 		= 100 * map(P4)
 
-[State 210, 2]
-type = HitDef 
-p2facing = 1
-triggerall  	= enemy, !map(ArmorActive)
-triggerall = enemy, statetype = A || enemy, statetype = L
-trigger1 = movecontact = 0 && movereversed = 0
-attr = S, NA
-animtype  = Heavy
-air.animtype = back
-damage = 100 * MAP(P4) + (40*map(CounterHit)), 0
-pausetime = 20,20
-sparkno = 2
-sparkxy = -p2dist x * 0.25,-1
-hitsound   = 5,3
-guardsound = 6,2
-hitflag = MAFD
-guardflag = LA
-guard.ctrltime 	= 20
-guard.velocity 	= -5
-guard.slidetime = 18
-ground.type 	= TRIP
-ground.hittime  = 18
-air.hittime	= 42 * MAP(untechMOD)
-down.hittime	= 48 * MAP(untechMOD)
-ground.velocity = -3, 18
-air.type	= TRIP
-air.velocity = 1,16
-down.velocity = 1, 16
-air.fall = 1
-fall = 1
-fall.yvelocity = 0
-envshake.time 		= 35
-envshake.freq 		= 90
-envshake.ampl 		= -6
-envshake.phase 		= 100
-p2stateno 	= 5255
-p2getp1state	= 0
-getpower = (100)*(cond(var(var(2)) = 1, 1.5, 1)) 
 
 [State 210, 2]
 type = HitDef 
@@ -2980,37 +2943,26 @@ sparkxy = -p2dist x * 0.25,-1
 hitsound   = 5,3
 guardsound = 6,2
 hitflag = MAFD
-guardflag = LA
-guard.ctrltime 	= 20
-guard.velocity 	= -5
-guard.slidetime = 18
-ground.type 	= TRIP
-ground.hittime  = 18
-air.hittime	= 42 * MAP(untechMOD)
-down.hittime	= 48 * MAP(untechMOD)
-ground.velocity = -3, 18
-air.type	= TRIP
-air.velocity = 1,16
-down.velocity = 1, 16
-air.fall = 1
-fall = 1
-fall.yvelocity = 0
+guardflag = HA
+guard.ctrltime 		= 20
+guard.velocity 		= -5
+guard.slidetime 		= 18
+ground.type 		= TRIP
+ground.hittime  		= 18
+air.hittime		= 42 * MAP(untechMOD)
+down.hittime		= 48 * MAP(untechMOD)
+ground.velocity 		= -3, 18
+air.type			= TRIP
+air.velocity 		= 1,16
+down.velocity 		= 1, 16
+air.fall 			= 1
+fall 			= 1
+fall.yvelocity 		= 0
 envshake.time 		= 35
 envshake.freq 		= 90
 envshake.ampl 		= -6
 envshake.phase 		= 100
-getpower = (100)*(cond(var(var(2)) = 1, 1.5, 1)) 
-
-[State 0, Zoom]
-type = zoom
-trigger1 = (movehit =1)
-trigger1 = enemy,HitShakeOver = 0
-scale = 1.2
-lag = 0
-stagebound = 1
-camerabound = 0
-pos = 0,-20
-ignorehitpause=1
+getpower 		= 100*map(P4)
 
 [State 0, VelSet]
 type= VelSet

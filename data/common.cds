@@ -572,6 +572,13 @@ name = "recovery"
 command = /z
 time = 4
 
+;System
+[Command]
+name = "Redline Guard"
+command = /F,x
+time = 1
+buffer.time = 2
+
 ;===================================
 ; Blocking Commands
 ;===================================

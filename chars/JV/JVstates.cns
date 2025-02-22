@@ -383,11 +383,22 @@ type = VelSet
 trigger1 = time = 0
 x = 7.5
 
+[State 0, VelMul]
+type = VelMul
+trigger1 = !map(ADM)
+x = 0.96
+
 [State - Air Option Limiter - Airdash]
 type = mapadd
 trigger1 = time = 0
 map = "ADash"
 value = -1
+
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time = 0
+map = "ADM" ;AirDash Momentum Preserve
+value = 10
 
 [State 0, ChangeAnim]
 type = ChangeAnim
@@ -420,15 +431,9 @@ ownpal = 1
 removeongethit = 0
 ignorehitpause = 0
 
-[State - Airdash Momentum Preserve]
-type = mapset
-trigger1 = time = 0
-map = "ADM" ;AirDash Momentum Preserve
-value = 10
-
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = time = 8
+trigger1 = time = 4
 value = 1
 
 ;---------------------------------------------------------------------------
@@ -451,11 +456,22 @@ type = VelSet
 trigger1 = time = 0
 x = -7.5
 
+[State 0, VelMul]
+type = VelMul
+trigger1 = !map(ADM)
+x = 0.95
+
 [State - Air Option Limiter - Airdash]
 type = mapadd
 trigger1 = time = 0
 map = "ADash"
 value = -1
+
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time = 0
+map = "ADM" ;AirDash Momentum Preserve
+value = 10
 
 [State 0, ChangeAnim]
 type = ChangeAnim
@@ -464,35 +480,6 @@ value = 41
 elem = 4
 ignorehitpause = 1
 persistent = 0
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 1
-anim = 6951
-ID = 6951
-pos = 0,-10
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 0
-scale = 0.7,0.7
-sprpriority = 0
-ontop = 0
-shadow = 0,0,0
-ownpal = 1
-removeongethit = 0
-ignorehitpause = 0
-
-[State - Airdash Momentum Preserve]
-type = mapset
-trigger1 = time = 0
-map = "ADM" ;AirDash Momentum Preserve
-value = 10
 
 [State 0, CtrlSet]
 type = CtrlSet
@@ -971,287 +958,9 @@ value 	= SCA
 time 	= 1
 ignorehitpause = 1
 
-[State 100, 2] ;Prevent run from canceling into walk
-type = AssertSpecial
-trigger1 = 1
-flag = NoWalk
-
-[State 100, 3] ;Prevent from turning
-type = AssertSpecial
-trigger1 = 1
-flag = NoAutoTurn
-
 [State 100, 4]
 type = ChangeState
 trigger1 = animtime = 0
 value = 0
 ctrl = 1
 
-;===========================================================================
-;REDLINE CANCEL
-;---------------------------------------------------------------------------
-[Statedef 4000]
-type    = S
-movetype= A
-physics = S
-juggle  = 0
-anim = 0
-poweradd = -2000
-ctrl = 0
-velset = vel x * 0.05,0
-sprpriority = 2
-facep2 = 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F901
-ID = 1900
-pos = 0,-25
-postype = p1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 100
-scale = .5,.5
-sprpriority = -4
-removeongethit = 0
-
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,0
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,1
-
-[State 0, PosSet]
-type = PosSet
-trigger1 = prevstateno = 750
-y = 0
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = 1
-id = 900
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time = 4
-value = 1
-
-;===========================================================================
-;REDLINE CANCEL (AIR)
-;---------------------------------------------------------------------------
-[Statedef 4001]
-type    = A
-movetype = A
-physics = A
-juggle  = 0
-anim = 69000
-poweradd = (-2000)
-ctrl = 0
-velset = vel x,vel y
-sprpriority = 2
-facep2 = 0
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F901
-ID = 1900
-pos = 0,-25
-postype = p1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 100
-scale = .5,.5
-sprpriority = -4
-removeongethit = 0
-
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,0
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,1
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = 1
-id = 900
-
-[State 0, NotHitBy]
-type = NotHitBy
-trigger1 = time = 0
-value = SCA,NP,SP,HP
-time = cond((enemynear, stateno = [120,160]), 0, 16)
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time = 3
-value = 1
-
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = (pos y>=0 && vel y>=0)
-value = 0
-ctrl = 1
-
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = time = 5
-value = 50
-
-;===========================================================================
-;DEVIANT REDLINE CANCEL
-;---------------------------------------------------------------------------
-[Statedef 4005]
-type    = S
-movetype= A
-physics = S
-juggle  = 0
-anim = 0
-poweradd = -1000
-ctrl = 0
-velset = vel x * 0.05,0
-sprpriority = 2
-facep2 = 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F901
-ID = 1900
-pos = 0,-25
-postype = p1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 100
-scale = .5,.5
-sprpriority = -4
-removeongethit = 0
-
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,0
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,1
-
-[State 0, PosSet]
-type = PosSet
-trigger1 = prevstateno = 750
-y = 0
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = 1
-id = 900
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time = 4
-value = 1
-
-;===========================================================================
-;DEVIANT REDLINE CANCEL (AIR)
-;---------------------------------------------------------------------------
-[Statedef 4006]
-type    = A
-movetype = A
-physics = N
-anim = 69000
-poweradd = (-1000)
-ctrl = 0
-velset = vel x,vel y
-sprpriority = 2
-facep2 = 0
-
-[State -2, FRC]
-type 		= MapSet
-trigger1 		= !time
-map 		= "FRC"
-value 		= 0
-ignorehitpause 	= 1
-persistent		= 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F901
-ID = 1900
-pos = 0,-25
-postype = p1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 100
-scale = .5,.5
-sprpriority = -4
-removeongethit = 0
-
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,0
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 7400,1
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = 1
-id = 900
-
-[State 0, NotHitBy]
-type = NotHitBy
-trigger1 = time = 0
-value = SCA,NP,SP,HP
-time = cond((enemynear, stateno = [120,160]), 0, 16)
-
-[State 0, CtrlSet]
-type = CtrlSet
-trigger1 = time = 3
-value = 1
-
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = (pos y>=0 && vel y>=0)
-value = 0
-ctrl = 1
-
-[State 0, StateTypeSet]
-type = StateTypeSet
-trigger1 = pos y >= -15
-physics = A
-
-
-[State 0, ChangeState]
-type = ChangeState
-trigger1 = time = 5
-value = 50

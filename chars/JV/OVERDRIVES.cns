@@ -575,31 +575,6 @@ guard.slidetime = 21
 guard.hittime = 21
 getpower = 0
 
-[State 0, Zoom]
-type = zoom
-triggerall	= backedgebodydist<=100
-trigger1  = !WinKO
-trigger1 	= movehit && animelemno(0) > 47
-trigger1 	= enemy,HitShakeOver = 0
-scale 	= 1.2
-lag 	= 0
-stagebound 	= 1
-camerabound 	= 0
-pos 		= pos x + 10,0
-ignorehitpause	= 1
-[State 0, Zoom]
-type = zoom
-triggerall	= backedgebodydist>100
-trigger1  = !WinKO
-trigger1 	= movehit && animelemno(0) > 47
-trigger1 	= enemy,HitShakeOver = 0
-scale 	= 1.5
-lag 	= 0.5
-stagebound 	= 1
-camerabound 	= 0
-pos 		= pos x,0
-ignorehitpause	=1
-
 [State 0, VelSet]
 type = VelSet
 trigger1 = enemy, backedgedist < 10
