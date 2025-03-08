@@ -104,6 +104,10 @@
 41,11, 0,0, 1, , A
 41,12, 0,0, 1, , A
 
+; Blueline Guard Spark
+[Begin Action 42]
+42,0, 0,0, 0, , AS200D256
+
 ; Small ground shockwave
 [Begin Action 60]
 61,0, 0,0, 2

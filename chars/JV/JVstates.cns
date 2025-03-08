@@ -381,7 +381,7 @@ flag = noairguard
 [State 100, 1]
 type = VelSet
 trigger1 = time = 0
-x = 7.5
+x = 6.5
 
 [State 0, VelMul]
 type = VelMul
@@ -645,7 +645,7 @@ ctrl = 1
 [Statedef 100]
 type    = S
 physics = S
-anim = 100 - 1*(prevstateno = 4000 || prevstateno = 2000)
+anim = 100
 sprpriority = 1
 velset = 8, 0
 ctrl = 0

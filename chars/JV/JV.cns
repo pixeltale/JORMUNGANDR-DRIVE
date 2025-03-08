@@ -1,5 +1,5 @@
 [Data]
-life = 1500
+life = 2000
 attack = 100
 defence = 100
 fall.defence_up = 0
@@ -19,7 +19,7 @@ ground.back = 20     ;Player width (back, ground)
 ground.front = 20    ;Player width (front, ground)
 air.back = 20        ;Player width (back, air)
 air.front = 20       ;Player width (front, air)
-height = 60          ;Height of player (for opponent to jump over)
+height = 75          ;Height of player (for opponent to jump over)
 attack.dist = 160    ;Default attack distance
 proj.attack.dist = 90 ;Default attack distance for projectiles
 proj.doscale = 0     ;Set to 1 to scale projectiles too
@@ -383,30 +383,31 @@ trigger1 = animtime=0
 [Statedef -2]
 
 
+
 [State 0, Jump Cancel]
 type 		= MapSet
 trigger1 		= stateno = stateno && time = 0
-map 		= "JC"
+map 			= "JC"
 value 		= 0
 
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
 trigger1 		= statetype != A
-map 		= "L_Teleport"
+map 			= "L_Teleport"
 value 		= 0
 ignorehitpause 	= 1
 persistent 		= 0
 
 [State - Air Option Limiter - Double Jump]
-type = mapset
-trigger1 = statetype = S
-map = "DoubleJump"
-value = 0
+type 		= mapset
+trigger1 		= statetype = S
+map 			= "DoubleJump"
+value 		= 0
 
 [State 0, Strike The Earth - Reset]
 type 		= MapSet
 trigger1 		= stateno != [1200,1203]
-map 		= "StrikeCount"
+map 			= "StrikeCount"
 value 		= 0
 ignorehitpause 	= 1
 [State 0, Beast Elbow Limiter]
@@ -472,8 +473,8 @@ ignorehitpause = 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "ch = %i"
-params = var(2)
+text = "ch = %i ctrltime = %f"
+params = var(2), map(CtrlTime_set)
 ignorehitpause = 1
 persistent = 1
 

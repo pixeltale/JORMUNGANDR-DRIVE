@@ -193,7 +193,7 @@ triggerall = command != "holdback"
 triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
 triggerall = Map(ADash) > 0
-triggerall = pos y<-45 || vel y > 0
+triggerall = pos y<-65 || vel y > 0
 trigger1 = ctrl
 trigger2 = movehit
 trigger2 = stateno = 3130
@@ -209,7 +209,7 @@ triggerall = command = "a44" || command = "M44"
 trigger1 = statetype = A
 trigger1 = ctrl
 triggerall = Map(ADash) > 0
-triggerall = pos y<-45
+triggerall = pos y<-65
 ;--------------------------------------------------------------------------
 
 ;Dash
@@ -238,12 +238,12 @@ trigger2 = stateno = 250
 ;===========================================================================
 
 ;IRON MOUNTAIN'S COFFIN
-[State -1, One Inch Punch]
-type = changeState
-value = 2300
-triggerall = command = "623C"
-triggerall = statetype != A
-trigger1 = var(1) || ctrl
+;[State -1, One Inch Punch]
+;type = changeState
+;value = 1210
+;triggerall = command = "623C"
+;triggerall = statetype != A
+;trigger1 = var(1) || ctrl
 
 ;THE BEAST UNLEASHED ....
 [State -1, Beast Elbow]
@@ -320,27 +320,27 @@ trigger2 = var(1)
 trigger3 = stateno = 100 && time > 2
 
 ;===========================================================================
-;j22L: HOP
-[State -1, Fastfall]
+;j214L - Uptrick
+[State -1, Uptrick]
 type = changeState
-value = 651
-triggerall = command = "22L"
+value = 1215
+triggerall = command = "214L"
 triggerall = statetype = A && !map(L_Teleport)
 trigger1 = var(1) || ctrl || stateno = 652 && movecontact
 
-;j22M: HOP
+;j214M: HOP
 [State -1, Fastfall]
 type = changeState
-value = 652
-triggerall = command = "22M"
+value = 1216
+triggerall = command = "214M"
 triggerall = statetype = A
 trigger1 = var(1) || ctrl || stateno = 650
 
-;j22H FASTFALL
+;j214H FASTFALL
 [State -1, Fastfall]
 type = changeState
-value = 650
-triggerall = command = "22H"
+value = 1217
+triggerall = command = "214H"
 triggerall = statetype = A
 trigger1 = var(1) || ctrl || stateno = 651
 
@@ -487,7 +487,7 @@ triggerall = command = "B"
 triggerall = command = "holddown"
 triggerall = !map(NoNormals)
 trigger1 = ctrl || stateno = [100,101] 
-trigger2 = (stateno = 400 || stateno = [200, 210] ) && movecontact
+trigger2 = (stateno = 400 || stateno = [200, 210] ) && movecontact && prevstateno != 410
 
 ;---------------------------------------------------------------------------
 ;2C
@@ -540,13 +540,13 @@ trigger2 = movecontact && stateno = 600
 ;---------------------------------------------------------------------------
 ;j.2C: Jumping Heavy
 [State -1, j2C]
-type = ChangeState
-value = 640
-triggerall = command = "C"
+type 		= ChangeState
+value 		= 640
+triggerall 	= command = "C"
 triggerall	= command = "holddown"
-triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = stateno = [600, 630] && movecontact
+triggerall 	= statetype = A
+trigger1 		= ctrl
+trigger2 		= stateno = [600, 630] && movecontact
 
 ;j.C: Jumping Heavy
 [State -1, jC]
@@ -563,7 +563,7 @@ type = ChangeState
 value = 910 + 1*statetype = A
 triggerall = power >= (500 * prevstateno = [120, 155])
 triggerall = command = "Redline Guard"
-trigger1 = ctrl || stateno = [120,155] && map(IBParam)
+trigger1 = ctrl || stateno = [120,155] && map(IBParam) && time > 0
 
 ;DEVIANT REDLINE CANCEL
 [State -1, REDLINE CANCEL]

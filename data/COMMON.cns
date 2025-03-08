@@ -1992,27 +1992,16 @@ trigger1 = time = 1 && map(IBTimer)
 map = "IBTimer"
 value = 0
 
-[State 0, Helper]
-type = Helper
-triggerall = power >= 500
-trigger1 = (Command = "pushblock") && !numhelper(99149)
-helpertype = normal ;player
-name = "pushblock"
-ID = 99149
-stateno = 99149
-pos = 20,0
-size.height = 500
-postype = p2
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
 trigger1 = enemy,Map(GC)=1 && enemy,movecontact
 value = 5275
+
+[State 0, MapSet] ;Regain ctrl frame
+type = MapSet
+trigger1 = !time
+map = "CtrlTime_set"
+value = gethitvar(ctrltime)
 
 ;Guard Cancel
 ; [State 0, Guard Cancel]
@@ -2125,23 +2114,6 @@ type = MapSet
 trigger1 = time = 1 && map(IBTimer)
 map = "IBTimer"
 value = 0
-
-[State 0, Helper]
-type = Helper
-triggerall = power >= 500
-trigger1 = (Command = "pushblock") && !numhelper(99149)
-helpertype = normal ;player
-name = "pushblock"
-ID = 99149
-stateno = 99149
-pos = 20,0
-size.height = 500
-postype = p2    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
@@ -2257,24 +2229,6 @@ type = MapSet
 trigger1 = time = 1 && map(IBTimer)
 map = "IBTimer"
 value = 0
-
-[State 0, Helper]
-type = Helper
-triggerall = power >= 500
-trigger1 = (Command = "pushblock") && !numhelper(99149)
-helpertype = normal ;player
-name = "pushblock"
-ID = 99149
-stateno = 99149
-pos = 20,0
-size.height = 500
-postype = p2    ;p2,front,back,left,right
-facing = 1
-keyctrl = 0
-ownpal = 0
-supermovetime = 0
-pausemovetime = 0
-
 
 [State 154, End]
 type=changestate
@@ -4356,28 +4310,9 @@ juggle  = 0
 anim = 0
 poweradd = -2000
 ctrl = 0
-velset = vel x * 0.05,0
+velset = vel x,0
 sprpriority = 2
 facep2 = 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = F901
-ID = 1900
-pos = 0,-25
-postype = p1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-pausemovetime = 100
-scale = .5,.5
-sprpriority = -4
-removeongethit = 0
 
 [State 200, 2]
 type = PlaySnd
@@ -6720,24 +6655,24 @@ value = 6140
 [State -1, RC Jasta]
 type = ChangeState
 value = 4000
-triggerall = !map(ScratchLockout) && enemy, Alive && teammode != Tag
+triggerall = !map(RCLockout) && enemy, Alive && teammode != Tag
 triggerall = power>=2000
-triggerall = stateno != 900 && stateno != 803 && stateno != [910,911]
+triggerall = stateno != 900 && stateno != 803 && stateno != [910,912]
 triggerall = command = "F"
 triggerall = statetype != A
-trigger1 = movecontact
+trigger1 = movecontact && !movereversed
 
 ;REDLINE CANCEL (AIR)
 [State -1, RC Jasta Air]
 type = ChangeState
 value = 4001
-triggerall = !map(ScratchLockout) && enemy, Alive && teammode != Tag
+triggerall = !map(RCLockout) && enemy, Alive && teammode != Tag
 triggerall = power>=2000
 triggerall = stateno !=750
-triggerall = stateno != 900
+triggerall = stateno != 900 && stateno != [910,912]
 triggerall = command = "F"
 triggerall = statetype = A
-trigger1 = movecontact
+trigger1 = movecontact && !movereversed
 
 [State -1, Grab] ;Throw
 type = ChangeState
@@ -6775,6 +6710,27 @@ ignorehitpause = 1
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
+
+;=============================================================================
+;JORMUNGANDR Guard Lockout (Redline Guard)
+[State 0, No Guard After Redline Guard - Set]
+type 		= MapSet
+trigger1 		= stateno = [910,911]
+map 			= "GuardLockout"
+value 		= 30
+[State 0, No Guard After Redline Guard - Tick Down]
+type 		= MapAdd
+trigger1 		= map(GuardLockout) > 0
+map 			= "GuardLockout"
+value 		= -1
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = stateno = [910,911]
+flag = NoStandGuard
+flag2 = NoCrouchGuard
+flag3 = NoAirGuard
+ignorehitpause = 1
 
 ;=============================================================================
 ;JORMUNGANDR Hitstun Scaling System
@@ -7108,90 +7064,6 @@ map 		= "cornerSplat"
 value 		= cond((abs(camerapos x) > 260 && frontedgedist < 250) && (stagefrontedgedist < stagebackedgedist), 5225, 5220)
 ignorehitpause 	= 0
 persistent	= 0
-
-;====================================================================
-;Improved Pushblock
-;====================================================================
-[State -2, Pushblock Improvement]
-type = velmul
-trigger1 = numhelper(99149)
-x = 0.5
-
-[State -2, Pushblock Improvement]
-type = velmul
-trigger1 = enemy, numhelper(99149)
-x = 0.95
-[State -2, Pushblock Improvement]
-type = veladd
-trigger1 = enemy, numhelper(99149)
-x = -1
-
-;=================================
-;Invulnerability Types
-;=================================
-[State 0, NotHitBy] ;Strike Invul
-type = NotHitBy
-triggerall = movetype != H
-trigger1 = map(Invul_Strike)
-value = ,NA,SA,HA
-time = 1
-ignorehitpause = 1
-[State 0, NotHitBy] ;Projectile Invul
-type = NotHitBy
-triggerall = movetype != H
-trigger1 = map(Invul_Proj)
-value = ,NP,SP,HP
-time = 1
-ignorehitpause = 1
-[State 0, NotHitBy] ;Throw Invul
-type = NotHitBy
-triggerall = movetype != H
-trigger1 = map(Invul_Throw)
-value = ,NT,ST,HT
-time = 1
-ignorehitpause = 1
-[State 0, NotHitBy] ;Full Invul
-type = NotHitBy
-triggerall = movetype != H
-trigger1 = map(Invul_Full)
-value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time = 1
-ignorehitpause = 1
-[State 0, NotHitBy] ;Full Invul
-type = NotHitBy
-triggerall = enemy, statetype = A
-triggerall = movetype != H
-trigger1 = map(Invul_Air)
-value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-time = 1
-ignorehitpause = 1
-
-[State 0, Mapset]
-type = MapAdd
-trigger1 = map(Invul_Strike)  > 0
-map = "Invul_Strike"
-value = -1
-[State 0, Mapset]
-type = MapAdd
-trigger1 = map(Invul_Proj)  > 0
-map = "Invul_Proj"
-value = -1
-[State 0, Mapset]
-type = MapAdd
-trigger1 = map(Invul_Throw) > 0
-map = "Invul_Throw"
-value = -1
-[State 0, Mapset]
-type = MapAdd
-trigger1 = map(Invul_Full)  > 0
-map = "Invul_Full"
-value = -1
-
-[State 0, Mapset]
-type = MapSet
-trigger1 = enemy, statetype != A || enemy, movetype = H
-map = "Invul_Air"
-value = 0
 
 ;=================================
 ;Ground Recovery - Can't Punish Landing
@@ -7586,8 +7458,8 @@ persistent 		= 1
 
 [State 0, MAPADD]
 type = MapAdd
-trigger1 = map(ScratchLockout)
-map = "ScratchLockout"
+trigger1 = map(RCLockout)
+map = "RCLockout"
 value = -1
 ignorehitpause = 1
 
