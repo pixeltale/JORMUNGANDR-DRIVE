@@ -383,7 +383,6 @@ trigger1 = animtime=0
 [Statedef -2]
 
 
-
 [State 0, Jump Cancel]
 type 		= MapSet
 trigger1 		= stateno = stateno && time = 0
@@ -473,8 +472,8 @@ ignorehitpause = 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "ch = %i ctrltime = %f"
-params = var(2), map(CtrlTime_set)
+text = "bedgedist = %i p2dist = %f"
+params = BackEdgeBodyDist, p2dist x
 ignorehitpause = 1
 persistent = 1
 

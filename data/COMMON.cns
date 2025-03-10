@@ -1918,6 +1918,141 @@ trigger3 = AILevel && numenemy
 trigger3 = enemynear,hitdefattr=SCA,AT
 value = 140
 
+
+;-------------------------------------------------------------------------------
+;BLUELINE GUARD
+[Statedef 135]
+type = S
+physics = S
+
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = 1
+map = "BGuard"
+value = 1
+
+[State 130, Anim]
+type = changeanim
+trigger1 = anim!=130
+value = 130
+[State 130, AI fix]
+type = ctrlset
+trigger1 = AILevel && numenemy
+value = (enemynear,time>=120 || time>=180)
+[State 130, High to Low]
+type = changestate
+trigger1 = !AILevel && command = "holddown" && command = "HOLD_F"
+trigger2 = AILevel && ceil(random<(200*(AILevel**2/64.0)));(random<200+(15*var(54)))
+trigger2 = (enemynear,movetype=A) && (enemynear,statetype=C)
+value = 136
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoWalk
+[State 130, Stop Guarding]
+type = changestate
+trigger1 = command != "HOLD_F"
+value = 0
+ctrl = 1
+;-------------------------------------------------------------------------------
+;BLUELINE GUARD (CROUCHING)
+[Statedef 136]
+type = C
+physics = C
+
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = 1
+map = "BGuard"
+value = 1
+
+[State 131, Anim]
+type = changeanim
+trigger1 = anim!=131
+value = 131
+[State 131, Low to High]
+type = changestate
+trigger1 = !AILevel && command != "holddown" && command = "HOLD_F"
+trigger2 = AILevel && ceil(random<(100*(AILevel**2/64.0)));(random<100+(20*var(54)))   
+trigger2 = (enemynear,movetype=A) && (enemynear,statetype!=C)
+value = 130
+[State 131, AI fix]
+type = ctrlset
+trigger1 = AILevel && numenemy
+value = (enemynear,time>=150 || time>=180)
+[State 131, Stop Guarding]
+type = changestate
+trigger1 = command != "HOLD_F"
+value = 11
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+;BLUELINE GUARD (AIR)
+[Statedef 137]
+type = A
+physics = A
+
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = 1
+map = "BGuard"
+value = 1
+
+[State 132, Anim]
+type = changeanim
+trigger1 = anim!=132
+value = 132
+[State 132, Var]
+type = varset
+trigger1 = 1
+sysvar(0) = (pos y>=0 && vel y>0)
+[State 132, Vel]
+type = velset
+trigger1 = sysvar(0)
+y = 0
+[State 132, Pos]
+type = posset
+trigger1 = sysvar(0)
+y = 0
+[State 132, AI fix]
+type = ctrlset
+trigger1 = AILevel && numenemy
+value = (enemynear,time>=150 || time>=180)
+[State 132, End]
+type = changestate
+trigger1 = sysvar(0) && InGuardDist
+trigger1 = command != "BLUELINE GUARD"
+value = 130
+[State 132, End]
+type = changestate
+trigger1 = sysvar(0)
+value = 52
+[State 132, stop guarding]
+type = changestate
+trigger1 = command != "HOLD_F"
+value = 50
+ctrl = 1
+
+;-------------------------------------------------------------------------------
+;BLUELINE Guard Helper
+[Statedef 138]
+type = U
+physics = N
+anim = F42
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+x = root, pos x + 10
+y = root, pos y -40
+ignorehitpause = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = !animtime
+ignorehitpause = 1
+
 ;-------------------------------------------------------------------------------
 ;GUARD (end)
 [Statedef 140]
@@ -1971,6 +2106,13 @@ movetype = H
 physics = N
 velset = 0,0
 facep2 = 1
+
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = prevstateno != [135,137] && command != "HOLD_F"
+map = "BGuard"
+value = 0
+
 [State 150, Anim]
 type = changeanim
 trigger1 = 1
@@ -2039,6 +2181,16 @@ movetype = H
 physics = S
 anim = 150
 
+[State 0, MapSet] ;Activate Blueline Guard During Blockstun
+type = MapSet
+trigger1 = time && command = "HOLD_F"
+map = "BGuard"
+value = 1
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = !time && map(BGuard)
+map = "BGuard_Penalty"
+value = map(BGuard)
 
 [State 151, Vel]
 type = posset
@@ -2046,9 +2198,10 @@ trigger1 = !time
 y = 0
 
 [State 151, Vel]
-type = hitvelset
+type = VelSet
 trigger1 = !time
-x = 1
+x = gethitvar(xvel) * facing * map(BGuard_SlideMul)
+
 [State 151, Vel]
 type = velset
 trigger1 = time = gethitvar(slidetime)
@@ -2058,7 +2211,7 @@ x = 0
 [State 151, Ctrl]
 type = ctrlset
 triggerall = prevstateno != 155
-trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 3, 0)
+trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 2 - 2 * map(BGuard_Penalty), -2 * map(BGuard_Penalty))
 value = 1
 ignorehitpause = 0
 persistent = 0
@@ -2102,6 +2255,11 @@ type=changeanim
 trigger1= 1
 value=151
 
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = prevstateno != [135,137] && command != "HOLD_F"
+map = "BGuard"
+value = 0
 
 [State 0, MapSet] ;Instant Block Check
 type = MapSet
@@ -2156,10 +2314,22 @@ type=C
 movetype=H
 physics=C
 anim=151
-[State 153, Vel]
-type=hitvelset
-trigger1= !time
-x=1
+
+[State 0, MapSet] ;Activate Blueline Guard During Blockstun
+type = MapSet
+trigger1 = time && command = "HOLD_F"
+map = "BGuard"
+value = 1
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = !time && map(BGuard)
+map = "BGuard_Penalty"
+value = map(BGuard)
+
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing * map(BGuard_SlideMul)
 
 
 [State 153, Vel]
@@ -2170,7 +2340,7 @@ x = 0
 
 [State 151, Ctrl]
 type = ctrlset
-trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 3, 0)
+trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 2 - 2 * map(BGuard_Penalty), -2 * map(BGuard_Penalty))
 value = 1
 ignorehitpause = 0
 persistent = 0
@@ -2213,6 +2383,12 @@ type=changeanim
 trigger1= 1
 value=152
 
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = prevstateno != [135,137]
+map = "BGuard"
+value = 0
+
 [State 0, Turn]
 type = Turn
 trigger1 = !time
@@ -2243,11 +2419,22 @@ movetype=H
 physics=N
 anim=152
 
-[State 155, Vel]
-type = hitvelset
+[State 0, MapSet] ;Activate Blueline Guard During Blockstun
+type = MapSet
+trigger1 = time && command = "HOLD_F"
+map = "BGuard"
+value = 1
+[State 0, MapSet] ;Blueline Guard Check
+type = MapSet
+trigger1 = !time && map(BGuard)
+map = "BGuard_Penalty"
+value = map(BGuard)
+
+[State 151, Vel]
+type = VelSet
 trigger1 = !time
-x = 1
-y = 1
+x = gethitvar(xvel) * facing * map(BGuard_SlideMul)
+y = gethitvar(yvel)
 
 [State 155, Vel]
 type = veladd
@@ -2256,7 +2443,7 @@ y = 0.4 + 0.2*(pos y > -10)
 
 [State 151, Ctrl]
 type = ctrlset
-trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 3, 0)
+trigger1 = time = gethitvar(ctrltime) - cond(map(IBCheck), 2 - 2 * map(BGuard_Penalty), -2 * map(BGuard_Penalty))
 value = 1
 ignorehitpause = 0
 persistent = 0
@@ -2696,7 +2883,7 @@ ignorehitpause = 1
 [State 0, RC LOCKOUT]
 type 		= MapSet
 trigger1 	= 1
-map 		= "ScratchLockout"
+map 		= "RCLockout"
 value 		= 70
 ignorehitpause 	= 1
 
@@ -2952,10 +3139,10 @@ y = 0
 type = VelSet
 trigger1 = pos y = 0
 y = 0
-[State 5002, 1]
-type = HitVelSet
-trigger1 = Time = 0
-x = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
 [State 5002, 4]
 type = VelSet
 trigger1 = HitOver
@@ -4839,11 +5026,11 @@ type = VelAdd
 trigger1 = time
 y = .35
 
-[State 5231, Velocity]
-type = HitVelSet
-trigger1 = !Time
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5231, Hit CORNER Wall]
 type = ChangeState
@@ -4993,11 +5180,11 @@ type = VelAdd
 trigger1 = 1
 y = .45
 
-[State 5231, Velocity]
-type = HitVelSet
-trigger1 = Time = 0
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5231, Hit wall]
 type = ChangeState
@@ -5266,11 +5453,11 @@ type = VelAdd
 trigger1 = 1
 y = .4
 
-[State 5231, Velocity]
-type = HitVelSet
-trigger1 = Time = 0
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5231, Hit wall]
 type = ChangeState
@@ -5474,11 +5661,11 @@ type = VelAdd
 trigger1 = 1
 y = GetHitVar(yaccel)
 
-[State 5030, 3]
-type = HitVelSet
-trigger1 = Time = 0
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5030, 4]
 type = ChangeState
@@ -5621,7 +5808,7 @@ y = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 0
-x = floor(gethitvar(xvel))
+x = floor(gethitvar(xvel)) * facing
 
 [State 0, VelMul]
 type = VelMul
@@ -5712,12 +5899,11 @@ type = VelAdd
 trigger1 = 1
 y = GetHitVar(yaccel)
 
-[State 5030, 3]
-type = HitVelSet
-trigger1 = Time = 0
-ignorehitpause = 0
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5030, 4]
 type = selfState
@@ -5834,7 +6020,7 @@ anim        = 5260
 type = VelSet
 trigger1 = time = 0
 y = GetHitVar(yvel)
-x = gethitvar(xvel)* facing
+x = gethitvar(xvel) * facing
 
 [State 1028, Gravity]
 type = VelAdd
@@ -5870,7 +6056,7 @@ time = 1
 type = VelSet
 trigger1 = time = 0
 y = GetHitVar(yvel)
-x = gethitvar(xvel)* facing
+x = gethitvar(xvel) * facing
 
 [State 1028, Gravity]
 type = VelAdd
@@ -5985,11 +6171,11 @@ type = VelAdd
 trigger1 = 1
 y = GetHitVar(yaccel)
 
-[State 5030, 3]
-type = HitVelSet
-trigger1 = Time = 0
-x = 1
-y = 1
+[State 151, Vel]
+type = VelSet
+trigger1 = !time
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
 
 [State 5231, Hit wall]
 type = ChangeState
@@ -6277,11 +6463,6 @@ movetype = H
 physics = N
 velset = 0,0
 
-;[State 1317, Muteki]
-;type = NotHitBy
-;trigger1 = AnimElemTime(2)<0
-;value = SCA
-
 [State 30001, ChangeAnim]
 type = ChangeAnim
 trigger1 = !Time
@@ -6290,7 +6471,7 @@ value = 6160
 [State 5221 VelSet]
 type = velset
 trigger1 = Time = 0
-x = gethitvar(xvel)*facing
+x = gethitvar(xvel) * facing
 y = gethitvar(yvel)
 
 [State 30001, AngleDraw]
@@ -6377,38 +6558,6 @@ trigger1 = pos y >= 0 && gethitvar(ctrltime) = 0
 value = 5000
 ctrl = 0
 ignorehitpause = 1
-
-;---------------------------------------------------------------------------
-;Aryan Trapstar Pound State
-[Statedef 5400]
-type    = A
-movetype= H
-physics = A
-ctrl = 0
-
-[State 5020, 1] ;Anim for HIT_LIGHT to HIT_HARD
-type = ChangeAnim
-trigger1 = Time = 0
-value = 5030
-
-[State 155, Vel]
-type = hitvelset
-trigger1 = !time
-x = 1
-y = 1
-
-[State 5035, 4]
-type = ChangeState
-triggerall = HitFall
-trigger1 = HitOver  ;Hit is over
-trigger2 = time = 5
-trigger3 = Vel Y >= 0
-value = 5050 ;Air get-hit (falling)
-
-[State 1026, Hit Floor]
-type = ChangeState
-trigger1 = Pos Y >= 0
-value = 5258
 
 ;---------------------------------------------------------------------------
 ; Continue screen animation
@@ -6710,6 +6859,52 @@ ignorehitpause = 1
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
+
+;=============================================================================
+;JORMUNGANDR Blueline Guard Calculations
+
+[State 0, BGuard Reset]
+type 		= MapSet
+trigger1 	= 1
+map 		= "BGuard_CustomBuffer"
+value 		= command = "holdback" && command = "HOLD_F"
+
+[State 0, BGuard Reset]
+type 		= MapSet
+trigger1 	= map(BGuard) && stateno != [120,155]
+map 		= "BGuard"
+value 		= 0
+
+[State 0, VelAdd]
+type = VelAdd
+triggerall = enemy, moveguarded = 1 && map(BGuard)
+trigger1 = BackEdgeBodyDist < 10 && map(BGuard_Slidemul)
+x = -0.5
+ignorehitpause = 1
+redirectid = enemynear, id
+
+[State 0, MapSet] ;Blueline Guard Check - Velocity Multiplier
+type = MapSet
+trigger1 = stateno = [120,155]
+map = "BGuard_SlideMul"
+value = cond(map(BGuard), 1.5, 1)
+
+[State 0, Helper]   ;Blueline Guard Visual
+type = Helper
+trigger1 = map(BGuard) && !NumHelper(138)
+helpertype = Normal ;Player
+name = "BlueLineFX"
+ID = 138
+stateno = 138
+pos = 10,-60
+postype = P1    ;P2, Front, Back, Left, Right
+facing = 1
+keyctrl = 0
+ownpal = 0
+supermovetime = 0
+ignorehitpause = 1
+size.xscale = 0.3
+size.yscale = 0.3
 
 ;=============================================================================
 ;JORMUNGANDR Guard Lockout (Redline Guard)

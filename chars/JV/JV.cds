@@ -562,8 +562,32 @@ trigger2 = stateno = [600,610] && movecontact
 type = ChangeState
 value = 910 + 1*statetype = A
 triggerall = power >= (500 * prevstateno = [120, 155])
-triggerall = command = "Redline Guard"
+triggerall = command = "REDLINE GUARD"
 trigger1 = ctrl || stateno = [120,155] && map(IBParam) && time > 0
+
+;BLUELINE GUARD (STANDING)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 135
+triggerall = power > 0 && statetype != A
+triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
+
+;BLUELINE GUARD (CROUCHING)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 136
+triggerall = power > 0 && statetype != A
+triggerall = command = "BLUELINE GUARD" && command = "holddown"  || command = "holddown" && map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
+
+;BLUELINE GUARD (AIR)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 137
+triggerall = power > 0 && statetype = A
+triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals)
 
 ;DEVIANT REDLINE CANCEL
 [State -1, REDLINE CANCEL]

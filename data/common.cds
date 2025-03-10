@@ -214,6 +214,10 @@ name = "HOLD_D"
 command = /d
 time = 1
 [Command]
+name = "HOLD_F"
+command = /x
+time = 1
+[Command]
 name = "holds"
 command = /s
 time = 1
@@ -574,23 +578,16 @@ time = 4
 
 ;System
 [Command]
-name = "Redline Guard"
+name = "REDLINE GUARD"
 command = /F,x
 time = 1
 buffer.time = 2
-
-;===================================
-; Blocking Commands
-;===================================
+;System
 [Command]
-name = "blocking"
-command = $F,x
-time = 3
-
-[Command]
-name = "blocking" ;Same name as above (buttons in opposite order)
-command = x,$F
-time = 3
+name = "BLUELINE GUARD"
+command = /$B,/x
+time = 1
+buffer.time = 2
 
 ;===================================
 ; Command Inputs - Super

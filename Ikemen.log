@@ -1,6 +1,5 @@
-.\external\script\start.lua:1401: chars\JV/NORMALS.cns:2757:
-
-id: Nothing assigned
+.\external\script\start.lua:1401: ./chars/JV/JV.cds:565:
+Command doesn't exist: REDLINE GUARD
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1401: in function 'f_game'

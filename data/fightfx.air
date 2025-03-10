@@ -106,7 +106,10 @@
 
 ; Blueline Guard Spark
 [Begin Action 42]
-42,0, 0,0, 0, , AS200D256
+LoopStart
+42,0, 0,0, 5, , AS100D256
+Interpolate Scale
+42,0, 0,0, 1, , AS110D256, 0.98,1
 
 ; Small ground shockwave
 [Begin Action 60]
