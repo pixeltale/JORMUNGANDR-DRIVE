@@ -350,6 +350,17 @@ ctrl = 0
 velset = vel x,0
 anim = 40
 
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "DoubleJump"
+value 		= const(AirJumps)
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "AirDash"
+value 		= const(AirDashes)
+
 [State 52, 5]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -2623,6 +2634,230 @@ value = 69002
 ctrl = 0
 
 ;---------------------------------------------------------------------------
+;Red Guard
+[Statedef 910]
+type    = S
+movetype= I
+physics = S
+poweradd= -500
+velset = vel x * 0.5,0
+anim = 910
+ctrl = 0
+sprpriority = 2
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= 1
+map 		= "RCLockout"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F41	;RedGuard Spark
+ID = 41
+pos = 10,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = const(size.xscale),const(size.yscale)*1.5
+sprpriority = 2
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,0
+hitsound = S2,0
+p1stateno = 912
+ignorehitpause = 1
+
+
+[State 1000, 7]
+type = ChangeState
+triggerall = prevstateno != [150,155]
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 1000, 7]
+type = ChangeState
+triggerall = prevstateno = [150,155]
+trigger1 = time >= map(ctrltime_set)*2
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Red Guard (Air)
+[Statedef 911]
+type    = A
+movetype= I
+physics = A
+poweradd= -500
+velset = vel x,vel y + 1
+anim = 911
+ctrl = 0
+sprpriority = 2
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= 1
+map 		= "RCLockout"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F41	;RedGuard Spark
+ID = 41
+pos = 10,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = const(size.xscale),const(size.yscale)*1.5
+sprpriority = 2
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
+[State 0, ReversalDef]
+type = ReversalDef
+trigger1 = 1
+reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+pausetime = 0,0
+hitsound = S2,0
+p1stateno = 913
+ignorehitpause = 1
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Red Guard - Success
+[Statedef 912] ;Redline guard success
+type    = S
+movetype= I
+physics = S
+poweradd= 500
+velset = vel x * 0.5, 0
+anim = 910
+ctrl = 0
+sprpriority = 2
+
+;Include Meter Gain Bonus Mapadd Here
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 4
+sinadd = 200, 64, 64, 10	
+mul = 256,256,256
+sinadd = 0,0,0,10
+invertall = 0
+color = 256
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= time = 0
+map 		= "SlowdownTimeB"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = !time
+time = 20
+freq = 20
+ampl = -6
+phase = 120
+ignorehitpause = 1
+persistent = 1
+
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = time = 1
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Red Guard - Success (Air)
+[Statedef 913]
+type    = A
+movetype= I
+physics = A
+poweradd= 500
+velset = vel x * 0.75, -3 
+anim = 910
+ctrl = 0
+sprpriority = 2
+
+
+;Include Meter Gain Bonus Mapadd Here
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 4
+sinadd = 200, 64, 64, 10	
+mul = 256,256,256
+sinadd = 0,0,0,10
+invertall = 0
+color = 256
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= time = 0
+map 		= "SlowdownTimeB"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, EnvShake]
+type = EnvShake
+trigger1 = !time
+time = 20
+freq = 20
+ampl = -6
+phase = 120
+ignorehitpause = 1
+persistent = 1
+
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = time = 1
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
 ; Stand get-hit (shaking)
 [Statedef 5000]
 type    = S
@@ -4133,6 +4368,23 @@ ctrl = 0
 velset = vel x,0
 sprpriority = 2
 facep2 = 1
+
+[State 0. MapSet]
+type 		= MapSet
+trigger1 		= time = 0
+map 		= "SlowdownTimeB"
+value 		= 30
+ignorehitpause 	= 1
+persistent 		= 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 4
+sinadd = 200, 64, 64, 20	
+mul = 256,256,256
+invertall = 0
+color = 256
 
 [State 200, 2]
 type = PlaySnd
@@ -7877,11 +8129,11 @@ flag = autoGuard
 ignorehitpause = 1
 persistent = 1
 ;Punish
-[State 0, DAMAGE]
+[State 0, AssertInput]
 type = AssertInput
 triggerall =  map(_iksys_trainingGuardMode) = 3
 trigger1 = stateno = [120, 155] && !time
-flag = a
+flag = x
 ignorehitpause = 1
 persistent = 1
 

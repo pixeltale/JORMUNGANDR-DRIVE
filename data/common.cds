@@ -814,20 +814,16 @@ buffer.time = 10
 
 [Command]
 name = "623A"
-command = ~F, D, DF, a
-buffer.time = 20
+command = ~F, D, $F, a
 [Command]
 name = "623B"
-command = ~F, D, DF, b
-buffer.time = 20
+command = ~F, D, $F, b
 [Command]
 name = "623C"
-command = ~F, D, DF, c
-buffer.time = 20
+command = ~F, D, $F, c
 [Command]
 name = "623D"
-command = ~F, D, DF, x
-buffer.time = 20
+command = ~F, D, $F, x
 
 [Command]
 name = "421A"

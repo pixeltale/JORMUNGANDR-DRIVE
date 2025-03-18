@@ -1,4 +1,4 @@
-.\external\script\start.lua:1401: data/COMMON.cns:7856:
+.\external\script\start.lua:1401: data/COMMON.cns:4384:
 Missing trigger1
 stack traceback:
 	[G]: in function 'game'

@@ -547,7 +547,7 @@ persistent		= 1
 [State 200, 1] ;Final Hit
 type = HitDef
 p2facing = 1 
-trigger1 = animelem = 48
+trigger1 = animelem = 50
 attr = S, HA
 damage = 150*map(P4) + 30, 10
 hitflag = MAFD
@@ -562,12 +562,12 @@ air.type	= trip
 animtype = hard
 ground.slidetime = 25
 ground.hittime  = 23
-ground.velocity = -13,-2
-air.velocity = -13,-2
-down.velocity = -13,-2
+ground.velocity = -6,-8
+air.velocity = -6,-8
+down.velocity = -6,-5
 air.hittime = 24
-envshake.time = 30
-envshake.ampl = 10
+envshake.time = 40
+envshake.ampl = -10
 envshake.mul = 0.9
 fall = 1
 fall.yvelocity = 0
@@ -580,6 +580,41 @@ type = VelSet
 trigger1 = enemy, backedgedist < 10
 x = 0
 y = 0
+ignorehitpause = 1
+
+[State 0]
+type = MapSet
+trigger1 = animelem != 48
+map = "nozoom"
+value = 0
+ignorehitpause = 0
+[State 0, Zoom]
+type = zoom
+triggerall=map(nozoom)=0
+triggerall=enemy, statetype != A
+triggerall=backedgebodydist<=100
+trigger1 = movehit
+trigger1 = enemy,HitShakeOver = 0
+scale = 1.5
+lag = 0.5
+stagebound = 1
+camerabound = 0
+pos =0,-20
+ignorehitpause=1
+[State -3, Hyper Finish Background]
+type = Helper
+triggerall = WinKO && RoundState = 3 && NumHelper(8990) = 0
+trigger1 = WinKO
+name = "Hyper Finish B.G."
+id = 8990
+pos = 0,0
+postype = p1
+facing = 0
+stateno = 8990
+keyctrl = 0
+ownpal = 1
+supermovetime = 1000
+pausemovetime = 1000
 ignorehitpause = 1
 
 [State 0, ChangeState]

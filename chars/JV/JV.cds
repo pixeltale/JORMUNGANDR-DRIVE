@@ -137,11 +137,7 @@ triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
 triggerall = Map(airdash)
 triggerall = pos y<-65 || vel y > 0
-trigger1 = ctrl
-trigger2 = movehit
-trigger2 = stateno = 3130
-trigger3 = stateno = 1052 && movehit && var(4) > 2
-trigger4 = stateno = 703 && power >= 1000 || stateno = 705
+trigger1 = ctrl || stateno = 713
 
 
 ;Backward Airdash
@@ -213,7 +209,7 @@ trigger1 = var(1)
 ;236B - Strike the Earth
 [State -1, STE]
 type = ChangeState
-value = 1200
+value = 1030
 triggerall = command = "236B"
 trigger1 = var(1)
 
@@ -230,17 +226,17 @@ trigger1 = var(1)
 ;THE BEAST UNLEASHED ....
 [State -1, Beast Elbow]
 type = changeState
-value = 1205
+value = 1034
 triggerall = command = "624C"
 trigger1 = var(1)
-trigger2 = MAP(StrikeCount) = 2
+trigger2 = MAP(StrikeCount) = 2 && stateno != 1034
 
 ;THE TREE OF LIFE AND DEATH......
-[State -1, Yggdrasil]
-type = changeState
-value = 1206
-triggerall = command = "236C"
-trigger1 = MAP(StrikeCount) = 2
+;[State -1, Yggdrasil]
+;type = changeState
+;value = 1206
+;triggerall = command = "236C"
+;trigger1 = MAP(StrikeCount) = 2
 
 ;ALL EXISTENCE DENIED......
 [State -1, EGO DEATH DRIVER]
@@ -264,7 +260,7 @@ trigger1 = var(2)
 ;j236C: Jotunn's Wrath
 [State -1, Jotunn's Wrath]
 type = changeState
-value = cond(map(EN), 1030, 1025)
+value = cond(map(EN), 1041, 1040)
 triggerall = command = "236C"
 trigger1 = var(2)
 

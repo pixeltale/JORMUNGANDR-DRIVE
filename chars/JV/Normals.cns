@@ -1059,6 +1059,7 @@ air.fall 		= 1
 guard.slidetime 	= 8
 guard.ctrltime 	= 8
 guard.hittime 	= 8
+guard.velocity = 5
 getpower 		= 20 * MAP(GEAR.MUL)
 [State 610, 3]
 type = HitDef 
@@ -1178,10 +1179,10 @@ ground.type 	= high
 air.type		= high
 ground.slidetime 	= 6
 ground.hittime  	= 18 * MAP(untechMOD)
-air.hittime  		= 22 * MAP(untechMOD)
+air.hittime  		= 20 * MAP(untechMOD)
 ground.velocity 	= -4
 fall.yvelocity 	= 0
-air.velocity 	= -6,-2
+air.velocity 	= -8,-3
 guard.ctrltime 	= 8
 air.fall 		= 1
 ground.cornerpush.veloff = -10
@@ -1259,10 +1260,10 @@ ground.type 	= high
 air.type		= high
 ground.slidetime 	= 6
 ground.hittime  	= 18
-air.hittime  		= 18 * MAP(untechMOD)
+air.hittime  		= 10
 ground.velocity 	= -4, -4
 fall.yvelocity 	= 0
-air.velocity 	= -2,-2
+air.velocity 		= -2,-2
 guard.ctrltime 	= 8
 fall			= 1
 air.fall 		= 1
@@ -1286,7 +1287,7 @@ ground.type 	= high
 air.type		= high
 ground.slidetime 	= 6
 ground.hittime  	= 18 * MAP(untechMOD)
-air.hittime  		= 22 * MAP(untechMOD)
+air.hittime  		= 24 * MAP(untechMOD)
 ground.velocity 	= -4, -6
 fall.yvelocity 	= 0
 air.velocity 	= -2,-6
@@ -2098,7 +2099,7 @@ y = 0.7
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "A"
-trigger1 = time >= 5
+trigger1 = time >= 5 && !map(L_Teleport)
 value = 713
 ctrl = 0
 [State 0, ChangeState]
@@ -2237,7 +2238,7 @@ poweradd		= 0
 ctrl 		= 0
 anim 		= 712
 sprpriority 	= 2
-velset		= vel x, vel y - 5
+velset		= vel x, vel y - 8
 
 [State 0, VelMul]
 type = VelMul
@@ -2250,6 +2251,34 @@ type = VelSet
 trigger1 = animelemno(0) = 3
 x = 8
 y = 15
+
+[State -2, Starter Level]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "StarterLevel"
+value 		= 2
+ignorehitpause 	= 1
+
+[State -2, P1 Value Set]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "P1"
+value 		= 0.85	;90% Starting DMG
+ignorehitpause 	= 1
+[State -2, P2 Value Set]
+type 		= MapSet
+trigger1 		= movehit && map(ComboStateCheck)
+map 		= "P2"
+value 		= 0.85	;84% DMG For next hit
+ignorehitpause 	= 1
+persistent = 0
+[State -2, P2 Accumulation - Scale]
+type 		= MapSet
+trigger1 		= movehit
+map 		= "Accumulation"
+value 		= Map(Accumulation) * map(P2)
+ignorehitpause 	= 1
+persistent 		= 0
 
 
 [State 0, JORMUNGANDR DEFAULT HITDEF]
@@ -2275,9 +2304,9 @@ guardsound 			= S2,0
 ;===============================
 ground.hittime 		= 10
 ground.slidetime		= 10
-ground.velocity 		= -5
-air.hittime 			= 20 * MAP(untechMOD)
-air.velocity 			= -5,-2
+ground.velocity 		= -5, 16
+air.hittime 			= 30 * MAP(untechMOD)
+air.velocity 			= -5,16 / MAP(untechMOD)
 down.hittime 			= 15
 ;===============================
 guard.ctrltime 		= 10
@@ -2285,17 +2314,20 @@ guard.slidetime 		= 10
 guard.velocity 		= -10
 airguard.velocity 		= -2,-2
 ;===============================
-ground.cornerpush.veloff	= -15
-air.cornerpush.veloff 	= -15
+ground.cornerpush.veloff	= -15 / MAP(UNTECHMOD)
+air.cornerpush.veloff 	= -25 / MAP(UNTECHMOD)
 down.cornerpush.veloff 	= -8
 guard.cornerpush.veloff 	= -8
 ;===============================
-fall 				= 0
+fall 				= 1
 air.fall 				= 1
 ;===============================
 envshake.time 			= 8
 envshake.freq 			= 8
 envshake.ampl 			= -2
+;===============================
+p2stateno       		= 5255
+p2getp1state    		= 0
 
 [State 0, ChangeState]
 type = ChangeState
@@ -2314,12 +2346,12 @@ poweradd= 0
 ctrl = 0
 anim = 641
 sprpriority = 2
-velset = vel x * 0.25 + 3,-4
+velset = 0,-4
 
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
-trigger1 		= !map(ComboStateCheck)
-map 		= "L_Teleport"
+trigger1 		= !time
+map 			= "L_Teleport"
 value 		= 1
 ignorehitpause 	= 1
 persistent 		= 0
@@ -2541,226 +2573,3 @@ trigger1 = animelem = 7
 map = "GC"
 value = 0
 
-;---------------------------------------------------------------------------
-;Red Guard
-[Statedef 910]
-type    = S
-movetype= I
-physics = S
-poweradd= -500
-velset = vel x * 0.5,0
-anim = 910
-ctrl = 0
-sprpriority = 2
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= 1
-map 		= "RCLockout"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = !time
-anim = F41	;RedGuard Spark
-ID = 41
-pos = 10,-60
-postype = P1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-supermovetime = 0
-pausemovetime = 0
-scale = const(size.xscale),const(size.yscale)*1.5
-sprpriority = 2
-ontop = 1
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-[State 0, ReversalDef]
-type = ReversalDef
-trigger1 = 1
-reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-pausetime = 0,0
-hitsound = S2,0
-p1stateno = 912
-ignorehitpause = 1
-
-
-[State 1000, 7]
-type = ChangeState
-triggerall = prevstateno != [150,155]
-trigger1 = AnimTime = 0
-value = 0
-ctrl = 1
-
-[State 1000, 7]
-type = ChangeState
-triggerall = prevstateno = [150,155]
-trigger1 = time >= map(ctrltime_set)*2
-value = 0
-ctrl = 1
-
-;---------------------------------------------------------------------------
-;Red Guard (Air)
-[Statedef 911]
-type    = A
-movetype= I
-physics = A
-poweradd= -500
-velset = vel x,vel y + 1
-anim = 911
-ctrl = 0
-sprpriority = 2
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= 1
-map 		= "RCLockout"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-
-[State 0, Explod]
-type = Explod
-trigger1 = !time
-anim = F41	;RedGuard Spark
-ID = 41
-pos = 10,-60
-postype = P1
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -2
-supermovetime = 0
-pausemovetime = 0
-scale = const(size.xscale),const(size.yscale)*1.5
-sprpriority = 2
-ontop = 1
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
-
-[State 0, ReversalDef]
-type = ReversalDef
-trigger1 = 1
-reversal.attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
-pausetime = 0,0
-hitsound = S2,0
-p1stateno = 913
-ignorehitpause = 1
-
-[State 1000, 7]
-type = ChangeState
-trigger1 = AnimTime = 0
-value = 50
-ctrl = 1
-
-;---------------------------------------------------------------------------
-;Red Guard - Success
-[Statedef 912]
-type    = S
-movetype= I
-physics = S
-poweradd= 500
-velset = vel x * 0.5, 0
-anim = 910
-ctrl = 0
-sprpriority = 2
-
-;Include Meter Gain Bonus Mapadd Here
-
-[State 0, PalFX]
-type = PalFX
-trigger1 = !time
-time = 4
-sinadd = 200, 64, 64, 10	
-mul = 256,256,256
-sinadd = 0,0,0,10
-invertall = 0
-color = 256
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "SlowdownTimeB"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-
-[State 0, EnvShake]
-type = EnvShake
-trigger1 = !time
-time = 20
-freq = 20
-ampl = -6
-phase = 120
-ignorehitpause = 1
-persistent = 1
-
-
-[State 1000, 7]
-type = ChangeState
-trigger1 = time = 1
-value = 0
-ctrl = 1
-
-;---------------------------------------------------------------------------
-;Red Guard - Success (Air)
-[Statedef 913]
-type    = A
-movetype= I
-physics = A
-poweradd= 500
-velset = vel x * 0.75, -3 
-anim = 910
-ctrl = 0
-sprpriority = 2
-
-
-;Include Meter Gain Bonus Mapadd Here
-
-[State 0, PalFX]
-type = PalFX
-trigger1 = !time
-time = 4
-sinadd = 200, 64, 64, 10	
-mul = 256,256,256
-sinadd = 0,0,0,10
-invertall = 0
-color = 256
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "SlowdownTimeB"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-
-[State 0, EnvShake]
-type = EnvShake
-trigger1 = !time
-time = 20
-freq = 20
-ampl = -6
-phase = 120
-ignorehitpause = 1
-persistent = 1
-
-
-[State 1000, 7]
-type = ChangeState
-trigger1 = time = 1
-value = 50
-ctrl = 1

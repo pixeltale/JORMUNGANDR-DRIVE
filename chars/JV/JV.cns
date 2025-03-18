@@ -376,12 +376,6 @@ trigger1 = animtime=0
 
 ;---------------------- Float variable list ----------------------
 
-
-
-
-
-
-
 [Statedef -2]
 
 
@@ -400,10 +394,9 @@ ignorehitpause 	= 1
 persistent 		= 0
 
 
-
 [State 0, Strike The Earth - Reset]
 type 		= MapSet
-trigger1 		= stateno != [1200,1203]
+trigger1 		= stateno != [1030,1035]
 map 			= "StrikeCount"
 value 		= 0
 ignorehitpause 	= 1
@@ -428,7 +421,7 @@ ignorehitpause 	= 1
 
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= stateno >= 1000 && stateno != 1202
+trigger1 		= stateno >= 1000 && stateno != 1032
 map 		= "JC"
 value 		= 0
 ignorehitpause 	= 1
@@ -456,8 +449,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "geargauge = %f gearmul = %f"
-params = map(GEAR.GAUGE), map(GEAR.MUL)
+text = "geargauge = %f gearmul = %f power = %i"
+params = map(GEAR.GAUGE), map(GEAR.MUL), power
 ignorehitpause = 1
 persistent = 1
 

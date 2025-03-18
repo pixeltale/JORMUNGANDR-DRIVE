@@ -258,7 +258,11 @@ type = mapadd
 trigger1 = time = 0
 map = "DoubleJump"
 value = -1
-
+[State - Air Option Limiter - Airdash]
+type = mapadd
+trigger1 = time = 0
+map = "AirDash"
+value = -1
 
 [State 45, 1]
 type = ChangeAnim
