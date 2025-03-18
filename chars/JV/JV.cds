@@ -5,71 +5,13 @@ command.time = 15
 command.buffer.time = 5
 
 [Command]
-name = "236236L"
+name = "236236A"
 command = ~D, F, D, F, a
 time = 26
 [Command]
-name = "6246L"
-command = ~$F, $D, $B, $F, a
-[Command]
-name = "426H"
-command = ~$B, $D, F, c
-time = 30
-buffer.time = 10
-[Command]
-name = "624H"
-command = ~$F, $D, B, c
-time = 30
-buffer.time = 10
-[Command]
-name = "214L"
-command = ~$D, B, a
-buffer.time = 5
-[Command]
-name = "214L_unbuffer"
+name = "214A_unbuffer"
 command = ~$D, B, a
 buffer.time = 0
-[Command]
-name = "214M"
-command = ~$D, B, b
-buffer.time = 10
-[Command]
-name = "214H"
-command = ~$D, B, c
-buffer.time = 10
-[Command]
-name = "214R"
-command = ~$D, B, c
-buffer.time = 10
-[Command]
-name = "236L"
-command = ~D, >F, a
-[Command]
-name = "236M"
-command = ~D, >F, b
-[Command]
-name = "236H"
-command = ~D, >F, c
-[Command]
-name = "236R"
-command = ~$D, >F, d
-buffer.time = 10
-[Command]
-name = "22L"
-command = ~D, D, a
-time = 10
-[Command]
-name = "22M"
-command = ~D, D, b
-time = 10
-[Command]
-name = "22H"
-command = ~D, D, c
-time = 10
-[Command]
-name = "22R"
-command = ~D, D, d
-time = 10
 
 [Command]
 name = "feintBuffer_B"
@@ -91,18 +33,28 @@ buffer.time = 0
 ;for a combo into a special move (used below).
 ;Since a lot of special moves rely on the same conditions, this reduces
 ;redundant logic.
-[State -1, Combo condition Reset]
-type = VarSet
+[State -1, Cancel Condition Reset]
+type = VarSet		;Ground Special
 trigger1 = 1
 var(1) = 0
+[State -1, Cancel Condition Reset]
+type = VarSet		;Air Special
+trigger1 = 1
+var(2) = 0
 
-[State -1, Combo condition Check]
+[State -1, Cancel Condition Check]
 type = VarSet
-trigger1 = statetype != A && ctrl
-trigger2 = (stateno = [200,299]) || (stateno = [400,503]) || stateno = [600, 640]
-trigger2 = movecontact
-trigger3 = stateno = 100 || stateno = 60
+trigger1 = statetype != A && ctrl || stateno = 100
+trigger2 = (stateno = [200,299] || stateno = [400,503]) && movecontact
 var(1) = 1
+
+[State -1, Cancel Condition Check]
+type = VarSet
+trigger1 = statetype = A && ctrl
+trigger2 = stateno = [600, 640]
+trigger2 = movecontact
+trigger3 = stateno = 60
+var(2) = 1
 
 ;===========================================================================
 ;236X - Judgement
@@ -162,25 +114,16 @@ triggerall = command = "holdup" || command = "up"
 trigger1 = map(JC)
 trigger2 = ctrl ||stateno = 100 && time > 3
 
-;Double Jump Raw
 [State -1,DJC]
 type = ChangeState
 value = 45
-triggerall = Map(DoubleJump)  < 1
-triggerall = command = "up"
-trigger1 = ctrl && stateno!= [40,60]
-
-[State -1,DJC]
-type = ChangeState
-value = 45
-triggerall = command = "up" || movecontact && command = "holdup"
-triggerall = Map(DoubleJump) < 1
-trigger1 = ctrl && stateno!= [40,55] && !(stateno = 56 && time < 30)
-trigger2 = movecontact ;&& enemynear, movetype = H
+triggerall = command = "up" && map(doubleJump_BUFFFIX) < 2 || movecontact && command = "holdup"
+triggerall = stateno!= [45,46]
+triggerall = Map(DoubleJump)
+triggerall= statetype = A
+trigger1 = ctrl
+trigger2 = movecontact
 trigger2 = hitdefattr = A, NA
-trigger2 = stateno!=620
-trigger3 =  stateno=45 || stateno=46|| stateno=50
-trigger3 = vel y>.1
 
 
 
@@ -192,7 +135,7 @@ value = 60
 triggerall = command != "holdback"
 triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
-triggerall = Map(ADash) > 0
+triggerall = Map(airdash)
 triggerall = pos y<-65 || vel y > 0
 trigger1 = ctrl
 trigger2 = movehit
@@ -208,10 +151,9 @@ value = 61
 triggerall = command = "a44" || command = "M44"
 trigger1 = statetype = A
 trigger1 = ctrl
-triggerall = Map(ADash) > 0
+triggerall = Map(airdash)
 triggerall = pos y<-65
 ;--------------------------------------------------------------------------
-
 ;Dash
 [State -1, Run Fwd]
 type = ChangeState
@@ -236,21 +178,60 @@ trigger2 = stateno = 250
 ;===========================================================================
 ;SPECIAL ATTACKS
 ;===========================================================================
+;236A
+[State -1, One Inch Punch]
+type = changeState
+value = 1000
+triggerall = command = "236A"
+triggerall = !map(EN)
+trigger1 = var(1)
+
+;E236A
+[State -1, One Inch Punch]
+type = changeState
+value = 1001
+triggerall = command = "236A"
+triggerall = map(EN)
+trigger1 = var(1)
+
+;214A
+[State -1, Spotdodge]
+type = ChangeState
+value = 1010
+triggerall = command = "214A"
+triggerall = stateno = 40 || !map(EN) && statetype != A
+trigger1 = var(1) || stateno = 40
+
+;E214A
+[State -1, Spotdodge]
+type = ChangeState
+value = 1011
+triggerall = command = "214A" && prevstateno != 1010 || command = "214A_unbuffer" && prevstateno = 1010 
+triggerall = map(EN)
+trigger1 = var(1)
+
+;236B - Strike the Earth
+[State -1, STE]
+type = ChangeState
+value = 1200
+triggerall = command = "236B"
+trigger1 = var(1)
 
 ;IRON MOUNTAIN'S COFFIN
-;[State -1, One Inch Punch]
-;type = changeState
-;value = 1210
-;triggerall = command = "623C"
-;triggerall = statetype != A
-;trigger1 = var(1) || ctrl
+[State -1, Tetsuzankou]
+type = changeState
+value = 1020
+triggerall = command = "623C"
+trigger1 = var(1)
 
+;===========================================================================
+;STRIKE THE EARTH!
+;===========================================================================
 ;THE BEAST UNLEASHED ....
 [State -1, Beast Elbow]
 type = changeState
 value = 1205
-triggerall = command = "624H"
-triggerall = statetype != A
+triggerall = command = "624C"
 trigger1 = var(1)
 trigger2 = MAP(StrikeCount) = 2
 
@@ -258,163 +239,57 @@ trigger2 = MAP(StrikeCount) = 2
 [State -1, Yggdrasil]
 type = changeState
 value = 1206
-triggerall = command = "236H"
-triggerall = statetype != A
+triggerall = command = "236C"
 trigger1 = MAP(StrikeCount) = 2
 
 ;ALL EXISTENCE DENIED......
 [State -1, EGO DEATH DRIVER]
 type = changeState
 value = 1207
-triggerall = command = "6246L"
-triggerall = statetype != A
+triggerall = command = "6246A"
 trigger1 = MAP(StrikeCount) = 2
 
 ;===========================================================================
-;4S - Aimless Serpent (Ground)
-[State -1, Spotdodge]
-type = ChangeState
-value = 1010
-triggerall = command = "214L"
-triggerall = stateno = 40 || !map(EN) && statetype != A
-trigger1 = ctrl
-trigger2 = var(1) || stateno = 40
-
-;4SEN - Wandering Serpent (Ground)
-[State -1, Spotdodge]
-type = ChangeState
-value = 1011
-triggerall = command = "214L" && prevstateno != 1010 || command = "214L_unbuffer" && prevstateno = 1010 
-triggerall = map(EN)
-triggerall = statetype != A
-trigger1 = var(1)
 
 ;===========================================================================
-;236M - Strike the Earth
-[State -1, STE]
-type = ChangeState
-value = 1200
-triggerall = command = "236M"
-triggerall = statetype != A
-trigger1 = var(1)
-trigger2 = stateno = 100 && time > 2
-
-;6S - Verofolnir
-[State -1, Stomp]
-type = ChangeState
-value = 1100
-triggerall = command = "236H" && command != "426H"
-triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = var(1)
-trigger3 = stateno = 100 && time > 2
-
-;2S - Disengage
-[State -1, DP]
-type = ChangeState
-value = 1090
-triggerall = command = "214M"
-triggerall = statetype != A
-trigger1 = ctrl
-trigger2 = var(1)
-trigger3 = stateno = 100 && time > 2
-
+;Air Specials
 ;===========================================================================
-;j214L - Uptrick
-[State -1, Uptrick]
-type = changeState
-value = 1215
-triggerall = command = "214L"
-triggerall = statetype = A && !map(L_Teleport)
-trigger1 = var(1) || ctrl || stateno = 652 && movecontact
-
-;j214M: HOP
-[State -1, Fastfall]
-type = changeState
-value = 1216
-triggerall = command = "214M"
-triggerall = statetype = A
-trigger1 = var(1) || ctrl || stateno = 650
-
-;j214H FASTFALL
+;j22C
 [State -1, Fastfall]
 type = changeState
 value = 1217
-triggerall = command = "214H"
-triggerall = statetype = A
-trigger1 = var(1) || ctrl || stateno = 651
-
-;5S: One-Inch Punch
-[State -1, One Inch Punch]
-type = changeState
-value = 1000
-triggerall = command = "236L"
-triggerall = statetype != A
-triggerall = !map(EN)
-trigger1 = ctrl
-trigger2 = var(1)
-trigger3 = stateno = [200,220] || stateno = [400,431]
-trigger3 = movecontact
-
-
-;5SEN: One-Inch Punch
-[State -1, One Inch Punch]
-type = changeState
-value = 1001
-triggerall = command = "236L"
-triggerall = statetype != A
-triggerall = map(EN)
-trigger1 = ctrl
-trigger2 = var(1)
-trigger3 = stateno = [200,220] || stateno = [400,431]
-trigger3 = movecontact
-trigger4 = stateno = 100 && time > 2
+triggerall = command = "22C"
+trigger1 = var(2)
 
 ;j236C: Jotunn's Wrath
 [State -1, Jotunn's Wrath]
 type = changeState
 value = cond(map(EN), 1030, 1025)
-triggerall = command = "236H"
-triggerall = statetype = A
-trigger1 = ctrl
-trigger2 = var(1)
-trigger3 = stateno = 60
-trigger4 = movecontact && stateno = [600,640]
+triggerall = command = "236C"
+trigger1 = var(2)
 
-
+;===========================================================================
+;SYSTEM MECHANICS
+;===========================================================================
 [State -1, EXCEED Shock]
 type = ChangeState
 value = 905
-triggerall = command = "236" && command = "F"
-triggerall = statetype !=A
+triggerall = command = "E"
 trigger1 = var(1)
-trigger2 = stateno = [200,230] || stateno = [400,431]
-trigger2 = movecontact
-trigger3 = stateno = [100,101]
+
 ;===========================================================================
-
-[State -1, 2D: Striking Serpent]
-type = ChangeState
-value = 702 + 1*(Map(EnState))
-triggerall = command = "D"
-triggerall = command = "holddown"
-triggerall = statetype !=A
-trigger1 = var(1)
-trigger2 = stateno = [200,230] || stateno = [400,431]
-trigger2 = movecontact
-trigger3 = stateno = [100,101]
-
+;DRIVER ACTION
+;===========================================================================
 [State -1, 5D: Coiled Serpent]
 type = ChangeState
 value = 700 + 1*(MAP(EnState))
 triggerall = command = "D"
-triggerall = prevstateno != 632
-triggerall = statetype !=A && stateno != 704
 trigger1 = var(1)
-trigger1 = ctrl
-trigger2 = stateno = [200,230] || stateno = [400,431]
-trigger2 = movecontact
-trigger3 = stateno = [100,101] && !(prevstateno = 2000 && time <= 5)
+[State -1, 5D: Coiled Serpent]
+type = ChangeState
+value = 710
+triggerall = command = "D"
+trigger1 = var(2)
 
 ;===========================================================================
 ;NORMALS

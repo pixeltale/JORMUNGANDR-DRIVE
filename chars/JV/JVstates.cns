@@ -33,7 +33,7 @@
 type = S
 physics = S
 sprpriority = 1
-velset = vel x, 0
+velset = vel x * 0.5, 0
 
 [State 0, 1]
 type = ChangeAnim
@@ -207,7 +207,7 @@ y = const(velocity.jump.y)
 type = VelSet
 triggerall = sysvar(1) = 0
 trigger1 = animtime = 0
-x = const(velocity.jump.neu.x) + (vel x * 0.05)
+x = const(velocity.jump.neu.x) + (vel x * 0.45)
 y = const(velocity.jump.y)
 
 [State 40, 4] ;Backward Jump
@@ -257,18 +257,8 @@ velset = 0,0
 type = mapadd
 trigger1 = time = 0
 map = "DoubleJump"
-value = 1
+value = -1
 
-[State - Air Option Limiter - Airdash]
-type = mapadd
-trigger1 = time = 0
-map = "ADash"
-value = -1
-[State Category]
-type = mapadd
-trigger1 = time = 0
-map = "DJL"
-value = -1
 
 [State 45, 1]
 type = ChangeAnim
@@ -381,17 +371,22 @@ flag = noairguard
 [State 100, 1]
 type = VelSet
 trigger1 = time = 0
-x = 6.5
+x = 7
 
 [State 0, VelMul]
 type = VelMul
 trigger1 = !map(ADM)
 x = 0.96
 
+[State - Air Option Limiter - Double Jump]
+type = mapadd
+trigger1 = time = 0
+map = "DoubleJump"
+value = -1
 [State - Air Option Limiter - Airdash]
 type = mapadd
 trigger1 = time = 0
-map = "ADash"
+map = "AirDash"
 value = -1
 
 [State - Airdash Momentum Preserve]
@@ -461,10 +456,15 @@ type = VelMul
 trigger1 = !map(ADM)
 x = 0.95
 
+[State - Air Option Limiter - Double Jump]
+type = mapadd
+trigger1 = time = 0
+map = "DoubleJump"
+value = -1
 [State - Air Option Limiter - Airdash]
 type = mapadd
 trigger1 = time = 0
-map = "ADash"
+map = "AirDash"
 value = -1
 
 [State - Airdash Momentum Preserve]

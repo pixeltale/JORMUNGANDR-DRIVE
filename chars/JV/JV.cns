@@ -69,7 +69,9 @@ down.bounce.groundlevel = -4          ;Y-position at which player bouncing off t
 down.friction.threshold = .05         ;If the player's speed drops below this threshold while lying down, stop his movement **MUGEN 1.0**
 
 [Constants]
-defensemod = 1.2
+defensemod 	= 1.2
+airjumps		= 1
+airdashes		= 1
 
 [Quotes]
 victory1 = "Its JV time baby!"
@@ -397,11 +399,7 @@ value 		= 0
 ignorehitpause 	= 1
 persistent 		= 0
 
-[State - Air Option Limiter - Double Jump]
-type 		= mapset
-trigger1 		= statetype = S
-map 			= "DoubleJump"
-value 		= 0
+
 
 [State 0, Strike The Earth - Reset]
 type 		= MapSet
@@ -455,25 +453,11 @@ value 		= 1
 ignorehitpause 	= 1
 persistent 		= 1
 
-[State 0, VarSet]
-type = VarSet
-trigger1 = 1
-v = 2
-value = enemynear, movetype = A
-ignorehitpause = 1
-
-[State 0, VarSet]
-type = VarSet
-trigger1 = var(2) && !time && movehit
-v = 3
-value = 1
-ignorehitpause = 1
-
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "bedgedist = %i p2dist = %f"
-params = BackEdgeBodyDist, p2dist x
+text = "geargauge = %f gearmul = %f"
+params = map(GEAR.GAUGE), map(GEAR.MUL)
 ignorehitpause = 1
 persistent = 1
 

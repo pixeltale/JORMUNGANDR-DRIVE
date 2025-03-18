@@ -91,7 +91,7 @@ name = "fwd"      ; REQUIRED for command buffering
 command = F
 time = 1
 [Command]
-name = "airJump"       ; REQUIRED for command buffering
+name = "airjump"       ; REQUIRED for command buffering
 command = >$U
 time = 5
 buffer.time = 3
@@ -99,6 +99,7 @@ buffer.time = 3
 name = "up"       ; REQUIRED for command buffering
 command = $U
 time = 1
+buffer.time = 3
 [Command]
 name = "down"     ; REQUIRED for command buffering
 command = D
@@ -679,6 +680,9 @@ command = ~F, y
 name = "6246"
 command = ~$F, $D, $B, $F
 [Command]
+name = "624"
+command = ~$F, $D, $B
+[Command]
 name = "426"
 command = ~$B, $D, F
 [Command]
@@ -724,6 +728,23 @@ buffer.time = 15
 ; Command Inputs - Special, With Buttons
 ;===================================
 [Command]
+name = "6246A"
+command = ~$F, $D, $B, F, a
+buffer.time = 10
+[Command]
+name = "6246B"
+command = ~$F, $D, $B, F, b
+buffer.time = 10
+[Command]
+name = "6246C"
+command = ~$F, $D, $B, F, c
+buffer.time = 10
+[Command]
+name = "6246D"
+command = ~$F, $D, $B, F, d
+buffer.time = 10
+
+[Command]
 name = "632146A"
 command = ~F, DF, D, DB, B, F, a
 buffer.time = 15
@@ -758,6 +779,23 @@ command = ~B, DB, D, DF, F, x
 buffer.time = 10
 
 [Command]
+name = "624A"
+command = ~$F, $D, $B, a
+buffer.time = 10
+[Command]
+name = "624B"
+command = ~$F, $D, $B, b
+buffer.time = 10
+[Command]
+name = "624C"
+command = ~$F, $D, $B, c
+buffer.time = 10
+[Command]
+name = "624D"
+command = ~$F, $D, $B, d
+buffer.time = 10
+
+[Command]
 name = "63214A"
 command = ~F, DF, D, DB, B, a
 buffer.time = 10
@@ -777,15 +815,19 @@ buffer.time = 10
 [Command]
 name = "623A"
 command = ~F, D, DF, a
+buffer.time = 20
 [Command]
 name = "623B"
 command = ~F, D, DF, b
+buffer.time = 20
 [Command]
 name = "623C"
 command = ~F, D, DF, c
+buffer.time = 20
 [Command]
 name = "623D"
 command = ~F, D, DF, x
+buffer.time = 20
 
 [Command]
 name = "421A"
@@ -845,6 +887,23 @@ time = 10
 [Command]
 name = "66D"
 command = F, F, x
+time = 10
+
+[Command]
+name = "22A"
+command = ~D, D, a
+time = 10
+[Command]
+name = "22B"
+command = ~D, D, a
+time = 10
+[Command]
+name = "22C"
+command = ~D, D, c
+time = 10
+[Command]
+name = "22D"
+command = ~D, D, d
 time = 10
 
 ;236 Motion ========================[]
@@ -992,15 +1051,15 @@ buffer.time = 2
 
 [Command]
 name = "throwtech"
-command = x+y
+command = a+b
 time = 1
 [Command]
 name = "throwtech"
-command = y+z
+command = b+c
 time = 1
 [Command]
 name = "throwtech"
-command = x+z
+command = a+c
 time = 1
 
 

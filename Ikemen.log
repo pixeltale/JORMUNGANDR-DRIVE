@@ -1,5 +1,5 @@
-.\external\script\start.lua:1401: ./chars/JV/JV.cds:565:
-Command doesn't exist: REDLINE GUARD
+.\external\script\start.lua:1401: data/COMMON.cns:7856:
+Missing trigger1
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1401: in function 'f_game'
