@@ -46,7 +46,7 @@ persistent 		= 0
 type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
-damage 				= 100 * MAP(P4),0
+damage 				= 25 * MAP(P4),0
 pausetime 			= 8,8 + 2 * map(CounterHit)
 getpower 				= 25 * MAP(GEAR.MUL),0
 ;===============================
@@ -160,7 +160,7 @@ persistent 		= 0
 type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
-damage 				= 100 * MAP(P4),0
+damage 				= 75 * MAP(P4),0
 pausetime 			= 10,10
 getpower 				= 25 * MAP(GEAR.MUL),0
 ;===============================
@@ -280,7 +280,7 @@ persistent 		= 0
 type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
-damage 				= 150 * MAP(P4),0
+damage 				= 120 * MAP(P4),0
 pausetime 			= 12,12
 getpower 				= 100 * MAP(GEAR.MUL)
 ;===============================
@@ -325,7 +325,7 @@ envshake.phase 		= 0.5
 [State 0, VelAdd]
 type = velset
 trigger1 = animelem = 3
-x = vel x + 6
+x = vel x + 3
 
 [State 0, Explod]
 type = Explod
@@ -430,11 +430,11 @@ x = 4
 [State 0]
 type 	= HitDef 
 p2facing 	= 1
-trigger1 	= Time= 0
+trigger1 	= !movecontact && !movereversed
 attr 		= S, NA
 animtype 	= Hard
 air.animtype 	= back
-damage 		= 100*Map(P4)
+damage 		= 75*Map(P4)
 hitflag 	= MAFD
 guardflag 	= MA
 pausetime 	= 14,14
@@ -534,7 +534,7 @@ persistent 		= 0
 type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
-damage 				= 100 * MAP(P4),0
+damage 				= 25 * MAP(P4),0
 pausetime 			= 8,8
 getpower 				= 25 * MAP(GEAR.MUL)
 ;===============================

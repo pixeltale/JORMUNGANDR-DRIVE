@@ -4369,14 +4369,6 @@ velset = vel x,0
 sprpriority = 2
 facep2 = 1
 
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "SlowdownTimeB"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
-
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
@@ -4739,7 +4731,7 @@ value = F7,0
 
 [State 5222, State]
 type = SelfState
-trigger1 = time = 10
+trigger1 = time = 5
 value = 5223
 
 ;------------------
@@ -6803,7 +6795,7 @@ value 		= 1000
 
 [State 0, GEAR INCREASE]
 type 		= MapAdd
-trigger1 	= enemy, movetype = H
+trigger1 	= enemy, movetype = H && movecontact
 map 		= "GEAR.GAUGE"
 value 		= 1
 [State 0, GEAR INCREASE]

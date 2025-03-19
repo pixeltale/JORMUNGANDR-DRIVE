@@ -378,6 +378,13 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+[State 77]
+type = bgpalfx
+trigger1 = map(PShift)
+time = 1
+add= 10,-120,10
+ignorehitpause = 1
+persistent = 1
 
 [State 0, Jump Cancel]
 type 		= MapSet

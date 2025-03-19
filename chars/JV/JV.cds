@@ -44,7 +44,8 @@ var(2) = 0
 
 [State -1, Cancel Condition Check]
 type = VarSet
-trigger1 = statetype != A && ctrl || stateno = 100
+triggerall = statetype != A
+trigger1 = ctrl || stateno = 100
 trigger2 = (stateno = [200,299] || stateno = [400,503]) && movecontact
 var(1) = 1
 
@@ -178,14 +179,14 @@ trigger2 = stateno = 250
 [State -1, Jotunn's Extinction]
 type = changeState
 value = 2000
-triggerall = command = "236D"
+triggerall = command = "236D" && power >= 1000
 trigger1 = var(2)
 
 ;j236D > j236D: Ordinance Driver
 [State -1, Ordinance Driver]
 type = changeState
 value = 2010
-triggerall = command = "236D"
+triggerall = command = "236D" && power >= 1000
 trigger1 = stateno = 2000 && movehit
 
 ;===========================================================================
