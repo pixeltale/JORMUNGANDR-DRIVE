@@ -7,7 +7,7 @@ name 		= "JV"        		;Name of character
 displayname 	= "J.V."		;Name of character to display
 mugenversion 	= 1.1        	;Version of M.U.G.E.N character works on (X.XX)
 ikemenversion	= 0.99
-author 		    = "PXN."         		;Character author name
+author 		= "PXN."         		;Character author name
 pal.defaults 	= 1,2,3,4
 
 ; Files for the player

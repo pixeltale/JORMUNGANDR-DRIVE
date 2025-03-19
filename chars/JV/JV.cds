@@ -172,6 +172,23 @@ trigger1 = ctrl
 trigger2 = stateno = 250
 
 ;===========================================================================
+;DEVIANT DRIVES
+;===========================================================================
+;j236D: Jotunn's Extinction
+[State -1, Jotunn's Extinction]
+type = changeState
+value = 2000
+triggerall = command = "236D"
+trigger1 = var(2)
+
+;j236D > j236D: Ordinance Driver
+[State -1, Ordinance Driver]
+type = changeState
+value = 2010
+triggerall = command = "236D"
+trigger1 = stateno = 2000 && movehit
+
+;===========================================================================
 ;SPECIAL ATTACKS
 ;===========================================================================
 ;236A

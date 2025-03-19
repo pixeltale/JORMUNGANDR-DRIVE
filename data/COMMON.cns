@@ -6803,19 +6803,19 @@ value 		= 1000
 
 [State 0, GEAR INCREASE]
 type 		= MapAdd
-trigger1 	= vel x > 6
+trigger1 	= enemy, movetype = H
 map 		= "GEAR.GAUGE"
-value 		= 2
+value 		= 1
 [State 0, GEAR INCREASE]
 type 		= MapAdd
-trigger1 	= enemy, movetype = H
+trigger1 	= vel x > 6
 map 		= "GEAR.GAUGE"
 value 		= 2
 [State 0, GEAR INCREASE]
 type 		= MapAdd
 trigger1 	= movehit = 1 && map(ComboStateCheck)
 map 		= "GEAR.GAUGE"
-value 		= 3
+value 		= 2
 [State 0, GEAR INCREASE]
 type 		= MapAdd
 trigger1 	= movehit = 1 && !map(ComboStateCheck)

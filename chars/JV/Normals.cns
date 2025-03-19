@@ -2221,10 +2221,10 @@ ignorehitpause = 1
 trans = add
 
 [State 0, ChangeState]
-type = ChangeState
-trigger1 =pos y>= 0
-value = 0
-ctrl = 1
+type 	= ChangeState
+trigger1 	= pos y >= 0
+value 	= 0
+ctrl 	= 1
 
 
 ;================================
@@ -2250,7 +2250,7 @@ y = 0.7
 type = VelSet
 trigger1 = animelemno(0) = 3
 x = 8
-y = 15
+y = 8
 
 [State -2, Starter Level]
 type 		= MapSet
@@ -2422,6 +2422,13 @@ velset = vel x,0
 anim = 905
 ctrl = 0
 sprpriority = 2
+
+[State -2, DOWN GEAR]
+type 			= MapAdd
+trigger1 			= !time
+map 				= "GEAR.GAUGE"
+value 			= -333
+ignorehitpause 	= 1
 
 [State 0]
 type = MapSet
