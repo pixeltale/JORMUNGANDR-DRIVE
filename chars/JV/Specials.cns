@@ -634,7 +634,7 @@ persistent 	= 0				        ;+
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = animelemno(0) <= 3
+trigger1 = animelemno(0) <= 2
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
 time = 1
 
@@ -878,7 +878,7 @@ time 		= 1
 ignorehitpause 	= 0
 [State 0. MapSet]				;Does nothing to the performance of the armor.
 type 		= MapSet			;This value is used for enemy characters
-trigger1 	= animelemno(0) = [2, 7]	;To see if armor is currently active or not.
+trigger1 	= animelemno(0) = [2, 5]	;To see if armor is currently active or not.
 map 		= "armorActive"
 value 		= 1
 ignorehitpause 	= 1
@@ -906,13 +906,13 @@ ignorehitpause 	= 1
 
 [State -2, FRC]
 type 		= MapSet
-trigger1 		= animelemno(1) = 7
+trigger1 		= animelemno(1) = 5
 map 		= "FRC"
 value 		= 1
 ignorehitpause 	= 1
 [State -2, FRC]
 type 		= MapSet
-trigger1 		= animelemno(2) = 8
+trigger1 		= animelemno(2) = 6
 map 		= "FRC"
 value 		= 0
 ignorehitpause 	= 1
@@ -1093,19 +1093,19 @@ value 	= 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "A" || command = "HOLD_A"
-trigger1 = movecontact || animelemno(0) >= 5 && animelemno(0) < 7
+trigger1 = movecontact
 value = 1031
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "B" || command = "HOLD_B"
-trigger1 = movecontact || animelemno(0) >= 5 && animelemno(0) < 7
+trigger1 = movecontact
 value = 1032
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "C" || command = "HOLD_C"
-trigger1 = movecontact || animelemno(0) >= 5 && animelemno(0) < 7
+trigger1 = movecontact
 value = 1033
 ctrl = 0
 
@@ -2952,7 +2952,7 @@ ground.slidetime 	= 14
 ground.hittime  	= 23
 ground.velocity 	= 0,15
 air.velocity 		= 0,15
-air.hittime 		= 24
+air.hittime 		= 28
 envshake.time 		= 7
 fall 			= 1
 fall.yvelocity 	= -6

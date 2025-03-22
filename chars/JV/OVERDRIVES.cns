@@ -73,21 +73,10 @@ value 		= Map(Accumulation) * map(P2)
 ignorehitpause 	= 1
 persistent 		= 0
 
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0
-anim = 3000
-ID = 3000
-pos = 0,0
-ignorehitpause = 1
-scale = .84, .84
-supermovetime = 200
-
 [State 0, SuperPause]
 type = SuperPause
 trigger1 = time = 0
 time = 30
-anim = 3000
 sound = 20,0
 pos = 0,0
 movetime = 0
@@ -98,10 +87,9 @@ unhittable = 1
 
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = time = 0
+trigger1 = time = [0, 14]
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
-;value2 = S,NA
-time = 8
+time = 1
 
 [State 200, 1]
 type = HitDef

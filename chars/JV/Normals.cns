@@ -2291,7 +2291,7 @@ pausetime 			= 10,10
 getpower 				= 75 * MAP(GEAR.MUL),0
 ;===============================
 attr 				= S,NA
-hitflag 				= MAF
+hitflag 				= MAFD
 guardflag 			= HA
 animtype 				= Light
 air.animtype 			= Light
@@ -2480,12 +2480,6 @@ sinadd = 0,0,0,10
 invertall = 0
 color = 256
 
-[State Category]
-type = mapset
-trigger1 = time = 0
-map = "Body"
-value = 1
-
 [State Cancel]
 type = mapset
 trigger1 = time = 0
@@ -2496,6 +2490,7 @@ type = mapset
 trigger1 = moveguarded
 map = "GC"
 value = 1
+redirectid = enemynear, id
 
 [State -2, Starter Level]
 type 		= MapSet
@@ -2607,6 +2602,26 @@ velset = vel x,0
 anim = 915
 ctrl = 0
 sprpriority = 10
+facep2 = 1
+
+[State 0, Zoom]
+type = zoom
+trigger1 = time < 30
+scale = 1.4
+lag = 0.75
+stagebound = 0
+camerabound = 0
+pos =0,0
+ignorehitpause=1
+[State 0, Zoom]
+type = zoom
+trigger1 = time >= 30
+scale = 1
+lag = 0.75
+stagebound = 0
+camerabound = 0
+pos =0,0
+ignorehitpause=1
 
 [State 0, GEAR INCREASE]
 type 		= MapAdd
@@ -2643,6 +2658,10 @@ trigger1 = !time
 map = "PSHIFT.TIMER"
 value = 600
 
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 45
+value = 1
 [State 1000, 7]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -2660,6 +2679,26 @@ velset = 0,0
 anim = 915
 ctrl = 0
 sprpriority = 10
+facep2 = 1
+
+[State 0, Zoom]
+type = zoom
+trigger1 = time < 30
+scale = 1.4
+lag = 0.75
+stagebound = 0
+camerabound = 0
+pos =0,0
+ignorehitpause=1
+[State 0, Zoom]
+type = zoom
+trigger1 = time >= 30
+scale = 1
+lag = 0.75
+stagebound = 0
+camerabound = 0
+pos =0,0
+ignorehitpause=1
 
 [State 0, GEAR INCREASE]
 type 		= MapAdd
@@ -2714,6 +2753,10 @@ trigger1 = !time
 map = "PSHIFT.TIMER"
 value = 600
 
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 45
+value = 1
 [State 1000, 7]
 type = ChangeState
 trigger1 = AnimTime = 0

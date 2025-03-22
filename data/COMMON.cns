@@ -1798,7 +1798,7 @@ value = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && enemy,movecontact
+trigger1 = enemy,Map(GC)=1 && BackEdgeBodyDist <=0
 value = 5275
 
 [State 0, MapSet] ;Regain ctrl frame
@@ -1895,7 +1895,7 @@ physics = S
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && enemy,movecontact
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
 value = 5275
 
 [State 151, End]
@@ -1937,7 +1937,7 @@ value = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && enemy,movecontact
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
 value = 5275
 
 ;Guard Cancel
@@ -2024,7 +2024,7 @@ physics=S
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && enemy,movecontact
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
 value = 5275
 
 [State 153, End]
@@ -4284,10 +4284,22 @@ velset = vel x,0
 sprpriority = 2
 facep2 = 1
 
+[State 0, AfterImage] ;Post RC Afterimages ============ ++
+type 		= AfterImage
+trigger1    = !time
+time 		= 30
+length 		= 120
+timegap 		= 0.5
+ignorehitpause 	= 1
+paladd		= 255, 25, 25
+trans 		= Add
+persistent 	= 1
+;==================================================++
+
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
-time = 4
+time = 10
 sinadd = 200, 64, 64, 20	
 mul = 256,256,256
 invertall = 0
@@ -4331,6 +4343,38 @@ ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
 facep2 = 0
+
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "DoubleJump"
+value 		= const(AirJumps)
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "AirDash"
+value 		= const(AirDashes)
+
+[State 0, AfterImage] ;Post RC Afterimages ============ ++
+type 		= AfterImage
+trigger1    = !time
+time 		= 30
+length 		= 120
+timegap 		= 0.5
+ignorehitpause 	= 1
+paladd		= 255, 25, 25
+trans 		= Add
+persistent 	= 1
+;==================================================++
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 10
+sinadd = 200, 64, 64, 20	
+mul = 256,256,256
+invertall = 0
+color = 256
 
 [State 0, Explod]
 type = Explod
@@ -4396,6 +4440,26 @@ velset = vel x * 0.05,0
 sprpriority = 2
 facep2 = 1
 
+[State 0, AfterImage] ;Post RC Afterimages ============ ++
+type 		= AfterImage
+trigger1    = !time
+time 		= 30
+length 		= 120
+timegap 		= 0.5
+ignorehitpause 	= 1
+paladd		= 25, 25, 255
+trans 		= Add
+persistent 	= 1
+;==================================================++
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 10
+sinadd = 100, 100, 200, 20	
+mul = 256,256,256
+invertall = 0
+color = 256
+
 [State 0, Explod]
 type = Explod
 trigger1 = time = 0
@@ -4453,6 +4517,37 @@ ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
 facep2 = 0
+
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "DoubleJump"
+value 		= const(AirJumps)
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "AirDash"
+value 		= const(AirDashes)
+
+[State 0, AfterImage] ;Post RC Afterimages ============ ++
+type 		= AfterImage
+trigger1    = !time
+time 		= 30
+length 		= 120
+timegap 		= 0.5
+ignorehitpause 	= 1
+paladd		= 25, 25, 255
+trans 		= Add
+persistent 	= 1
+;==================================================++
+[State 0, PalFX]
+type = PalFX
+trigger1 = !time
+time = 10
+sinadd = 100, 100, 200, 20	
+mul = 256,256,256
+invertall = 0
+color = 256
 
 [State 0, Explod]
 type = Explod
@@ -6056,57 +6151,9 @@ trigger1 = time>35
 value = 5110
 ctrl = 0
 
-;-------------------------------------------------------------------------------
-;Guard Crush Slide (shaking)
-[Statedef 5275]
-type=S
-movetype=H
-physics=N
-velset=0,0
-[State 150, Anim]
-type=changeanim
-trigger1= 1
-value=150
-
-[State 150, End]
-type=changestate
-trigger1= hitshakeover
-value = 5276
-;---------------------------------------------------------------------------
-;Guard Crush Slide (travel)
-[Statedef 5276]
-type    = S
-movetype= H
-physics = S
-anim  = 150
-velset = -20*cond(enemy,facing=facing,-1,1),0
-
-[State 0, VelMul]
-type = VelMul
-trigger1 = 1
-x = .95
-
-[State 52, Guard]
-type = changestate
-trigger1 = ((ifElse(P2DisT x < 0, Facing = -1, Facing = 1) && NumExplod(90000004)) || (ifElse(P2DisT x < 0, Facing = 1, Facing = -1) && NumExplod(90000006))) 
-trigger1 = inguarddist
-value = 120
-
-[State 5231, Hit wall]
-type = ChangeState
-trigger1 = BackEdgeBodyDist <= 1
-trigger2 = FrontEdgeBodyDist <= 1
-value = 5277
-
-[State 5900, 5]
-type = ChangeState
-trigger1 = time = 50
-value = 0
-ctrl = 1
-
 ;---------------------------------------------------------------------------
 ;Guard Crushed
-[Statedef 5277]
+[Statedef 5275]
 type    = S
 movetype= H
 physics = S
@@ -6614,17 +6661,11 @@ ignorehitpause = 1
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
-[State 0, MapSet] ;Instant Block Timer Reset
-type        = MapAdd
-trigger1    = map(GC)
+[State 0, MapSet] ;No more guard crush
+type        = MapSet
+trigger1    = ctrl
 map         = "GC"
-value       = -1
-
-[State 0, GEAR DECREASE]
-type 		= MapAdd
-trigger1 	= stateno != 905
-map 		= "GC"
-value 		= 0
+value       = 0
 
 ;===============================================================================
 ; ------- PARADIGM SHIFT AND WAR --------
@@ -6679,7 +6720,7 @@ map = "WAR"
 value = 1
 [state 40, MapSet] ;LOST THE WAR...
 type = MapSet
-trigger1 = power <= 0
+trigger1 = power <= 0 && map(WAR)
 map = "WAR.LOST"
 value = 1
 [state 40, MapSet] ;WAR IS OVER
@@ -6689,7 +6730,7 @@ map = "WAR"
 value = 0
 [state 40, MapSet] ;reset for next war...
 type = MapSet
-trigger1 = power >= 1
+trigger1 = power >= 1 && enemy, !map(WAR)
 map = "WAR.LOST"
 value = 0
 [state 40, MapSet] ;SHIFT OVER
@@ -6889,7 +6930,7 @@ map 		= "GEAR.GAUGE"
 value 		= 0
 [State 0, GEAR MAX]
 type 		= MapSet
-trigger1 	= map(GEAR.GAUGE) > 999
+trigger1 	= map(GEAR.GAUGE) > 999 || map(PSHIFT)
 map 		= "GEAR.GAUGE"
 value 		= 1000
 
@@ -7548,7 +7589,122 @@ v = 55
 value = map(VoidGauge) / 10
 
 
+;================================
+;GEAR Indicator
+;================================
+[State 0, Explod] ;Level 1 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) < 333 && teamside = 1
+triggerall = !numexplod(210)
+anim = F210
+ID = 210
+pos = 120, 168
+postype = left
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+[State 0, Explod] ;Level 2 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) >= 333 && teamside = 1
+triggerall = !numexplod(211)
+anim = F210
+ID = 211
+pos = 124, 172
+postype = left
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+[State 0, Explod] ;Level 3 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) >= 666 && teamside = 1
+triggerall = !numexplod(212)
+anim = F210
+ID = 212
+pos = 128, 168
+postype = left
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+[State 0, Explod] ;Level 1 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) < 333 && teamside = 2
+triggerall = !numexplod(210)
+anim = F210
+ID = 210
+pos = -120, 168
+postype = right
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+[State 0, Explod] ;Level 2 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) >= 333 && teamside = 2
+triggerall = !numexplod(211)
+anim = F210
+ID = 211
+pos = -124, 172
+postype = right
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
+[State 0, Explod] ;Level 3 INDICATOR
+type = Explod
+trigger1 = map(GEAR.GAUGE) >= 666 && teamside = 2
+triggerall = !numexplod(212)
+anim = F210
+ID = 212
+pos = -128, 168
+postype = right
+scale = 0.06,0.06
+sprpriority = 999
+ontop = 1
+ownpal = 1
+facing = 0
+removetime = -1
+removeongethit = 0
+ignorehitpause = 1
+persistent = 0
 
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(GEAR.GAUGE) < 666
+id = 212
+ignorehitpause = 1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(GEAR.GAUGE) < 333
+id = 211
+ignorehitpause = 1
 
 ;================================
 ;Attack Level Indicator / Starter Level Indicator
@@ -7559,8 +7715,8 @@ triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !n
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
 trigger1 = map(StarterLevel) = 1 && !map(Counterhit_Flag)
-anim = F1020
-ID = 1020
+anim = F250
+ID = 250
 pos = p2dist x, p2dist y - 40
 postype = p1
 scale = 0.5,0.5
@@ -7577,8 +7733,8 @@ triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !n
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
 trigger1 = map(StarterLevel) = 2 && !map(Counterhit_Flag) || map(StarterLevel) = 1 && map(Counterhit_Flag)
-anim = F1021
-ID = 1021
+anim = F251
+ID = 251
 pos = p2dist x, p2dist y - 40
 postype = p1
 scale = 0.5,0.5
@@ -7595,8 +7751,8 @@ triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !n
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
 trigger1 = map(StarterLevel) = 3 && !map(Counterhit_FLag) || map(StarterLevel) = 2 && map(Counterhit_Flag)
-anim = F1022
-ID = 1022
+anim = F252
+ID = 252
 pos = p2dist x, p2dist y - 40
 postype = p1
 scale = 0.5,0.5
@@ -7613,8 +7769,8 @@ triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !n
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
 trigger1 = map(StarterLevel) = 4 && !map(Counterhit_Flag) || map(StarterLevel) = 3 && map(Counterhit_Flag)
-anim = F1023
-ID = 1023
+anim = F253
+ID = 253
 pos = p2dist x, p2dist y - 40
 postype = p1
 scale = 0.5,0.5
@@ -7903,7 +8059,7 @@ value = 0
 [State 0, PowerAdd] ;LOSE Meter Over Time during WAR
 type = PowerAdd 
 trigger1 = map(WAR)
-value = -2
+value = -2 - 2*movetype = H
 
 ;==================================================================================================
 ;TRAINING MODE STUFF

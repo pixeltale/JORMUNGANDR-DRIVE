@@ -289,8 +289,8 @@ trigger1 = var(2)
 type 		= ChangeState
 value 		= 915 + (statetype = A)
 triggerall	= map(VoidGauge) >= 1000
-triggerall 	= command = "E" && command = "D"
-trigger1 		= var(1 + (statetype = A)) || MoveContact
+triggerall 	= command = "E" && command = "D" || command = "SHIFT"
+trigger1 		= var(1 + (statetype = A)) || movetype != H
 [State -1, EXCEED Shock]
 type 		= ChangeState
 value 		= 905

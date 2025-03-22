@@ -44,6 +44,10 @@ name = "E"
 command = y
 time = 1
 [Command]
+name = "SHIFT"
+command = z
+time = 1
+[Command]
 name = "z"
 command = z
 time = 1
@@ -818,16 +822,16 @@ buffer.time = 10
 
 [Command]
 name = "623A"
-command = ~F, D, $F, a
+command = ~$F, D, $F, a
 [Command]
 name = "623B"
-command = ~F, D, $F, b
+command = ~$F, D, $F, b
 [Command]
 name = "623C"
-command = ~F, D, $F, c
+command = ~$F, D, $F, c
 [Command]
 name = "623D"
-command = ~F, D, $F, x
+command = ~$F, D, $F, x
 
 [Command]
 name = "421A"

@@ -665,25 +665,6 @@ paladd		= 191, 64, 191			        ;+
 trans 		= add				        ;+
 persistent 	= 0				        ;+
 ;==================================================++
-[State 0, AfterImage] ;Post RC Afterimages              ============ ++
-type 		= AfterImage
-triggerall 		= time >= 0			        ;+
-trigger1		= prevstateno = 4000 || prevstateno = 2000;+
-time 		= 24				        ;+
-length 		= 25   				        ;+
-timegap 		= 1				        ;+
-ignorehitpause 	= 1 				        ;+
-paladd		= 255, 64, 64			        ;+
-trans 		= add				        ;+
-persistent 	= 1				        ;+
-;==================================================++
-
-[State 0, ChangeAnim] ;Transition from "Blink" to run
-type = ChangeAnim
-trigger1 = anim = 99 && animtime = 0
-value = 100
-elem = 1
-ignorehitpause = 1
 
 [State 0, CtrlSet]
 type = CtrlSet

@@ -462,8 +462,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "GC = %f"
-params = map(GC)
+text = "GEARGAUGE = %f war = %f"
+params = map(GEAR.GAUGE), map(WAR)
 ignorehitpause = 1
 persistent = 1
 
