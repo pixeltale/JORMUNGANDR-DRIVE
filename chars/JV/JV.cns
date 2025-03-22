@@ -378,6 +378,76 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+[State 0, Explod]
+type = Explod
+triggerall = time % 5 = 0
+trigger1 = map(WAR)
+anim = 1082
+ID = 1082
+pos = random * 0.45,-pos y - 20
+postype = p1
+facing = 1
+vfacing = 1
+bindtime = 0
+vel = 0,-2
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 0 + random
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause =1
+[State 0, Explod]
+type = Explod
+triggerall = time % 10 = 0
+trigger1 = map(WAR)
+anim = 1083
+ID = 1083
+pos = random * 0.45,-pos y - 20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 0
+vel = 0,-2
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause =1
+[State 0, Explod]
+type = Explod
+triggerall = time % 15 = 0
+trigger1 = map(WAR)
+anim = 1084
+ID = 1084
+pos = random * 0.45,-pos y - 20
+postype = p1  ;p2,front,back,left,right
+facing = 1
+vfacing = 1
+bindtime = 0
+vel = 0,-2
+accel = 0,0
+random = 0,0
+removetime = -2
+pausemovetime = 0
+scale = 0.75,0.75
+sprpriority = 0
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause =1
+
 [State 77]
 type 		= bgpalfx
 trigger1 		= map(PSHIFT) && !map(WAR)

@@ -852,16 +852,16 @@ time = 6
 
 [Command]
 name = "236A"
-command = ~D, $F, a
+command = ~D, F, a
 [Command]
 name = "236B"
-command = ~D, $F, b
+command = ~D, F, b
 [Command]
 name = "236C"
-command = ~D, $F, c
+command = ~D, F, c
 [Command]
 name = "236D"
-command = ~D, $F, d
+command = ~D, F, d
 
 [Command]
 name = "214A"
