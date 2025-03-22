@@ -1798,7 +1798,7 @@ value = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && BackEdgeBodyDist <=0
+trigger1 = enemy,Map(GC)=1 && BackEdgeBodyDist <=0 && !map(BGuard)
 value = 5275
 
 [State 0, MapSet] ;Regain ctrl frame
@@ -1895,7 +1895,7 @@ physics = S
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0 && !map(BGuard)
 value = 5275
 
 [State 151, End]
@@ -1937,7 +1937,7 @@ value = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0 && !map(BGuard)
 value = 5275
 
 ;Guard Cancel
@@ -2024,7 +2024,7 @@ physics=S
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0
+trigger1 = map(GC)=1 && BackEdgeBodyDist <= 0 && !map(BGuard)
 value = 5275
 
 [State 153, End]
@@ -6661,6 +6661,11 @@ ignorehitpause = 1
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
+[State Cancel]
+type = mapset
+trigger1 = stateno != 905
+map = "SHOCK.DC"
+value = 0
 [State 0, MapSet] ;No more guard crush
 type        = MapSet
 trigger1    = ctrl

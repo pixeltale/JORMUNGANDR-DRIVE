@@ -2306,9 +2306,9 @@ guardsound 			= S2,0
 ground.hittime 		= 10
 ground.slidetime		= 10
 ground.velocity 		= -5, 16
-air.hittime 			= 30 * MAP(untechMOD)
+air.hittime 			= 25 * MAP(untechMOD)
 air.velocity 			= -5,16 / MAP(untechMOD)
-down.hittime 			= 15
+down.hittime 			= 30
 ;===============================
 guard.ctrltime 		= 10
 guard.slidetime 		= 10
@@ -2431,15 +2431,8 @@ map 				= "GEAR.GAUGE"
 value 			= -333
 ignorehitpause 	= 1
 
-[State 0]
-type 		= MapSet
-trigger1 		= time = 0
-map 			= "nozoom"
-value 		= 0
-ignorehitpause	= 0
 [State 0, Zoom]
 type = zoom
-triggerall=map(nozoom)=0
 triggerall=enemy, statetype != A
 triggerall=backedgebodydist<=100
 trigger1 = movehit
@@ -2452,8 +2445,6 @@ pos =0,-20
 ignorehitpause=1
 [State 0, Zoom]
 type = zoom
-triggerall=map(nozoom)=0
-triggerall=map(Big)<=1
 triggerall=backedgebodydist>100
 trigger1 = movehit
 trigger1 = enemy,HitShakeOver = 0
@@ -2482,14 +2473,15 @@ color = 256
 
 [State Cancel]
 type = mapset
-trigger1 = time = 0
-map = "DCFH"
-value = 1
+trigger1 = movecontact
+map = "SHOCK.DC"
+value = time >= 60
 [State - Guard Crush]
 type = mapset
-trigger1 = moveguarded
+trigger1 = movecontact
 map = "GC"
 value = 1
+ignorehitpause = 1
 redirectid = enemynear, id
 
 [State -2, Starter Level]
@@ -2525,8 +2517,7 @@ type = HitDef
 trigger1 = !movecontact && time < 60
 attr = S, SA
 animtype  = Hard
-damage    = 100, 0
-priority  = 4
+damage    = 100 + time, 0
 guardflag = MA
 hitflag = MAFD
 pausetime = 35,35
@@ -2549,10 +2540,10 @@ p2getp1state = 0
 getpower	= 0
 [State 1020, 6]
 type = HitDef
-trigger1 = !movecontact && time > 60
+trigger1 = !movecontact && time >= 60
 attr = S, SA
 animtype  = Hard
-damage    = 50 + time, 0
+damage    = 120 + time, 0
 priority  = 4
 guardflag = MA
 hitflag = MAFD
@@ -2563,11 +2554,12 @@ hitsound   = 5,4
 guardsound = 6,0
 ground.type = Low
 guard.slidetime = 55
+guard.ctrltime = 55
 ground.slidetime = 20
 ground.hittime  = 22
-ground.velocity = -12,-7
+ground.velocity = -25,-7
 guard.velocity = -20
-air.velocity = -12,-7
+air.velocity = -25,-7
 airguard.velocity = -5, -4
 p2facing = 1
 fall = 1
@@ -2578,7 +2570,7 @@ getpower	= 0
 
 [State 0, ChangeAnim]
 type 		= ChangeAnim
-triggerall	= anim = 905 && ANIMELEMNO(0) = 6 && time < 300
+triggerall	= anim = 905 && ANIMELEMNO(0) = 6 && time < 55
 trigger1 		= command = "HOLD_E"
 value 		= 905
 elem 		= 6

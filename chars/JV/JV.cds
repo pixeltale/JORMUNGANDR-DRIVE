@@ -160,7 +160,7 @@ triggerall = command = "66" || command = "M66"
 triggerall = stateno!=100
 trigger1 = statetype = S
 trigger1 = ctrl
-trigger2 = stateno = 250
+trigger2 = stateno = 250 || map(Shock.DC)
 
 ;Backdash
 [State -1, Backdash]
@@ -290,7 +290,7 @@ type 		= ChangeState
 value 		= 915 + (statetype = A)
 triggerall	= map(VoidGauge) >= 1000
 triggerall 	= command = "E" && command = "D" || command = "SHIFT"
-trigger1 		= var(1 + (statetype = A)) || movetype != H
+trigger1 		= var(1 + (statetype = A)) || movetype != H && roundstate = 2
 [State -1, EXCEED Shock]
 type 		= ChangeState
 value 		= 905

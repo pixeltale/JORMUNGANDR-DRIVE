@@ -679,11 +679,10 @@ value = 1
 [State 0, VelSet]
 type = VelAdd
 trigger1 = time % 2
-x = 2.5
+x = 2.5 + (prevstateno = 905)
 [State 0, VelSet]
 type = VelSet
-triggerall = anim = 100
-trigger1 = vel x >= 20
+trigger1 = vel x >= 20 && prevstateno != 905
 x = 20
 [State 0, VelSet]
 type = VelAdd
