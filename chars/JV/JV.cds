@@ -63,7 +63,7 @@ var(2) = 1
 type = ChangeState
 value = 3000
 triggerall = command = "236236C"
-triggerall = power >= 2000
+triggerall = power >= 2000 * map(METER.COST)
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = statetype != A
@@ -179,14 +179,14 @@ trigger2 = stateno = 250
 [State -1, Jotunn's Extinction]
 type = changeState
 value = 2000
-triggerall = command = "236D" && power >= 1000
+triggerall = command = "236D" && power >= 1000 * map(METER.COST)
 trigger1 = var(2)
 
 ;j236D > j236D: Ordinance Driver
 [State -1, Ordinance Driver]
 type = changeState
 value = 2010
-triggerall = command = "236D" && power >= 1000
+triggerall = command = "236D" && power >= 1000 * map(METER.COST)
 trigger1 = stateno = 2000 && movehit
 
 ;===========================================================================
@@ -257,11 +257,11 @@ trigger2 = MAP(StrikeCount) = 2 && stateno != 1034
 ;trigger1 = MAP(StrikeCount) = 2
 
 ;ALL EXISTENCE DENIED......
-[State -1, EGO DEATH DRIVER]
-type = changeState
-value = 1207
-triggerall = command = "6246A"
-trigger1 = MAP(StrikeCount) = 2
+;[State -1, EGO DEATH DRIVER]
+;type = changeState
+;value = 1207
+;triggerall = command = "6246A"
+;trigger1 = MAP(StrikeCount) = 2
 
 ;===========================================================================
 
@@ -272,24 +272,31 @@ trigger1 = MAP(StrikeCount) = 2
 [State -1, Fastfall]
 type = changeState
 value = 1217
-triggerall = command = "22C"
+triggerall = command = "22C" && (pos y <= -30)
 trigger1 = var(2)
 
 ;j236C: Jotunn's Wrath
 [State -1, Jotunn's Wrath]
 type = changeState
 value = cond(map(EN), 1041, 1040)
-triggerall = command = "236C"
+triggerall = command = "236C" && command != "up"
 trigger1 = var(2)
 
 ;===========================================================================
 ;SYSTEM MECHANICS
 ;===========================================================================
+[State -1, PARADIGM SHIFT]
+type 		= ChangeState
+value 		= 915 + (statetype = A)
+triggerall	= map(VoidGauge) >= 1000
+triggerall 	= command = "E" && command = "D"
+trigger1 		= var(1 + (statetype = A)) || MoveContact
 [State -1, EXCEED Shock]
-type = ChangeState
-value = 905
-triggerall = command = "E"
-trigger1 = var(1)
+type 		= ChangeState
+value 		= 905
+triggerall 	= power >= 1000 * map(METER.COST)
+triggerall 	= command = "E"
+trigger1	 	= var(1)
 
 ;===========================================================================
 ;DRIVER ACTION
@@ -299,10 +306,10 @@ type = ChangeState
 value = 700 + 1*(MAP(EnState))
 triggerall = command = "D"
 trigger1 = var(1)
-[State -1, 5D: Coiled Serpent]
+[State -1, j.5D: Coiled Serpent]
 type = ChangeState
 value = 710
-triggerall = command = "D"
+triggerall = command = "D" && (pos y <= -30)
 trigger1 = var(2)
 
 ;===========================================================================
@@ -446,43 +453,11 @@ triggerall = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = [600,610] && movecontact
 
-;REDLINE GUARD
-[State -1, REDLINE GUARD]
-type = ChangeState
-value = 910 + 1*statetype = A
-triggerall = power >= (500 * prevstateno = [120, 155])
-triggerall = command = "REDLINE GUARD"
-trigger1 = ctrl || stateno = [120,155] && map(IBParam) && time > 0
-
-;BLUELINE GUARD (STANDING)
-[State -1, BLUELINE GUARD]
-type = ChangeState
-value = 135
-triggerall = power > 0 && statetype != A
-triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
-trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
-
-;BLUELINE GUARD (CROUCHING)
-[State -1, BLUELINE GUARD]
-type = ChangeState
-value = 136
-triggerall = power > 0 && statetype != A
-triggerall = command = "BLUELINE GUARD" && command = "holddown"  || command = "holddown" && map(BGuard_CustomBuffer)
-trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
-
-;BLUELINE GUARD (AIR)
-[State -1, BLUELINE GUARD]
-type = ChangeState
-value = 137
-triggerall = power > 0 && statetype = A
-triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
-trigger1 = ctrl || stateno = 100 && !map(noNormals)
-
 ;DEVIANT REDLINE CANCEL
 [State -1, REDLINE CANCEL]
 type = ChangeState
 value = 4002
-triggerall = power >=1000 && stateno != 4002
+triggerall = power >=1000 * map(METER.COST) && stateno != 4002
 triggerall = command = "F"
 triggerall = statetype != A
 trigger1 = map(FRC)
@@ -491,7 +466,7 @@ trigger1 = map(FRC)
 [State -1, REDLINE CANCEL]
 type = ChangeState
 value = 4003
-triggerall = power>=1000 && stateno != 4003
+triggerall = power>=1000 * map(METER.COST) && stateno != 4003
 triggerall = command = "F"
 triggerall = statetype = A 
 trigger1 = map(FRC)

@@ -379,12 +379,18 @@ trigger1 = animtime=0
 [Statedef -2]
 
 [State 77]
-type = bgpalfx
-trigger1 = map(PShift)
-time = 1
-add= 10,-120,10
+type 		= bgpalfx
+trigger1 		= map(PSHIFT) && !map(WAR)
+time 		= 1
+add			= 10,-30,20
 ignorehitpause = 1
-persistent = 1
+persistent 	= 1
+
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= map(PSHIFT)
+map 			= "METER.COST"
+value 		= 0
 
 [State 0, Jump Cancel]
 type 		= MapSet
@@ -456,8 +462,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "geargauge = %f gearmul = %f power = %i"
-params = map(GEAR.GAUGE), map(GEAR.MUL), power
+text = "GC = %f"
+params = map(GC)
 ignorehitpause = 1
 persistent = 1
 

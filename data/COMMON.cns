@@ -1569,6 +1569,12 @@ value = 140
 type = S
 physics = S
 
+[State 0, GEAR DECREASE]
+type 		= MapAdd
+trigger1 	= 1
+map 		= "GEAR.GAUGE"
+value 		= -1
+
 [State 0, MapSet] ;Blueline Guard Check
 type = MapSet
 trigger1 = 1
@@ -1605,6 +1611,12 @@ ctrl = 1
 type = C
 physics = C
 
+[State 0, GEAR DECREASE]
+type 		= MapAdd
+trigger1 	= 1
+map 		= "GEAR.GAUGE"
+value 		= -1
+
 [State 0, MapSet] ;Blueline Guard Check
 type = MapSet
 trigger1 = 1
@@ -1636,6 +1648,12 @@ ctrl = 1
 [Statedef 137]
 type = A
 physics = A
+
+[State 0, GEAR DECREASE]
+type 		= MapAdd
+trigger1 	= 1
+map 		= "GEAR.GAUGE"
+value 		= -1
 
 [State 0, MapSet] ;Blueline Guard Check
 type = MapSet
@@ -2496,7 +2514,7 @@ ctrl = 1
 
 ;---------------------------------------------------------------------------
 ;Burst Mechanic
-[Statedef 900]
+[Statedef 900] ;Void Break
 type    = A
 movetype= H
 physics = N
@@ -2507,16 +2525,21 @@ sprpriority = 2
 velset = 0,0
 facep2 = 1
 
-[state 40, MapSet] ;Burstgauge Drain
+[state 40, MapSet] ;VoidGauge Drain
 type = MapAdd
-trigger1 = !time
-map = "BurstGauge"
+trigger1 = !time && prevstateno != [120,155]
+map = "VoidGauge"
 value = -999
+[state 40, MapSet] ;VoidGauge Drain
+type = MapAdd
+trigger1 = !time && prevstateno = [120,155]
+map = "VoidGauge"
+value = -499
 
 [state 40, MapSet]  ;Lock out burst gain until landing, second half of this code is in -2
 type = MapSet       ;Under "Burst Calculations"
 trigger1 = !time
-map = "BurstGauge_Lockout"
+map = "VoidGauge_Lockout"
 value = 1
 
 [State 0, Turn]
@@ -2547,21 +2570,14 @@ trigger1 = time = 0
 value = SCA
 time = 32
 
-
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 1
-y = -1
+y = -2
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem =2
 y = 0
-
-[State 0, VarAdd]
-type = VarAdd
-trigger1 = time = 0
-v = 15     
-value = -1000
 
 [State -3, Burst Announcer]
 type = PlaySnd
@@ -2576,16 +2592,16 @@ value = 9174,1
 [State 0, Explod]
 type = Explod
 trigger1 = animelem = 2
-anim = F1010
-ID = 1010
-pos = 10,-60
+anim = F150
+ID = 150
+pos = 0,-60
 postype = p1  ;p2,front,back,left,right
 facing = 1
 vfacing = 1
 bindtime = 1
 removetime = -2
 pausemovetime = 0
-scale = 1,1
+scale = 0.5,0.5
 sprpriority = -1
 ontop = 0
 
@@ -2770,7 +2786,11 @@ anim = 910
 ctrl = 0
 sprpriority = 2
 
-;Include Meter Gain Bonus Mapadd Here
+[State 0, GEAR INCREASE]
+type 		= MapAdd
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 333
 
 [State 0, PalFX]
 type = PalFX
@@ -2819,8 +2839,11 @@ anim = 910
 ctrl = 0
 sprpriority = 2
 
-
-;Include Meter Gain Bonus Mapadd Here
+[State 0, GEAR INCREASE]
+type 		= MapAdd
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 333
 
 [State 0, PalFX]
 type = PalFX
@@ -2895,33 +2918,6 @@ trigger1 = Time = 0
 trigger1 = GetHitVar(yvel) != 0 || GetHitVar(fall)
 trigger2 = Pos Y != 0
 statetype = A
-
-[State 5000, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5000
-trigger2 = anim = 5010
-persistent = 0
-time = 6
-waveform = square
-
-[State 5000, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5001
-trigger2 = anim = 5011
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5000, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5012
-trigger2 = anim = 5002
-trigger3 = anim = 5030
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
 
 [State 5000, 6]
 type = ChangeState
@@ -3076,29 +3072,6 @@ type = ChangeState
 trigger1 = HitShakeOver
 value = 5030
 
-[State 5010, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5020
-persistent = 0
-time = 6
-waveform = square
-
-[State 5010, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5021
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5010, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5022
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
-
 ;---------------------------------------------------------------------------
 ; Crouch get-hit (knocked back)
 [Statedef 5011]
@@ -3185,34 +3158,6 @@ value = anim
 type = ChangeState
 trigger1 = HitShakeOver
 value = 5030
-
-[State 5020, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5000
-trigger2 = anim = 5010
-persistent = 0
-time = 6
-waveform = square
-
-[State 5020, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5001
-trigger2 = anim = 5011
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5020, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5012
-trigger2 = anim = 5002
-trigger3 = anim = 5030
-trigger4 = anim = [5051,5059]
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
 
 ;==============================================================
 ; Air get-hit (restand) [WIP]
@@ -3500,13 +3445,6 @@ type = SelfState
 trigger1 = HitShakeOver
 value = 5071
 
-[State 5070, 3]
-type = ForceFeedback
-trigger1 = time = 0
-time = 12
-waveform = sinesquare
-ampl = 140
-
 ;---------------------------------------------------------------------------
 ; Tripped get-hit (knocked away)
 [Statedef 5071]
@@ -3685,13 +3623,6 @@ trigger1 = 1
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 5101 ;Downed get-hit (bounce off ground)
-
-[State 5100, 13]
-type = ForceFeedback
-trigger1 = Time = 0
-waveform = sinesquare
-ampl = 128,-3,-.2,.005
-time = 20
 
 ;---------------------------------------------------------------------------
 ; Downed get-hit (bounce off ground)
@@ -3909,22 +3840,6 @@ type = VelSet
 trigger1 = abs(Vel x) < Const(movement.down.friction.threshold)
 persistent = 0
 x = 0
-
-[State 5111, 15]
-type = ForceFeedback
-trigger1 = alive
-trigger1 = Time = 0
-time = 8
-ampl = 240
-waveform = sine
-
-[State 5111, 16]
-type = ForceFeedback
-trigger1 = !alive
-trigger1 = Time = 0
-ampl = 200, 7, -.467
-time = 30
-waveform = sine
 
 ;---------------------------------------------------------------------------
 ;Invincible Knockdown
@@ -4363,7 +4278,7 @@ movetype= A
 physics = S
 juggle  = 0
 anim = 0
-poweradd = -2000
+poweradd = -2000 * map(METER.COST)
 ctrl = 0
 velset = vel x,0
 sprpriority = 2
@@ -4411,7 +4326,7 @@ movetype = A
 physics = A
 juggle  = 0
 anim = 69000
-poweradd = (-2000)
+poweradd = -2000 * map(METER.COST)
 ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
@@ -4475,7 +4390,7 @@ movetype= A
 physics = S
 juggle  = 0
 anim = 0
-poweradd = -1000
+poweradd = -1000 * map(METER.COST)
 ctrl = 0
 velset = vel x * 0.05,0
 sprpriority = 2
@@ -4533,7 +4448,7 @@ movetype = A
 physics = A
 juggle  = 0
 anim = 69000
-poweradd = -1000
+poweradd = -1000 * map(METER.COST)
 ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
@@ -5485,34 +5400,6 @@ trigger2 = Vel Y > 0    ;Hit ground
 trigger2 = Pos Y >= Const(movement.air.gethit.groundlevel)
 value = 5246 ;HITA_FALL
 
-[State 5020, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5000
-trigger2 = anim = 5010
-persistent = 0
-time = 6
-waveform = square
-
-[State 5020, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5001
-trigger2 = anim = 5011
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5020, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5012
-trigger2 = anim = 5002
-trigger3 = anim = 5030
-trigger4 = anim = [5051,5059]
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
-
 [State 5020, 5]
 type = SelfState
 trigger1 = HitShakeOver
@@ -5648,6 +5535,13 @@ physics = N
 anim  = 5101
 velset = -10*cond(enemy,facing=facing,-1,1),0
 
+[State 1200, Shake Screen]
+type = EnvShake
+trigger1 = time % 20 = 0
+time = 5    ;Time to shake screen
+ampl = -2     ;Amount to shake
+freq = 120
+
 [State 0, ModifyExplod]
 type = MakeDust
 trigger1 = time % 5 = 0
@@ -5735,34 +5629,6 @@ type = ChangeState
 trigger1 = HitShakeOver
 value = 5256
 
-[State 5020, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5000
-trigger2 = anim = 5010
-persistent = 0
-time = 6
-waveform = square
-
-[State 5020, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5001
-trigger2 = anim = 5011
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5020, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5012
-trigger2 = anim = 5002
-trigger3 = anim = 5030
-trigger4 = anim = [5051,5059]
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
-
 ;-----------------------------------------------------------------------------
 ;Ground Bounce Launch
 [Statedef 5256]
@@ -5847,13 +5713,6 @@ value = F7,1
 type = ChangeState
 trigger1 = Time = 3
 value = 5259
-
-[State 5100, 13]
-type = ForceFeedback
-trigger1 = Time = 0
-waveform = sinesquare
-ampl = 128,-3,-.2,.005
-time = 20
 
 ;---------------------------------------------------------------------------
 ;Ground Bounce Bounce
@@ -5999,34 +5858,6 @@ value = 5246 ;HITA_FALL
 type = ChangeState
 trigger1 = HitShakeOver
 value = 5246
-
-[State 5020, FFB Light]
-type = ForceFeedback
-trigger1 = anim = 5000
-trigger2 = anim = 5010
-persistent = 0
-time = 6
-waveform = square
-
-[State 5020, FFB Medium]
-type = ForceFeedback
-trigger1 = anim = 5001
-trigger2 = anim = 5011
-persistent = 0
-time = 8
-waveform = sinesquare
-ampl = 110,-1,-.3
-
-[State 5020, FFB Hard]
-type = ForceFeedback
-trigger1 = anim = 5012
-trigger2 = anim = 5002
-trigger3 = anim = 5030
-trigger4 = anim = [5051,5059]
-persistent = 0
-time = 15
-waveform = sinesquare
-ampl = 140
 
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------
@@ -6281,6 +6112,12 @@ movetype= H
 physics = S
 velset = 0,0
 anim = 5002
+
+[State 0, GEAR DECREASE]
+type 		= MapSet
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 1
 
 [State 0, PosSet]
 type = PosSet
@@ -6682,7 +6519,7 @@ value = 6140
 type = ChangeState
 value = 4000
 triggerall = !map(RCLockout) && enemy, Alive && teammode != Tag
-triggerall = power>=2000
+triggerall = power>=2000 * map(METER.COST)
 triggerall = stateno != 900 && stateno != 803 && stateno != [910,912]
 triggerall = command = "F"
 triggerall = statetype != A
@@ -6693,7 +6530,7 @@ trigger1 = movecontact && !movereversed
 type = ChangeState
 value = 4001
 triggerall = !map(RCLockout) && enemy, Alive && teammode != Tag
-triggerall = power>=2000
+triggerall = power>=2000 * map(METER.COST)
 triggerall = stateno !=750
 triggerall = stateno != 900 && stateno != [910,912]
 triggerall = command = "F"
@@ -6715,6 +6552,38 @@ triggerall = !(Name="JV" && map(NoNormals))
 trigger1 = command = "Throw"
 trigger1 = statetype = A
 trigger1 = ctrl || var(2) || stateno = [600,640] && time < 2
+
+;REDLINE GUARD
+[State -1, REDLINE GUARD]
+type = ChangeState
+value = 910 + 1*statetype = A
+triggerall = power >= (500 * prevstateno = [120, 155])
+triggerall = command = "REDLINE GUARD"
+trigger1 = ctrl || stateno = [120,155] && map(IBParam) && time > 0
+
+;BLUELINE GUARD (STANDING)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 135
+triggerall = power > 0 && statetype != A
+triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
+
+;BLUELINE GUARD (CROUCHING)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 136
+triggerall = power > 0 && statetype != A
+triggerall = command = "BLUELINE GUARD" && command = "holddown"  || command = "holddown" && map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals) || stateno = 140
+
+;BLUELINE GUARD (AIR)
+[State -1, BLUELINE GUARD]
+type = ChangeState
+value = 137
+triggerall = power > 0 && statetype = A
+triggerall = command = "BLUELINE GUARD" || map(BGuard_CustomBuffer)
+trigger1 = ctrl || stateno = 100 && !map(noNormals)
 
 ;==============================================================================
 
@@ -6745,6 +6614,237 @@ ignorehitpause = 1
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
+[State 0, MapSet] ;Instant Block Timer Reset
+type        = MapAdd
+trigger1    = map(GC)
+map         = "GC"
+value       = -1
+
+[State 0, GEAR DECREASE]
+type 		= MapAdd
+trigger1 	= stateno != 905
+map 		= "GC"
+value 		= 0
+
+;===============================================================================
+; ------- PARADIGM SHIFT AND WAR --------
+;===============================================================================
+
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= map(PSHIFT) && name != "JV"
+map 			= "METER.COST"
+value 		    = 0.5
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= !map(PSHIFT)
+map 			= "METER.COST"
+value 		    = 1
+
+[state 40, MapSet] ;INFINITE WAR
+type = MapSET
+trigger1 = map(WAR)
+map = "PSHIFT.TIMER"
+value = 600
+[state 40, MapSet] ;TICK DOWN.
+type = MapAdd
+trigger1 = map(PSHIFT.TIMER) > 0
+map = "PSHIFT.TIMER"
+value = -1
+[state 40, MapSet] ;SHIFT ON
+type = MapSet
+trigger1 = map(PSHIFT.TIMER) > 0
+map = "PSHIFT"
+value = 1
+[state 40, MapSet] ;SHIFT OFF
+type = MapSet
+trigger1 = map(PSHIFT.TIMER) <= 0
+map = "PSHIFT"
+value = 0
+
+
+[State 77]
+type 		= bgpalfx
+trigger1 		= map(PSHIFT) && map(WAR)
+time 		= 1
+add			= -5,-30,-30
+ignorehitpause = 1
+persistent 	= 1
+
+[state 40, MapSet] ;WAR
+type = MapAdd
+trigger1 = power > 0
+trigger1 = map(PSHIFT) && enemy, map(PSHIFT)
+map = "WAR"
+value = 1
+[state 40, MapSet] ;LOST THE WAR...
+type = MapSet
+trigger1 = power <= 0
+map = "WAR.LOST"
+value = 1
+[state 40, MapSet] ;WAR IS OVER
+type = MapSet
+trigger1 = map(WAR.LOST) || enemy, map(WAR.LOST)
+map = "WAR"
+value = 0
+[state 40, MapSet] ;reset for next war...
+type = MapSet
+trigger1 = power >= 1
+map = "WAR.LOST"
+value = 0
+[state 40, MapSet] ;SHIFT OVER
+type = MapSet
+trigger1 = map(WAR.LOST)
+map = "PSHIFT.TIMER"
+value = 0
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = map(WAR)
+value = -gethitvar(damage)
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1 = map(WAR)
+value = 50 * movehit = 1
+
+[State 0, PlaySnd] ;war moment
+type = PlayBgm
+trigger1 = map(WAR) = 1 && enemy, map(WAR) > 1
+bgm = "sound\rah.mp3"
+persistent = 0
+
+
+;===============================================================================
+; ------- VOID GAUGE VISUALS --------
+;===============================================================================
+;p1 side
+[State -2, Explod];Void Gauge Back
+type = Explod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 1 && !numexplod(200)
+anim = F200
+ID = 200
+pos = 34, 32
+postype = left
+removetime = -1
+sprpriority = -2
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = 0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+;p1 side
+[State -2, Explod];Void Gauge Bar
+type = Explod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 1 && !numexplod(201)
+anim = F201
+ID = 201
+pos = 34, 32
+postype = left
+removetime = -1
+sprpriority = -1
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = 0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+;p1 side
+[State -2, Explod];Void Gauge Bar
+type = Explod
+triggerall = !map(TrailerMode) && map(VoidGauge) >= 1000
+trigger1 = teamside = 1 && !numexplod(202)
+anim = F202
+ID = 202
+pos = 34, 32
+postype = left
+removetime = -1
+sprpriority = -1
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = 0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+[State 0, ModifyExplod]
+type = ModifyExplod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 1 && numexplod(201)
+ID = 201
+window = 0, 100, 53 * (map(VoidGauge)/1000), -40
+ignorehitpause = 1
+
+;p2 side
+[State -2, Explod];Void Gauge Back
+type = Explod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 2 && !numexplod(200)
+anim = F200
+ID = 200
+pos = -34, 32
+postype = right
+removetime = -1
+sprpriority = -2
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = -0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+;p2 side
+[State -2, Explod];Void Gauge Bar
+type = Explod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 2 && !numexplod(201)
+anim = F201
+ID = 201
+pos = -34, 32
+postype = right
+removetime = -1
+sprpriority = -1
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = -0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+;p2 side
+[State -2, Explod];Void Gauge Bar
+type = Explod
+triggerall = !map(TrailerMode) && map(VoidGauge) >= 1000
+trigger1 = teamside = 2 && !numexplod(202)
+anim = F202
+ID = 202
+pos = -34, 32
+postype = right
+removetime = -1
+sprpriority = -1
+bindtime = -1
+ontop = 0
+ownpal = 1
+ignorehitpause = 1
+scale = -0.38,0.38
+pausemovetime = 999999
+supermovetime = 999999
+[State 0, ModifyExplod]
+type = ModifyExplod
+triggerall = !map(TrailerMode)
+trigger1 = teamside = 2 && numexplod(201)
+ID = 201
+window = 0, 100, -53 * (map(VoidGauge)/1000), -40
+ignorehitpause = 1
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = map(VoidGauge) < 1000
+id = 202
+ignorehitpause = 1
 
 ;===============================================================================
 ; ------- G.E.A.R BONUS--------
@@ -6784,7 +6884,7 @@ value 		= 3 * map(P4)
 ;===============================================================================
 [State 0, GEAR Reset]
 type 		= MapSet
-trigger1 	= roundstate = 1 || map(GEAR.GAUGE) < 0
+trigger1 	= roundstate != [2,3] || map(GEAR.GAUGE) < 0
 map 		= "GEAR.GAUGE"
 value 		= 0
 [State 0, GEAR MAX]
@@ -7029,13 +7129,13 @@ ignorehitpause = 1
 ;======================================
 ;TAG MODE -- Drain BURST for backup character
 ;======================================
-[state 40, MapSet] ;Burstgauge Drain
+[state 40, MapSet] ;VoidGauge Drain
 type = MapSet
 triggerall = teammode = Tag
 trigger1 = stateno = const(Statetagwaitingoutside)
-trigger1 = partner, map(BurstGauge) <= 10
-map = "BurstGauge"
-value = partner, map(BurstGauge)
+trigger1 = partner, map(VoidGauge) <= 10
+map = "VoidGauge"
+value = partner, map(VoidGauge)
 persistent = 0
 
 ;======================================
@@ -7169,7 +7269,16 @@ ignorehitpause = 1
 type = SelfState
 value = 900
 triggerall = alive
-triggerall = map(BurstGauge)>=1000
+triggerall = map(VoidGauge)>=1000 && stateno != [120,155]
+triggerall = !(enemy, map(BurstLock))
+triggerall = command = "F" && command = "E"
+triggerall = movetype = H && enemy, hitdefattr != SCA, HA, HP, NT, ST, HT
+trigger1 = enemy,hitdefattr = SCA, NA, SA, NP, SP
+[State -1, Burst]
+type = SelfState
+value = 900
+triggerall = alive
+triggerall = map(VoidGauge)>=500 && stateno = [120,155]
 triggerall = !(enemy, map(BurstLock))
 triggerall = command = "F" && command = "E"
 triggerall = movetype = H && enemy, hitdefattr != SCA, HA, HP, NT, ST, HT
@@ -7198,7 +7307,7 @@ color = 256
 
 [State 0, PalFX]
 type = PalFX
-trigger1 = map(BurstGauge_Lockout)
+trigger1 = map(VoidGauge_Lockout)
 trigger1 = enemy, map(ComboTimer)
 time = 2
 add = (30 + 20 + 20 * sin(2 * pi * gametime / 160)),0,0
@@ -7275,26 +7384,26 @@ trigger1 = command = "holdfwd" || command = "holdback"
 x = 0.125*(cond(command = "holdfwd" && command != "holdback", 1, -1))
 
 ;=================================
-;Burst Stuff
+;Void Gauge
 ;=================================
 ;Burst Calculations
-[state 40, MapSet] ;Start round 1 with full Burst
+[state 40, MapSet] ;Start round 1 with full Void Gauge
 type = MapSet
 triggerall = roundNo = 1
 trigger1 = roundstate = 0
-map = "BurstGauge"
+map = "VoidGauge"
 value = 1000
 
 [state 40, MapSet] ;Dont go over max value
 type = MapSet
-trigger1 = map(BurstGauge) >= 1000
-map = "BurstGauge"
+trigger1 = map(VoidGauge) >= 1000
+map = "VoidGauge"
 value = 1000
 
-[State 0, MapAdd] ;Build Burst while hit
+[State 0, MapAdd] ;Build Void while hit
 type = MapAdd
-trigger1 = movetype = H && !map(BurstGauge_Lockout)
-map = "BurstGauge"
+trigger1 = movetype = H && !map(VoidGauge_Lockout)
+map = "VoidGauge"
 value = gethitvar(damage) * 0.35 + 3 * (enemy, (map(ComboStateCheck))) 
 ignorehitpause = 1
 persistent = 0
@@ -7302,15 +7411,43 @@ persistent = 0
 [State 0, MapAdd] ;Build Burst over time
 type = MapAdd
 triggerall = roundstate > 0 
-triggerall = time % 12 = 0
-trigger1 = !map(BurstGauge_Lockout)
-map = "BurstGauge"
+triggerall = time % 8 = 0
+trigger1 = !map(VoidGauge_Lockout) && !map(ComboStateCheck)
+map = "VoidGauge"
+value = 1 * map(GEAR.MUL)
+[State 0, MapAdd] ;Build Burst over time
+type = MapAdd
+triggerall = roundstate > 0 
+triggerall = time % 8 = 0
+trigger1 = !map(VoidGauge_Lockout) && map(ComboStateCheck)
+map = "VoidGauge"
 value = 1
+
+[state 40, MapSet] ;What Tier..?
+type = MapSet
+trigger1 = map(VoidGauge) < 250
+map = "VoidGauge.TIER"
+value = 1
+[state 40, MapSet] ;What Tier..?
+type = MapSet
+trigger1 = 500 > map(VoidGauge) > 250
+map = "VoidGauge.TIER"
+value = 2
+[state 40, MapSet] ;What Tier..?
+type = MapSet
+trigger1 = 750 > map(VoidGauge) > 500
+map = "VoidGauge.TIER"
+value = 3
+[state 40, MapSet] ;What Tier..?
+type = MapSet
+trigger1 = 1000 > map(VoidGauge) > 750
+map = "VoidGauge.TIER"
+value = 4
 
 [state 40, MapSet] ;No more lockout
 type = MapSet
 trigger1 = ctrl = 1
-map = "BurstGauge_Lockout"
+map = "VoidGauge_Lockout"
 value = 0
 
 [state 40, MapSet] ;No more lockout
@@ -7406,9 +7543,9 @@ pausemovetime = 100
 
 [State 0, VarSet]
 type = VarSet
-trigger1 = map(BurstGauge)
+trigger1 = map(VoidGauge)
 v = 55
-value = map(BurstGauge) / 10
+value = map(VoidGauge) / 10
 
 
 
@@ -7688,8 +7825,16 @@ persistent = 0
 
 [State 100, 3] ;No Chip Damage
 type = AssertSpecial
-trigger1 	= map(IBTimer) > 20
+trigger1 	= map(IBTimer) > 20 || map(Bguard)
 flag = NoGuardDamage
+
+[State 0, PowerAdd]
+type = PowerAdd
+trigger1    = stateno = 150 || stateno = 152 || stateno = 154
+trigger1 	= map(Bguard_Penalty)
+value = -gethitvar(hittime)
+ignorehitpause = 0
+persistent = 0
 
 [State 0. MapSet]
 type 		= MapSet
@@ -7745,14 +7890,20 @@ trigger1 = vel x > 0
 trigger1 = !(stateno = [3000,4000]) && stateno != 5610
 trigger1 = !(map(untechDecay) >= 2) && !(map(isAssist) > 0)
 value = vel x * 0.25 * MAP(GEAR.MUL)
-[State 0, PowerAdd]
-type = PowerAdd
-trigger1 = roundstate = 2 && !map(ComboStateCheck)
+[State 0, PowerAdd] ;Gain Meter Over Time
+type = PowerAdd 
+trigger1 = roundstate = 2 && !map(ComboStateCheck) && !map(BGuard) && !map(WAR)
 value = 2 * map(GEAR.MUL)
+
 [State 0, PowerAdd]
 type = PowerSet
 trigger1 = roundstate = 0
 value = 0
+
+[State 0, PowerAdd] ;LOSE Meter Over Time during WAR
+type = PowerAdd 
+trigger1 = map(WAR)
+value = -2
 
 ;==================================================================================================
 ;TRAINING MODE STUFF
@@ -7773,11 +7924,11 @@ value = 10000
 [State 0, MapAdd]
 type = MapAdd
 triggerall = GameMode = "Training"
-trigger1 = map(BurstGauge) > 0
+trigger1 = map(VoidGauge) > 0
 trigger1 = movetype = I
 trigger1 = teamside = 2
 trigger2 = roundstate = 0
-map = "BurstGauge"
+map = "VoidGauge"
 value = 1000
 
 [State 0, VarAdd]
@@ -7806,7 +7957,7 @@ value = cond((map(cokc)>0),0,1)
 type = MapSet
 triggerall = GameMode = "Training"
 trigger1 = map(cock)=1
-map = "BurstGauge"
+map = "VoidGauge"
 value = cond((map(cokc)>0),0,1000)
 
 [State 0, VarAdd]
@@ -8541,7 +8692,7 @@ value = 1
 [State 0, Explod] ;BURST EXPLOD
 type = Explod
 trigger1 = !numexplod(900)
-trigger1 = map(BurstGauge) >= 1000 && teamside = 1
+trigger1 = map(VoidGauge) >= 1000 && teamside = 1
 triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
 triggerall = !(enemy, (map(SlowdownTime) && map(SlowdownTimeB) && map(SlowdownTimeC)))
 triggerall = cond(teammode != Tag, playerno = playerno, playerno = teamleader)
@@ -8564,7 +8715,7 @@ ignorehitpause = 1
 [State 0, Explod]
 type = Explod
 trigger1 = !numexplod(900)
-trigger1 = map(BurstGauge) >= 1000 && teamside = 2
+trigger1 = map(VoidGauge) >= 1000 && teamside = 2
 triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
 triggerall = !(enemy, (map(SlowdownTime) && map(SlowdownTimeB) && map(SlowdownTimeC)))
 triggerall = cond(teammode != Tag, playerno = playerno, playerno = teamleader)
@@ -8586,7 +8737,7 @@ ignorehitpause = 1
 
 [State 0, RemoveExplod]
 type = RemoveExplod
-trigger1 = stateno = 900 || map(BurstGauge) < 1000 || roundstate = 3 || !alive
+trigger1 = stateno = 900 || map(VoidGauge) < 1000 || roundstate = 3 || !alive
 ignorehitpause = 1
 persistent = 1
 id = 900

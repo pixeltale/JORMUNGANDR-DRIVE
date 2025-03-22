@@ -219,6 +219,10 @@ name = "HOLD_F"
 command = /x
 time = 1
 [Command]
+name = "HOLD_E"
+command = /y
+time = 1
+[Command]
 name = "holds"
 command = /s
 time = 1

@@ -2644,8 +2644,15 @@ ctrl = 0
 anim = 2000
 sprpriority = 2
 facep2 = 1
-poweradd = -1000
+poweradd = -1000 * map(METER.COST)
 velset = vel x+2, vel y - .75
+
+[State -2, GEAR DECREASE]
+type 			= MapAdd
+trigger1 			= !time
+map 				= "GEAR.GAUGE"
+value 			= -333
+ignorehitpause 	= 1
 
 [State -2, Starter Level]
 type 		= MapSet
@@ -2851,7 +2858,7 @@ Physics = A
 velset = 0,0
 ctrl = 0
 anim = 2010
-poweradd = -1000
+poweradd = -1000 * map(METER.COST)
 sprpriority = 2
 facep2 = 1
 

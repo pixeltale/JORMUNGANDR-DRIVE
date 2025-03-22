@@ -1,5 +1,5 @@
-.\external\script\start.lua:1401: data/COMMON.cns:4384:
-Missing trigger1
+.\external\script\start.lua:1401: chars\JV/NORMALS.cns:2587:
+Command doesn't exist: HOLD_E
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1401: in function 'f_game'

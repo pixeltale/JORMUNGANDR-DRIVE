@@ -147,7 +147,13 @@ tile = 1,1
 velocity = 0.1,0.1
 TRANS=add
 
-
+[BG OCEAN]		;Destroyed Building - Far Right - Distance: Close
+type 	= normal
+spriteno	= 10,0
+start 	= 0,300
+delta 	= 1,1
+tile		= 1,0
+TRANS	= ADD
 
 [BG CLOUD1]		;Cloud - Right - Distance: Far
 type = normal
@@ -177,17 +183,6 @@ start = 600,-300
 delta = .5,.5
 mask = 1
 
-[BG 1]		;BG Glow
-type = anim
-actionno=1
-start = 0,240
-delta = 0,1.1
-tile = 1,0
-tilespacing = 0, 0
-velocity = 0,0
-mask = 0
-TRANS=add
-
 [BG BUILDING1]		;Destroyed Building - Far Right - Distance: Close
 type = normal
 spriteno=2,0
@@ -195,12 +190,20 @@ start = 800,350
 delta = .9,.9
 mask = 1
 
-[BG BUILDING 2]		;Destroyed Building - Mid-Left - Distance: Mid-Far
+[BG BUILDING 2B]		;Destroyed Building - Mid-Left - Distance: Mid-Far
+type = anim
+actionno = 2
+start = -600,260
+delta = .7,.7
+mask = 1
+[BG BUILDING 2A]		;Destroyed Building - Mid-Left - Distance: Mid-Far
 type = normal
 spriteno=2,1
 start = -600,250
 delta = .7,.7
 mask = 1
+
+
 
 [BG 1] ;FLOOR. Add some details (idk, maybe cracks, water ripples) to make parallax go harder
 type  = parallax
@@ -224,6 +227,18 @@ LoopStart
 5,0, 0,0, 10, , AS225D256
 5,0, 0,0, 10, , AS225D256
 5,0, 0,0, 20, , AS225D256
+
+; Reflection in the Water
+[Begin Action 2]
+Interpolate Scale
+Interpolate Offset
+2,1, 0,0, 150, V, A1, 1,0.32
+Interpolate Scale
+Interpolate Offset
+2,1, 0,0, 150, V, A1, 1,0.3
+Interpolate Scale
+Interpolate Offset
+2,1, 0,0, 150, V, A1, 1,0.31
 
 ; 1
 [Begin Action 5]

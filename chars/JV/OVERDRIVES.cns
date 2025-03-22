@@ -8,12 +8,12 @@ ctrl = 0
 velset = vel x,0
 anim =3001
 sprpriority = 8
-poweradd = -2000
+poweradd = -4000 * map(METER.COST)
 
 [State 0, RC LOCKOUT]
 type 		= MapSet
-trigger1 	= movehit
-map 		= "ScratchLockout"
+trigger1 		= movehit
+map 			= "ScratchLockout"
 value 		= 10
 ignorehitpause 	= 1
 persistent		= 1
@@ -484,7 +484,7 @@ type = HitDef
 p2facing = 1 
 trigger1 = animelem = 2 || animelem = 5 || animelem = 10 || animelem = 14 || animelem = 19 || animelem = 23 || animelem = 25 || animelem = 28 || animelem = 32 || animelem = 35
 attr = S, HA
-damage = 15*MAP(P4) + 15, 10
+damage = 25*MAP(P4) + 20, 10
 hitflag = MAFD
 guardflag = MA
 pausetime = 3,15
@@ -634,7 +634,7 @@ juggle = 0
 velset = vel x,0
 ctrl = 0
 anim = 3050
-poweradd = -4000
+poweradd = -4000 * map(METER.COST)
 sprpriority = 2
 
 [State -3, Hyper Finish Background]

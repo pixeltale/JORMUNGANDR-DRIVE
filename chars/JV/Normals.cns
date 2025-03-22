@@ -60,7 +60,7 @@ air.TYPE 				= High
 ;===============================
 sparkno 				= 1
 sparkxy 				= -p2dist x * 0.25, -50
-hitsound 				= S1,0
+hitsound 				= 5,0
 guardsound 			= S2,0
 ;===============================
 ground.hittime 		= 10
@@ -75,7 +75,7 @@ guard.slidetime		= 8
 guard.velocity 		= -5
 airguard.velocity 		= -1,-2
 ;===============================
-ground.cornerpush.veloff	= -8
+ground.cornerpush.veloff	= -8/map(untechMOD)
 air.cornerpush.veloff 	= -8
 down.cornerpush.veloff 	= -8
 guard.cornerpush.veloff 	= -8
@@ -174,7 +174,7 @@ air.TYPE 				= High
 ;===============================
 sparkno 				= 1
 sparkxy 				= -p2dist x * 0.25, -50
-hitsound 				= S1,0
+hitsound 				= 5,1
 guardsound 			= S2,0
 ;===============================
 ground.hittime 		= 18
@@ -188,7 +188,7 @@ guard.velocity 		= -10
 guard.slidetime		= 10
 airguard.velocity 		= -2,-2
 ;===============================
-ground.cornerpush.veloff	= -15
+ground.cornerpush.veloff	= -15/map(untechMOD)
 air.cornerpush.veloff 	= -12
 down.cornerpush.veloff 	= -8
 guard.cornerpush.veloff 	= -15
@@ -294,7 +294,7 @@ air.TYPE 				= High
 ;===============================
 sparkno 				= 2
 sparkxy 				= -p2dist x * 0.25, -60
-hitsound 				= S1,0
+hitsound 				= 5,3
 guardsound 			= S2,0
 ;===============================
 ground.hittime  		= 26 * MAP(untechMOD)
@@ -309,7 +309,7 @@ guard.slidetime 		= 12
 guard.velocity 		= -10
 airguard.velocity 		= -2,-1
 ;===============================
-ground.cornerpush.veloff	= -8
+ground.cornerpush.veloff	= -8/map(untechMOD)
 air.cornerpush.veloff 	= -8
 down.cornerpush.veloff 	= -8
 guard.cornerpush.veloff 	= -8
@@ -461,7 +461,7 @@ envshake.ampl 	= 2
 envshake.phase 	= 1
 air.fall 			= 1
 fall.yvelocity 	= 0
-ground.cornerpush.veloff = -20
+ground.cornerpush.veloff = -20/map(untechMOD)
 air.cornerpush.veloff	= -25
 getpower 	= 75 * MAP(GEAR.MUL)
 
@@ -970,7 +970,7 @@ air.velocity 	= -1.3,-2
 guard.slidetime 	= 6
 guard.hittime 	= 11
 air.fall 		= 1
-ground.cornerpush.veloff = -7.5 / map(UntechMOD)
+ground.cornerpush.veloff = -2.5 / map(UntechMOD)
 air.cornerpush.veloff 	= -10
 getpower 		= 65 * MAP(GEAR.MUL)
 
@@ -1322,7 +1322,7 @@ sprpriority = 2
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "D" && time > 8
+trigger1 = command != "HOLD_D" && time > 8
 trigger2 = time > 90
 value = 704
 ctrl = 0
@@ -1436,7 +1436,7 @@ type    = S
 movetype= I
 physics = S
 poweradd= 0
-anim =1505
+anim = 709
 sprpriority = 2
 
 [State 0, ChangeState]
@@ -1466,7 +1466,7 @@ movetype= A
 physics = S
 poweradd= 0
 ctrl = 0
-anim = 1520 + 1*(map(EnState))
+anim = 705 + 1*(map(EnState))
 sprpriority = 2
 velset = 9,0
 facep2 = 1
@@ -1503,7 +1503,7 @@ persistent 		= 0
 type = HitDef 
 p2facing 	= 1
 triggerall	= enemy, !map(ArmorActive)
-triggerall 	= anim = 1521
+triggerall 	= anim = 706
 trigger1	= !movecontact && !movereversed
 attr 		= S, NA
 damage 		= 100*MAP(P4), 10
@@ -1539,7 +1539,7 @@ p2getp1state 	= 0
 type = HitDef 
 p2facing 	= 1
 triggerall	= enemy, map(ArmorActive)
-triggerall 	= anim = 1521
+triggerall 	= anim = 706
 trigger1	= !movecontact && !movereversed
 attr 		= S, NA
 damage 		= 100*MAP(P4), 10
@@ -1584,7 +1584,7 @@ persistent 	= 0				        ;+
 [State 200, 1] ;NO ENHANCER
 type = HitDef 
 p2facing = 1
-triggerall = anim = 1520
+triggerall = anim = 705
 trigger1 = time = 0
 attr = S, NA
 animtype  = Hard
@@ -1898,14 +1898,14 @@ movetype= A
 physics = S
 poweradd= 0
 ctrl = 0
-anim = 1515 + 1*(Map(EnState))
+anim = 707 + 1*(Map(EnState))
 sprpriority = 2
 velset = vel x * 0.6,0
 facep2 = 1
 
 [State -2, Starter Level]
 type 		= MapSet
-triggerall 		= anim = 1515
+triggerall 		= anim = 707
 trigger1 		= movehit && !map(ComboStateCheck)
 map 		= "StarterLevel"
 value 		= 3	;Heavy Starter
@@ -1913,14 +1913,14 @@ ignorehitpause 	= 1
 
 [State -2, P1 Value Set]
 type 		= MapSet
-triggerall 		= anim = 1515
+triggerall 		= anim = 707
 trigger1 		= movehit && !map(ComboStateCheck)
 map 		= "P1"
 value 		= 0.90	;100% Starting DMG
 ignorehitpause 	= 1
 [State -2, P2 Value Set]
 type 		= MapSet
-triggerall 		= anim = 1515
+triggerall 		= anim = 707
 trigger1 		= movehit && map(ComboStateCheck)
 map 		= "P2"
 value 		= 0.80	;85% DMG For next hit
@@ -1928,7 +1928,7 @@ ignorehitpause 	= 1
 persistent = 0
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
-triggerall 		= anim = 1515
+triggerall 		= anim = 707
 trigger1 		= movehit
 map 		= "Accumulation"
 value 		= Map(Accumulation) * map(P2)
@@ -1938,7 +1938,7 @@ persistent 		= 0
 [State 200, 1]
 type 	= HitDef 
 p2facing 	= 1
-triggerall = anim = 1515
+triggerall = anim = 707
 trigger1 	= time = 0
 trigger1	= !movecontact && !movereversed
 attr 		= S, NA
@@ -1972,7 +1972,7 @@ getpower 		= 65 * MAP(GEAR.MUL)
 
 [State -2, Starter Level]
 type 		= MapSet
-triggerall 		= anim = 1516
+triggerall 		= anim = 708
 trigger1 		= movehit && !map(ComboStateCheck)
 map 		= "StarterLevel"
 value 		= 3	;Heavy Starter
@@ -1980,14 +1980,14 @@ ignorehitpause 	= 1
 
 [State -2, P1 Value Set]
 type 		= MapSet
-triggerall 		= anim = 1516
+triggerall 		= anim = 708
 trigger1 		= movehit && !map(ComboStateCheck)
 map 		= "P1"
 value 		= 0.95	;100% Starting DMG
 ignorehitpause 	= 1
 [State -2, P2 Value Set]
 type 		= MapSet
-triggerall 		= anim = 1516
+triggerall 		= anim = 708
 trigger1 		= movehit && map(comboStateCheck)
 map 		= "P2"
 value 		= 0.90	;95% DMG For next hit
@@ -1995,7 +1995,7 @@ ignorehitpause 	= 1
 persistent = 0
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
-triggerall 		= anim = 1516
+triggerall 		= anim = 708
 trigger1 		= movehit
 map 		= "Accumulation"
 value 		= Map(Accumulation) * map(P2)
@@ -2005,7 +2005,7 @@ persistent 		= 0
 [State 200, 1]
 type 	= HitDef 
 p2facing 	= 1
-triggerall = anim = 1516
+triggerall = anim = 708
 trigger1 	= time = 0
 attr 		= S, NA
 animtype  	= Hard
@@ -2026,8 +2026,8 @@ ground.hittime  	= 120 * MAP(untechMOD)
 air.hittime  	= 120 * MAP(untechMOD)
 down.hittime	= 120
 ground.velocity 	= -3.8,-6 
-air.velocity 	= -0.5,-5 + (map(EN5RL_UseCount) * 0.2)
-down.velocity 	= -0.5,-8 + (map(EN5RL_UseCount) * 0.2)
+air.velocity 	= -0.5,-5 * MAP(UNTECHMOD)
+down.velocity 	= -0.5,-8 * MAP(UNTECHMOD)
 air.fall 		= 1
 fall 		= 1
 fall.yvelocity 	= 0
@@ -2036,25 +2036,26 @@ envshake.freq 	= 80
 envshake.ampl 	= 6
 envshake.phase 	= 1
 guardsound	= 0, 2
+air.cornerpush.veloff = -25 * map(untechmod)
 getpower 		= 65 * MAP(GEAR.MUL)
 
 [State 0, VelAdd]
 type = VelAdd
-trigger1 = anim = 1516
-trigger1 = animelemno(0) = [4,5] 
+trigger1 = anim = 708
+trigger1 = animelemno(0) = [3,4] 
 x = 2
 y = 0
 
 [State 0, VelMul]
 type = VelMul
-trigger1 = anim = 1516
+trigger1 = anim = 708
 trigger1 = animelemno(0) >= 5 
 x = 0.9
 y = 0
 
 [State 0, 5RL Limiter]
 type 		= MapAdd
-trigger1 	= movehit = 1 && anim = 1516
+trigger1 	= movehit = 1 && anim = 708
 map 		= "En5RL_UseCount"
 value 		= 1
 ignorehitpause 	= 0
@@ -2417,7 +2418,7 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-poweradd= -500
+poweradd= -1000
 velset = vel x,0
 anim = 905
 ctrl = 0
@@ -2431,11 +2432,11 @@ value 			= -333
 ignorehitpause 	= 1
 
 [State 0]
-type = MapSet
-trigger1 = time=0
-map = "nozoom"
-value = 0
-ignorehitpause = 0
+type 		= MapSet
+trigger1 		= time = 0
+map 			= "nozoom"
+value 		= 0
+ignorehitpause	= 0
 [State 0, Zoom]
 type = zoom
 triggerall=map(nozoom)=0
@@ -2469,15 +2470,6 @@ map = "nozoom"
 value = 1
 ignorehitpause = 0
 
-[State 0, TargetBind]
-type = TargetBind
-trigger1= movehit
-trigger1 = enemy,HitShakeOver = 0
-time = 1
-id = 230
-pos = 60,-11
-ignorehitpause = 1
-
 [State 0, PalFX]
 type = PalFX
 trigger1 = time = 9
@@ -2501,7 +2493,7 @@ map = "DCFH"
 value = 1
 [State - Guard Crush]
 type = mapset
-trigger1 = time = 0
+trigger1 = moveguarded
 map = "GC"
 value = 1
 
@@ -2533,16 +2525,9 @@ value 		= Map(Accumulation) * map(P2)
 ignorehitpause 	= 1
 persistent 		= 0
 
-[State - Counter Hit Vulnerable]
-type = mapset
-trigger1 = 1
-map = "CounterState"
-value = (time = [0, 25])
-ignorehitpause = 1
-
 [State 1020, 6]
 type = HitDef
-trigger1 = !movecontact
+trigger1 = !movecontact && time < 60
 attr = S, SA
 animtype  = Hard
 damage    = 100, 0
@@ -2556,7 +2541,6 @@ hitsound   = 5,4
 guardsound = 6,0
 ground.type = Low
 guard.slidetime = 55
-ground.slidetime = 20
 ground.hittime  = 22
 ground.velocity = -12,-7
 guard.velocity = -7
@@ -2567,6 +2551,44 @@ fall = 1
 p2facing = 1 
 p2stateno = 5220
 p2getp1state = 0
+getpower	= 0
+[State 1020, 6]
+type = HitDef
+trigger1 = !movecontact && time > 60
+attr = S, SA
+animtype  = Hard
+damage    = 50 + time, 0
+priority  = 4
+guardflag = MA
+hitflag = MAFD
+pausetime = 35,35
+guard.pausetime = 15,15
+sparkxy = -10,-60
+hitsound   = 5,4
+guardsound = 6,0
+ground.type = Low
+guard.slidetime = 55
+ground.slidetime = 20
+ground.hittime  = 22
+ground.velocity = -12,-7
+guard.velocity = -20
+air.velocity = -12,-7
+airguard.velocity = -5, -4
+p2facing = 1
+fall = 1
+p2facing = 1 
+p2stateno = 5220
+p2getp1state = 0
+getpower	= 0
+
+[State 0, ChangeAnim]
+type 		= ChangeAnim
+triggerall	= anim = 905 && ANIMELEMNO(0) = 6 && time < 300
+trigger1 		= command = "HOLD_E"
+value 		= 905
+elem 		= 6
+ignorehitpause = 1
+
 
 [State 1000, 7]
 type = ChangeState
@@ -2574,9 +2596,126 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
-[State Cancel]
-type = mapset
-trigger1 = animelem = 7
-map = "GC"
-value = 0
+;---------------------------------------------------------------------------
+;PARADIGM SHIFT
+[Statedef 915]
+type    = S
+movetype= A
+physics = S
+poweradd= 0
+velset = vel x,0
+anim = 915
+ctrl = 0
+sprpriority = 10
 
+[State 0, GEAR INCREASE]
+type 		= MapAdd
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 999
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = !time
+time = 45
+darken = 1
+p2defmul = 0
+poweradd = 0
+unhittable = 1
+movetime		= 45
+ignorehitpause = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = !time
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 5
+ignorehitpause = 1
+
+[state 40, MapSet] ;VoidGauge Drain
+type = MapAdd
+trigger1 = !time
+map = "VoidGauge"
+value = -999
+[state 40, MapSet] ;10 seconds in paradise.
+type = MapAdd
+trigger1 = !time
+map = "PSHIFT.TIMER"
+value = 600
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;PARADIGM SHIFT (AIR)
+[Statedef 916]
+type    = A
+movetype= A
+physics = A
+poweradd= 0
+velset = 0,0
+anim = 915
+ctrl = 0
+sprpriority = 10
+
+[State 0, GEAR INCREASE]
+type 		= MapAdd
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 999
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = [0,45]
+x = 0
+y = 0
+
+
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "DoubleJump"
+value 		= const(AirJumps)
+[State - Air Option Limiter - Double Jump]
+type 		= mapset
+trigger1 		= !time
+map 			= "AirDash"
+value 		= const(AirDashes)
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = !time
+time = 45
+darken = 1
+p2defmul = 0
+poweradd = 0
+unhittable = 1
+movetime		= 45
+ignorehitpause = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = !time
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 5
+ignorehitpause = 1
+
+[state 40, MapSet] ;VoidGauge Drain
+type = MapAdd
+trigger1 = !time
+map = "VoidGauge"
+value = -999
+[state 40, MapSet] ;10 seconds in paradise.
+type = MapAdd
+trigger1 = !time
+map = "PSHIFT.TIMER"
+value = 600
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
