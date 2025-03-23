@@ -58,7 +58,8 @@
   "InputButtonAssistWindow": 1,
   "InputSOCDResolution": 1,
   "IP": {
-    "ace": "26.129.5.133"
+    "ace": "26.129.5.133",
+    "crow real": "26.218.122.243"
   },
   "LifeMul": 100,
   "ListenPort": "7500",
