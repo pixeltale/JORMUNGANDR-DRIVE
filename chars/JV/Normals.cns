@@ -326,6 +326,10 @@ envshake.phase 		= 0.5
 type = velset
 trigger1 = animelem = 3
 x = vel x + 3
+[State 0, VelAdd]
+type = velset
+trigger1 = moveguarded && enemy, backedgedist = 0
+x = 0
 
 [State 0, Explod]
 type = Explod
@@ -2454,12 +2458,6 @@ stagebound = 1
 camerabound = 0
 pos = pos x,-20
 ignorehitpause=1
-[State 0]
-type = MapAdd
-trigger1 = movehit
-map = "nozoom"
-value = 1
-ignorehitpause = 0
 
 [State 0, PalFX]
 type = PalFX
@@ -2475,7 +2473,7 @@ color = 256
 type = mapset
 trigger1 = movecontact
 map = "SHOCK.DC"
-value = time >= 60
+value = time >= 30
 [State - Guard Crush]
 type = mapset
 trigger1 = movecontact
@@ -2514,7 +2512,7 @@ persistent 		= 0
 
 [State 1020, 6]
 type = HitDef
-trigger1 = !movecontact && time < 60
+trigger1 = !movecontact && !movereversed && time < 30
 attr = S, SA
 animtype  = Hard
 damage    = 100 + time, 0
@@ -2540,7 +2538,7 @@ p2getp1state = 0
 getpower	= 0
 [State 1020, 6]
 type = HitDef
-trigger1 = !movecontact && time >= 60
+trigger1 = !movecontact && !movereversed && time >= 30
 attr = S, SA
 animtype  = Hard
 damage    = 120 + time, 0
@@ -2570,7 +2568,7 @@ getpower	= 0
 
 [State 0, ChangeAnim]
 type 		= ChangeAnim
-triggerall	= anim = 905 && ANIMELEMNO(0) = 6 && time < 55
+triggerall	= anim = 905 && ANIMELEMNO(0) = 6 && time < 25
 trigger1 		= command = "HOLD_E"
 value 		= 905
 elem 		= 6

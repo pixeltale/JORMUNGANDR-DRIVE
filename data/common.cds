@@ -1,6 +1,6 @@
 [Defaults]
 command.time = 15
-command.buffer.time = 5
+command.buffer.time = 7
 
 ;-| Single Button |---------------------------------------------------------
 [Command]
@@ -789,19 +789,19 @@ buffer.time = 10
 [Command]
 name = "624A"
 command = ~$F, $D, $B, a
-buffer.time = 10
+buffer.time = 15
 [Command]
 name = "624B"
 command = ~$F, $D, $B, b
-buffer.time = 10
+buffer.time = 15
 [Command]
 name = "624C"
 command = ~$F, $D, $B, c
-buffer.time = 10
+buffer.time = 15
 [Command]
 name = "624D"
 command = ~$F, $D, $B, d
-buffer.time = 10
+buffer.time = 15
 
 [Command]
 name = "63214A"
@@ -834,6 +834,19 @@ name = "623D"
 command = ~$F, D, $F, x
 
 [Command]
+name = "236A"
+command = ~D, F, a
+[Command]
+name = "236B"
+command = ~D, F, b
+[Command]
+name = "236C"
+command = ~D, F, c
+[Command]
+name = "236D"
+command = ~D, F, d
+
+[Command]
 name = "421A"
 command = ~B, D, DB, a
 time = 6
@@ -849,19 +862,6 @@ time = 6
 name = "421D"
 command = ~B, D, DB, x
 time = 6
-
-[Command]
-name = "236A"
-command = ~D, F, a
-[Command]
-name = "236B"
-command = ~D, F, b
-[Command]
-name = "236C"
-command = ~D, F, c
-[Command]
-name = "236D"
-command = ~D, F, d
 
 [Command]
 name = "214A"

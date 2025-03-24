@@ -59,7 +59,8 @@
   "InputSOCDResolution": 1,
   "IP": {
     "ace": "26.129.5.133",
-    "crow real": "26.218.122.243"
+    "crow real": "26.218.122.243",
+    "sonigs": "26.192.120.38"
   },
   "LifeMul": 100,
   "ListenPort": "7500",

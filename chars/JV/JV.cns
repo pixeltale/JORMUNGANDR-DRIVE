@@ -68,10 +68,18 @@ down.bounce.yaccel = .4               ;Vertical acceleration for player bouncing
 down.bounce.groundlevel = -4          ;Y-position at which player bouncing off the ground touches the ground again **MUGEN 1.0**
 down.friction.threshold = .05         ;If the player's speed drops below this threshold while lying down, stop his movement **MUGEN 1.0**
 
-[Constants]
+[Constants] ;Custom Defined aCons
 defensemod 	= 1.2
 airjumps		= 1
 airdashes		= 1
+ADM.SPEED		= 7.5
+ADM.BACK.SPEED	= -7.5
+ADM.LENGTH	= 10
+ADM.BACK.LENGTH= 10
+BACKDASH.SPEED	= -7
+THROW.DIST	= 55
+AIRTHROW.DISTX	= 55
+AIRTHROW.DISTY	= 65
 
 [Quotes]
 victory1 = "Its JV time baby!"
@@ -532,8 +540,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "GEARGAUGE = %f war = %f"
-params = map(GEAR.GAUGE), map(WAR)
+text = "p2distx = %f p2disty = %f"
+params = p2dist x, p2dist y
 ignorehitpause = 1
 persistent = 1
 

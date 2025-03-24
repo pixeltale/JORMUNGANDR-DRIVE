@@ -652,19 +652,19 @@ value = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "A"
-trigger1 = movecontact || animelemno(0) >= 3
+trigger1 = movecontact || animelemno(0) > 3
 value = 1031
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "B" || command = "HOLD_B"
-trigger1 = movecontact || animelemno(0) >= 3
+trigger1 = movecontact || animelemno(0) > 3
 value = 1032
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "C" || command = "HOLD_C"
-trigger1 = movecontact || animelemno(0) >= 3
+trigger1 = movecontact || animelemno(0) > 3
 value = 1033
 ctrl = 0
 
@@ -1552,42 +1552,56 @@ sprpriority 	= 2
 facep2 		= 1
 velset 		= vel x, 0
 
+[State 0, Enhancer Check]
+type = MapSet
+trigger1 = !time
+map = "EnCheck"
+value = map(En) > 0
+
 [State 0, Beast Elbow Limiter]
 type 		= MapSet
 trigger1		= movehit = 1
 trigger1 		= map(ComboStateCheck)
-map 		= "Beast_UseCount"
+map 			= "Beast_UseCount"
 value 		= 1
 
 [State -2, Starter Level]
 type 		= MapSet
 trigger1 		= movehit && !map(ComboStateCheck)
-map 		= "StarterLevel"
+map 			= "StarterLevel"
 value 		= 3	;Heavy Starter
 ignorehitpause 	= 1
 
 [State -2, P1 Value Set]
 type 		= MapSet
 trigger1 		= movehit && !map(ComboStateCheck)
-map 		= "P1"
+map 			= "P1"
 value 		= 0.90	;100% Starting DMG
 ignorehitpause 	= 1
 [State -2, P2 Value Set]
 type 		= MapSet
 trigger1 		= movehit && map(ComboStateCheck)
-map 		= "P2"
+map 			= "P2"
 value 		= 0.95	;85% DMG For next hit
 ignorehitpause 	= 1
 persistent = 0
 [State -2, P2 Accumulation - Scale]
 type 		= MapSet
 trigger1 		= movehit
-map 		= "Accumulation"
+map 			= "Accumulation"
 value 		= Map(Accumulation) * map(P2)
 ignorehitpause 	= 1
 persistent 		= 0
 
-
+[State 0, PalFX]
+type 	= PalFX
+trigger1	= !time
+trigger1 	= map(EnCheck)|| PrevStateNo = [1031,1033]
+time 	= 30
+mul 		= 256,256,256
+sinadd 	= 191, 64, 191,30
+invertall = 0
+color 	= 256
 [State 0, AfterImage] ;Enhancer Afterimage Effect ============ ++
 type 		= AfterImage			        ;+
 trigger1 		= time 	=  0 && !map(Beast_UseCount)        ;+
@@ -1643,7 +1657,7 @@ envshake.time	= 40
 envshake.freq 	= 120
 envshake.ampl 	= 5
 envshake.phase 	= 1
-getpower 		= (50)*(cond(var(var(3)) = 1, 1, .5)) 
+getpower 		= 150 * map(GEAR.MUL)
 p2stateno 	= 5245
 p2getp1state	= 0
 
@@ -1691,7 +1705,7 @@ envshake.time 	= 3
 envshake.freq 	= 5
 envshake.ampl 	= 2
 envshake.phase 	= 1
-getpower 		= (50)*(cond(var(var(3)) = 1, 1, .5)) 
+getpower 		= 100 * map(GEAR.MUL)
 
 
 [State 200, 1]
@@ -1734,7 +1748,7 @@ envshake.freq 	= 120
 envshake.ampl 	= 5
 envshake.phase 	= 1
 ;==============================================
-getpower 	= (150)*(cond(var(var(5)) = 1, 1, .5)) 
+getpower 	= 150 * map(GEAR.MUL)
 p2stateno 	= 915020
 
 [State 200, 1]
@@ -1776,7 +1790,7 @@ envshake.freq 	= 5
 envshake.ampl 	= 2
 envshake.phase 	= 1
 ;==============================================
-getpower 		= (150)*(cond(var(var(5)) = 1, 1, .5))
+getpower 		= 150 * map(GEAR.MUL)
 
 [State 0, VelAdd]
 type = veladd
@@ -1789,6 +1803,7 @@ x = vel x + 5
 
 [State 0, Changestate]
 type = Changestate
+triggerall = map(EnCheck) || PrevStateNo = [1031,1033]
 triggerall = command != "holdback"
 triggerall = command = "66" || command = "M66"
 trigger1 = movecontact
@@ -2561,7 +2576,7 @@ ctrl = 1
 
 
 ;====================================
-;j214H
+;j22C
 [Statedef 1217]
 type    = A
 movetype= A
@@ -2572,28 +2587,6 @@ ctrl = 0
 anim = 640
 sprpriority = 2
 velset = vel x,0
-
-[State 0, Explod]
-type = Explod
-trigger1 = time = 0 && Map(EN)
-anim = 101
-ID = 101
-pos = 0,0
-postype = p1  ;p2,front,back,left,right
-facing = 1
-vfacing = 1
-bindtime = 1
-vel = 5,0
-accel = -0.1,0
-random = 0,0
-removetime = 24
-pausemovetime = 0
-scale = 0.84,0.84
-sprpriority = 0
-ontop = 1
-shadow = 0,0,0
-ownpal = 0
-removeongethit = 0
 
 [State 0, VelSet]
 type = VelMul
@@ -2704,7 +2697,7 @@ ground.slidetime 	= 14
 ground.hittime  	= 33
 ground.velocity 	= -20,-6
 air.velocity 	= -20,-2
-air.hittime 	= 999 * MAP(untechMOD)
+air.hittime 	= 50 * MAP(untechMOD)
 fall 		= 1
 fall.yvelocity 	= 0
 guard.slidetime 	= 12

@@ -31,24 +31,13 @@ type = S
 physics = S
 sprpriority = 0
 
-[State Cancel]
-type = mapset
-trigger1 = 1
-map = "GC"
-value = 0
-
 [State 0, 1]
 type = ChangeAnim
-trigger1 = Anim != 0 && Anim != 5
-trigger2 = Anim = 5 && AnimTime = 0 ;Turn anim over
+trigger1 = Anim != 0 && Anim != 5 
+trigger2 = Anim = 5 && AnimTime = 0
 value = 0
 
-[State 0, 2]
-type = VelSet
-trigger1 = 1
-y = 0
-
-[State 0, 3] ;Stop moving if low velocity or 10 ticks pass after walk states or backdash
+[State 0, 3] ;Stop moving if low velocity or 4 ticks pass
 type = VelSet
 trigger1 = abs(vel x) < Const(movement.stand.friction.threshold)
 x = 0
@@ -65,11 +54,6 @@ ctrl = 0
 type    = C
 physics = C
 anim = 10
-
-[State 10, 1]
-type = VelMul
-trigger1 = Time = 0
-x = .95
 
 [State 10, 2] ;Stop moving if low velocity
 type = VelSet
@@ -118,6 +102,20 @@ type    = S
 physics = S
 sprpriority = 0
 
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = command = "holdback" 
+trigger1 = animelem = 10
+trigger2 = animelem = 25
+value = S115,0
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = command = "holdfwd"
+trigger1 = animelem = 10
+trigger2 = animelem = 25
+value = S115,0
+
 [State 20, 1]
 type = VelSet
 trigger1 = command = "holdfwd"
@@ -142,20 +140,21 @@ trigger1 = Anim != 21 && Anim != 5
 trigger2 = Anim = 5 && AnimTime = 0
 value = 21
 
+
 ;---------------------------------------------------------------------------
 ; Jump Start
 [Statedef 40]
-type    = S
+type    = A
 physics = S
 anim = 40
 ctrl = 0
 sprpriority = 1
 facep2 = 1
 
-[state 40, Vulnerability]
-type = hitby
-trigger1 = 1
-value = SCA, NA, SA, HA, NP, SP, HP; not hit by throws
+[State 200, 2]
+type = PlaySnd
+trigger1 = time = 0
+value = 0, 4
 
 [State 40, 1]
 type = VarSet
@@ -172,18 +171,26 @@ type = VarSet
 trigger1 = command = "holdback"
 sysvar(1) = -1
 
-[State 40, 4]
+[State 40, 4];FWD jump
 type = VelSet
-trigger1 = AnimTime = 0
-x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x), ifelse(sysvar(1)=1, const(velocity.jump.fwd.x), const(velocity.jump.back.x)))
+triggerall = sysvar(1) = 1
+trigger1 = animtime = 0
+x = const(velocity.jump.fwd.x) + (vel x * 0.65)
 y = const(velocity.jump.y)
 
-[State 40, 5]
+[State 40, 4] ;Neutral Jump
 type = VelSet
-trigger1 = AnimTime = 0
-trigger1 = prevstateno = 100 ;RUN_FWD
-trigger1 = sysvar(1) = 1
-x = const(velocity.runjump.fwd.x)
+triggerall = sysvar(1) = 0
+trigger1 = animtime = 0
+x = const(velocity.jump.neu.x) + (vel x * 0.45)
+y = const(velocity.jump.y)
+
+[State 40, 4] ;Backward Jump
+type = VelSet
+triggerall = sysvar(1) = -1
+trigger1 = animtime = 0
+x = const(velocity.jump.back.x)
+y = const(velocity.jump.y)
 
 [State 40, 6]
 type = ChangeState
@@ -199,15 +206,10 @@ physics = N
 ctrl = 0
 velset = 0,0
 
-[State Category]
+[State - Air Option Limiter - Double Jump]
 type = mapadd
 trigger1 = time = 0
-map = "DJCL"
-value = -1
-[State Category]
-type = mapadd
-trigger1 = time = 0
-map = "ADash"
+map = "DoubleJump"
 value = -1
 
 [State 45, 1]
@@ -244,15 +246,15 @@ y = const(velocity.airjump.y)
 [State 45, 7]
 type = ChangeState
 trigger1 = Time = 2
-value = 50
+value = 46
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; Jump Up
-[Statedef 50]
+; AirJump Up
+[Statedef 46]
 type    = A
 physics = A
-facep2 = cond(Map(SJI) , 1, 0)
+ctrl = 1
 
 [State 50, 1]
 type = VarSet
@@ -272,6 +274,39 @@ trigger1 = anim >= 41 && anim <= 43
 persistent = 0
 value = Anim + 3
 
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = time = 6
+value = 50
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Jump Up
+[Statedef 50]
+type    = A
+physics = A
+ctrl = 1
+
+[State 50, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+
+[State 50, 2]
+type = ChangeAnim
+trigger1 = Time = 0
+value = ifelse((vel x)=0, 41, ifelse((vel x)>0, 42, 43))
+
+[State 50, 3]
+type = ChangeAnim
+trigger1 = Vel y > Const720p(-8)
+trigger1 = SelfAnimExist(anim + 3)
+trigger1 = anim >= 41 && anim <= 43
+persistent = 0
+value = Anim + 3
+
+
+
 ;---------------------------------------------------------------------------
 ; Jump Down (empty state for compatibility)
 [Statedef 51]
@@ -290,50 +325,32 @@ type    = S
 physics = S
 ctrl = 0
 anim = 47
-
-[State 52, 1]
-type = VelSet
-trigger1 = Time = 0
-y = 0
+velset = vel x, 0
 
 [State 52, 2]
 type = PosSet
 trigger1 = Time = 0
 y = 0
 
-[State 52, 4]
-type = VelSet
-trigger1 = abs(vel x) < Const(movement.stand.friction.threshold)
-x = 0
-
-[State 52, Guard]
-type = changestate
-trigger1 = ctrl && command = "holdback"
-trigger1 = inguarddist && (prevstateno != [600, 699])
-value = 120
-
-[state 52, Control]
-type = ctrlset
-trigger1 = !time
-trigger1 = !(prevstateno = [600, 699])
-trigger2 = time = 1 ; 2 for SNK-style, 1 for Capcom-style. Both are good options.
+[State 52, 3]
+type = CtrlSet
+trigger1 = Time = 3
 value = 1
 
-[State 52, Assert: NoWalk]
-type = AssertSpecial
-trigger1 = Anim != 5
-flag = NoWalk
-ignoreHitPause = 1
+[State 52, 4]
+type = VelSet
+trigger1 = 1
+x = vel x * 0.99
 
-[State 52, ChangeAnim to Turning]
-type = ChangeAnim
-trigger1 = ctrl && P2Dist x < 0
-trigger1 = Anim != 5
-value = 5
+[State 52, 5]
+type = ChangeState
+trigger1 = command = "holddown"
+value = 10
+ctrl = 1
 
 [State 52, Turn]
 type = Turn
-trigger1 = Anim = 5 && AnimElem = 1
+trigger1 = p2dist x < 0
 
 [State 52, 5]
 type = ChangeState
@@ -437,6 +454,108 @@ time = 60
 palbright = 1, 1, 1
 
 ;---------------------------------------------------------------------------
+; Air Dash Fwd
+[Statedef 60]
+type    = A
+physics = A
+anim = 60
+sprpriority = 1
+ctrl = 0
+velset = 0, 0
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = const(ADM.SPEED)
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = !map(ADM)
+x = 0.96
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+trigger1 = time = 0
+map = "AirDash"
+value = -1
+
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time = 0
+map = "ADM" ;AirDash Momentum Preserve
+value = const(ADM.LENGTH)
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = vel y > 2
+value = 41
+elem = 4
+ignorehitpause = 1
+persistent = 0
+
+;Add visual soon.
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 4
+value = 1
+
+;---------------------------------------------------------------------------
+; Air Dash Back
+[Statedef 61]
+type    = A
+physics = A
+anim = 61
+sprpriority = 1
+ctrl = 0
+velset = 0, 0
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time <= 20
+flag = noairguard
+
+[State 100, 1]
+type = VelSet
+trigger1 = time = 0
+x = const(ADM.BACK.SPEED)
+
+[State 0, VelMul]
+type = VelMul
+trigger1 = !map(ADM)
+x = 0.95
+
+[State - Air Option Limiter - Airdash]
+type = mapadd
+trigger1 = time = 0
+map = "AirDash"
+value = -1
+
+[State - Airdash Momentum Preserve]
+type = mapset
+trigger1 = time = 0
+map = "ADM" 				;AirDash Momentum Preserve
+value = const(ADM.BACK.LENGTH)
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = vel y > 2
+value = 41
+elem = 4
+ignorehitpause = 1
+persistent = 0
+
+[State 0, CtrlSet]
+type = CtrlSet
+trigger1 = time = 4
+value = 1
+
+;---------------------------------------------------------------------------
 ;Throw
 [Statedef 800]
 type        = S
@@ -484,6 +603,7 @@ persistent 		= 0
 [State 800, 1] ;With grab sound
 type = HitDef 
 p2facing = 1
+triggerall = abs(p2dist x) <= abs(CONST(THROW.DIST))
 trigger1 = p2statetype != A
 trigger1 = enemy, movetype != H && enemy, stateno != [120, 155]
 Trigger1 = time = 0 
@@ -924,6 +1044,7 @@ persistent 		= 0
 [State 800, 1] ;Outside of Combos
 type = HitDef 
 p2facing = 1
+triggerall  = abs(p2dist x) <= abs(CONST(AIRTHROW.DISTX)) && abs(p2dist y) <= abs(CONST(AIRTHROW.DISTY))
 triggerall = !map(ComboStateCheck)
 trigger1 = enemy, stateno != [120, 155]
 attr = A, NT
@@ -944,6 +1065,7 @@ air.velocity = 0,0
 [State 800, 1] ;Mid-Combo
 type = HitDef 
 p2facing = 1
+triggerall  = abs(p2dist x) <= abs(CONST(AIRTHROW.DISTX)) && abs(p2dist y) <= abs(CONST(AIRTHROW.DISTY))
 triggerall = map(ComboStateCheck)
 trigger1 = enemy, stateno != [120, 155]
 attr = A, NT
@@ -990,6 +1112,12 @@ velset = 0,0
 anim = 831
 sprpriority = 2
 
+[State -2, P1 Value Set]
+type 		= MapAdd
+trigger1 	= movehit && enemy, prevstateno = 900
+map 		= "VoidGauge"
+value 		= 1000
+
 [State 0, VelSet]
 type = VelSet
 trigger1 = 1
@@ -1021,7 +1149,7 @@ value = 835
 ctrl = 0
 
 ;-----------------------------
-[Statedef 832] ;Airthrow tech window
+[Statedef 832] ;Airthrow - P2 Hold State
 type    = A
 movetype= H
 physics = N
@@ -1030,6 +1158,7 @@ poweradd= 0
 ctrl = 0
 velset = 0,0
 sprpriority = 2
+
 
 [State 0, Width]
 type = Width
@@ -1355,25 +1484,57 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-; Hop backwards
+; Run stop
+[Statedef 101]
+type    = S
+physics = S
+sprpriority = 1
+ctrl = 1
+anim = 101
+
+[State 200, 3]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;Backdash
 [Statedef 105]
-type    = A
-physics = A
+type    = S
+physics = S
 ctrl = 0
 anim = 105
 sprpriority = 1
 
-[State 105, 1]
-type = VelSet
-trigger1 = Time = 0
-x = const(velocity.run.back.x)
-y = const(velocity.run.back.y)
+[State 200, 2]
+type = PlaySnd
+trigger1 = time = 0
+value = 0, 1
+[State 200, 2]
+type = PlaySnd
+trigger1 = animelem = 4
+value = 20, 0
 
-[State 105, 3]
+;Add Dust Effects Eventually
+
+[State 100, 1]
+type = VelSet
+trigger1 = time=[2,7]
+x = CONST(BACKDASH.SPEED)
+
+[State 0, NotHitBy]
+type 	= NotHitBy
+trigger1 	= time <= 7
+value 	= SCA
+time 	= 1
+ignorehitpause = 1
+
+[State 100, 4]
 type = ChangeState
-trigger1 = Vel Y > 0
-trigger1 = Pos Y >= 0
-value = 106
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
 
 ;---------------------------------------------------------------------------
 ; Hop backwards (land)
@@ -1602,7 +1763,7 @@ trigger1 = 1
 flag = NoWalk
 [State 130, Stop Guarding]
 type = changestate
-trigger1 = command != "HOLD_F"
+trigger1 = command != "HOLD_F" || command != "holdback"
 value = 0
 ctrl = 1
 ;-------------------------------------------------------------------------------
@@ -1639,7 +1800,7 @@ trigger1 = AILevel && numenemy
 value = (enemynear,time>=150 || time>=180)
 [State 131, Stop Guarding]
 type = changestate
-trigger1 = command != "HOLD_F"
+trigger1 = command != "HOLD_F" || command != "holdback"
 value = 11
 ctrl = 1
 
@@ -1845,7 +2006,7 @@ anim = 150
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
-trigger1 = time && command = "HOLD_F"
+trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
 [State 0, MapSet] ;Blueline Guard Check
@@ -1867,7 +2028,7 @@ x = gethitvar(xvel) * facing * map(BGuard_SlideMul)
 [State 151, Vel]
 type = velset
 trigger1 = time = gethitvar(slidetime)
-trigger2 = hitover
+trigger2 = abs(vel x) < 0.5 && map(BGuard_Slidemul)
 x = 0
 
 [State 151, Ctrl]
@@ -1979,7 +2140,7 @@ anim=151
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
-trigger1 = time && command = "HOLD_F"
+trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
 [State 0, MapSet] ;Blueline Guard Check
@@ -2083,7 +2244,7 @@ anim=152
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
-trigger1 = time && command = "HOLD_F"
+trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
 [State 0, MapSet] ;Blueline Guard Check
@@ -2567,13 +2728,13 @@ color = 256
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = time = 0
-value = SCA
+value = , NA, SA, HA, NP, SP, HP
 time = 32
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 1
-y = -2
+y = -4
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem =2
@@ -4216,51 +4377,27 @@ persistent = 0
 type = VelSet
 trigger1 = Time = 4
 trigger1 = Command = "holdup"
-y = -6
-x = vel x*.5
-
-[State 5210, 2] ;Go down
-type = VelSet
-trigger1 = Time = 4
-trigger1 = Command = "holddown"
-y = 4
+y = -8
 x = vel x*.5
 
 [State 5210, 2] ;Go fwd
 type = VelSet
 trigger1 = Time = 0
 trigger1 = Command = "holdfwd"
-x = 4
+x = 8
 y = -5.5
 
 [State 5210, 2] ;Go back
 type = VelSet
 trigger1 = Time = 0
 trigger1 = Command = "holdback"
-x = -4
+x = -8
 y = -5.5
 
 [State 5210, 4]
 type = CtrlSet
 trigger1 = Time >= 12
 value = 1
-
-[State 5210, 4]
-type = MapAdd
-trigger1 = Time = 0
-map = "DJCL"
-value = -1
-
-[State 5210, 4]
-type = MapAdd
-trigger1 = Time = 0
-map = "ADash"
-value = -1
-
-; [State 5210, 5]
-; type = VelAdd
-; trigger1 = Time >= 4
-; y = Const(movement.air.gethit.airrecover.yaccel)
 
 [State 5210, 5] ;Land on ground
 type = ChangeState
@@ -4411,7 +4548,7 @@ id = 900
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = time = 3
+trigger1 = time = 1
 value = 1
 
 [State 0, ChangeState]
@@ -6165,6 +6302,12 @@ type 		= MapSet
 trigger1 	= !time
 map 		= "GEAR.GAUGE"
 value 		= 1
+[State 0, GEAR DECREASE]
+type 		= MapAdd
+trigger1 	= !time
+map 		= "GEAR.GAUGE"
+value 		= 333
+redirectid  = enemynear, id
 
 [State 0, PosSet]
 type = PosSet
@@ -6704,7 +6847,7 @@ map = "PSHIFT"
 value = 1
 [state 40, MapSet] ;SHIFT OFF
 type = MapSet
-trigger1 = map(PSHIFT.TIMER) <= 0
+trigger1 = map(PSHIFT.TIMER) <= 0 || roundstate != 2
 map = "PSHIFT"
 value = 0
 
@@ -7993,7 +8136,7 @@ flag = NoGuardDamage
 type = PowerAdd
 trigger1    = stateno = 150 || stateno = 152 || stateno = 154
 trigger1 	= map(Bguard_Penalty)
-value = -gethitvar(hittime)
+value       = -gethitvar(hittime)
 ignorehitpause = 0
 persistent = 0
 
