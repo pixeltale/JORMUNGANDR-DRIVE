@@ -851,13 +851,13 @@ trigger1 	= enemy, movehit = 1
 trigger2 	= animelem = 1 && map(ArmorElement) > 1
 value 		= anim
 elem 		= map(armorElement)
-ignorehitpause = 1
+ignorehitpause = 0
 
 [State 0. MapSet]
 type 		= MapSet
 trigger1 	= animelem = 1 && time = 0
 map 		= "armorPoints"
-value 		= 999
+value 		= 1
 ignorehitpause 	= 1
 persistent 	= 1
 [State 0. MapSet]
@@ -869,7 +869,7 @@ ignorehitpause 	= 1
 [State 0, HitOverride]
 type = HitOverride
 triggerall 	= !(enemy, map(ArmorBreak))		;"Armor Break" Attacks will bypass
-triggerall 	= animelemno(0) = [2,7]		;Active Frame Range
+triggerall 	= animelemno(0) = [2,5]		;Active Frame Range
 trigger1 	= map(ArmorPoints) > 0			;Withstand a Certain Hitcount. Armorpoints tick down with enemy attacks.
 attr 		= SCA,NA,SA,NP,SP
 slot 		= 0

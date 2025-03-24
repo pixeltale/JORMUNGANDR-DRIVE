@@ -790,18 +790,22 @@ buffer.time = 10
 name = "624A"
 command = ~$F, $D, $B, a
 buffer.time = 15
+time = 20
 [Command]
 name = "624B"
 command = ~$F, $D, $B, b
 buffer.time = 15
+time = 20
 [Command]
 name = "624C"
 command = ~$F, $D, $B, c
 buffer.time = 15
+time = 20
 [Command]
 name = "624D"
 command = ~$F, $D, $B, d
 buffer.time = 15
+time = 20
 
 [Command]
 name = "63214A"
@@ -823,15 +827,19 @@ buffer.time = 10
 [Command]
 name = "623A"
 command = ~$F, D, $F, a
+time = 20
 [Command]
 name = "623B"
 command = ~$F, D, $F, b
+time = 20
 [Command]
 name = "623C"
 command = ~$F, D, $F, c
+time = 20
 [Command]
 name = "623D"
 command = ~$F, D, $F, x
+time = 20
 
 [Command]
 name = "236A"
