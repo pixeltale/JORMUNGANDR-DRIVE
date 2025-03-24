@@ -1326,7 +1326,7 @@ sprpriority = 2
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command != "HOLD_D" && time > 8
+trigger1 = command = "D" && time > 8
 trigger2 = time > 90
 value = 704
 ctrl = 0
@@ -1395,16 +1395,16 @@ persistent 	= 0				        ;+
 ;==================================================++
 
 [State 0, ChangeState]
-type = ChangeState
-trigger1 = command != "HOLD_D"
-value = 704
-ctrl = 0
+type 	= ChangeState
+trigger1 	= command = "unbuffer_D" && time > 3
+value 	= 704
+ctrl 	= 0
 
 [State -2, Coiled Serpent]
-type 		= MapSet
-trigger1 		= 1
+type 	= MapSet
+trigger1 	= 1
 map 		= "EN"
-value 		= 5
+value 	= 5
 ignorehitpause 	= 1
 [State -2, Coiled Serpent]
 type 		= MapSet
@@ -1415,7 +1415,7 @@ ignorehitpause 	= 1
 
 [State 0, ChangeState]
 type = ChangeState
-trigger1 = command = "A"
+trigger1 = command = "unbuffer_A"
 trigger1 = time
 value = 707
 ctrl = 0

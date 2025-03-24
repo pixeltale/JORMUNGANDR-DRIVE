@@ -14,6 +14,16 @@ command = ~$D, B, a
 buffer.time = 0
 
 [Command]
+name = "unbuffer_A"
+command = /a
+time = 1
+buffer.time = 0
+[Command]
+name = "unbuffer_D"
+command = /d
+time = 1
+buffer.time = 0
+[Command]
 name = "feintBuffer_B"
 command = /b
 time = 1
