@@ -1,5 +1,13 @@
-external/script/main.lua:371: <game end>
+.\external\script\start.lua:1401: chars\JV/JV.cns:431:
+-50, 100, 50*(1/(enemy, gethitvar(hittime) - enemy,gethitvar(ctrltime)), -40
+window: Missing ')' before ,
 stack traceback:
-	[G]: in function 'refresh'
-	external/script/main.lua:371: in main chunk
+	[G]: in function 'game'
+	.\external\script\start.lua:1401: in function 'f_game'
+	.\external\script\start.lua:1834: in function 'launchFight'
+	external/script/default.lua:2: in function <external/script/default.lua:0>
+	.\external\script\start.lua:1455: in function 'f'
+	external/script/main.lua:3105: in function 'loop'
+	external/script/main.lua:3189: in function 'loop'
+	external/script/main.lua:4156: in main chunk
 	[G]: ?

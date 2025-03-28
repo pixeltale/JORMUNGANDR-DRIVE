@@ -4,6 +4,12 @@
 type = S
 physics = S
 sprpriority = 0
+velset = vel x, 0
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = !time
+y = 0
 
 [State 0, 1]
 type = ChangeAnim
@@ -1696,6 +1702,7 @@ value = 140
 [Statedef 135]
 type = S
 physics = S
+velset = 0
 
 [State 0, GEAR DECREASE]
 type 		= MapAdd
@@ -4942,9 +4949,8 @@ value = 5062
 
 [State 5050, 5]; Recover in mid air
 type = SelfState
-triggerall = Vel Y > Const(movement.air.gethit.airrecover.threshold)
 triggerall = alive
-triggerall = gethitvar(hittime) = -1
+triggerall = time >= gethitvar(ctrltime)
 trigger1 = 1 ;Condition that makes you always airtech on the first possible frame
 value = 5210 
 
@@ -4953,15 +4959,6 @@ type = SelfState
 triggerall = alive
 trigger1 = (Vel y > 0) && (Pos y >= 0)
 value = 5200
-
-[State 5030, 5]
-type = ChangeState
-triggerall = alive
-triggerall = !HitFall
-trigger1 = HitOver
-trigger2 = Vel Y > 0    ;Hit ground
-trigger2 = Pos Y >= Const(movement.air.gethit.groundlevel)
-value = 5002 ;RESTAND
 
 [State 1028, Hit ground]
 type = SelfState
@@ -6785,6 +6782,11 @@ triggerall = map(untechMOD) < 1
 triggerall = enemy, statetype = S
 trigger1 = movehit 	= 1 && enemy, BackEdgeBodyDist <= 0
 x = -2 / map(untechMOD)
+[State 0, Veladd]
+type = VelMul
+triggerall = statetype = S && enemy, statetype = S
+trigger1 = movecontact = 1 && enemy, BackEdgeBodyDist <= 0
+x = 0.5
 
 [State Cancel]
 type = mapset
@@ -7627,91 +7629,6 @@ trigger1 = map(BurstLock)
 map = "BurstLock"
 value = -1
 
-[State 0, DAMAGE]
-type = text
-triggerall = teamside = 1
-triggerall = stateno != 5611
-triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
-triggerall = (enemy, !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC))
-triggerall = playerno = teamleader
-triggerall = !map(TrailerMode) && roundstate = 2
-triggerall = !((enemy, name = "ONE") && enemy, var(30)) && !((name = "ONE") && var(30))
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "%d"
-params = var(55)
-font = F4
-align = -1
-pos = 55, 55
-scale = 0.5, 0.65
-ignorehitpause = 1
-pausemovetime = 100
-
-[State 0, DAMAGE]
-type = text
-triggerall = teamside = 1
-triggerall = stateno != 5611
-triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
-triggerall = (enemy, !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC))
-triggerall = playerno = teamleader
-triggerall = !map(TrailerMode) && roundstate = 2
-triggerall = !((enemy, name = "ONE") && enemy, var(30)) && !((name = "ONE") && var(30))
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "PERCENT"
-params = var(55)
-font = F1
-align = -1
-pos = 85, 55
-scale = 0.5, 0.65
-ignorehitpause = 1
-pausemovetime = 100
-
-[State 0, DAMAGE]
-type = text
-triggerall = teamside = 2
-triggerall = stateno != 5611
-triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
-triggerall = (enemy, !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC))
-triggerall = playerno = teamleader
-triggerall = !map(TrailerMode) && roundstate = 2
-triggerall = !((enemy, name = "ONE") && enemy, var(30)) && !((name = "ONE") && var(30))
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "%d"
-params = var(55)
-font = F4
-align = -1
-pos = 265, 55
-scale = 0.5, 0.65
-ignorehitpause = 1
-pausemovetime = 100
-
-[State 0, DAMAGE]
-type = text
-triggerall = teamside = 2
-triggerall = stateno != 5611
-triggerall = !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC)
-triggerall = (enemy, !map(SlowdownTime) && !map(SlowdownTimeB) && !map(SlowdownTimeC))
-triggerall = playerno = teamleader
-triggerall = !map(TrailerMode) && roundstate = 2
-triggerall = !((enemy, name = "ONE") && enemy, var(30)) && !((name = "ONE") && var(30))
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "PERCENT"
-params = var(55)
-font = F1
-align = -1
-pos = 295, 55
-scale = 0.5, 0.65
-ignorehitpause = 1
-pausemovetime = 100
-
-
 [State 0, VarSet]
 type = VarSet
 trigger1 = map(VoidGauge)
@@ -7844,7 +7761,7 @@ type = Explod
 triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !numexplod(1022) && !numexplod(1023)
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
-trigger1 = map(StarterLevel) = 1 && !map(Counterhit_Flag)
+trigger1 = map(StarterLevel) = 1 && (!map(Counterhit_Flag) && !movecountered)
 anim = F250
 ID = 250
 pos = p2dist x, p2dist y - 40
@@ -7862,7 +7779,7 @@ type = Explod
 triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !numexplod(1022) && !numexplod(1023)
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
-trigger1 = map(StarterLevel) = 2 && !map(Counterhit_Flag) || map(StarterLevel) = 1 && map(Counterhit_Flag)
+trigger1 = map(StarterLevel) = 2 && (!map(Counterhit_Flag) && !movecountered) || map(StarterLevel) = 1 && (map(Counterhit_Flag) || movecountered)
 anim = F251
 ID = 251
 pos = p2dist x, p2dist y - 40
@@ -7880,7 +7797,7 @@ type = Explod
 triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !numexplod(1022) && !numexplod(1023)
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
-trigger1 = map(StarterLevel) = 3 && !map(Counterhit_FLag) || map(StarterLevel) = 2 && map(Counterhit_Flag)
+trigger1 = map(StarterLevel) = 3 && (!map(Counterhit_Flag) && !movecountered) || map(StarterLevel) = 2 && (map(Counterhit_Flag) || movecountered)
 anim = F252
 ID = 252
 pos = p2dist x, p2dist y - 40
@@ -7898,7 +7815,7 @@ type = Explod
 triggerall = !map(ComboStateCheck) && !numexplod(1020) && !numexplod(1021) && !numexplod(1022) && !numexplod(1023)
 triggerall = enemy, !isHelper
 trigger1 = movehit = 1
-trigger1 = map(StarterLevel) = 4 && !map(Counterhit_Flag) || map(StarterLevel) = 3 && map(Counterhit_Flag)
+trigger1 = map(StarterLevel) = 4 && (!map(Counterhit_Flag) && !movecountered) || map(StarterLevel) = 3 && (map(Counterhit_Flag) || movecountered)
 anim = F253
 ID = 253
 pos = p2dist x, p2dist y - 40

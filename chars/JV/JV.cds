@@ -148,7 +148,7 @@ triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
 triggerall = Map(airdash) && map(DoubleJump)
 triggerall = pos y<-65 || vel y > 0
-trigger1 = ctrl || stateno = 713
+trigger1 = ctrl
 
 
 ;Backward Airdash
@@ -282,7 +282,7 @@ trigger2 = MAP(StrikeCount) = 2 && stateno != 1034
 [State -1, Fastfall]
 type = changeState
 value = 1217
-triggerall = command = "22C" && (pos y <= -30)
+triggerall = command = "22C" && (pos y <= -20)
 trigger1 = var(2)
 
 ;j236C: Jotunn's Wrath

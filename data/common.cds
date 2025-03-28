@@ -206,22 +206,27 @@ time = 1
 name = "HOLD_A"
 command = /a
 time = 1
+buffer.time = 0
 [Command]
 name = "HOLD_B"
 command = /b
 time = 1
+buffer.time = 0
 [Command]
 name = "HOLD_C"
 command = /c
 time = 1
+buffer.time = 0
 [Command]
 name = "HOLD_D"
 command = /d
 time = 1
+buffer.time = 0
 [Command]
 name = "HOLD_F"
 command = /x
 time = 1
+buffer.time = 0
 [Command]
 name = "HOLD_E"
 command = /y

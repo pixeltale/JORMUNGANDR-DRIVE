@@ -77,7 +77,7 @@ ADM.BACK.SPEED	= -6
 ADM.LENGTH	= 10
 ADM.BACK.LENGTH= 10
 BACKDASH.SPEED	= -7
-THROW.DIST	= 55
+THROW.DIST	= 65
 AIRTHROW.DISTX	= 55
 AIRTHROW.DISTY	= 65
 
@@ -386,6 +386,112 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+triggerall = map(ComboStateCheck)
+trigger1 = !NumExplod(300)
+anim = F300
+ID = 300
+pos = 30,75
+postype = left
+facing = 1
+vfacing = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+supermovetime = 999999999999
+pausemovetime = 999999999999
+scale = 0.5,0.5
+sprpriority = 1
+ontop	= -1
+ignorehitpause = 1
+ownpal	= 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 1
+triggerall = map(ComboStateCheck)
+trigger1 = !NumExplod(301)
+anim = F301
+ID = 301
+pos = 30,75
+postype = left
+facing = 1
+vfacing = 1
+removetime = -1
+supermovetime = 999999999999
+pausemovetime = 999999999999
+scale = 0.5,0.5
+sprpriority = 2
+ontop	= -1
+ignorehitpause = 1
+ownpal	= 1
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = teamside = 1 && numexplod(301)
+ID = 301
+window = 0, 100, 3*(enemy, gethitvar(hittime)), -40
+ignorehitpause = 1
+
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+triggerall = map(ComboStateCheck)
+trigger1 = !NumExplod(300)
+anim = F300
+ID = 300
+pos = -30,75
+postype = right
+facing = 1
+vfacing = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -1
+supermovetime = 999999999999
+pausemovetime = 999999999999
+scale = -0.5,0.5
+sprpriority = 1
+ontop	= -1
+ignorehitpause = 1
+ownpal	= 1
+[State 0, Explod]
+type = Explod
+triggerall = teamside = 2
+triggerall = map(ComboStateCheck)
+trigger1 = !NumExplod(301)
+anim = F301
+ID = 301
+pos = -30,75
+postype = right
+facing = 1
+vfacing = 1
+removetime = -1
+supermovetime = 999999999999
+pausemovetime = 999999999999
+scale = -0.5,0.5
+sprpriority = 2
+ontop	= -1
+ignorehitpause = 1
+ownpal	= 1
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = teamside = 2 && numexplod(301)
+ID = 301
+window = 0, 100, -3*(enemy, gethitvar(hittime)), -40
+ignorehitpause = 1
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = !map(ComboStateCheck)
+id = 300
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = !map(ComboStateCheck)
+id = 301
+
 [State 0, Explod]
 type = Explod
 triggerall = time % 5 = 0
@@ -540,8 +646,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "p2distx = %f p2disty = %f"
-params = p2dist x, p2dist y
+text = "hitstun = %i"
+params = enemy, GetHitVar(hittime)
 ignorehitpause = 1
 persistent = 1
 

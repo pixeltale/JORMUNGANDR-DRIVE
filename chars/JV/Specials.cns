@@ -769,7 +769,7 @@ ground.hittime  = 23
 ground.velocity = -6,-2 - 1*map(EnState)
 air.velocity = -6.6,-1 *map(EnState) * MAP(untechMOD)
 down.velocity = -3, -2 - 3*map(EnState) * map(UntechMod)
-air.hittime = 34
+air.hittime = 20
 down.hittime = 34
 envshake.time = 7
 fall = 1
@@ -803,7 +803,7 @@ ground.hittime  = 23
 ground.velocity = -7,-5
 air.velocity 	= -6,-3 / MAP(untechMOD)
 down.velocity 	= -3, -7
-air.hittime 	= 34 * map(untechMOD)
+air.hittime 	= 18 * map(untechMOD)
 down.hittime 	= 28 * map(untechMOD)
 envshake.time 	= 7
 fall 		= 1
@@ -822,6 +822,13 @@ type 			= MapSet
 trigger1 			= movehit
 map 				= "wallbounce_boomerang"
 value 			= 1*(enemy, backedgedist > 10)
+ignorehitpause 	= 1
+persistent 		= 0
+[State -2, Wallbounce Velocity Set]
+type 		= MapSet
+trigger1 		= movehit
+map 			= "wallbounce_yvel"
+value 		= -5.5 * map(UntechMOD)
 ignorehitpause 	= 1
 persistent 		= 0
 
@@ -1858,7 +1865,7 @@ ground.slidetime 	= 14
 ground.hittime  	= 12
 ground.velocity 	= -5,-5
 air.velocity 	= -5,-4
-air.hittime 	= 12 * MAP(untechMOD)
+air.hittime 	= 18 * MAP(untechMOD)
 fall 		= 1
 guard.slidetime 	= 12
 guard.hittime 	= 12
@@ -1868,6 +1875,13 @@ envshake.freq 	= 10
 envshake.ampl 	= 2
 envshake.phase 	= 1
 getpower 		= 100 * map(GEAR.MUL)
+
+[State 0, Changestate]
+type = Changestate
+triggerall = movecontact && map(airdash)
+trigger1 = command = "fwd" || command = "M66"
+value = 60
+ctrl = 1
 
 [State 0, ChangeState]
 type = ChangeState
@@ -1940,7 +1954,7 @@ p2facing = 1
 triggerall = p2dist x > 45 || enemy, map(ArmorActive)
 trigger1 = time = 0
 attr = S, SA
-damage = 80*MAP(P4), 10
+damage = 100*MAP(P4), 10
 hitflag = MAFD
 guardflag = MAF
 pausetime = 14,14
@@ -1987,7 +2001,14 @@ fall.yvelocity 	= 0
 guard.ctrltime 	= 10
 p2stateno 	= 5220
 p2getp1state 	= 0
-getpower = (120)*(cond(var(var(3)) = 1, 1, .5)) 
+getpower = (120)*map(GEAR.MUL)
+
+[State 0, Changestate]
+type = Changestate
+triggerall = movecontact && map(airdash)
+trigger1 = command = "fwd" || command = "M66"
+value = 60
+ctrl = 1
 
 [State -2, Wallbounce Type Set]
 type 		= MapSet
@@ -2567,21 +2588,20 @@ poweradd= 0
 ctrl = 0
 anim = 640
 sprpriority = 2
-velset = vel x,0
 
 [State 0, VelSet]
-type = VelMul
-trigger1 = time = [1,3]
-x = 0.25
-y = 0.2
+type = VelSet
+trigger1 = time = [0,5]
+x = 0
+y = -4
 ignorehitpause = 1
 persistent = 0
 
 [State 0, VelSet]
 type = VelSet
-trigger1 = time = 4
+trigger1 = time = 6
 x = 0
-y = 18
+y = 20
 ignorehitpause = 1
 persistent = 1
 
@@ -2811,6 +2831,13 @@ trigger1 		= movehit && map(ComboStateCheck)
 map 		= "jEXLim"
 value 		= 1
 ignorehitpause 	= 1
+
+[State 0, Changestate]
+type = Changestate
+triggerall = movecontact && map(airdash)
+trigger1 = command = "fwd" || command = "M66"
+value = 60
+ctrl = 1
 
 [State 0, ChangeState]
 type 	= ChangeState
