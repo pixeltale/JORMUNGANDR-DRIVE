@@ -482,8 +482,7 @@ persistent 	= 0				        ;+
 [State 200, 1]
 type = HitDef
 p2facing = 1 
-trigger1 = !MAP(CounterHit) && movecontact = 0
-hitonce = 1
+trigger1 = !MAP(CounterHit) && !movecontact && !MoveReversed
 attr = S, SA
 damage 		= 100*MAP(P4), 40
 hitflag 		= MAFD
@@ -499,7 +498,7 @@ animtype 	= medium
 ground.hittime  	= 48
 down.hittime	= 48
 ground.velocity 	= -2,-5
-air.velocity 	= -6.6,-2 + (map(untechDecay) * 0.2)
+air.velocity 	= -6.6,-2 * map(untechMOD)
 down.velocity	= -6.6, -6.6
 air.hittime 	= 34
 envshake.time 	= 7
@@ -513,8 +512,7 @@ getpower 		= 75 * MAP(GEAR.MUL)
 [State 200, 1]
 type = HitDef
 p2facing = 1 
-trigger1 = MAP(CounterHit) && movecontact = 0
-hitonce = 1
+trigger1 = MAP(CounterHit) && !movecontact && !MoveReversed
 attr = S, SA
 damage = 150*MAP(P4), 10
 hitflag = MAFD
@@ -545,7 +543,7 @@ trigger1 = animtime = 0
 value = 0
 ctrl = 1
 ;================================
-;214L - Aimless Serpent
+;214A - Aimless Serpent
 ;-----------------------------
 [Statedef 1010]
 type    = S
@@ -596,7 +594,7 @@ ctrl = 1
 ;-----------------------------
 [Statedef 1011]
 type    = S
-movetype= I
+movetype= A
 physics = S
 poweradd= 0
 ctrl = 0
@@ -604,21 +602,9 @@ anim = 1011
 sprpriority = 2
 
 [State 0, PosAdd]
-type = PosAdd
-trigger1 = animelem = 1
+type = VelSet
+trigger1 = animelem = 1 || animelem = 2
 x = 10
-[State 0, VelSet]
-type = VelSet
-trigger1 = animelemno(0) = [1,2]
-x = 15
-[State 0, VelAdd]
-type = VelMul
-trigger1 = animelemno(0) > 4
-x = 0.7
-[State 0, VelSet]
-type = VelSet
-trigger1 = animelem = 6
-x = 0
 
 [State 0, AfterImage] ;Enhancer Afterimage Effect ============ ++
 type 		= AfterImage			        ;+
@@ -638,11 +624,6 @@ trigger1 = animelemno(0) <= 2
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
 time = 1
 
-[State 200, 2]
-type = PlaySnd
-trigger1 = time = 0
-value = 5,0
-
 [State 810, Push];Cross Up
 type = PlayerPush
 triggerall = !map(ComboStateCheck)
@@ -652,19 +633,19 @@ value = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "A"
-trigger1 = movecontact || animelemno(0) > 3
+trigger1 = movecontact || time >= 9
 value = 1031
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "B" || command = "HOLD_B"
-trigger1 = movecontact || animelemno(0) > 3
+trigger1 = movecontact || time >= 9
 value = 1032
 ctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = command = "C" || command = "HOLD_C"
-trigger1 = movecontact || animelemno(0) > 3
+trigger1 = movecontact || time >= 9
 value = 1033
 ctrl = 0
 
@@ -771,7 +752,7 @@ triggerall = anim = 1020
 trigger1 = !movecontact && !movereversed
 hitonce = 1
 attr = S, SA
-damage = 120*MAP(P4), 20
+damage = 100*MAP(P4), 20
 hitflag = MAFD
 guardflag = MA
 pausetime = 12,12 + 10 * map(CounterHit)
@@ -805,7 +786,7 @@ triggerall = anim = 1021
 trigger1 = !movecontact && !movereversed
 hitonce = 1
 attr = S, SA
-damage = 140*MAP(P4), 20
+damage = 120*MAP(P4), 20
 hitflag = MAFD
 guardflag = MA
 pausetime = 15,15 + 10 * map(CounterHit)
@@ -820,10 +801,10 @@ animtype = medium
 ground.slidetime = 34
 ground.hittime  = 23
 ground.velocity = -7,-5
-air.velocity 	= -6,-3 * MAP(untechMOD)
+air.velocity 	= -6,-3 / MAP(untechMOD)
 down.velocity 	= -3, -7
-air.hittime 	= 34
-down.hittime 	= 34
+air.hittime 	= 34 * map(untechMOD)
+down.hittime 	= 28 * map(untechMOD)
 envshake.time 	= 7
 fall 		= 1
 fall.yvelocity = 0
@@ -2037,7 +2018,7 @@ persistent 		= 0
 [State 0, ChangeState]
 type = ChangeState
 trigger1 =animtime = 0 
-value = 69000
+value = 50
 ctrl = 1
 [State 0, ChangeState]
 type = ChangeState

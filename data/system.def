@@ -160,12 +160,15 @@ menu.item.spacing = 0, 15
 menu.itemname.online = "ONLINE"                            ;Ikemen feature
 menu.itemname.versus = "VS MODE"
 menu.itemname.arcade = "ARCADE"
-menu.itemname.training = "THE LAB"
-;menu.itemname.trials = "TRIALS"
+menu.itemname.lab	= "THE LAB"
 menu.itemname.extras = "EXTRAS"                             ;Ikemen feature
 menu.itemname.replay = "REPLAY"                      ;Ikemen feature
 menu.itemname.options = "OPTIONS"
 menu.itemname.exit = "EXIT"
+
+; MAIN MENU -> PRACTICE
+menu.itemname.lab.training = "TRAINING MODE"
+menu.itemname.lab.trials = "COMBO TRIALS"
 
 ; MAIN MENU -> ONLINE SUBMENU
 menu.itemname.online.serverhost = "HOST GAME"               ;Ikemen feature
@@ -520,7 +523,7 @@ p2.teammenu.ratio7.icon.facing = 1,        ;Ikemen feature
 p2.teammenu.ratio7.icon.scale = 0.40, 0.40 ;Ikemen feature
 
 teammenu.itemname.single = Solo ;Ikemen feature
-teammenu.itemname.tag = Tag      ;Ikemen feature
+;teammenu.itemname.tag = Tag      ;Ikemen feature
 teammenu.itemname.simul =   ;Ikemen feature
 teammenu.itemname.turns =    ;Ikemen feature
 teammenu.itemname.ratio =    ;Ikemen feature
@@ -1201,14 +1204,14 @@ bgclearcolor = 0, 0, 0
 	; trialsteps.horizontal.padding: horizontal layouts only - padding between glyphs and edges of the background element along the x (horizontal) axis.
 	; trialsteps.window: X1,Y1,X2,Y2: display window for trials--will create automated scrolling or line returns, depending on the trial layout of choice
 	; --------------------------------------------------------------------------
-	trialsteps.pos = 40,115
+	trialsteps.pos = 0,80
 	trialsteps.spacing = 0,11
-	trialsteps.window = 40,100, 320,140
+	trialsteps.window = 0, 0, 150, 150
 
 	; TRIALTITLE OPTIONS -------------------------------------------------------
 	; --------------------------------------------------------------------------
-	trialtitle.pos = 15,100
-	trialtitle.text.offset = 0,-7
+	trialtitle.pos = 0,80
+	trialtitle.text.offset = 0,-20
 	trialtitle.text.font = 1,0,1, 255, 100, 100
 	; trialtitle.text.text = "Trial: %s"
 	; trialtitle.text.scale = 

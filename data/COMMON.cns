@@ -372,6 +372,11 @@ type = PosAdd
 trigger1 = !time
 y = -10
 
+[State 0, PosAdd]
+type = VelAdd
+trigger1 = vel y > 0
+y = -0.05
+
 [State 45, 2]
 type = ChangeAnim
 trigger1 = vel y < -2
@@ -399,23 +404,11 @@ type = VarSet
 trigger1 = command = "holdback"
 sysvar(1) = -1
 
-
-[State 45, 6]
-type = VelMul
-trigger1 = Time = 5
-y = 0.9
 [State 45, 6]
 type = VelSet
 trigger1 = Time = 0
 x = ifelse(sysvar(1)=0, const(velocity.jump.neu.x), ifelse(sysvar(1)=1, const(velocity.jump.fwd.x)*0.5 + vel x * 0.5, const(velocity.jump.back.x)*0.5))*1.1
 y = const(velocity.jump.y) * 1.2
-
-[State 0, StateTypeSet]
-type = StateTypeSet
-trigger1 = time = 0
-statetype = A       ;S,A,C,L
-movetype = I        ;I,A,H
-physics = A         ;A,C,S,N
 
 [State 1220, Afterimage]
 type = AfterImage
@@ -1906,6 +1899,7 @@ facep2 = 1
 
 [State 0, MapSet] ;Blueline Guard Check
 type = MapSet
+triggerall = !map(GC)
 trigger1 = prevstateno != [135,137] && command != "HOLD_F"
 map = "BGuard"
 value = 0
@@ -1933,7 +1927,7 @@ value = 0
 
 [State 0, Changestate] ;Guard Crush
 type = Changestate 
-trigger1 = enemy,Map(GC)=1 && BackEdgeBodyDist <=0 && !map(BGuard)
+trigger1 = Map(GC)=1 && BackEdgeBodyDist <=0 && !map(BGuard)
 value = 5275
 
 [State 0, MapSet] ;Regain ctrl frame
@@ -1941,15 +1935,6 @@ type = MapSet
 trigger1 = !time
 map = "CtrlTime_set"
 value = gethitvar(ctrltime)
-
-;Guard Cancel
-; [State 0, Guard Cancel]
-; type = ChangeState
-; triggerall = command = "AB"
-; triggerall = command = "holdfwd"
-; trigger1 = statetype = S
-; helpertype = normal
-; value = 4008
 
 [State 150, End]
 type = changestate
@@ -1980,6 +1965,7 @@ anim = 150
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
+triggerall = !map(GC)
 trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
@@ -2054,6 +2040,7 @@ value=151
 
 [State 0, MapSet] ;Blueline Guard Check
 type = MapSet
+triggerall = !map(GC)
 trigger1 = prevstateno != [135,137] && command != "HOLD_F"
 map = "BGuard"
 value = 0
@@ -2114,6 +2101,7 @@ anim=151
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
+triggerall = !map(GC)
 trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
@@ -2203,6 +2191,11 @@ trigger1 = time = 1 && map(IBTimer)
 map = "IBTimer"
 value = 0
 
+[State 0, Changestate] ;Guard Crush
+type = Changestate
+trigger1 = Map(GC)=1 && BackEdgeBodyDist <=0 && !map(BGuard)
+value = 5240
+
 [State 154, End]
 type=changestate
 trigger1= hitshakeover
@@ -2218,6 +2211,7 @@ anim=152
 
 [State 0, MapSet] ;Activate Blueline Guard During Blockstun
 type = MapSet
+triggerall = !map(GC)
 trigger1 = time && command = "HOLD_F" && command = "holdback"
 map = "BGuard"
 value = 1
@@ -2236,7 +2230,7 @@ y = gethitvar(yvel)
 [State 155, Vel]
 type = veladd
 trigger1 = 1
-y = 0.4 + 0.2*(pos y > -10) 
+y = 0.4 + 0.2*(pos y > -10)  - 0.1 *(map(GC))
 
 [State 151, Ctrl]
 type = ctrlset
@@ -2257,6 +2251,11 @@ y=0
 type=posset
 trigger1= sysvar(0)
 y=0
+
+[State 0, Changestate] ;Guard Crush
+type = Changestate
+trigger1 = Map(GC)=1 && BackEdgeBodyDist <=0 && !map(BGuard)
+value = 5240
 
 [State 155, End]
 type = changestate
@@ -5450,6 +5449,7 @@ value = 5241
 type    = A
 movetype= H
 physics = N
+anim    = 5220
 
 [State 5223, Gravity]
 type = VelAdd
@@ -5480,6 +5480,7 @@ value = 5100
 type    = A
 movetype= H
 physics = N
+anim    = 5222
 
 [State 0, PosAdd]
 type = PosAdd
@@ -5514,11 +5515,6 @@ anim = F72
 pos = 0, floor (screenpos y) - 50
 postype = back
 sprpriority = 3
-
-[State 5232, Anim]
-type = ChangeAnim
-trigger1 = Time = 0
-value =5222
 
 [State 5232, Sound]
 type = PlaySnd
@@ -6782,6 +6778,13 @@ ignorehitpause = 1
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
+
+[State 0, Veladd]
+type = VelAdd
+triggerall = map(untechMOD) < 1
+triggerall = enemy, statetype = S
+trigger1 = movehit 	= 1 && enemy, BackEdgeBodyDist <= 0
+x = -2 / map(untechMOD)
 
 [State Cancel]
 type = mapset

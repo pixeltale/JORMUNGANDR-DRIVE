@@ -1,0 +1,5 @@
+external/script/main.lua:371: <game end>
+stack traceback:
+	[G]: in function 'refresh'
+	external/script/main.lua:371: in main chunk
+	[G]: ?

@@ -1,0 +1,154 @@
+# Dramatic Zoom by Phantom.of.the.Server
+# For Ikemen GO 0.99 and above
+
+# See the readme for installation instructions
+
+
+#===============================================================================
+# Configuration
+#===============================================================================
+
+[Function F_PotS_DramaticZoom_Config()]
+
+mapset{map: "_pots_dramaticzoom_cfg_zoom"; value: 1.25} # Intensity of zoom
+mapset{map: "_pots_dramaticzoom_cfg_slowmo"; value: 5} # Intensity of slow motion
+mapset{map: "_pots_dramaticzoom_cfg_pitch"; value: 0.85} # Sound pitch to use during zoom
+mapset{map: "_pots_dramaticzoom_cfg_music"; value: 0} # Allow stage music during zoom
+
+mapset{map: "_pots_dramaticzoom_cfg_distx"; value: 1} # Multiplier for maximum X distance between characters to trigger zoom
+mapset{map: "_pots_dramaticzoom_cfg_disty"; value: 1} # Multiplier for maximum Y distance between characters to trigger zoom
+mapset{map: "_pots_dramaticzoom_cfg_life"; value: 5} # Maximum life percentage of both characters at which zoom will trigger
+
+mapset{map: "_pots_dramaticzoom_cfg_normal"; value: 0} # Allow zoom on normal attacks
+mapset{map: "_pots_dramaticzoom_cfg_special"; value: 1} # Allow zoom on special attacks
+mapset{map: "_pots_dramaticzoom_cfg_super"; value: 1} # Allow zoom on super attacks
+
+mapset{map: "_pots_dramaticzoom_cfg_simul"; value: 0} # Allow zoom during simul mode
+
+
+#===============================================================================
+# Negative states
+#===============================================================================
+
+[StateDef -4]
+
+ignorehitpause if !ishelper {
+
+	# Run config
+	if roundstate = 0 && time = 0 {
+		call F_PotS_DramaticZoom_Config();
+	}
+
+	# Check attack attributes for both players
+	if movetype = A || p2movetype = A {
+		let p1_attr_normal = stateno = [200, 999] || hitdefattr = SCA, NA, NT, NP;
+		let p2_attr_normal = p2stateno = [200, 999] || p2, hitdefattr = SCA, NA, NT, NP;
+		let p1_attr_special = stateno = [1000, 2999] || hitdefattr = SCA, SA, ST, SP;
+		let p2_attr_special = p2stateno = [1000, 2999] || p2, hitdefattr = SCA, SA, ST, SP;
+		let p1_attr_super = stateno = [3000, 4999] || hitdefattr = SCA, HA, HT, HP;
+		let p2_attr_super = p2stateno = [3000, 4999] || p2, hitdefattr = SCA, HA, HT, HP;
+	}
+
+	if roundstate = 2
+	&& ID > p2, ID
+	&& ID = p2, p2, ID
+	# && facing != p2, facing # Removed because it makes it less fun
+	&& movetype = A && p2movetype = A
+	# && inguarddist && p2, inguarddist # Removed because it leaves out throws
+	&& movecontact = 0 && p2, movecontact = 0
+	&& movereversed = 0 && p2, movereversed = 0
+	# Check simul mode
+	&& (map(_pots_dramaticzoom_cfg_simul) != 0 || (teammode != Simul && p2, teammode != Simul))
+	# Life check
+	&& (100.0 * life / lifemax) <= map(_pots_dramaticzoom_cfg_life)
+	&& (100.0 * p2life / p2, lifemax) <= map(_pots_dramaticzoom_cfg_life)
+	# X Distance check
+	&& (abs(p2bodydist x) <= abs(const(size.head.pos.y) * map(_pots_dramaticzoom_cfg_distx))
+		|| abs(p2, p2bodydist x) <= abs(p2, const(size.head.pos.y) * map(_pots_dramaticzoom_cfg_distx)))
+	# Y Distance check
+	&& (abs(p2dist y) <= abs(const(size.head.pos.y) * map(_pots_dramaticzoom_cfg_disty))
+		|| abs(p2, p2dist y) <= abs(p2, const(size.head.pos.y) * map(_pots_dramaticzoom_cfg_disty)))
+	# Attack type check
+	&& (map(_pots_dramaticzoom_cfg_normal) != 0 || $p1_attr_normal = 0 || $p2_attr_normal = 0)
+	&& (map(_pots_dramaticzoom_cfg_special) != 0 || $p1_attr_special = 0 || $p2_attr_special = 0)
+	&& (map(_pots_dramaticzoom_cfg_super) != 0 || $p1_attr_super = 0 || $p2_attr_super = 0) {
+		let ok = 1;
+		# Check if another player is already calling this feature
+		for i = 1; 8; 1 {
+			if $i != playerno && playerIDexist(player($i), ID) {
+				if player($i), map(_pots_dramaticzoom) > 0 {
+					let ok = 0;
+					break;
+				}
+			}
+		}
+		if $ok {
+			if map(_pots_dramaticzoom) < 0 {
+				mapset{map: "_pots_dramaticzoom"; value: 1}
+			} else {
+				mapadd{map: "_pots_dramaticzoom"; value: 1}
+			}
+		}
+	} else {
+		if map(_pots_dramaticzoom) > 0 {
+			mapset{map: "_pots_dramaticzoom"; value: -1}
+			pause{time: 0}
+		} else if map(_pots_dramaticzoom) < 0 {
+			if (hitshakeover && p2, hitshakeover && hitpausetime = 0 && p2, hitpausetime = 0) || map(_pots_dramaticzoom) != -1 {
+				mapadd{map: "_pots_dramaticzoom"; value: -1}
+			}
+		}
+	}
+
+	# Reset variable after the zoomout time
+	if map(_pots_dramaticzoom) < -20 {
+		mapset{map: "_pots_dramaticzoom"; value: 0}
+	}
+
+	# Apply effects before the hit or during hitpause
+	if map(_pots_dramaticzoom) > 0 || map(_pots_dramaticzoom) = -1 {
+		if map(_pots_dramaticzoom) = 1 {
+			bgpalfx{
+				time: 15;
+				add: 128, 128, 128;
+				sinadd: -128, -128, -128, 60;
+			}
+		}
+		# Zoom
+		zoom{
+			scale: map(_pots_dramaticzoom_cfg_zoom);
+			pos: (pos x + p2, pos x) / 2.0,
+				max(stagevar(camera.boundhigh), (pos y + p2, pos y) / 4.0);
+			lag: 0.75;
+			stagebound: 1;
+			camerabound: 1;
+		}
+		# Slow motion
+		if map(_pots_dramaticzoom) > 0 # No slow motion after the hit to not interfere with combo timing
+		&& pausetime = 0 && p2, pausetime = 0 {
+			pause{time: map(_pots_dramaticzoom_cfg_slowmo)}
+		}
+		# Pause BGM
+		if map(_pots_dramaticzoom_cfg_music) = 0 {
+			assertspecial{flag: nomusic}
+		}
+		# TODO: Add interpolated explods if the feature is ever unlocked for legacy chars
+	} else if map(_pots_dramaticzoom) = [-20, -2] {
+		# Reset zoom smoothly
+		zoom{
+			scale: 1.0;
+			pos: ((pos x + p2, pos x) / 2.0) / 20 / (21 + map(_pots_dramaticzoom)),
+				max(stagevar(camera.boundhigh), (pos y + p2, pos y) / 4.0) / 20 / (21 + map(_pots_dramaticzoom));
+			lag: 0.75;
+			stagebound: 1;
+			camerabound: 0;
+		}
+	}
+
+	# Debug
+	#displaytoclipboard{
+	#	text: "%f";
+	#	params: map(_pots_dramaticzoom);
+	#}
+
+}

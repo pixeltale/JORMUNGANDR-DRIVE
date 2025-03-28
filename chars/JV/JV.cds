@@ -20,7 +20,7 @@ time = 1
 buffer.time = 0
 [Command]
 name = "unbuffer_D"
-command = /d
+command = d
 time = 1
 buffer.time = 0
 [Command]

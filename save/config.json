@@ -27,9 +27,9 @@
     "data/functions.zss",
     "data/action.zss",
     "data/guardbreak.zss",
-    "data/score.zss",
-    "data/tag.zss",
-    "data/training.zss"
+    "data/training.zss",
+    "data/trials.zss",
+    "data/dramaticzoom.zss"
   ],
   "ControllerStickSensitivity": 0.4,
   "Credits": 10,

@@ -9,6 +9,7 @@ mugenversion 	= 1.1        	;Version of M.U.G.E.N character works on (X.XX)
 ikemenversion	= 0.99
 author 		= "PXN."         		;Character author name
 pal.defaults 	= 1,2,3,4
+trials		= trials.def
 
 ; Files for the player
 [Files]
