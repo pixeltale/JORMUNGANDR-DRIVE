@@ -1526,10 +1526,10 @@ fall.yvelocity 	= 0
 ground.hittime	= 19
 air.hittime 	= 38 * MAP(untechMOD)
 down.hittime	= 38
-envshake.time 	= 45
-envshake.freq 	= 10
-envshake.ampl 	= 2
-envshake.phase 	= 1
+envshake.time 			= 15
+envshake.freq 			= 15
+envshake.ampl 			= 6
+envshake.phase 		= 0.5
 air.fall 	= 1
 fall 		= 1
 guard.velocity 	= 1
@@ -1562,10 +1562,10 @@ fall.yvelocity 	= 0
 ground.hittime	= 19
 air.hittime 	= 38 * MAP(untechMOD)
 down.hittime	= 38
-envshake.time 	= 45
-envshake.freq 	= 10
-envshake.ampl 	= 2
-envshake.phase 	= 1
+envshake.time 			= 15
+envshake.freq 			= 15
+envshake.ampl 			= 6
+envshake.phase 		= 0.5
 air.fall 	= 1
 fall 		= 1
 guard.velocity 	= 1
@@ -1613,10 +1613,10 @@ air.velocity = 0.5,20
 down.velocity = 0.5,20
 air.fall = 1
 fall.yvelocity = 0
-envshake.time = 20
-envshake.freq = 80
-envshake.ampl = 6
-envshake.phase = 1
+envshake.time 	= 45
+envshake.freq 	= 10
+envshake.ampl 	= 2
+envshake.phase 	= 1
 getpower = 50 * MAP(GEAR.MUL)
 
 [State 0, Jump Cancel]
@@ -2358,7 +2358,7 @@ p2getp1state    		= 0
 [State 0, JORMUNGANDR DEFAULT HITDEF]
 type 				= HitDef
 triggerall			= map(encheck)
-trigger1 				= !movecontact && !movereversed
+trigger1 				= !movecontact && !movereversed && enemy, !map(ArmorActive)
 ;===============================
 damage 				= 120 * MAP(P4),0
 pausetime 			= 12,12
@@ -2403,16 +2403,60 @@ envshake.ampl 			= -2
 ;===============================
 p2stateno 			= 5245
 p2getp1state			= 0
+[State 0, JORMUNGANDR DEFAULT HITDEF]
+type 				= HitDef
+trigger1 				= !movecontact && !movereversed && enemy, map(ArmorActive)
+;===============================
+damage 				= 120,0
+pausetime 			= 12,12
+getpower 				= 75 * MAP(GEAR.MUL),0
+;===============================
+attr 				= S,NA
+hitflag 				= MAFD
+guardflag 			= HA
+animtype 				= Light
+air.animtype 			= Light
+ground.TYPE 			= High
+air.TYPE 				= High
+;===============================
+sparkno 				= 3
+sparkxy 				= -p2dist x * 0.25, -60
+hitsound 				= 5,0
+guardsound 			= 6,0
+;===============================
+ground.hittime 		= 26
+ground.slidetime		= 10
+ground.velocity 		= -5, 16
+air.hittime 			= 32 * MAP(untechMOD)
+air.velocity 			= -5,18 / MAP(untechMOD)
+down.hittime 			= 30
+;===============================
+guard.ctrltime 		= 10
+guard.slidetime 		= 10
+guard.velocity 		= -10
+airguard.velocity 		= -2,-2
+;===============================
+ground.cornerpush.veloff	= -15 / MAP(UNTECHMOD)
+air.cornerpush.veloff 	= -25 / MAP(UNTECHMOD)
+down.cornerpush.veloff 	= -8
+guard.cornerpush.veloff 	= -8
+;===============================
+fall 				= 1
+air.fall 				= 1
+;===============================
+envshake.time 			= 8
+envshake.freq 			= 8
+envshake.ampl 			= -2
 
 [State 0, ChangeState]
 type = ChangeState
-triggerall = !movecontact
+triggerall = !movecontact || moveguarded
 trigger1 =pos y>= 0
 value = 715
 ctrl = 1
 [State 0, ChangeState]
 type = ChangeState
-triggerall = movecontact
+triggerall = movehit
 trigger1 =pos y>= 0
 value = 0
 ctrl = 1
@@ -2450,7 +2494,7 @@ physics = A
 
 [State 0, CtrlSet]
 type = CtrlSet
-trigger1 = 1
+trigger1 = time = 5
 value = 1
 
 [State 0, AfterImage] ;Enhancer Afterimage Effect
@@ -2581,23 +2625,22 @@ animtype  = Hard
 damage    = 100 + time, 0
 guardflag = MA
 hitflag = MAFD
-pausetime = 35,35
+pausetime = 15,15
 guard.pausetime = 15,15
 sparkxy = -10,-60
 hitsound   = 5,4
 guardsound = 6,0
-ground.type = Low
+ground.type = TRIP
+air.type		= TRIP
 guard.slidetime = 55
 ground.hittime  = 22
-ground.velocity = -12,-7
+ground.velocity = -12,7
 guard.velocity = -7
-air.velocity = -12,-7
+air.velocity = -12,7
 airguard.velocity = -5, -4
 p2facing = 1
 fall = 1
-p2facing = 1 
-p2stateno = 5220
-p2getp1state = 0
+p2facing = 1
 getpower	= 0
 [State 1020, 6]
 type = HitDef

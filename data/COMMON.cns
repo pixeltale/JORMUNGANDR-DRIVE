@@ -2932,29 +2932,36 @@ anim = 910
 ctrl = 0
 sprpriority = 2
 
+
+
 [State 0, GEAR INCREASE]
 type 		= MapAdd
 trigger1 	= !time
 map 		= "GEAR.GAUGE"
 value 		= 333
 
+[State 0, Pause]
+type = Pause
+trigger1 = !time
+time = 15
+movetime = 1
+ignorehitpause = 1
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
-time = 4
-sinadd = 200, 64, 64, 10	
-mul = 256,256,256
-sinadd = 0,0,0,10
+time = 10
+add = 200, 30, 30
 invertall = 0
-color = 256
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "SlowdownTimeB"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
+color = 0
+ignorehitpause = 1
+[State 0, PalFX]
+type = BGPalFX
+trigger1 = !time
+time = 15
+add = -20, -20, -20
+invertall = 0
+color = 0
+ignorehitpause = 1
 
 [State 0, EnvShake]
 type = EnvShake
@@ -2966,10 +2973,13 @@ phase = 120
 ignorehitpause = 1
 persistent = 1
 
-
+[State 1000, 7]
+type = CtrlSet
+trigger1 = time
+value = 1
 [State 1000, 7]
 type = ChangeState
-trigger1 = time = 1
+trigger1 = time = 2
 value = 0
 ctrl = 1
 
@@ -2991,23 +3001,28 @@ trigger1 	= !time
 map 		= "GEAR.GAUGE"
 value 		= 333
 
+[State 0, Pause]
+type = Pause
+trigger1 = !time
+time = 15
+movetime = 1
+ignorehitpause = 1
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
-time = 4
-sinadd = 200, 64, 64, 10	
-mul = 256,256,256
-sinadd = 0,0,0,10
+time = 10
+add = 200, 30, 30
 invertall = 0
-color = 256
-
-[State 0. MapSet]
-type 		= MapSet
-trigger1 		= time = 0
-map 		= "SlowdownTimeB"
-value 		= 30
-ignorehitpause 	= 1
-persistent 		= 1
+color = 0
+ignorehitpause = 1
+[State 0, PalFX]
+type = BGPalFX
+trigger1 = !time
+time = 15
+add = -20, -20, -20
+invertall = 0
+color = 0
+ignorehitpause = 1
 
 [State 0, EnvShake]
 type = EnvShake
@@ -4406,18 +4421,6 @@ velset = vel x,0
 sprpriority = 2
 facep2 = 1
 
-[State 0, AfterImage] ;Post RC Afterimages ============ ++
-type 		= AfterImage
-trigger1    = !time
-time 		= 30
-length 		= 120
-timegap 		= 0.5
-ignorehitpause 	= 1
-paladd		= 255, 25, 25
-trans 		= Add
-persistent 	= 1
-;==================================================++
-
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
@@ -4476,18 +4479,6 @@ type 		= mapset
 trigger1 		= !time
 map 			= "AirDash"
 value 		= const(AirDashes)
-
-[State 0, AfterImage] ;Post RC Afterimages ============ ++
-type 		= AfterImage
-trigger1    = !time
-time 		= 30
-length 		= 120
-timegap 		= 0.5
-ignorehitpause 	= 1
-paladd		= 255, 25, 25
-trans 		= Add
-persistent 	= 1
-;==================================================++
 
 [State 0, PalFX]
 type = PalFX
@@ -4562,17 +4553,29 @@ velset = vel x * 0.05,0
 sprpriority = 2
 facep2 = 1
 
-[State 0, AfterImage] ;Post RC Afterimages ============ ++
-type 		= AfterImage
-trigger1    = !time
-time 		= 30
-length 		= 120
-timegap 		= 0.5
-ignorehitpause 	= 1
-paladd		= 25, 25, 255
-trans 		= Add
-persistent 	= 1
-;==================================================++
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F47	;Blue Dash Effect
+ID = 47
+pos = -5,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 0.20,0.40
+sprpriority = -1
+ontop = 0
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+
 [State 0, PalFX]
 type = PalFX
 trigger1 = !time
@@ -4651,6 +4654,28 @@ trigger1 		= !time
 map 			= "AirDash"
 value 		= const(AirDashes)
 
+[State 0, Explod]
+type = Explod
+trigger1 = !time
+anim = F47	;Blue Dash Effect
+ID = 47
+pos = -5,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 0.65,0.50
+sprpriority = 10
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
 [State 0, AfterImage] ;Post RC Afterimages ============ ++
 type 		= AfterImage
 trigger1    = !time
@@ -6776,6 +6801,64 @@ ignorehitpause = 1
 ;------------------------------------------------------------------------------
 [Statedef -2]
 
+;======================================
+;Special Effects on System Mechanics
+;======================================
+[State 0, Explod] ;RC Dash Effect
+type = Explod
+triggerall = stateno = 100 && (prevstateno = 4000 || prevstateno = 905) || stateno = 60 && prevstateno = 4001
+trigger1 = !numexplod(45) && time < 10
+anim = F45	;Red Dash Effect
+ID = 45
+pos = -5,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 0,0
+accel = 0,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 0.20,0.40
+sprpriority = -1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+
+[State 0, Mapadd]
+type 		    = MapSet
+trigger1 	    = numexplod(45)
+map 		    = "BGPalFXTime"
+value 		    = 10
+ignorehitpause 	= 1
+[State 0, Mapadd]
+type 		    = MapAdd
+trigger1 	    = map(BGPalFXTime)
+map 		    = "BGPalFXTime"
+value 		    = -1
+ignorehitpause 	= 1
+
+[State 0, BGPalFX]
+type = BGPalFX
+trigger1 = map(BGPalFXTime)
+time = 5
+add = -(map(BGPalFXTime))*2.75,-(map(BGPalFXTime))*2.75,-(map(BGPalFXTime))*2.75
+persistent = 1
+ignorehitpause = 1
+
+[State 0, PalFX]
+type = PalFX
+trigger1 = enemy, stateno = [912,913]
+time = 1
+add = 75, 75, 75
+invertall = 0
+color = 0
+ignorehitpause = 1
+
+
 [State 0, Veladd]
 type = VelAdd
 triggerall = map(untechMOD) < 1
@@ -6879,12 +6962,6 @@ value = -gethitvar(damage)
 type = PowerAdd
 trigger1 = map(WAR)
 value = 50 * movehit = 1
-
-[State 0, PlaySnd] ;war moment
-type = PlayBgm
-trigger1 = map(WAR) = 1 && enemy, map(WAR) > 1
-bgm = "sound\rah.mp3"
-persistent = 0
 
 
 ;===============================================================================
@@ -7901,8 +7978,8 @@ value = 100
 [State -2, RC Speed Boost]
 type = Changestate
 triggerall = time > 0
-trigger1 = stateno = 4000 && (command = "back" || command = "holdback")
-value = 105
+trigger1 = stateno = 4001 && (command = "fwd" || command = "holdfwd")
+value = 60
 [State -2, RC Speed Boost]
 type = VelAdd
 triggerall = map(SlowdownTime)
@@ -8891,6 +8968,14 @@ value = 1
 
 ;---------------------------------------------------------------------------------
 [Statedef -3]
+
+;No FRC During These States
+[State -2, P1 Value Set]
+type 		= MapSet
+trigger1 	= stateno = [915,916]
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
 
 [State 0, Explod] ;BURST EXPLOD
 type = Explod

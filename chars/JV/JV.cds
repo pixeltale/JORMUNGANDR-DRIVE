@@ -298,9 +298,9 @@ trigger1 = var(2)
 [State -1, PARADIGM SHIFT]
 type 		= ChangeState
 value 		= 915 + (statetype = A)
-triggerall	= map(VoidGauge) >= 1000
+triggerall	= map(VoidGauge) >= 1000 && roundstate = 2
 triggerall 	= command = "E" && command = "D" || command = "SHIFT"
-trigger1 		= var(1 + (statetype = A)) || movetype != H && roundstate = 2
+trigger1 		= var(1 + (statetype = A)) || movetype != H
 [State -1, EXCEED Shock]
 type 		= ChangeState
 value 		= 905

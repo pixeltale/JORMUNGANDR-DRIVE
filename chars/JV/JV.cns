@@ -386,7 +386,6 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
-
 [State 0, Explod]
 type = Explod
 triggerall = teamside = 1
@@ -394,7 +393,7 @@ triggerall = map(ComboStateCheck)
 trigger1 = !NumExplod(300)
 anim = F300
 ID = 300
-pos = 30,75
+pos = 45,75
 postype = left
 facing = 1
 vfacing = 1
@@ -404,9 +403,9 @@ random = 0,0
 removetime = -1
 supermovetime = 999999999999
 pausemovetime = 999999999999
-scale = 0.5,0.5
-sprpriority = 1
-ontop	= -1
+scale = 0.25,0.25
+sprpriority = -1
+ontop	= 0
 ignorehitpause = 1
 ownpal	= 1
 [State 0, Explod]
@@ -416,16 +415,16 @@ triggerall = map(ComboStateCheck)
 trigger1 = !NumExplod(301)
 anim = F301
 ID = 301
-pos = 30,75
+pos = 45,75
 postype = left
 facing = 1
 vfacing = 1
 removetime = -1
 supermovetime = 999999999999
 pausemovetime = 999999999999
-scale = 0.5,0.5
-sprpriority = 2
-ontop	= -1
+scale = 0.25,0.25
+sprpriority = 0
+ontop	= 0
 ignorehitpause = 1
 ownpal	= 1
 [State 0, ModifyExplod]
@@ -442,7 +441,7 @@ triggerall = map(ComboStateCheck)
 trigger1 = !NumExplod(300)
 anim = F300
 ID = 300
-pos = -30,75
+pos = -45,75
 postype = right
 facing = 1
 vfacing = 1
@@ -452,9 +451,9 @@ random = 0,0
 removetime = -1
 supermovetime = 999999999999
 pausemovetime = 999999999999
-scale = -0.5,0.5
-sprpriority = 1
-ontop	= -1
+scale = -0.25,0.25
+sprpriority = -1
+ontop	= 0
 ignorehitpause = 1
 ownpal	= 1
 [State 0, Explod]
@@ -464,16 +463,16 @@ triggerall = map(ComboStateCheck)
 trigger1 = !NumExplod(301)
 anim = F301
 ID = 301
-pos = -30,75
+pos = -45,75
 postype = right
 facing = 1
 vfacing = 1
 removetime = -1
 supermovetime = 999999999999
 pausemovetime = 999999999999
-scale = -0.5,0.5
-sprpriority = 2
-ontop	= -1
+scale = -0.25,0.25
+sprpriority = 0
+ontop	= 0
 ignorehitpause = 1
 ownpal	= 1
 [State 0, ModifyExplod]

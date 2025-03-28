@@ -25,8 +25,6 @@
   ],
   "CommonStates": [
     "data/functions.zss",
-    "data/action.zss",
-    "data/guardbreak.zss",
     "data/training.zss",
     "data/trials.zss",
     "data/dramaticzoom.zss"

@@ -1,13 +1,13 @@
-external/script/main.lua:713: <game end>
+.\external\script\start.lua:1401: data/COMMON.cns:2966:
+64, 64, 64, 100
+add: Invalid data: ,
 stack traceback:
-	[G]: in function 'refresh'
-	external/script/main.lua:713: in function 'f_refresh'
-	.\external\script\start.lua:2240: in function 'f_selectScreen'
-	.\external\script\start.lua:1419: in function 'f'
-	external/script/main.lua:3069: in function 'loop'
-	external/script/main.lua:2685: in function <external/script/main.lua:2680>
-	external/script/main.lua:3200: in function 'loop'
-	external/script/main.lua:3189: in function 'loop'
+	[G]: in function 'game'
+	.\external\script\start.lua:1401: in function 'f_game'
+	.\external\script\start.lua:1834: in function 'launchFight'
+	external/script/default.lua:2: in function <external/script/default.lua:0>
+	.\external\script\start.lua:1455: in function 'f'
+	external/script/main.lua:3105: in function 'loop'
 	external/script/main.lua:3189: in function 'loop'
 	external/script/main.lua:4156: in main chunk
 	[G]: ?
