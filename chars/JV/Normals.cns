@@ -161,7 +161,7 @@ type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
 damage 				= 75 * MAP(P4),0
-pausetime 			= 10,10
+pausetime 			= 10,10 + 2 * (map(CounterHit))
 getpower 				= 25 * MAP(GEAR.MUL),0
 ;===============================
 attr 				= S,NA
@@ -649,7 +649,7 @@ animtype  	= Light
 air.animtype 	= back
 hitflag 		= MAFD
 guardflag 	= LA
-pausetime 	= 11,11
+pausetime 	= 12,12 + 2 * (map(CounterHit))
 sparkxy 		= -15,-33
 sparkno 		= 1
 hitsound   	= 5,2
@@ -731,14 +731,14 @@ persistent 		= 0
 [State 0]
 type 		= HitDef 
 p2facing 		= 1
-trigger1 		= Time= 0 && (enemynear, stateno!= [5110,5119])
+trigger1 		= !movecontact && !movereversed
 attr 		= S, NA
 animtype  		= Light
 air.animtype 		= back
 damage 			= 100*MAP(P4)
 hitflag 			= MAFD
 guardflag 		= MA
-pausetime 		= 15,15
+pausetime 		= 15,15 + 4 * (map(CounterHit))
 sparkno 			= 2
 sparkxy 			= -10,-50
 hitsound   		= 5,3
@@ -2196,7 +2196,7 @@ persistent 		= 0
 [State 630, 2]
 type = HitDef 
 p2facing 	= 1
-trigger1 	= time = 0
+trigger1 	= !movecontact && !movereversed
 hitonce 	= 1
 attr 	= A, NA
 damage 	= 100*MAP(P4)

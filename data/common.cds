@@ -595,7 +595,7 @@ time = 4
 name = "REDLINE GUARD"
 command = /F,x
 time = 1
-buffer.time = 2
+buffer.time = 5
 ;System
 [Command]
 name = "BLUELINE GUARD"
