@@ -5622,17 +5622,11 @@ trigger1 = Time > 0
 value = anim
 
 [State 5030, 5]
-type = ChangeState
-triggerall = HitFall
-trigger1 = HitOver
+type = SelfState
+trigger1 = HitShakeOver
 trigger2 = Vel Y > 0    ;Hit ground
 trigger2 = Pos Y >= Const(movement.air.gethit.groundlevel)
 value = 5246 ;HITA_FALL
-
-[State 5020, 5]
-type = SelfState
-trigger1 = HitShakeOver
-value = 5246
 
 ;---------------------------------------------------------------------------
 ;---------------------------------------------------------------------------

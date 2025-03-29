@@ -817,6 +817,42 @@ air.cornerpush.veloff	= -25
 p2stateno 			= 5220
 p2getp1state 			= 0
 
+[State 200, 1]
+type = HitDef
+p2facing 	= 1
+triggerall	= enemy, map(ArmorActive)
+trigger1 	= !movecontact && !movereversed
+hitonce 	= 1
+attr 	= S, SA
+damage 	= 120*MAP(P4), 20
+hitflag	= MAFD
+guardflag	= MA
+pausetime	= 15,15 + 10 * map(CounterHit)
+guard.pausetime = 12,12
+sparkno 	= 2
+sparkxy 	= -25,-44
+hitsound 	= 5,1
+guardsound 			= 6,0
+ground.type = HIGH
+air.type = HIGH
+animtype = medium
+ground.slidetime = 34
+ground.hittime  = 23
+ground.velocity = -7,-5
+air.velocity 	= -6,-3 / MAP(untechMOD)
+down.velocity 	= -3, -7
+air.hittime 	= 18 * map(untechMOD)
+down.hittime 	= 28 * map(untechMOD)
+envshake.time 	= 7
+fall 		= 1
+fall.yvelocity = 0
+guard.slidetime = 25
+guard.velocity = -12
+guard.ctrltime = 12
+getpower 		= 65 * MAP(GEAR.MUL)
+ground.cornerpush.veloff = -25
+air.cornerpush.veloff	= -25
+
 [State -2, Wallbounce Type Set]
 type 			= MapSet
 trigger1 			= movehit
@@ -1716,11 +1752,11 @@ guardsound 	= 6, 0
 ground.type 	= High
 ground.slidetime 	= 5
 ;==============================================
-air.hittime  	= 90 * MAP(untechMOD)
-ground.hittime	= 90 * MAP(untechMOD)
+air.hittime  	= 30 * MAP(untechMOD)
+ground.hittime	= 40 * MAP(untechMOD)
 down.hittime 	= 90 * MAP(untechMOD)
 ;==============================================
-ground.velocity 	= -4
+ground.velocity 	= -8
 air.velocity 	= -1,-8
 down.velocity	= -1, -6
 guard.slidetime 	= 8
@@ -1737,7 +1773,8 @@ envshake.ampl 	= 5
 envshake.phase 	= 1
 ;==============================================
 getpower 	= 150 * map(GEAR.MUL)
-p2stateno 	= 915020
+p2stateno 	= 5245
+p2getp1state	= 0
 
 [State 200, 1]
 type = HitDef 
@@ -2721,14 +2758,14 @@ hitonce = 1
 attr = S, SA
 damage = 120*Map(P4), 10
 hitflag = MAFD
-guardflag = MAF
+guardflag 	= MAF
 pausetime 	= 25,25
 sparkno 		= 3
 sparkxy 		= -10,-45
 hitsound   	= 5,4
 guardsound 	= 6,0
 ground.type 	= TRIP
-air.type	= TRIP
+air.type		= TRIP
 animtype 		= medium
 ground.slidetime 	= 14
 ground.hittime  	= 33

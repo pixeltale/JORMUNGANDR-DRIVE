@@ -73,7 +73,7 @@ var(2) = 1
 type = ChangeState
 value = 3000
 triggerall = command = "236236C"
-triggerall = power >= 2000 * map(METER.COST)
+triggerall = power >= 4000 * map(METER.COST)
 trigger1 = statetype != A
 trigger1 = ctrl
 trigger2 = statetype != A
