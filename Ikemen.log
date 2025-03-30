@@ -1,6 +1,5 @@
-.\external\script\start.lua:1401: data/COMMON.cns:2966:
-64, 64, 64, 100
-add: Invalid data: ,
+.\external\script\start.lua:1401: data/COMMON.cns:2945:
+Invalid attribute value: np
 stack traceback:
 	[G]: in function 'game'
 	.\external\script\start.lua:1401: in function 'f_game'

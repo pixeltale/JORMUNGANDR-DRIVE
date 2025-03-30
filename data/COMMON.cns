@@ -578,7 +578,7 @@ type = HitDef
 p2facing = 1
 triggerall = abs(p2dist x) <= abs(CONST(THROW.DIST))
 trigger1 = p2statetype != A
-trigger1 = enemy, movetype != H && enemy, stateno != [120, 155]
+trigger1 = enemy, movetype != H
 Trigger1 = time = 0 
 attr = S, NT          ;Attributes: Standing, Normal Throw
 hitflag = M-          ;Affect only ground people who are not being hit
@@ -1462,7 +1462,7 @@ ctrl = 1
 type    = S
 physics = S
 sprpriority = 1
-ctrl = 1
+ctrl = 0
 anim = 101
 
 [State 200, 3]
@@ -2942,8 +2942,16 @@ value 		= 333
 
 [State 0, Pause]
 type = Pause
+triggerall = enemy, hitdefattr != SCA,NP, SP, HP
 trigger1 = !time
 time = 15
+movetime = 1
+ignorehitpause = 1
+[State 0, Pause]
+type = Pause
+triggerall = enemy, hitdefattr = SCA,NP, SP, HP
+trigger1 = !time
+time = 5
 movetime = 1
 ignorehitpause = 1
 [State 0, PalFX]
@@ -4246,6 +4254,7 @@ anim = 5200
 
 [State 5210, 2] ;Turn if not facing opponent
 type = Turn
+trigger1 = time = 10
 trigger1 = p2dist X < 0
 
 [State 0, NotHitBy]
@@ -4259,13 +4268,13 @@ type = VelSet
 trigger1 = Time = 0 && command != "holdfwd"
 trigger1 = Time = 0 && command != "holdback"
 x = .5*(Const(velocity.air.gethit.groundrecover.x))
-y = -3
+y = -4
 
 [State 5201, 2]
 type = VelSet
 trigger1 = Time = 0 && command = "holdback"
 x = -3.5
-y = -3.75
+y = -4.75
 
 [State 5201, 2]
 type = VelAdd
@@ -4276,10 +4285,11 @@ y = -0.1
 type = VelSet
 trigger1 = Time = 0 && command = "holdfwd"
 x = 3.5
-y = -3.75
+y = -4.75
 
 [State 0, Width]
 type = Playerpush
+triggerall = vel x > 3
 trigger1 = time = [0,25]
 value = 0
 ignorehitpause = 1
@@ -4553,6 +4563,29 @@ velset = vel x * 0.05,0
 sprpriority = 2
 facep2 = 1
 
+[State 0, Explod] ;FRC Effect
+type = Explod
+trigger1 = !numexplod(46) && !time
+anim = F46	;Blue Dash Effect
+ID = 46
+pos = -5,-60
+postype = P1
+facing = 1
+vfacing = 1
+bindtime = 1
+vel = 1,0
+accel = 0.1,0
+random = 0,0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 0.20,0.40
+sprpriority = -1
+ontop = 0
+shadow = 0,0,0
+ownpal = 1
+removeongethit = 0
+
 [State 0, Explod]
 type = Explod
 trigger1 = !time
@@ -4768,7 +4801,7 @@ velset = 0,0
 [State 5220, Anim] ;Custom animation
 type = ChangeAnim2
 trigger1 = 1
-value = 5030
+value = 5220
 
 ;OG Y Pos --------------------
 ; [State 0, MapSet] ;Random DBFZ Smash code i made while bored
@@ -4801,6 +4834,7 @@ value = 5221
 type    = A
 movetype= H
 physics = N
+anim    = 5220
 
 [State 5221 VelSet]
 type = velset
@@ -5912,6 +5946,11 @@ movetype= H
 physics = N
 anim = 5160
 
+[State 0, PosSet]
+type = PosSet
+trigger1 = time = 0
+y = 0
+
 [State 1027, Stop moving]
 type = PosFreeze
 trigger1 = 1
@@ -6775,25 +6814,43 @@ trigger1 = ctrl || stateno = 100 && !map(noNormals)
 ;Counter-Hit Indicator
 ;=================================
 [State 0, Explod] ;INDICATOR
-type = Explod
-triggerall = !numexplod(1005)
-trigger1 = map(counterhit_flag) && movehit && !movereversed
-trigger1 = enemy, movetype = H
-anim = F1005
-ID = 1005
-pos = 180, 125
-postype = Left
-scale = 0.5,0.5
-sprpriority = 1
-ontop = 0
-ownpal = 1
-facing = 0
+type        = Explod
+triggerall  = teamside = 1
+trigger1    = movecountered = 1
+trigger1    = enemy, movetype = H
+anim        = F275
+ID          = 275
+pos         = 35, 100
+postype     = Left
+scale       = 0.3,0.25
+sprpriority = -10
+ontop       = 0
+ownpal      = 1
+facing      = 0
 removeongethit = 0
-ignorehitpause = 1
+ignorehitpause = 0
+[State 0, Explod] ;INDICATOR
+type        = Explod
+triggerall  = teamside = 2
+trigger1    = movecountered = 1
+trigger1    = enemy, movetype = H
+anim        = F275
+ID          = 275
+pos         = -100, 100
+postype     = Right
+scale       = 0.3,0.25
+sprpriority = -10
+ontop       = 0
+ownpal      = 1
+facing      = 0
+removeongethit = 0
+ignorehitpause = 0
 
 
 ;------------------------------------------------------------------------------
 [Statedef -2]
+
+
 
 ;======================================
 ;Special Effects on System Mechanics
@@ -6809,8 +6866,8 @@ postype = P1
 facing = 1
 vfacing = 1
 bindtime = 1
-vel = 0,0
-accel = 0,0
+vel = -5,0
+accel = 0.5,0
 random = 0,0
 removetime = -2
 supermovetime = 0
@@ -6843,6 +6900,7 @@ add = -(map(BGPalFXTime))*2.75,-(map(BGPalFXTime))*2.75,-(map(BGPalFXTime))*2.75
 persistent = 1
 ignorehitpause = 1
 
+;Turn Grayscale on parry
 [State 0, PalFX]
 type = PalFX
 trigger1 = enemy, stateno = [912,913]
@@ -6852,7 +6910,9 @@ invertall = 0
 color = 0
 ignorehitpause = 1
 
-
+;===============================================================================
+; ------- CORNER VELOCITY --------
+;===============================================================================
 [State 0, Veladd]
 type = VelAdd
 triggerall = map(untechMOD) < 1
@@ -6865,6 +6925,9 @@ triggerall = statetype = S && enemy, statetype = S
 trigger1 = movecontact = 1 && enemy, BackEdgeBodyDist <= 0
 x = 0.5
 
+;===============================================================================
+; ------- EXCEED SHOCK --------
+;===============================================================================
 [State Cancel]
 type = mapset
 trigger1 = stateno != 905
@@ -6944,7 +7007,7 @@ map = "WAR.LOST"
 value = 0
 [state 40, MapSet] ;SHIFT OVER
 type = MapSet
-trigger1 = map(WAR.LOST)
+trigger1 = map(WAR.LOST) || roundstate = 3
 map = "PSHIFT.TIMER"
 value = 0
 
@@ -7937,6 +8000,13 @@ persistent 		= 1
 ;RC STUFF
 ;=============================
 [State 0, Mapadd]
+type 		= MapSet
+trigger1 	    = map(FATAL)
+map 		    = "SlowdownTime"
+value 		    = 30
+ignorehitpause 	= 1
+persistent 		= 1
+[State 0, Mapadd]
 type 		= MapAdd
 trigger1 	    = map(SlowdownTime)
 map 		    = "SlowdownTime"
@@ -7948,7 +8018,7 @@ persistent 		= 1
 type = BGPalFX
 trigger1 = map(SlowdownTime)
 time = 5
-add = -(map(SlowdownTime))*2.75,-(map(SlowdownTime))*2.75,-(map(SlowdownTime))*2.75
+add = -(map(SlowdownTime))*1.75,-(map(SlowdownTime))*1.75,-(map(SlowdownTime))*1.75
 persistent = 1
 ignorehitpause = 1
 
@@ -8619,7 +8689,7 @@ persistent = 1
 ;Throw Protection
 [State 0, NotHitBy]
 type = NotHitBy
-trigger1 = (stateno = [120,155])
+trigger1 = (stateno = [120,155]) && stateno != [135,137]
 value = ,NT,ST,HT
 time = 1
 ignorehitpause = 1
@@ -9102,13 +9172,13 @@ value 		= const(AirDashes)
 ;===============================================================================
 [State -2, CH Check - 1] 				;Checks if the opponent is
 type = MapSet	                        ;attacking or not
-trigger1 = enemynear, movetype = A		
+trigger1 = enemynear, movetype = A
 map = "CounterHit"
 value = 1
 ignorehitpause = 1
 [State -2, CH Check - 1] 				;Checks if the opponent is
 type = MapSet	                        ;attacking or not
-trigger1 = enemynear, movetype != A		
+trigger1 = enemynear, movetype != A
 map = "CounterHit"
 value = 0
 ignorehitpause = 1

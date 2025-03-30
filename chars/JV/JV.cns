@@ -386,6 +386,15 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= stateno != map(FATAL)
+map 			= "FATAL"
+value 		= 0
+ignorehitpause 	= 1
+
+
 [State 0, Explod]
 type = Explod
 triggerall = teamside = 1

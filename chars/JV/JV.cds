@@ -57,14 +57,17 @@ type = VarSet
 triggerall = statetype != A
 trigger1 = ctrl || stateno = 100
 trigger2 = (stateno = [200,299] || stateno = [400,503]) && movecontact
+trigger3 = map(FATAL)
 var(1) = 1
 
 [State -1, Cancel Condition Check]
 type = VarSet
-trigger1 = statetype = A && ctrl
+triggerall = statetype = A
+trigger1 = ctrl
 trigger2 = stateno = [600, 640]
 trigger2 = movecontact
 trigger3 = stateno = 60
+trigger4 = map(FATAL)
 var(2) = 1
 
 ;===========================================================================
@@ -167,7 +170,7 @@ type = ChangeState
 value = 100
 triggerall = command != "holdback"
 triggerall = command = "66" || command = "M66"
-triggerall = stateno!=100
+triggerall = stateno!=[100,101]
 trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = stateno = 250 || map(Shock.DC)

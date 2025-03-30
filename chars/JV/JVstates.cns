@@ -181,7 +181,7 @@ flag = NoAutoTurn
 
 [State 100, 4]
 type = ChangeState
-trigger1 = command !="holdfwd" && time> (7 + 10*(prevstateno = 2000)) 
+trigger1 = (command !="holdfwd" && command != "M66Hold") && time> (7 + 10*(prevstateno = 2000)) 
 value = 101
 ctrl = 1
 
