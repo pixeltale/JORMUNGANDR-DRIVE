@@ -831,19 +831,19 @@ buffer.time = 10
 
 [Command]
 name = "623A"
-command = ~$F, D, $F, a
+command = ~$/F, D, $F, a
 time = 20
 [Command]
 name = "623B"
-command = ~$F, D, $F, b
+command = ~$/F, D, $F, b
 time = 20
 [Command]
 name = "623C"
-command = ~$F, D, $F, c
+command = ~$/F, D, $F, c
 time = 20
 [Command]
 name = "623D"
-command = ~$F, D, $F, x
+command = ~$/F, D, $F, x
 time = 20
 
 [Command]

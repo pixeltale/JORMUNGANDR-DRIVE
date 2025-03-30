@@ -386,8 +386,20 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+[State 0, Fatal Disable]
+type 		= MapSet
+trigger1 		= map(PSHIFT)
+map 			= "JV.PSHIFTDISCOUNT"
+value 		= 0
+ignorehitpause 	= 1
+[State 0, Fatal Disable]
+type 		= MapSet
+trigger1 		= map(PSHIFT)
+map 			= "JV.PSHIFTDISCOUNT"
+value 		= 1
+ignorehitpause 	= 1
 
-[State 0, Jump Cancel]
+[State 0, Fatal Disable]
 type 		= MapSet
 trigger1 		= stateno != map(FATAL)
 map 			= "FATAL"

@@ -47,7 +47,7 @@ type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
 damage 				= 25 * MAP(P4),0
-pausetime 			= 8,8 + 2 * map(CounterHit)
+pausetime 			= 8,8 + 2 * enemy, movetype = A
 getpower 				= 25 * MAP(GEAR.MUL),0
 ;===============================
 attr 				= S,NA
@@ -161,7 +161,7 @@ type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
 damage 				= 75 * MAP(P4),0
-pausetime 			= 10,10 + 2 * (map(CounterHit))
+pausetime 			= 10,10 + 2 * (enemy, movetype = A)
 getpower 				= 25 * MAP(GEAR.MUL),0
 ;===============================
 attr 				= S,NA
@@ -281,7 +281,7 @@ type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
 damage 				= 120 * MAP(P4),0
-pausetime 			= 12,12 + 4 * (map(CounterHit))
+pausetime 			= 12,12 + 4 * (movecountered)
 getpower 				= 100 * MAP(GEAR.MUL)
 ;===============================
 attr 				= S,NA
@@ -442,7 +442,7 @@ air.animtype 	= back
 damage 		= 75*Map(P4)
 hitflag 		= MAF
 guardflag 	= MA
-pausetime 	= 14,14 + 2 * (map(CounterHit))
+pausetime 	= 14,14 + 2 * (enemy, movetype = A)
 sparkno 		= 4
 sparkxy 		= -15,-60
 hitsound   	= 5,0
@@ -540,7 +540,7 @@ type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
 damage 				= 25 * MAP(P4),0
-pausetime 			= 8,8 + 2 * (map(CounterHit))
+pausetime 			= 8,8 + 2 * (enemy, movetype = A)
 getpower 				= 25 * MAP(GEAR.MUL)
 ;===============================
 attr 				= S,NA
@@ -650,7 +650,7 @@ animtype  	= Light
 air.animtype 	= back
 hitflag 		= MAFD
 guardflag 	= LA
-pausetime 	= 12,12 + 2 * (map(CounterHit))
+pausetime 	= 12,12 + 2 * (enemy, movetype = A)
 sparkxy 		= -15,-33
 sparkno 		= 1
 hitsound   	= 5,2
@@ -739,7 +739,7 @@ air.animtype 		= back
 damage 			= 100*MAP(P4)
 hitflag 			= MAFD
 guardflag 		= MA
-pausetime 		= 12,12 + 4 * (map(CounterHit))
+pausetime 		= 12,12 + 4 * (enemy, movetype = A)
 sparkno 			= 2
 sparkxy 			= -10,-50
 hitsound   		= 5,3
@@ -874,7 +874,7 @@ damage 		= 100*map(P4), 0
 animtype  	= Hard
 hitflag 		= MAF
 guardflag 	= LA
-pausetime 	= 12,12 + 4 * (map(CounterHit))
+pausetime 	= 12,12 + 4 * (enemy, movetype = A)
 sparkno 		= 2
 sparkxy 		= -10,-8
 hitsound   	= 5,2
@@ -958,7 +958,7 @@ attr = A, NA
 damage 		= 50*map(P4) + 5
 hitflag 		= MAF
 guardflag 	= HA
-pausetime 	= 6,6 + 2 * (map(CounterHit))
+pausetime 	= 6,6 + 2 * (enemy, movetype = A)
 sparkno 		= 0
 sparkxy 		= -15,-8
 hitsound   	= 5,0
@@ -1046,7 +1046,7 @@ attr = A, NA
 damage 		= 20*map(P4)
 guardflag 	= MA
 hitflag 		= MAF
-pausetime 	= 5,5 + 2 * (map(CounterHit))
+pausetime 	= 5,5 + 2 * (enemy, movetype = A)
 sparkno 		= 1
 sparkxy 		= -10,-35
 hitsound   	= 5,0
@@ -1175,7 +1175,7 @@ attr 	= A, NA
 damage 	= 100*MAP(P4)
 hitflag 	= MAF
 guardflag 	= HA
-pausetime 	= 12,12 + 4 * (map(CounterHit))
+pausetime 	= 12,12 + 4 * (enemy, movetype = A)
 sparkno 		= 3
 sparkxy 		= -5,-35
 hitsound   	= 5,3
@@ -1256,7 +1256,7 @@ attr 	= A, NA
 damage 	= 100*MAP(P4)
 hitflag 	= MAF
 guardflag 	= HA
-pausetime 	= 8,8 + 4 * (map(CounterHit))
+pausetime 	= 8,8 + 4 * (enemy, movetype = A)
 sparkno 		= 3
 sparkxy 		= -5,-35
 hitsound   	= 5,3
@@ -1281,7 +1281,7 @@ trigger1 	= animelem = 8
 hitonce 	= 1
 attr 	= A, NA
 damage 	= 100*MAP(P4)
-hitflag 	= MAF
+hitflag 	= MAFD
 guardflag 	= HA
 pausetime 	= 8,8
 sparkno 		= 3
@@ -1514,7 +1514,7 @@ attr 		= S, NA
 damage 		= 100*MAP(P4), 10
 hitflag 		= MAFD
 guardflag		= HAFD
-pausetime 	= 15,15 + 2 * (map(CounterHit))
+pausetime 	= 15,15 + 2 * (enemy, movetype = A)
 sparkno 		= 3
 sparkxy 		= -5,-35
 hitsound   	= 5,4
@@ -1984,7 +1984,7 @@ type 		= MapSet
 triggerall 		= anim = 708
 trigger1 		= movehit && !map(ComboStateCheck)
 map 		= "P1"
-value 		= 0.95 + 0.10 * (map(Counterhit) > 0)	;100% Starting DMG
+value 		= 0.95 + 0.10 * (enemy, movetype = A > 0)	;100% Starting DMG
 ignorehitpause 	= 1
 [State -2, P2 Value Set]
 type 		= MapSet
@@ -2016,7 +2016,7 @@ guardflag 	= LAFD
 guard.ctrltime 	= 25
 guard.velocity 	= 8
 guard.pausetime 	= 18, 18
-pausetime 	= 25, 25 + 4 * (map(CounterHit))
+pausetime 	= 25, 25 + 4 * (enemy, movetype = A)
 sparkno 		= 3
 sparkxy 		= -10,-10
 hitsound   	= 5,3
@@ -2551,7 +2551,7 @@ ctrl = 1
 type    = S
 movetype= A
 physics = S
-poweradd= -1000
+poweradd= -1000 * map(METER.COST)
 velset = vel x,0
 anim = 905
 ctrl = 0
@@ -2589,7 +2589,7 @@ color = 256
 
 [State Cancel]
 type = mapset
-trigger1 = movecontact
+trigger1 = movecontact = 1
 map = "SHOCK.DC"
 value = time >= 30
 [State - Guard Crush]

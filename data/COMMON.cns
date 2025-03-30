@@ -6872,7 +6872,7 @@ ignorehitpause = 0
 ;======================================
 [State 0, Explod] ;RC Dash Effect
 type = Explod
-triggerall = stateno = 100 && (prevstateno = 4000 || prevstateno = 905) || stateno = 60 && prevstateno = 4001
+triggerall = stateno = 100 && (prevstateno = 4000 || prevstateno = 905 && MAP(SHOCK.DC)) || stateno = 60 && prevstateno = 4001
 trigger1 = !numexplod(45) && time < 10
 anim = F45	;Red Dash Effect
 ID = 45

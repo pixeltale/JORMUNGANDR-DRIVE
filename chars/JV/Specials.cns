@@ -470,7 +470,7 @@ persistent 	= 0				        ;+
 [State 200, 1]
 type = HitDef
 p2facing = 1 
-trigger1 = !MAP(CounterHit) && !movecontact && !MoveReversed
+trigger1 = !enemy, movetype = A && !movecontact && !MoveReversed
 attr = S, SA
 damage 		= 100*MAP(P4), 40
 hitflag 		= MAFD
@@ -500,7 +500,7 @@ getpower 		= 75 * MAP(GEAR.MUL)
 [State 200, 1]
 type = HitDef
 p2facing = 1 
-trigger1 = MAP(CounterHit) && !movecontact && !MoveReversed
+trigger1 = enemy, movetype = A && !movecontact && !MoveReversed
 attr = S, SA
 damage = 150*MAP(P4), 10
 hitflag = MAFD
@@ -743,7 +743,7 @@ attr = S, SA
 damage = 100*MAP(P4), 20
 hitflag = MAFD
 guardflag = MA
-pausetime = 12,12 + 10 * map(CounterHit)
+pausetime = 12,12 + 10 * enemy, movetype = A
 guard.pausetime = 15,15
 sparkno = 2
 sparkxy = -25,-44
@@ -777,7 +777,7 @@ attr = S, SA
 damage = 120*MAP(P4), 20
 hitflag = MAFD
 guardflag = MA
-pausetime = 15,15 + 10 * map(CounterHit)
+pausetime = 15,15 + 10 * enemy, movetype = A
 guard.pausetime = 12,12
 sparkno = 2
 sparkxy = -25,-44
@@ -815,7 +815,7 @@ attr 	= S, SA
 damage 	= 120*MAP(P4), 20
 hitflag	= MAFD
 guardflag	= MA
-pausetime	= 15,15 + 10 * map(CounterHit)
+pausetime	= 15,15 + 10 * enemy, movetype = A
 guard.pausetime = 12,12
 sparkno 	= 2
 sparkxy 	= -25,-44
@@ -994,7 +994,7 @@ damage 		= 100*map(P4), 10
 hitflag 	= MAF
 guardflag 	= LAFD
 guard.ctrltime 	= 5
-pausetime 	= 14,14 + 10 * map(CounterHit)
+pausetime 	= 14,14 + 10 * enemy, movetype = A
 sparkno 		= 1
 sparkxy 		= -10,-40
 hitsound   	= 5,3
@@ -1191,7 +1191,7 @@ persistent 		= 0
 type 				= HitDef
 trigger1 				= !movecontact && !movereversed
 ;===============================
-damage 				= 100 * MAP(P4) + 50 * map(CounterHit), 25
+damage 				= 100 * MAP(P4) + 50 * enemy, movetype = A, 25
 pausetime 			= 14,14
 getpower 				= 0,0
 ;===============================
@@ -1725,7 +1725,7 @@ type = HitDef
 p2facing = 1
 triggerall = !map(Beast_UseCount)
 trigger1 = !movereversed && !movecontact
-trigger1 = map(CounterHit) && !map(ArmorActive)
+trigger1 = enemy, movetype = A && !map(ArmorActive)
 attr = S, SA
 damage 		= 250*map(P4)
 animtype 	= light                 ;Animation type: Light, Medium, Heavy, Back (def: Light)
@@ -2124,7 +2124,7 @@ trigger1 = movecontact = 0 && movereversed = 0
 attr = S, NA
 animtype  = Heavy
 air.animtype = back
-damage = 100 * MAP(P4) + (40*map(CounterHit)), 0
+damage = 100 * MAP(P4) + (40*enemy, movetype = A), 0
 pausetime = 15,15
 sparkno = 2
 sparkxy = -p2dist x * 0.25,-1
@@ -2135,7 +2135,7 @@ guardflag = HA
 guard.ctrltime 	= 28
 guard.velocity 	= -10
 guard.slidetime = 18
-ground.hittime  = 42 * MAP(untechMOD) + 20*(map(CounterHit) > 0)
+ground.hittime  = 42 * MAP(untechMOD) + 20*(enemy, movetype = A > 0)
 air.hittime	= 42 * MAP(untechMOD)
 down.hittime	= 48 * MAP(untechMOD)
 ground.velocity = -3
@@ -2159,7 +2159,7 @@ trigger1 = movecontact = 0 && movereversed = 0
 attr = S, NA
 animtype  = Heavy
 air.animtype = back
-damage = 100 * MAP(P4) + (40*map(CounterHit)), 0
+damage = 100 * MAP(P4) + (40*enemy, movetype = A), 0
 pausetime = 20,20
 sparkno = 2
 sparkxy = -p2dist x * 0.25,-1
@@ -2312,7 +2312,7 @@ trigger1 	= movecontact = 0 && movereversed = 0
 attr 	= S, HA
 animtype  	= Heavy
 air.animtype 	= back
-damage 		= 100 * MAP(P4) + (100 * map(CounterHit)), 0
+damage 		= 100 * MAP(P4) + (100 * enemy, movetype = A), 0
 pausetime 	= 10,999
 sparkno 		= 3
 sparkxy 		= -p2dist x * 0.25,-1
