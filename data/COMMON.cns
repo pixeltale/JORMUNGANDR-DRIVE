@@ -4563,6 +4563,13 @@ velset = vel x * 0.05,0
 sprpriority = 2
 facep2 = 1
 
+[State -2, FRC]	;FRC END
+type 		= MapSet
+trigger1 	= 1
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
+
 [State 0, Explod] ;FRC Effect
 type = Explod
 trigger1 = !numexplod(46) && !time
@@ -4675,6 +4682,14 @@ ctrl = 0
 velset = vel x,vel y
 sprpriority = 2
 facep2 = 0
+
+[State -2, FRC]	;FRC END
+type 		= MapSet
+trigger1 	= 1
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
+
 
 [State - Air Option Limiter - Double Jump]
 type 		= mapset
