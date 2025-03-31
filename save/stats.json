@@ -4,14 +4,21 @@
       "playtime": 0
     },
     "netplayversus": {
-      "playtime": 13371.79
+      "playtime": 15187.97
     },
     "trials": {
       "playtime": 0
     },
     "versus": {
       "playtime": 0
+    },
+    "arcade": {
+      "playtime": 87.18,
+      "clear": 1,
+      "clearcount": {
+        "jv": 1
+      }
     }
   },
-  "playtime": 13371.79
+  "playtime": 15275.15
 }

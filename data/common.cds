@@ -848,13 +848,25 @@ time = 20
 
 [Command]
 name = "236A"
+command = ~D, F+a
+[Command]
+name = "236A"
 command = ~D, F, a
 [Command]
 name = "236B"
-command = ~D, F, b
+command = ~D, F+b
+[Command]
+name = "236B"
+command = ~D, F, a
+[Command]
+name = "236C"
+command = ~D, F+c
 [Command]
 name = "236C"
 command = ~D, F, c
+[Command]
+name = "236D"
+command = ~D, F+d
 [Command]
 name = "236D"
 command = ~D, F, d
@@ -876,18 +888,31 @@ name = "421D"
 command = ~B, D, DB, x
 time = 6
 
+
 [Command]
 name = "214A"
-command = ~D, DB, B, a
+command = ~D, B+a
+[Command]
+name = "214A"
+command = ~D, B, a
 [Command]
 name = "214B"
-command = ~D, DB, B, b
+command = ~D, B+b
+[Command]
+name = "214B"
+command = ~D, B, b
 [Command]
 name = "214C"
-command = ~D, DB, B, c
+command = ~D, B+c
+[Command]
+name = "214C"
+command = ~D, B, c
 [Command]
 name = "214D"
-command = ~D, DB, B, x
+command = ~D, B+d
+[Command]
+name = "214D"
+command = ~D, B, d
 
 [Command]
 name = "66A"

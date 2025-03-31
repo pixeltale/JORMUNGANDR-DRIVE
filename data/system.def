@@ -265,7 +265,7 @@ cancel.snd = 100,2
 	;footer3.offset = (localcoordX - 1 - (2 * localcoordX / 320)), localcoordY
 	footer3.font = "default-3x5.def", 0, -1, 191, 191, 191, -1
 	footer3.scale = 1.0, 1.0
-	footer3.text = "PRERELEASE BUILD 2025.2"
+	footer3.text = "PRERELEASE BUILD 2025.3"
 	;footer.overlay.window = 0, (localcoordY - 7), (localcoordX - 1), (localcoordY - 1)
 	footer.overlay.col = 0, 0, 64
 	footer.overlay.alpha = 255, 100
@@ -966,7 +966,7 @@ roundstowin = 5           ;Number of rounds to get win pose (lose pose otherwise
 	keymenu.itemname.d = "D"
 	keymenu.itemname.y = "E"
 	keymenu.itemname.x = "F"
-	keymenu.itemname.z = "MACRO 2"
+	keymenu.itemname.z = "SHIFT"
 	keymenu.itemname.w = "DASH MACRO"
 	keymenu.itemname.start = "Start"
 	keymenu.itemname.menu = "Menu"
@@ -1191,10 +1191,10 @@ bgclearcolor = 0, 0, 0
 	; RESETONSUCCESS FADES -----------------------------------------------------
 	; Used when "resetonsuccess" is set to "true"; defaults to the commented values below.
 	; --------------------------------------------------------------------------
-	; fadein.time = 40, --Ikemen feature
+	fadein.time = 20, --Ikemen feature
 	; fadein.col = {0, 0, 0}, --Ikemen feature
 	; fadein.anim = -1, --Ikemen feature
-	; fadeout.time = 40, --Ikemen feature
+	fadeout.time = 20, --Ikemen feature
 	; fadeout.col = {0, 0, 0}, --Ikemen feature
 	; fadeout.anim = -1, --Ikemen feature
 
@@ -1374,7 +1374,7 @@ bgclearcolor = 0, 0, 0
 	; --------------------------------------------------------------------------
 	success.pos	= 160,120
 	success.snd	= 600,0 
-	success.text.text = "SUCCESS!"
+	success.text.text = "YOU ROCK!"
 	success.text.offset = 0,0
 	success.text.font = 2,0,0, 255, 100, 100
 	success.text.displaytime = 70

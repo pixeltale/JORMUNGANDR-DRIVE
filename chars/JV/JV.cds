@@ -349,7 +349,8 @@ triggerall = command = "A"
 triggerall = command != "holddown" && var(59) !=4
 triggerall = !map(NoNormals)
 trigger1 = ctrl || stateno = [100,101] 
-trigger2 = (stateno = 200 && prevstateno != 200 || stateno = 400) && movecontact
+trigger2 = stateno = 400 && MoveContact 
+trigger3 = stateno = 200 && (movecontact || animelemno(0) >= 4) && prevstateno != 200
 
 ;5B
 [State -1, Standing Medium]
@@ -384,7 +385,8 @@ triggerall = command = "A"
 triggerall = command = "holddown"
 triggerall = !map(NoNormals)
 trigger1 = ctrl || stateno = [100,101] 
-trigger2 = (stateno = 400 && prevstateno != 400 || stateno = 200) && movecontact
+trigger2 = stateno = 200 && MoveContact 
+trigger3 = stateno = 400 && (movecontact || animelemno(0) >= 3) && prevstateno != 400
 
 ;---------------------------------------------------------------------------
 ;2B

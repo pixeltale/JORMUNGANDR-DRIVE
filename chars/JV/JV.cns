@@ -666,8 +666,8 @@ persistent 		= 1
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard
 trigger1 = 1
-text = "hitstun = %i"
-params = enemy, GetHitVar(hittime)
+text = "CH = %f"
+params = map(COUNTERHIT)
 ignorehitpause = 1
 persistent = 1
 

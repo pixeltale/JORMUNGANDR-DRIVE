@@ -1,6 +1,6 @@
 ; JV TRIALS LIST ---------------------------
 
-[TrialDef, 214A Dash Cancel (Building Block)]
+[TrialDef, 214A Intro]
 
 trial.dummymode = stand
 trial.guardmode = none
@@ -15,7 +15,7 @@ trialstep.2.stateno = 100
 trialstep.2.isnohit = true
 trialstep2.numofhits = 0
 
-[TrialDef, Basic BNB]
+[TrialDef, Easy BNB]
 trial.dummymode = stand
 trial.guardmode = none
 trial.dummybuttonjam = none
@@ -30,8 +30,8 @@ trialstep.3.stateno = 100
 trialstep.3.isnohit = true
 trialstep.4.text = [EN]236A
 trialstep.4.stateno = 1001
-trialstep.5.text = 5A > 5B > 2C > 5C > 6C
-trialstep.5.stateno = 200, 210, 420, 220, 230
+trialstep.5.text = 5A > 5B > 2C
+trialstep.5.stateno = 200, 210, 420
 trialstep.6.text = Jump Cancel
 trialstep.6.stateno = 40
 trialstep.6.isnohit = true
@@ -45,27 +45,86 @@ trialstep.9.stateno = 610, 640
 trialstep.10.text = Air Throw
 trialstep.10.stateno = 835
 
-[TrialDef, Strike the Earth Combo]
+[TrialDef, Strike the Earth Intro]
 trial.dummymode = stand
-trial.guardmode = all
+trial.guardmode = none
 trial.dummybuttonjam = none
-
 trialstep.1.text = 5A > 5B > 5C
 trialstep.1.glyphs = ^A
 trialstep.1.stateno = 200, 210, 220
+trialstep.2.text = 214A > Dash Cancel
+trialstep.2.stateno = 100
+trialstep.2.isnohit = true
+trialstep.3.text = [EN] 236B
+trialstep.3.stateno = 1030
+trial.step.3.anim   = 1031
+trialstep.4.text = C Followup (I)
+trialstep.4.stateno = 1033
+trialstep.5.text = A Followup (II)
+trialstep.5.stateno = 1031
+trialstep.6.text = BEAST (END)
+trialstep.6.stateno = 1034
+trialstep.7.text = Dash Cancel
+trialstep.7.stateno = 100
+trialstep.7.isnohit = true
+trialstep.8.text    = [EN] 5D > B
+trialstep.8.stateno = 705
+trialstep.9.text    = Dash
+trialstep.9.stateno = 100
+trialstep.9.isnohit = true
+trialstep.10.text    = 5C
+trialstep.10.stateno = 220
+trialstep.11.text    = [EN] 623C
+trialstep.11.stateno = 1020
+
+[TrialDef, Deviant Drive Ender]
+trial.dummymode = stand
+trial.guardmode = all
+trial.dummybuttonjam = none
+trialstep.1.text = 5B > 5C
+trialstep.1.glyphs = ^A
+trialstep.1.stateno = 210, 220
 trialstep.2.text = 214A
 trialstep.2.stateno = 1010
 trialstep.2.isnohit = true
-trialstep.3.text = Dash
+trialstep.3.text = Dash Cancel
 trialstep.3.stateno = 100
 trialstep.3.isnohit = true
-trialstep.4.text = [EN]236B
+trialstep.4.text = [EN] 236B
 trialstep.4.stateno = 1030
 trial.step.4.anim   = 1031
 trialstep.4.isnohit = true
-trialstep.5.text = C Followup (STRIKE I)
+trialstep.5.text = C Followup (I)
 trialstep.5.stateno = 1033
-trialstep.6.text = A Followup (STRIKE II)
+trialstep.6.text = A Followup (II)
 trialstep.6.stateno = 1031
-trialstep.7.text = BEAST (ENDER)
+trialstep.7.text = BEAST (END)
 trialstep.7.stateno = 1034
+trialstep.8.text = Dash Cancel
+trialstep.8.stateno = 100
+trialstep.8.isnohit = true
+trialstep.9.text    = [EN] 5D > B
+trialstep.9.stateno = 705
+trialstep.10.text    = Dash
+trialstep.10.stateno = 100
+trialstep.10.isnohit = true
+trialstep.11.text    = 5C
+trialstep.11.stateno = 220
+trialstep.12.text    = [EN] 214A > C FOLLOWUP (I)
+trialstep.12.stateno = 1033
+trialstep.13.text    = B Followup (II)
+trialstep.13.stateno = 1032
+trialstep.14.text    = Jump Cancel
+trialstep.14.stateno = 40
+trialstep.14.isnohit = true
+trialstep.15.text   = j.C > j.2C
+trialstep.15.stateno = 630, 640
+trialstep.16.text   = Double Jump Cancel
+trialstep.16.stateno = 45
+trialstep.16.isnohit = true
+trialstep.17.text   = j.C
+trialstep.17.stateno = 630
+trialstep.18.text   = [DEVIANT DRIVE] j.236D
+trialstep.18.stateno = 2000
+trialstep.19.text   = [DEVIANT DRIVE SECOND] j.236D > j.236D
+trialstep.19.stateno = 2010

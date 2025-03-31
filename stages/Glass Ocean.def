@@ -155,6 +155,13 @@ delta 	= 1,1
 tile		= 1,0
 TRANS	= ADD
 
+[BG OCEAN]		;Destroyed Building - Far Right - Distance: Close
+type 	= normal
+spriteno	= 50,0
+start 	= 0,200
+delta 	= 1,1
+tile		= 1,0
+
 [BG CLOUD1]		;Cloud - Right - Distance: Far
 type = normal
 spriteno=3,2

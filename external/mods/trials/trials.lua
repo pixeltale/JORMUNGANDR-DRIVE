@@ -1184,7 +1184,7 @@ function start.f_trialsChecker()
 							if motif.trials_mode.resetonsuccess == "true" then
 								start.trials.draw.fadein = motif.trials_mode.fadein_time
 								start.trials.draw.fadeout = motif.trials_mode.fadeout_time
-								start.trials.draw.fade = start.trials.draw.fadein + start.trials.draw.fadeout
+								start.trials.draw.fade = start.trials.draw.fadein + start.trials.draw.fadeout		--PXN Note: Disabled Fade-In.
 							end
 						end
 					end

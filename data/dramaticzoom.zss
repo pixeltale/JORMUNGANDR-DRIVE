@@ -19,7 +19,7 @@ mapset{map: "_pots_dramaticzoom_cfg_distx"; value: 1} # Multiplier for maximum X
 mapset{map: "_pots_dramaticzoom_cfg_disty"; value: 1} # Multiplier for maximum Y distance between characters to trigger zoom
 mapset{map: "_pots_dramaticzoom_cfg_life"; value: 5} # Maximum life percentage of both characters at which zoom will trigger
 
-mapset{map: "_pots_dramaticzoom_cfg_normal"; value: 0} # Allow zoom on normal attacks
+mapset{map: "_pots_dramaticzoom_cfg_normal"; value: 1} # Allow zoom on normal attacks
 mapset{map: "_pots_dramaticzoom_cfg_special"; value: 1} # Allow zoom on special attacks
 mapset{map: "_pots_dramaticzoom_cfg_super"; value: 1} # Allow zoom on super attacks
 
