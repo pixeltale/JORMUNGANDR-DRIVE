@@ -2022,12 +2022,13 @@ ground.hittime  	= 33
 ground.velocity 	= -8,-6
 air.velocity 	= -25,-4.5
 ground.hittime	= 70 * MAP(untechMOD)
-air.hittime 	= 40 * MAP(untechMOD)
+air.hittime 	= 30 * MAP(untechMOD)
 fall 		= 1
 fall.yvelocity 	= 0
 guard.ctrltime 	= 10
 p2stateno 	= 5220
 p2getp1state 	= 0
+air.cornerpush.veloff = 15 / map(UNTECHMOD)
 getpower = (120)*map(GEAR.MUL)
 
 [State 0, Changestate]

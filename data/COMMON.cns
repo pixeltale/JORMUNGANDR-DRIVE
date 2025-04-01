@@ -3884,7 +3884,7 @@ value = 5111
 
 ;---------------------------------------------------------------------------
 ; Downed get-hit (lying down)
-[Statedef 5111]
+[Statedef 5111] ;Hard Knockdown/HKD
 type    = L
 movetype= H
 physics = N
@@ -3987,7 +3987,7 @@ value = 5150
 type = ChangeState
 triggerall = alive
 triggerall = Anim = 5110
-trigger1 = Time = 45 && command != "holddown" || time >= 65
+trigger1 = Time = 25 && command != "holddown" || time >= 35
 value = 5120
 
 [State 5111, 11]
@@ -4290,7 +4290,7 @@ y = -4.75
 
 [State 5201, 2]
 type = VelAdd
-trigger1 = Time
+trigger1 = 1
 y = -0.1
 
 [State 5201, 2]
