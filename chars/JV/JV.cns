@@ -667,7 +667,7 @@ persistent 		= 1
 type = DisplayToClipboard
 trigger1 = 1
 text = "CH = %f"
-params = map(COUNTERHIT)
+params = map(P1)
 ignorehitpause = 1
 persistent = 1
 

@@ -27,7 +27,8 @@
     "data/functions.zss",
     "data/training.zss",
     "data/trials.zss",
-    "data/dramaticzoom.zss"
+    "data/dramaticzoom.zss",
+    "data/attackdata.zss"
   ],
   "ControllerStickSensitivity": 0.4,
   "Credits": 10,

@@ -131,6 +131,12 @@ ctrl = 0
 sprpriority = 1
 facep2 = 1
 
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= 1
+map 			= "JC"
+value 		= 0
+
 [State 200, 2]
 type = PlaySnd
 trigger1 = time = 0
@@ -3542,11 +3548,6 @@ type    = A
 movetype= H
 physics = N
 
-[State 5100, 4]
-type = PosSet
-trigger1 = enemynear, name = "Sahkive" && enemynear, stateno = 3101
-y = 0
-
 [State 5111, 11]
 type    = NotHitBy
 triggerall  = !alive
@@ -3932,6 +3933,11 @@ type = PosSet
 trigger1 = Time = 0
 y = 0
 
+[State 5111, 8]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
 [State 5111, Var] ;Get fall velocity
 type = VarSet
 trigger1 = Time = 0
@@ -3951,11 +3957,6 @@ trigger1 = !SysVar(0)
 anim = F(60 + (sysvar(1) > Const720p(20)) + (sysvar(1) > Const720p(56)))
 pos = 0, 0
 sprpriority = ifelse (sysvar(1) <= Const720p(56), -10, 10)
-
-[State 5111, 8]
-type = VelSet
-trigger1 = Time = 0
-y = 0
 
 [State 5111, 9] ;For hit up type
 type = ChangeAnim
@@ -3986,7 +3987,7 @@ value = 5150
 type = ChangeState
 triggerall = alive
 triggerall = Anim = 5110
-trigger1 = Time >= 45
+trigger1 = Time = 45 && command != "holddown" || time >= 65
 value = 5120
 
 [State 5111, 11]
@@ -4185,11 +4186,11 @@ y = GetHitVar(yaccel)
 [State 5200, 3]
 type = SelfState
 trigger1 = Vel Y >= 0 && Pos Y > 0
-value = 999222
+value = 5201
 
 ;---------------------------------------------------------------------------
 ;Slide (lying down)
-[Statedef 999222]
+[Statedef 5201]
 type    = L
 movetype= H
 physics = N
@@ -4251,12 +4252,12 @@ y = 0
 [State 0, ChangeState]
 type = SelfState
 trigger1 = time>20
-value = 5201
+value = 5202
 ctrl = 0
 
 ;---------------------------------------------------------------------------
 ; Air get-hit (fall recovery on ground)
-[Statedef 5201] ;Ground Tech
+[Statedef 5202] ;Ground Tech
 type    = A
 movetype= I
 physics = A
@@ -6838,7 +6839,7 @@ trigger1 = ctrl || stateno = 100 && !map(noNormals)
 
 
 ;======================================
-;Special Effects on System Mechanics
+;Visual Effects on System Mechanics
 ;======================================
 [State 0, Explod] ;RC Dash Effect
 type = Explod
@@ -6876,6 +6877,16 @@ trigger1 	    = map(BGPalFXTime)
 map 		    = "BGPalFXTime"
 value 		    = -1
 ignorehitpause 	= 1
+
+[State 0, Zoom]
+type = zoom
+trigger1 = map(BGPalFXTime)
+scale = 1 + 0.004 * map(BGPalFXTime)
+lag = 0.5
+stagebound = 1
+camerabound = 1
+pos = 0,0
+ignorehitpause=1
 
 [State 0, BGPalFX]
 type = BGPalFX
@@ -7659,7 +7670,7 @@ persistent	= 0
 ;=================================
 [State 170, 1]
 type = NotHitBy
-trigger1 = prevstateno = 5201 || stateno = 105 && prevstateno = 1010
+trigger1 = prevstateno = 5202 || stateno = 105 && prevstateno = 1010
 value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
 time = 1
 
@@ -8003,6 +8014,14 @@ map 		    = "SlowdownTime"
 value 		    = -1
 ignorehitpause 	= 1
 persistent 		= 1
+[State 0, Zoom]
+type = zoom
+trigger1 = map(SlowdownTime)
+scale = 1.2
+lag = 0.9
+stagebound = 1
+camerabound = 1
+pos = 0,0
 
 [State 0, BGPalFX]
 type = BGPalFX
@@ -8013,7 +8032,7 @@ persistent = 1
 ignorehitpause = 1
 
 [State 0, EVERYTHING WILL FREEZE!]
-type = SuperPause
+type = Pause
 triggerall = map(slowdownTime)
 trigger1 = gametime % 2 = 0
 time = 2
@@ -8438,22 +8457,6 @@ v = 21
 value = map(damage)
 ignorehitpause = 1
 
-[State 0, DAMAGE]
-type = text
-triggerall = map(_iksys_trainingAtkDataDisp)
-triggerall = teamside=2
-triggerall = GameMode = "Training"
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "Damage= %d  Frame Advantage= %d"
-params = var(21),var(20)
-font = F3
-align = 0
-pos = 161,70
-ignorehitpause = 1
-pausemovetime = 100
-
 [State 0, PalFX]
 type = PalFX
 triggerall = gamemode = "Training" && map(_iksys_trainingCtrlDataDisp) = 2 || map(_iksys_trainingCtrlDataDisp) = 3
@@ -8511,29 +8514,6 @@ color = 256
 ignorehitpause = 1
 persistent = 1
 
-[State 0, ENEMYCTRL]
-type = text
-triggerall = map(_iksys_trainingAtkDataDisp)
-triggerall = teamside = 2
-triggerall = GameMode = "Training"
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "Pressure Gap= %d"
-params = var(49)
-font = F3
-align = 0
-pos = 220,185
-ignorehitpause = 1
-pausemovetime = 100
-
-[State 0, VarSet] ;Gap Varset
-type = VarSet
-triggerall = gameMode = "Training"
-trigger1 = 1
-v = 49
-value = MAP(AWFreeze)
-
 [State -2, ActionWindow Tick Up]
 type 		= MapAdd
 trigger1 	= ctrl && (stateno != 150 || stateno != 152 || stateno != 154)
@@ -8553,7 +8533,7 @@ ignorehitpause 	= 0
 type 		= MapSet
 trigger1 	= !ctrl
 map 		= "AWFreeze"
-value 		= MAP(actionwindow)
+value 		= cond(MAP(actionwindow) = 0, map(ActionWindow),map(ActionWindow)+1)
 ignorehitpause 	= 1
 [State -2, ActionWindow ValueFreeze]
 type 		= MapSet
@@ -8561,27 +8541,11 @@ trigger1 	= stateno = 0 && time >= 30
 map 		= "AWFreeze"
 value 		= 0
 
-[State 0, Untech Decay]
-type = text
-triggerall = map(_iksys_trainingAtkDataDisp)
-triggerall = teamside = 2
-triggerall = GameMode = "Training"
-trigger1 = 1
-removetime = 1
-layerno = 2
-text = "Untech Time %d"
-params = var(39)
-font = F3
-align = -1
-pos = 150,185
-ignorehitpause = 1
-pausemovetime = 100
-
-[State 0, VarSet] ;Display P1 Value
+[State 0, VarSet] ;Display Untech Decay
 type = VarSet
 triggerall = gameMode = "Training"
 trigger1 = 1
-v = 39
+v = 3
 value = enemy, MAP(UntechMOD) * 100
 ignorehitpause = 1
 

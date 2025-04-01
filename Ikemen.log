@@ -1,26 +1,7 @@
-.\external\script\start.lua:1401: .\external\mods\trials\trials.lua:1113: attempt to index a non-table object(nil) with key 'ishelper'
+external/script/main.lua:2287: .\external\script\menu.lua line:48(column:90) near '_vis':   syntax error
+
 stack traceback:
-	.\external\mods\trials\trials.lua:1113: in function 'f_trialsChecker'
-	.\external\mods\trials\trials.lua:1319: in function 'k'
-	external/script/main.lua:433: in function 'run'
-	.\external\script\global.lua:250: in function 'loop'
-	<string>:1: in function <<string>:0>
-	[G]: in function 'game'
-	.\external\script\start.lua:1401: in function 'f_game'
-	.\external\script\start.lua:1834: in function 'launchFight'
-	external/script/default.lua:2: in function <external/script/default.lua:0>
-	.\external\script\start.lua:1455: in function 'f'
-	external/script/main.lua:3105: in function 'loop'
-	external/script/main.lua:3189: in function 'loop'
-	external/script/main.lua:4156: in main chunk
-	[G]: ?
-stack traceback:
-	[G]: in function 'game'
-	.\external\script\start.lua:1401: in function 'f_game'
-	.\external\script\start.lua:1834: in function 'launchFight'
-	external/script/default.lua:2: in function <external/script/default.lua:0>
-	.\external\script\start.lua:1455: in function 'f'
-	external/script/main.lua:3105: in function 'loop'
-	external/script/main.lua:3189: in function 'loop'
-	external/script/main.lua:4156: in main chunk
+	[G]: in function (anonymous)
+	[G]: in function 'require'
+	external/script/main.lua:2287: in main chunk
 	[G]: ?

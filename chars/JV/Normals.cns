@@ -222,9 +222,9 @@ value = 2
 
 [State 0, Jump Cancel]
 type 		= MapSet
-trigger1 		= movecontact = 1
-map 		= "JC"
-value 		= 1
+trigger1 		= 1
+map 			= "JC"
+value 		= movecontact
 
 [State 210, 5]
 type = ChangeState

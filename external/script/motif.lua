@@ -1492,6 +1492,8 @@ local motif =
 		menu_valuename_fallrecovery_random = "Random", --Ikemen feature
 		menu_valuename_atkdatadisp_none = "Off", --PXN Feature
 		menu_valuename_atkdatadisp_vis = "On", --PXN Feature
+		menu_valuename_scalingdatadisp_none = "Off",
+		menu_valuename_scalingdatadisp_vis = "On",
 		menu_valuename_ctrldatadisp_none = "Off", --PXN Feature
 		menu_valuename_ctrldatadisp_p1 = "P1", --PXN Feature
 		menu_valuename_ctrldatadisp_p2 = "P2", --PXN Feature
@@ -2205,7 +2207,7 @@ function motif.setBaseMenuInfo()
 	motif.menu_info.menu_itemname_menuinput_empty = ""
 	motif.menu_info.menu_itemname_menuinput_inputdefault = "Default"
 	motif.menu_info.menu_itemname_menuinput_back = "Back"
-	motif.menu_info.menu_itemname_reset = "Round Reset"
+	motif.menu_info.menu_itemname_reset = "Reset"
 	motif.menu_info.menu_itemname_reload = "Rematch"
 	motif.menu_info.menu_itemname_commandlist = "Command List"
 	motif.menu_info.menu_itemname_characterchange = "Character Change"
@@ -2239,6 +2241,7 @@ function motif.setBaseTrainingInfo()
 	motif.training_info.menu_itemname_menutraining_guardmode = "Guard Mode"
 	motif.training_info.menu_itemname_menutraining_fallrecovery = "Fall Recovery"
 	motif.training_info.menu_itemname_menutraining_atkdatadisp = "Attack Data"
+	motif.training_info.menu_itemname_menutraining_scalingdatadisp = "Scaling Data"
 	motif.training_info.menu_itemname_menutraining_ctrldatadisp = "Control Display"
 	motif.training_info.menu_itemname_menutraining_punish = "Punish After"
 	motif.training_info.menu_itemname_menutraining_regen = "Life Regen"
@@ -2264,6 +2267,7 @@ function motif.setBaseTrainingInfo()
 		"menutraining",
 		"menutraining_regen",
 		"menutraining_atkdatadisp",
+		"menutraining_scalingdatadisp",
 		"menutraining_ctrldatadisp",
 		"menutraining_guardmode",
 		"menutraining_punish",

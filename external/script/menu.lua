@@ -43,6 +43,10 @@ menu.t_valuename = {
 		{itemname = 'none', displayname = motif.training_info.menu_valuename_atkdatadisp_none}, -- 0
 		{itemname = 'vis', displayname = motif.training_info.menu_valuename_atkdatadisp_vis}, -- 1
 	},
+	scalingdatadisp = {
+		{itemname = 'none', displayname = motif.training_info.menu_valuename_scalingdatadisp_none}, -- 0
+		{itemname = 'vis', displayname = motif.training_info.menu_valuename_scalingdatadisp_vis}, -- 1
+	},
 	ctrldatadisp = {
 		{itemname = 'none', displayname = motif.training_info.menu_valuename_ctrldatadisp_none}, -- 0
 		{itemname = 'p1', displayname = motif.training_info.menu_valuename_ctrldatadisp_p1}, -- 1
@@ -180,6 +184,13 @@ menu.t_itemname = {
 	['atkdatadisp'] = function(t, item, cursorPosY, moveTxt, section)
 		if menu.f_valueChanged(t.items[item], motif[section]) then
 			charMapSet(2, '_iksys_trainingAtkDataDisp', menu.atkdatadisp - 1)
+		end
+		return true
+	end,
+	--Scaling Data Display
+	['scalingdatadisp'] = function(t, item, cursorPosY, moveTxt, section)
+		if menu.f_valueChanged(t.items[item], motif[section]) then
+			charMapSet(2, '_iksys_trainingScalingDataDisp', menu.scalingdatadisp - 1)
 		end
 		return true
 	end,
@@ -377,6 +388,9 @@ menu.t_vardisplay = {
 	['atkdatadisp'] = function()
 		return menu.t_valuename.atkdatadisp[menu.atkdatadisp or 1].displayname
 	end,
+	['scalingdatadisp'] = function()
+		return menu.t_valuename.scalingdatadisp[menu.scalingdatadisp or 1].displayname
+	end,
 	['ctrldatadisp'] = function()
 		return menu.t_valuename.ctrldatadisp[menu.ctrldatadisp or 1].displayname
 	end,
@@ -537,6 +551,7 @@ function menu.f_trainingReset()
 	charMapSet(2, '_iksys_trainingGuardMode', 0)
 	charMapSet(2, '_iksys_trainingFallRecovery', 0)
 	charMapSet(2, '_iksys_trainingAtkDataDisp', 0)
+	charMapSet(2, '_iksys_trainingScalingDataDisp', 0)
 	charMapSet(2, '_iksys_trainingCtrlDataDisp', 0)
 	charMapSet(2, '_iksys_trainingPunish', 0)
 	charMapSet(2, '_iksys_trainingRegen', 0)
