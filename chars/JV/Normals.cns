@@ -1356,7 +1356,7 @@ ctrl = 0
 ;-----------------------------
 [Statedef 701]
 type    = S
-movetype= I
+movetype= A
 physics = S
 poweradd= 0
 ctrl = 0
