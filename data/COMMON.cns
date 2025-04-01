@@ -6878,16 +6878,6 @@ map 		    = "BGPalFXTime"
 value 		    = -1
 ignorehitpause 	= 1
 
-[State 0, Zoom]
-type = zoom
-trigger1 = map(BGPalFXTime)
-scale = 1 + 0.004 * map(BGPalFXTime)
-lag = 0.5
-stagebound = 1
-camerabound = 1
-pos = 0,0
-ignorehitpause=1
-
 [State 0, BGPalFX]
 type = BGPalFX
 trigger1 = map(BGPalFXTime)
@@ -7359,16 +7349,6 @@ map 		= "isAssist"
 value 		= 0
 ignorehitpause 	= 0
 persistent      = 0
-
-;==============================================
-;MAIDEN SUPER CAMERA PUSSY LOCK #AWESOME
-[State 0, ScreenBound]
-type = ScreenBound
-triggerall = enemy,name="MAIDEN"
-trigger1 = enemy,stateno=[252,399]
-value = 1
-movecamera = 0,0
-;---------------------------------------------------------------------------------
 
 ;======================================
 ;No Landing Recovery
