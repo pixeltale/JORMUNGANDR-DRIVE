@@ -1,7 +1,6 @@
-external/script/main.lua:2287: .\external\script\menu.lua line:48(column:90) near '_vis':   syntax error
-
+external/script/main.lua:1293: <game end>
 stack traceback:
-	[G]: in function (anonymous)
-	[G]: in function 'require'
-	external/script/main.lua:2287: in main chunk
+	[G]: in function 'refresh'
+	external/script/main.lua:1293: in function 'f_loadingRefresh'
+	external/script/main.lua:1522: in main chunk
 	[G]: ?

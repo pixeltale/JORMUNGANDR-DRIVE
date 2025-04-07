@@ -59,7 +59,7 @@ JV
  ; stages/mybg.def, order=3
  ;
  ;Insert your stages below.
-stages/glass ocean.def, music = sound/SpiralLadder.mp3, music = sound/NARWHAL.mp3
+stages/glass ocean.def, music = sound/oceanofglass.mp3
 
 ;-------------------------------------------------------------------------------
 [Options]
