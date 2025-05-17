@@ -1,0 +1,144 @@
+;236L/M/H - 36 CHAMBERS: DEATH 13
+[Statedef 3000]
+type    = S
+movetype= A
+physics = S
+juggle  = 0
+ctrl = 0
+velset = vel x,0
+anim =3001
+sprpriority = 8
+poweradd = -4000 * map(METER.COST)
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = time = 1
+x = vel x + 15
+y = 0
+
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = map(EN)
+map = "EnLock"
+value = 1
+[State SP, MapSet]
+type = MapSet
+trigger1 = time = 0
+trigger1 = !map(EN)
+map = "EnLock"
+value = 0
+
+[State -2, Starter Level]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "StarterLevel"
+value 		= 2
+ignorehitpause 	= 1
+
+[State -2, P1 Value Set]
+type 		= MapSet
+trigger1 		= movehit && !map(ComboStateCheck)
+map 		= "P1"
+value 		= .90	;100% Starting DMG
+ignorehitpause 	= 1
+[State -2, P2 Value Set]
+type 		= MapSet
+trigger1 		= movehit && map(ComboStateCheck)
+map 		= "P2"
+value 		= 0.88	;90% DMG For next hit
+ignorehitpause 	= 1
+persistent = 0
+[State -2, P2 Accumulation - Scale]
+type 		= MapSet
+trigger1 		= movehit
+map 		= "Accumulation"
+value 		= Map(Accumulation) * map(P2)
+ignorehitpause 	= 1
+persistent 		= 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = time = 0
+time = 30
+sound = 20,0
+pos = 0,0
+movetime = 0
+darken = 1
+p2defmul = 1
+poweradd = 0
+unhittable = 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = time = [0, 14]
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST
+time = 1
+
+[State 200, 1] ;++++++++++++++++++++++++++++++++++
+type 		= HitDef 
+p2facing 		= 1
+trigger1 		= !movereversed && !movecontact
+;==============================================
+attr 			= S, NA                     
+damage 			= 500*map(P4) + 100, 150
+animtype 		= light
+air.animtype 		= back
+;==============================================
+guardflag 		= MA
+hitflag 		= MAFD
+;==============================================
+pausetime 		= 25, 25
+guard.pausetime		= 20, 20
+sparkno 		= 0
+sparkxy 		= -30, -59
+hitsound 		= 5, 1
+guardsound 		= 6, 0
+;==============================================
+ground.type 		= High
+air.type 		= High
+;==============================================
+ground.hittime  	= 99
+air.hittime  		= 99
+down.hittime 		= 99
+ground.slidetime 	= 5
+;==============================================
+ground.velocity 	= -10, -7
+air.velocity 		= -10,-5
+guard.ctrltime 		= 12
+guard.velocity		= -20
+guard.slidetime		= 20
+airguard.velocity 	= -1.9,-.8
+;==============================================
+fall			= 1
+air.fall 		= 1
+fall.yvelocity 		= 0
+;==============================================
+envshake.time		= 20
+envshake.freq 		= 120
+envshake.ampl 		= 6
+envshake.phase 		= 0.5
+;==============================================
+ground.cornerpush.veloff = 0
+;==============================================
+
+[State 8990, Explod]
+type = Explod
+triggerall = WinKO
+trigger1 = time = 40
+anim = 8991
+id = 8991
+pos = 160,120
+scale = .5,.5
+postype = Left
+bindtime = -1
+removetime = -2
+sprpriority = -15
+ownpal = 1
+supermovetime = -1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1

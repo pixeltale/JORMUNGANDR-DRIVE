@@ -1,0 +1,57 @@
+; Definition file for Justice Viroi (JV)
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name 		= "Lili"        		;Name of character
+displayname 	= "Lili"		;Name of character to display
+mugenversion 	= 1.1        	;Version of M.U.G.E.N character works on (X.XX)
+ikemenversion	= 0.99
+author 		= "PXN."         		;Character author name
+pal.defaults 	= 1,2,3,4
+trials		= trials.def
+
+; Files for the player
+[Files]
+cmd     	= LILI.cds           ;Command set
+cns     	= LILI.cns           ;Constants
+st      	= LILI.cns           ;States
+st1      	= NORMALS.cns
+st2      	= SPECIALS.cns
+st3      	= OVERDRIVES.cns
+st4 		= LILIstates.cns
+stcommon 	= COMMON.cns      ;Common states (from data/ or motif)
+sprite  		= LILI.sff           ;Sprite
+anim    		= LILI.air           ;Animation
+sound   		= LILI.snd           ;Sound
+ai      		= LILI.ai            ;AI hints data (not used)
+movelist 		= LILI.dat
+pal1    = 1.act
+pal2    = 2.act
+pal3    = 3.act
+pal4    = 4.act
+pal5    = 5.act
+pal6    = 6.act
+pal7    = 7.act
+pal8    = 8.act
+pal9    = 9.act
+pal10   = 10.act
+pal11   = 11.act
+pal12   = 12.act
+
+
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4 ;Press button X to select palette 1, etc.
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10 ;Hold Start and press button X for palette 7, etc.
+y2 = 11
+z2 = 12
+

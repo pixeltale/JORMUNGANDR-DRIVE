@@ -1,6 +1,61 @@
-external/script/main.lua:1293: <game end>
+runtime error: integer divide by zero
+goroutine 1 [running, locked to thread]:
+github.com/yuin/gopher-lua.(*LState).PCall.func1()
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1988 +0x1ea
+panic({0x7ff64bb5ace0?, 0x7ff64baf0700?})
+	runtime/panic.go:914 +0x21f
+main.(*Animation).SetAnimElem(0x7ff64b6a2b8b?, 0x4b6658ec?)
+	github.com/ikemen-engine/Ikemen-GO/src/anim.go:406 +0x10d
+main.(*Char).setAnimElem(0xc000478000, 0x1?)
+	github.com/ikemen-engine/Ikemen-GO/src/char.go:2691 +0x28
+main.changeAnim.Run.func1(0xa0?, {0xc001094300, 0xa?, 0xc0009cbfa8?})
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:2966 +0x145
+main.StateControllerBase.run({0xc000d35e40, 0x17, 0x20}, 0xc0009cbfb8?, 0xc0009cbfb8)
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:2437 +0x11d
+main.changeAnim.Run({0xc000d35e40?, 0x59?, 0x80?}, 0xc0029ea000?, {0x0?, 0x0?, 0x0?})
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:2954 +0x8a
+main.StateBlock.Run({0x1, 0xffffffff, 0xfffffffe, 0x0, {0xc000d35e20, 0x20, 0x20}, 0x0, {0xc0015b3360, 0x1, ...}, ...}, ...)
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:2331 +0x4a5
+main.StateBlock.Run({0x1, 0xffffffff, 0xffffffff, 0x0, {0x0, 0x0, 0x0}, 0x0, {0xc000c7e200, 0x1a, ...}, ...}, ...)
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:2331 +0x4a5
+main.(*StateBytecode).run(0xc00185b680, 0xc002975380?)
+	github.com/ikemen-engine/Ikemen-GO/src/bytecode.go:8601 +0x225
+main.(*Char).actionRun(0xc000478000)
+	github.com/ikemen-engine/Ikemen-GO/src/char.go:5758 +0x1c5
+main.(*CharList).action(0x7ff64bb0a110, 0x3f800001?, 0xc0009cd08c?, 0xc1ebf27e?, 0x0?, 0xfffefffe00010001?, 0x2000200000000?, 0x30003fffefffe?)
+	github.com/ikemen-engine/Ikemen-GO/src/char.go:6466 +0x179
+main.(*System).action(0x7ff64bb093c0)
+	github.com/ikemen-engine/Ikemen-GO/src/system.go:1364 +0x485
+main.(*System).fight(0x7ff64bb093c0)
+	github.com/ikemen-engine/Ikemen-GO/src/system.go:2107 +0x1537
+main.systemScriptInit.func57.2()
+	github.com/ikemen-engine/Ikemen-GO/src/script.go:991 +0x56a
+main.systemScriptInit.func57(0xc0000e2000)
+	github.com/ikemen-engine/Ikemen-GO/src/script.go:1039 +0x3af
+github.com/yuin/gopher-lua.callGFunction(0xc0000e2000, 0x0)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:202 +0x31
+github.com/yuin/gopher-lua.init.3.func26(0xc0000e2000, 0xc0c0001?, 0xc0000e4000?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:821 +0x365
+github.com/yuin/gopher-lua.mainLoop(0xc0000e2000, 0xc00058c540?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/vm.go:31 +0xe5
+github.com/yuin/gopher-lua.(*LState).callR(0xc0000e2000, 0x0, 0xffffffffffffffff, 0xc0000a4148?)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1211 +0x1bc
+github.com/yuin/gopher-lua.(*LState).Call(...)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:1967
+github.com/yuin/gopher-lua.(*LState).PCall(0xc0000e2000, 0x0, 0xc00058c540?, 0x0)
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/state.go:2030 +0x11e
+github.com/yuin/gopher-lua.(*LState).DoFile(0xc0000e2000, {0xc000096090?, 0x0?})
+	github.com/yuin/gopher-lua@v0.0.0-20220504180219-658193537a64/auxlib.go:396 +0x65
+main.main()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:91 +0x21d
+
 stack traceback:
-	[G]: in function 'refresh'
-	external/script/main.lua:1293: in function 'f_loadingRefresh'
-	external/script/main.lua:1522: in main chunk
+	[G]: in function 'game'
+	.\external\script\start.lua:1401: in function 'f_game'
+	.\external\script\start.lua:1834: in function 'launchFight'
+	external/script/default.lua:2: in function <external/script/default.lua:0>
+	.\external\script\start.lua:1455: in function 'f'
+	external/script/main.lua:3105: in function 'loop'
+	external/script/main.lua:3189: in function 'loop'
+	external/script/main.lua:4156: in main chunk
 	[G]: ?

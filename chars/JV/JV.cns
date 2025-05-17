@@ -386,131 +386,26 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
-[State 0, Fatal Disable]
+[State 0, JV - Paradigm Shift]
 type 		= MapSet
 trigger1 		= map(PSHIFT)
 map 			= "JV.PSHIFTDISCOUNT"
 value 		= 0
 ignorehitpause 	= 1
-[State 0, Fatal Disable]
+[State 0, JV - Paradigm Shift]
 type 		= MapSet
 trigger1 		= map(PSHIFT)
 map 			= "JV.PSHIFTDISCOUNT"
 value 		= 1
 ignorehitpause 	= 1
 
-[State 0, Fatal Disable]
+[State 0, JV - Paradigm Shift]
 type 		= MapSet
 trigger1 		= stateno != map(FATAL)
 map 			= "FATAL"
 value 		= 0
 ignorehitpause 	= 1
 
-
-[State 0, Explod]
-type = Explod
-triggerall = teamside = 1
-triggerall = map(ComboStateCheck)
-trigger1 = !NumExplod(300)
-anim = F300
-ID = 300
-pos = 45,75
-postype = left
-facing = 1
-vfacing = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -1
-supermovetime = 999999999999
-pausemovetime = 999999999999
-scale = 0.25,0.25
-sprpriority = -1
-ontop	= 0
-ignorehitpause = 1
-ownpal	= 1
-[State 0, Explod]
-type = Explod
-triggerall = teamside = 1
-triggerall = map(ComboStateCheck)
-trigger1 = !NumExplod(301)
-anim = F301
-ID = 301
-pos = 45,75
-postype = left
-facing = 1
-vfacing = 1
-removetime = -1
-supermovetime = 999999999999
-pausemovetime = 999999999999
-scale = 0.25,0.25
-sprpriority = 0
-ontop	= 0
-ignorehitpause = 1
-ownpal	= 1
-[State 0, ModifyExplod]
-type = ModifyExplod
-trigger1 = teamside = 1 && numexplod(301)
-ID = 301
-window = 0, 100, 3*(enemy, gethitvar(hittime)), -40
-ignorehitpause = 1
-
-[State 0, Explod]
-type = Explod
-triggerall = teamside = 2
-triggerall = map(ComboStateCheck)
-trigger1 = !NumExplod(300)
-anim = F300
-ID = 300
-pos = -45,75
-postype = right
-facing = 1
-vfacing = 1
-vel = 0,0
-accel = 0,0
-random = 0,0
-removetime = -1
-supermovetime = 999999999999
-pausemovetime = 999999999999
-scale = -0.25,0.25
-sprpriority = -1
-ontop	= 0
-ignorehitpause = 1
-ownpal	= 1
-[State 0, Explod]
-type = Explod
-triggerall = teamside = 2
-triggerall = map(ComboStateCheck)
-trigger1 = !NumExplod(301)
-anim = F301
-ID = 301
-pos = -45,75
-postype = right
-facing = 1
-vfacing = 1
-removetime = -1
-supermovetime = 999999999999
-pausemovetime = 999999999999
-scale = -0.25,0.25
-sprpriority = 0
-ontop	= 0
-ignorehitpause = 1
-ownpal	= 1
-[State 0, ModifyExplod]
-type = ModifyExplod
-trigger1 = teamside = 2 && numexplod(301)
-ID = 301
-window = 0, 100, -3*(enemy, gethitvar(hittime)), -40
-ignorehitpause = 1
-
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = !map(ComboStateCheck)
-id = 300
-[State 0, RemoveExplod]
-type = RemoveExplod
-trigger1 = !map(ComboStateCheck)
-id = 301
 
 [State 0, Explod]
 type = Explod
