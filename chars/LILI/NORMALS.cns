@@ -70,8 +70,8 @@ down.hittime 			= 10
 ground.velocity 		= -5
 air.velocity 			= -2,-2
 ;===============================
-guard.ctrltime 		= 8
-guard.slidetime		= 8
+guard.ctrltime 		= 12
+guard.slidetime		= 12
 guard.velocity 		= -6
 airguard.velocity 		= -1,-1
 ;===============================
@@ -187,7 +187,7 @@ ground.cornerpush.veloff = -5
 ;==============================================
 ground.velocity 	= -4
 air.velocity 		= -1.4,1.8
-guard.ctrltime 		= 12
+guard.ctrltime 		= 16
 airguard.velocity 	= -1.9,-.8
 ;==============================================
 fall			= 0
@@ -385,7 +385,7 @@ triggerall		= anim = 221
 trigger1 			= animelem = 4 || animelem = 5
 ;==============================================
 attr 			= S, NA                     
-damage 			= 100*map(P4), 150
+damage 			= 100*map(P4), 15
 animtype 			= light
 air.animtype 		= back
 ;==============================================
@@ -811,8 +811,8 @@ air.hittime 			= 10
 air.velocity 			= -2,-2
 down.hittime 			= 15
 ;===============================
-guard.ctrltime 		= 8
-guard.slidetime		= 8
+guard.ctrltime 		= 14
+guard.slidetime		= 14
 guard.velocity 		= -6
 airguard.velocity 		= -1,-1
 ;===============================
@@ -917,7 +917,7 @@ envshake.freq 		= 10
 envshake.ampl 		= 2
 envshake.phase 	= 1
 fall.yvelocity 	= 0
-guard.ctrltime 	= 8
+guard.ctrltime 	= 20
 air.fall 			= 1
 getpower 			= 75 * MAP(GEAR.MUL)
 
