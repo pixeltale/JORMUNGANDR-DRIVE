@@ -300,8 +300,8 @@ guardsound 			= 6,0
 ground.hittime  		= 26 * MAP(untechMOD)
 ground.slidetime		= 26
 ground.velocity 		= -8
-air.hittime  			= 30 * MAP(untechMOD)
-air.velocity 			= -3.5,-1.5
+air.hittime  			= 30
+air.velocity 			= -3.5,-1 / map(untechMod)
 down.velocity 			= -1,-5
 down.hittime 			= 30
 ;===============================
@@ -2566,7 +2566,7 @@ ignorehitpause 	= 1
 type 			= MapAdd
 trigger1 			= movehit = 1
 map 				= "GEAR.GAUGE"
-value 			= 222 + 222*(map(SHOCK.DC))
+value 			= 222*(map(SHOCK.DC))
 ignorehitpause 	= 1
 
 [State 0, Zoom]

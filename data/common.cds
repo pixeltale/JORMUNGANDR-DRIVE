@@ -853,23 +853,38 @@ command = ~D, F+a
 name = "236A"
 command = ~D, F, a
 [Command]
+name = "236A"
+command = ~D, DF, F, a
+[Command]
 name = "236B"
 command = ~D, F+b
 [Command]
 name = "236B"
-command = ~D, F, a
+command = ~D, F, b
+[Command]
+name = "236B"
+command = ~D, DF, F, b
 [Command]
 name = "236C"
 command = ~D, F+c
+time = 20
 [Command]
 name = "236C"
 command = ~D, F, c
 [Command]
+name = "236C"
+command = ~D, DF, F, c
+[Command]
 name = "236D"
 command = ~D, F+d
+time = 20
 [Command]
 name = "236D"
 command = ~D, F, d
+time = 20
+[Command]
+name = "236D"
+command = ~D, DF, F, d
 
 [Command]
 name = "421A"
