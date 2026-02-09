@@ -1,0 +1,97 @@
+;===================================================
+;[4]6A
+[Statedef 1000]
+type = S
+movetype = A
+physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 1000
+poweradd = 0
+sprpriority = 2
+
+
+[State 0, Helper]
+type = Helper
+trigger1 = animelem = 4
+helpertype = normal
+name = "FIIIIISH"
+ID = 1011
+stateno = 1011
+pos = 30,-60
+size.xscale = const(size.xscale)
+size.yscale = const(size.Yscale)
+postype = p1
+facing = 1
+ignorehitpause = 1
+
+[State -2, FRC]	;FRC START
+type 		= MapSet
+trigger1 		= animelemno(0) = 4
+map 		= "FRC"
+value 		= 1
+ignorehitpause 	= 1
+[State -2, FRC]	;FRC END
+type 		= MapSet
+trigger1 		= animelemno(-2) = 4
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;===================================================
+;Fish Projectile Mid
+[Statedef 1011]
+type = U
+movetype = A
+physics = N
+juggle = 0
+velset = 5,0
+ctrl = 0
+anim = 1011
+poweradd = 0
+sprpriority = 2
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 210, 2]
+type = HitDef 
+trigger1 		= !movereversed && !movecontact
+attr 		= S, NA
+animtype  	= Light
+air.animtype 	= back
+damage 		= 80*root, map(P4) + (vel x * 1.2), 15
+pausetime		= 5, 5
+guard.pausetime	= 1, 3
+hitflag 			= MAF
+guardflag 		= MA
+sparkno 			= 2
+sparkxy 			= -30,-35
+hitsound   		= 5,1
+guardsound 		= 6,0
+ground.hittime  		= 10
+air.hittime  		= 20 * root, map(UntechMod)
+down.hittime 		= 30
+ground.velocity 	= -2.5
+guard.ctrltime 	= 8
+air.velocity 		= -1.5,-2.5
+down.velocity		= -1, -4
+air.fall 			= 1
+fall.yvelocity 	= 0
+palfx.time 		= 12
+palfx.add 		= 100, 0,20
+getpower 			= 80
+
+[State 0, ChangeState]
+type = Destroyself
+trigger1 = movecontact || movereversed

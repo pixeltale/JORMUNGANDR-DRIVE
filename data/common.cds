@@ -280,22 +280,18 @@ time = 1
 [Command]
 name = "holdfwd" ;Required (do not remove)
 command = /$F
-time = 1
 buffer.time = 2
 [Command]
 name = "holddown" ;Required (do not remove)
 command = /$D
-time = 1
 buffer.time = 2
 [Command]
 name = "holdback" ;Required (do not remove)
 command = /$B
-time = 1
 buffer.time = 2
 [Command]
 name = "holdup" ;Required (do not remove)
 command = /$U
-time = 1
 buffer.time = 2
 [Command]
 name = "holdup" ;Required (do not remove)
