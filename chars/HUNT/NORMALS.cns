@@ -892,12 +892,6 @@ ctrl = 0
 anim = 420
 sprpriority = 2
 
-[State 0, MapAdd]
-type = MapAdd
-trigger1 = map(EN)
-map = "EN"
-value = 1
-
 [State -2, Starter Level]
 type 		= MapSet
 trigger1 		= movehit && !map(ComboStateCheck)
@@ -933,7 +927,7 @@ value = 0, 0
 [State 0, VelSet]
 type = VelAdd
 trigger1 = animelem = 2
-x = 5
+x = 5 + 2*map(HUNT.PSHIFT)
 y = 0
 
 [State 430, 2]

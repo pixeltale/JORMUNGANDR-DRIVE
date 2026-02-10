@@ -11,7 +11,7 @@ ctrl = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = animelem = 1
-x = 14
+x = 14 + 2*map(HUNT.PSHIFT)
 
 [State 200, 2]
 type = PlaySnd

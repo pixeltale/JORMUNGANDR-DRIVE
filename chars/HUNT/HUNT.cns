@@ -386,6 +386,16 @@ trigger1 = animtime=0
 
 [Statedef -2]
 
+[State 0, AttackMulSet]
+type = AttackMulSet
+trigger1 = map(HUNT.PSHIFT) > 0
+value = 1.2
+[State 0, AttackMulSet]
+type = AttackMulSet
+trigger1 = map(HUNT.PSHIFT) = 0
+value = 1
+
+
 [State -2, Charge Input]
 type 	= MapADD
 triggerall = roundstate = 2
@@ -416,13 +426,13 @@ ignorehitpause 	= 0
 [State 0, JV - Paradigm Shift]
 type 		= MapSet
 trigger1 		= map(PSHIFT)
-map 			= "JV.PSHIFTDISCOUNT"
+map 			= "HUNT.PSHIFT"
 value 		= 0
 ignorehitpause 	= 1
 [State 0, JV - Paradigm Shift]
 type 		= MapSet
 trigger1 		= map(PSHIFT)
-map 			= "JV.PSHIFTDISCOUNT"
+map 			= "HUNT.PSHIFT"
 value 		= 1
 ignorehitpause 	= 1
 
