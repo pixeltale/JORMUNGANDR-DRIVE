@@ -177,13 +177,35 @@ trigger2 = stateno = 250
 ;===========================================================================
 ;SPECIAL ATTACKS
 ;===========================================================================
+;623X
+[State -1, 623A]
+type = changeState
+value = 1020
+triggerall = command = "623A"
+trigger1 = var(1)
+[State -1, 623B]
+type = changeState
+value = 1021
+triggerall = command = "623B"
+trigger1 = var(1)
+[State -1, 623C]
+type = changeState
+value = 1022
+triggerall = command = "623C"
+trigger1 = var(1)
+
 ;[4]6A
 [State -1, Fish Boom]
 type = changeState
 value = 1000
-triggerall = command = "BC.RELEASE" && command = "HOLD_A" && map(Charge.level) >= 15
+triggerall = command = "BC.RELEASE" && command = "HOLD_A" && map(Charge.level) >= 25
 trigger1 = var(1)
-
+;[4]6B
+[State -1, Fish Boom]
+type = changeState
+value = 1010
+triggerall = command = "BC.RELEASE" && command = "HOLD_B" && map(Charge.level) >= 25
+trigger1 = var(1)
 
 ;===========================================================================
 ;SYSTEM MECHANICS
@@ -218,6 +240,16 @@ trigger1	 	= var(1)
 ;===========================================================================
 ;NORMALS
 ;===========================================================================
+;6A
+[State -1, 6A]
+type = ChangeState
+value = 235
+triggerall = statetype != A && stateno != 205
+triggerall = command = "A"
+triggerall = command = "holdfwd"
+triggerall = command != "holddown"
+trigger1 = ctrl || stateno = [100,101]
+trigger2 = (stateno = [400,420] || stateno = [200,220]) && movecontact
 ;6C
 [State -1, 6C]
 type = ChangeState
@@ -227,7 +259,7 @@ triggerall = command = "C"
 triggerall = command = "holdfwd"
 triggerall = command != "holddown"
 trigger1 = ctrl || stateno = [100,101]
-trigger2 = (stateno = [400,420] || stateno = [200,220]) && movecontact
+trigger2 = (stateno = [400,420] || stateno = [200,220] || stateno = 235) && movecontact
 
 ;5A
 [State -1, 5A]
@@ -239,16 +271,6 @@ triggerall = command != "holddown" && var(59) !=4
 trigger1 = ctrl || stateno = [100,101] 
 trigger2 = stateno = 400 && MoveContact 
 trigger3 = stateno = 200 && (movecontact || animelemno(0) >= 4) && prevstateno != 200
-;5AA
-;[State -1, 5AA]
-;type = ChangeState
-;value = 205
-;triggerall = statetype != A
-;triggerall = command = "A"
-;triggerall = command != "holddown" && var(59) !=4
-;trigger1 = ctrl || stateno = [100,101] 
-;trigger2 = stateno = 400 && MoveContact 
-;trigger3 = stateno = 200 && (movecontact || animelemno(0) >= 4) && prevstateno != 200
 
 ;5B
 [State -1, Standing Medium]
@@ -258,7 +280,7 @@ triggerall = statetype != A
 triggerall = command = "B"
 triggerall = command != "holddown"
 trigger1 = ctrl || stateno = [100,101] 
-trigger2 = (stateno = 200 || stateno = [400,410]) && movecontact
+trigger2 = (stateno = 200 || stateno = [400,410]) && movecontact && prevstateno != 210
 
 ;5C
 [State -1, Standing Heavy]

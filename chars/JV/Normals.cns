@@ -2695,6 +2695,12 @@ value 		= 905
 elem 		= 6
 ignorehitpause = 1
 
+[State 0, Jump Cancel]
+type 		= MapSet
+trigger1 		= time = 0
+map 		= "JC"
+value 		= 0
+ignorehitpause 	= 1
 
 [State 1000, 7]
 type = ChangeState

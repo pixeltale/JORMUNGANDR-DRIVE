@@ -46,7 +46,54 @@ value = 0
 ctrl = 1
 
 ;===================================================
-;Fish Projectile Mid
+;[4]6A
+[Statedef 1010]
+type = S
+movetype = A
+physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 1010
+poweradd = 0
+sprpriority = 2
+
+
+[State 0, Helper]
+type = Helper
+trigger1 = animelem = 4
+helpertype = normal
+name = "FIIIIISH"
+ID = 1011
+stateno = 1011
+pos = 30,-20
+size.xscale = const(size.xscale)
+size.yscale = const(size.Yscale)
+postype = p1
+facing = 1
+ignorehitpause = 1
+
+[State -2, FRC]	;FRC START
+type 		= MapSet
+trigger1 		= animelemno(0) = 4
+map 		= "FRC"
+value 		= 1
+ignorehitpause 	= 1
+[State -2, FRC]	;FRC END
+type 		= MapSet
+trigger1 		= animelemno(-2) = 4
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;===================================================
+;[4]6A Projectile
 [Statedef 1011]
 type = U
 movetype = A
@@ -58,6 +105,42 @@ anim = 1011
 poweradd = 0
 sprpriority = 2
 
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+[State 40, 1]
+type = Null
+trigger1 = root, stateno = 1000
+trigger1 = sysvar(1) := 0
+trigger2 = root, stateno = 1010
+trigger2 = sysvar(1) := 1
+
+;Movement for Low Disc
+[State 0, VelSet] 
+type = VelSet
+trigger1 = sysvar(1) = 1
+x = 2.5
+;Movement for Razor Disc
+[State 0, VelSet] 
+type = VelSet
+triggerall = !time
+trigger1 = sysvar(1) = 2
+x = 5
+y = 2
+[State 0, VelSet] 
+type = VelAdd
+triggerall = time < 20
+trigger1 = sysvar(1) = 2
+y = -.2
+[State 0, VelSet] 
+type = VelSet
+triggerall = time = 20
+trigger1 = sysvar(1) = 2
+x = 0
+y = 0
+
+
 [State 0, NotHitBy]
 type = NotHitBy
 trigger1 = 1
@@ -66,13 +149,14 @@ time = 1
 
 [State 210, 2]
 type = HitDef 
+trigger1		= sysvar(1) = 0
 trigger1 		= !movereversed && !movecontact
 attr 		= S, NA
 animtype  	= Light
 air.animtype 	= back
-damage 		= 80*root, map(P4) + (vel x * 1.2), 15
+damage 		= 80*root, map(P4), 15
 pausetime		= 5, 5
-guard.pausetime	= 1, 3
+guard.pausetime		= 1, 3
 hitflag 			= MAF
 guardflag 		= MA
 sparkno 			= 2
@@ -82,16 +166,212 @@ guardsound 		= 6,0
 ground.hittime  		= 10
 air.hittime  		= 20 * root, map(UntechMod)
 down.hittime 		= 30
-ground.velocity 	= -2.5
-guard.ctrltime 	= 8
+ground.velocity 		= -2.5
+guard.ctrltime 		= 4
 air.velocity 		= -1.5,-2.5
 down.velocity		= -1, -4
 air.fall 			= 1
-fall.yvelocity 	= 0
-palfx.time 		= 12
-palfx.add 		= 100, 0,20
-getpower 			= 80
+fall.yvelocity 		= 0
+getpower 		= 80
+[State 210, 2]
+type = HitDef 
+trigger1		= sysvar(1) = 1
+trigger1 		= !movereversed && !movecontact
+attr 		= S, NA
+animtype  	= Light
+air.animtype 	= back
+damage 		= 120*root, map(P4), 15
+pausetime		= 5, 5
+guard.pausetime		= 1, 3
+hitflag 			= MAFD
+guardflag 		= LA
+sparkno 			= 2
+sparkxy 			= -30,-35
+hitsound   		= 5,1
+guardsound 		= 6,0
+ground.hittime  		= 10
+air.hittime  		= 20 * root, map(UntechMod)
+down.hittime 		= 30
+ground.velocity 		= -2.5
+guard.ctrltime 		= 8
+air.velocity 		= -1.5,-2.5
+down.velocity		= -1, -4
+air.fall 			= 1
+fall.yvelocity 		= 0
+getpower 		= 120
 
 [State 0, ChangeState]
 type = Destroyself
 trigger1 = movecontact || movereversed
+
+;===================================================
+;623X
+[Statedef 1020]
+type = S
+movetype = A
+physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 1020
+poweradd = 0
+sprpriority = 2
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+[State 40, 1]
+type = Null
+trigger1 = prevstateno = 1021
+trigger1 = sysvar(1) := 1
+trigger2 = prevstateno = 1022
+trigger2 = sysvar(1) := 2
+
+[State 0, Helper]
+type = Helper
+trigger1 = animelem = 3
+helpertype = normal
+name = "Woke Orb"
+ID = 1025
+stateno = 1025
+pos = 70 + 90*sysvar(1),-60
+size.xscale = const(size.xscale)
+size.yscale = const(size.Yscale)
+postype = p1
+facing = 1
+ignorehitpause = 1
+
+[State -2, FRC]	;FRC START
+type 		= MapSet
+trigger1 		= animelemno(0) = 3
+map 		= "FRC"
+value 		= 1
+ignorehitpause 	= 1
+[State -2, FRC]	;FRC END
+type 		= MapSet
+trigger1 		= animelemno(-2) = 3
+map 		= "FRC"
+value 		= 0
+ignorehitpause 	= 1
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;623B
+[Statedef 1021]
+type = S
+movetype = A
+physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 1020
+poweradd = 0
+sprpriority = 2
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = 1
+value = 1020
+
+;623C
+[Statedef 1022]
+type = S
+movetype = A
+physics = S
+juggle = 0
+velset = vel x,0
+ctrl = 0
+anim = 1020
+poweradd = 0
+sprpriority = 2
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = 1
+value = 1020
+
+;===================================================
+;623X Orb
+[Statedef 1025]
+type = U
+movetype = A
+physics = N
+juggle = 0
+velset = 0,0
+ctrl = 0
+anim = 1025
+poweradd = 0
+sprpriority = 2
+
+[State 40, 1]
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = 0
+[State 40, 1]
+type = Null
+trigger1 = root, stateno = 1000
+trigger1 = sysvar(1) := 0
+trigger2 = root, stateno = 1010
+trigger2 = sysvar(1) := 1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+time = 1
+
+[State 0, JORMUNGANDR DEFAULT HITDEF]
+type 				= HitDef
+trigger1 				= !movecontact && !movereversed
+;===============================
+damage 				= 120 * root, MAP(P4), 12
+pausetime 			= 12,12 + 4 * enemy, movetype = A
+getpower 			= 120 * root, MAP(GEAR.MUL),0
+;===============================
+attr 				= S,NA
+hitflag 				= MAF
+guardflag 			= MA
+animtype 			= Light
+air.animtype 			= Light
+ground.TYPE 			= High
+air.TYPE 				= High
+;===============================
+sparkno 				= 3
+sparkxy 				= -p2dist x * 0.25, -50
+hitsound 				= 5,0
+guardsound 			= 6,0
+;===============================
+ground.hittime 			= 20
+ground.slidetime			= 25
+air.hittime 			= 26 * root, map(untechMOD)
+down.hittime 			= 26
+ground.velocity 			= -1,-5
+air.velocity 			= -1,-5 / root, MAP(untechMOD)
+down.velocity 			= 0, -7 / root, MAP(untechMOD)
+;===============================
+guard.ctrltime 			= 12
+guard.slidetime			= 12
+guard.velocity 			= -6
+airguard.velocity 			= -1,-1
+;===============================
+fall 				= 1
+air.fall 				= 1
+;===============================
+envshake.time 			= 2
+envshake.freq 			= 2
+envshake.ampl 			= 1
+envshake.phase 			= 0.5
+
+[State 0, StateTypeSet]
+type = StateTypeSet
+trigger1 = animelem = 36
+movetype = I
+
+
+[State 0, ChangeState]
+type = Destroyself
+trigger1 = movecontact || movereversed
+trigger2 = !animtime
