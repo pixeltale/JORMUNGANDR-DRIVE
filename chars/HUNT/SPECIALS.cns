@@ -172,6 +172,7 @@ down.velocity		= -1, -4
 air.fall 			= 1
 fall.yvelocity 		= 0
 getpower 		= 80
+guard.dist		= 0
 [State 210, 2]
 type = HitDef 
 trigger1		= sysvar(1) = 1
@@ -198,10 +199,12 @@ down.velocity		= -1, -4
 air.fall 			= 1
 fall.yvelocity 		= 0
 getpower 		= 120
+guard.dist		= 0
 
 [State 0, ChangeState]
 type = Destroyself
 trigger1 = movecontact || movereversed
+trigger2 = root, movetype = H
 
 ;===================================================
 ;623X
@@ -363,6 +366,7 @@ envshake.time 			= 2
 envshake.freq 			= 2
 envshake.ampl 			= 1
 envshake.phase 			= 0.5
+guard.dist			= 0
 
 [State 0, StateTypeSet]
 type = StateTypeSet
@@ -374,3 +378,4 @@ movetype = I
 type = Destroyself
 trigger1 = movecontact || movereversed
 trigger2 = !animtime
+trigger3 = root, movetype = H
