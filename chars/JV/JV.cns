@@ -388,7 +388,7 @@ trigger1 = animtime=0
 
 [State 0, JV - Paradigm Shift]
 type 		= MapSet
-trigger1 		= map(PSHIFT)
+trigger1 		= !map(PSHIFT)
 map 			= "JV.PSHIFTDISCOUNT"
 value 		= 0
 ignorehitpause 	= 1

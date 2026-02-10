@@ -434,7 +434,7 @@ palbright = 1, 1, 1
 
 ;---------------------------------------------------------------------------
 ; Air Dash Fwd
-[Statedef 60]
+[Statedef 60] ;Airdash Forward
 type    = A
 physics = A
 anim = 60
@@ -486,7 +486,7 @@ value = 1
 
 ;---------------------------------------------------------------------------
 ; Air Dash Back
-[Statedef 61]
+[Statedef 61] ;Airdash Back Backward Airdash 
 type    = A
 physics = A
 anim = 61

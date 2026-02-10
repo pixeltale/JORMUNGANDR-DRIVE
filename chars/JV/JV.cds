@@ -209,7 +209,7 @@ trigger1 = stateno = 2000 && movehit
 [State -1, One Inch Punch]
 type = changeState
 value = 1000
-triggerall = command = "236A"
+triggerall = command = "236" && command = "HOLD_A"
 triggerall = !map(EN)
 trigger1 = var(1)
 
@@ -217,7 +217,7 @@ trigger1 = var(1)
 [State -1, One Inch Punch]
 type = changeState
 value = 1001
-triggerall = command = "236A"
+triggerall = command = "236" && command = "HOLD_A"
 triggerall = map(EN)
 trigger1 = var(1)
 
@@ -225,7 +225,7 @@ trigger1 = var(1)
 [State -1, Spotdodge]
 type = ChangeState
 value = 1010
-triggerall = command = "214A"
+triggerall = command = "214" && command = "HOLD_A"
 triggerall = stateno = 40 || !map(EN) && statetype != A
 trigger1 = var(1) || stateno = 40
 
@@ -241,7 +241,7 @@ trigger1 = var(1)
 [State -1, STE]
 type = ChangeState
 value = 1030
-triggerall = command = "236B"
+triggerall = command = "236" && command = "HOLD_B"
 trigger1 = var(1)
 
 ;IRON MOUNTAIN'S COFFIN

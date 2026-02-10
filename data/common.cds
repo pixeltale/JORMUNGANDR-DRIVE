@@ -713,9 +713,14 @@ command = ~D, DF, F
 time = 6
 buffer.time = 10
 [Command]
+name = "236"
+command = ~D, F
+time = 14
+buffer.time = 10
+[Command]
 name = "214"
 command = ~D, DB, B
-time = 6
+time = 14
 buffer.time = 10
 [Command]
 name = "MistStep"
@@ -844,32 +849,41 @@ time = 20
 
 [Command]
 name = "236A"
-command = ~D, F+a
+command = ~D, F+as
+steptime = 7
 [Command]
 name = "236A"
 command = ~D, F, a
+steptime = 7
 [Command]
 name = "236A"
 command = ~D, DF, F, a
+steptime = 7
 [Command]
 name = "236B"
 command = ~D, F+b
+steptime = 7
 [Command]
 name = "236B"
 command = ~D, F, b
+steptime = 7
 [Command]
 name = "236B"
 command = ~D, DF, F, b
+steptime = 7
 [Command]
 name = "236C"
 command = ~D, F+c
+steptime = 7
 time = 20
 [Command]
 name = "236C"
 command = ~D, F, c
+steptime = 7
 [Command]
 name = "236C"
 command = ~D, DF, F, c
+steptime = 7
 [Command]
 name = "236D"
 command = ~D, F+d

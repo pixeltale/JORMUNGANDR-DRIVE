@@ -134,7 +134,7 @@ value = 60
 triggerall = command != "holdback"
 triggerall = command = "a66" || command = "M66"
 triggerall = statetype = A
-triggerall = Map(airdash) && map(DoubleJump)
+triggerall = (Map(airdash)+map(HUNT.PSHIFT)) > 0 && (map(DoubleJump)+map(HUNT.PSHIFT) > 0)
 triggerall = pos y<-65 || vel y > 0
 trigger1 = ctrl
 
@@ -146,7 +146,7 @@ value = 61
 triggerall = command = "a44" || command = "M44"
 trigger1 = statetype = A
 trigger1 = ctrl
-triggerall = Map(airdash) && map(DoubleJump)
+triggerall = (Map(airdash)+map(HUNT.PSHIFT)) > 0 && (map(DoubleJump)+map(HUNT.PSHIFT) > 0)
 triggerall = pos y<-65
 ;--------------------------------------------------------------------------
 ;Dash

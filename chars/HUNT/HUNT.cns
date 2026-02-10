@@ -72,7 +72,7 @@ down.friction.threshold = .05         ;If the player's speed drops below this th
 defensemod 	= 1.2
 airjumps		= 1
 airdashes		= 1
-ADM.SPEED		= 6.5
+ADM.SPEED	= 6.5
 ADM.BACK.SPEED	= -6
 ADM.LENGTH	= 10
 ADM.BACK.LENGTH= 10
@@ -425,7 +425,7 @@ ignorehitpause 	= 0
 
 [State 0, JV - Paradigm Shift]
 type 		= MapSet
-trigger1 		= map(PSHIFT)
+trigger1 		= !map(PSHIFT)
 map 			= "HUNT.PSHIFT"
 value 		= 0
 ignorehitpause 	= 1
@@ -565,7 +565,7 @@ persistent 		= 1
 type = DisplayToClipboard
 trigger1 = 1
 text = "Charge = %f, sysvar = %i"
-params = map(Charge.Level), sysvar(1)
+params = map(airdash), sysvar(1)
 ignorehitpause = 1
 persistent = 1
 
